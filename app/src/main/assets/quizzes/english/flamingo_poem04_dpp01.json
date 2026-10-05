@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "A Roadside Stand",
+  "title": "A Roadside Stand — Poem 4 DPP",
+  "source_pdf": "Flamingo DPP 12.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "What is the central irony in the poem regarding the “polished traﬃc”?",
+      "options": [
+        "It rushes past admiring the countryside.",
+        "It stops to buy goods from the roadside stand.",
+        "It symbolizes modern progress that ignores rural suﬀering.",
+        "It brings prosperity to rural areas."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "It symbolizes modern progress that ignores rural suﬀering."
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "The poet’s tone in “The hurt to the scenery wouldn’t be my complaint” is best described as:",
+      "options": [
+        "Outraged",
+        "Mocking",
+        "Sarcastic",
+        "Sympathetic"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Sympathetic"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What does the poet imply by \"you have the money, but if you want to be mean, why keep your money\"?",
+      "options": [
+        "The roadside vendors charge too much.",
+        "The drivers are rich but unwilling to help.",
+        "The countryside is full of greedy people.",
+        "City dwellers value rural products."
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The drivers are rich but unwilling to help."
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "The signs with “N turned wrong and S turned wrong” symbolise:",
+      "options": [
+        "Carelessness of city drivers",
+        "Poor education and innocence of villagers",
+        "Artistic style of countryside people",
+        "The reversed direction of modern society"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Poor education and innocence of villagers"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "The phrase \"beneﬁcent beasts of prey\" is an example of:",
+      "options": [
+        "Metaphor",
+        "Irony",
+        "Oxymoron",
+        "Alliteration"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Oxymoron"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "What is the underlying emotion in “the trusting sorrow of what is unsaid”?",
+      "options": [
+        "Anger",
+        "Silent desperation",
+        "Disbelief",
+        "Sarcasm"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Silent desperation"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What do the \"greedy good-doers\" ironically refer to?",
+      "options": [
+        "Farmers trying to sell goods",
+        "City people who exploit rural areas while claiming to help",
+        "Government employees collecting taxes",
+        "Honest rural development workers"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "City people who exploit rural areas while claiming to help"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "The poet mentions “sleep all day” and “destroy their sleeping at night” to suggest:",
+      "options": [
+        "The villagers are lazy",
+        "Rural people need more rest",
+        "Forced change disrupts natural living",
+        "Villagers should work at night"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Forced change disrupts natural living"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "What does the speaker’s reluctant empathy for the rural poor suggest?",
+      "options": [
+        "He wants to escape from rural areas",
+        "He doesn’t care about poverty",
+        "He is torn between pity and helplessness",
+        "He believes development will help"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "He is torn between pity and helplessness"
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "The phrase “childish longing in vain” most likely refers to:",
+      "options": [
+        "Unrealistic rural dreams for city luxuries",
+        "Children's desire for toys",
+        "Political leaders seeking popularity",
+        "Students wanting better schools | | Android App iOS App PW Website Parishram 2027 English A Roadside Stand DPP: 12 Foundation"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Unrealistic rural dreams for city luxuries"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+# ==============================================================================
+# Built & Compiled Artifacts (Gradle / Android)
+# ==============================================================================
+.gradle/
+build/
+**/build/
+.kotlin/
+*.apk
+*.aab
+
+# Local machine configuration
+local.properties
+
+# ==============================================================================
+# IDE & System Files
+# ==============================================================================
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+Captures/
+.externalNativeBuild/
+.cxx/
+
+# ==============================================================================
+# Security & Keystores
+# ==============================================================================
+*.jks
+*.keystore
+google-services.json
+
+# ==============================================================================
+# Raw Content & Study Materials (Managed in BoardsPrep-Content Repo)
+# ==============================================================================
+/Biology/
+/CHEMISTRY/
+/data/
+/English/
+/NCERT/
+/Physical Education/
+/Physics/
+/Sample Paper 2026-27 Official CBSE/
+/Syllabus/
+
+# ==============================================================================
+# Root-Level Scratch, Test Dumps & Loose Files
+# (Preserves files inside docs/ and app/)
+# ==============================================================================
+/*.json
+/*.jsonl
+/*.png
+/*.jpg
+/*.jpeg
+/*.webp
+/context.md
+/scratch/

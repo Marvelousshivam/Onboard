@@ -1,0 +1,74 @@
+[
+  {
+    "chapter": "The Last Lesson",
+    "part": "Prose Chapter 1 - Part 1",
+    "quiz_file": "flamingo_ch01_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "The Last Lesson",
+    "part": "Prose Chapter 1 - Part 2",
+    "quiz_file": "flamingo_ch01_dpp02.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "My Mother at Sixty-Six",
+    "part": "Poem 1",
+    "quiz_file": "flamingo_poem01_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "Lost Spring",
+    "part": "Prose Chapter 2 - Part 1 (Saheb)",
+    "quiz_file": "flamingo_ch02_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "Lost Spring",
+    "part": "Prose Chapter 2 - Part 2 (Mukesh)",
+    "quiz_file": "flamingo_ch02_dpp02.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "Keeping Quiet",
+    "part": "Poem 2",
+    "quiz_file": "flamingo_poem02_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "Deep Water",
+    "part": "Prose Chapter 3 - Part 1",
+    "quiz_file": "flamingo_ch03_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "Deep Water",
+    "part": "Prose Chapter 3 - Part 2",
+    "quiz_file": "flamingo_ch03_dpp02.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "The Rattrap",
+    "part": "Prose Chapter 4 - Part 1",
+    "quiz_file": "flamingo_ch04_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "The Rattrap",
+    "part": "Prose Chapter 4 - Part 2",
+    "quiz_file": "flamingo_ch04_dpp02.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "A Thing of Beauty",
+    "part": "Poem 3",
+    "quiz_file": "flamingo_poem03_dpp01.json",
+    "total_questions": 10
+  },
+  {
+    "chapter": "A Roadside Stand",
+    "part": "Poem 4",
+    "quiz_file": "flamingo_poem04_dpp01.json",
+    "total_questions": 10
+  }
+]

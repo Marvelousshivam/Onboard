@@ -1,0 +1,2707 @@
+{
+  "version": 2,
+  "last_updated": "2026-10-05T04:48:04.135379+00:00",
+  "base_raw_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main",
+  "subjects": [
+    {
+      "id": "english",
+      "name": "English Core",
+      "code": "301",
+      "stream": "General",
+      "total_theory_marks": 80,
+      "total_practical_marks": 20,
+      "icon_name": "menu_book",
+      "chapters": [
+        {
+          "id": "eng_flam_01",
+          "subject_id": "english",
+          "number": 1,
+          "name": "The Last Lesson",
+          "folder": "english/01_the_last_lesson",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Order from Berlin",
+            "M. Hamel's last lecture",
+            "Linguistic Chauvinism"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/01_the_last_lesson/ncert/ch01_the_last_lesson.pdf",
+          "notes": [
+            {
+              "title": "Ch01 The Last Lesson Notes",
+              "filename": "ch01_the_last_lesson_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/01_the_last_lesson/notes/ch01_the_last_lesson_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch01 The Last Lesson Dpp",
+              "filename": "ch01_the_last_lesson_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/01_the_last_lesson/dpp/ch01_the_last_lesson_dpp.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "flamingo_ch01_dpp01",
+              "title": "The Last Lesson \u2014 Prose Chapter 1 - Part 1 DPP",
+              "filename": "flamingo_ch01_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/01_the_last_lesson/quizzes/flamingo_ch01_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "flamingo_ch01_dpp02",
+              "title": "The Last Lesson \u2014 Prose Chapter 1 - Part 2 DPP",
+              "filename": "flamingo_ch01_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/01_the_last_lesson/quizzes/flamingo_ch01_dpp02.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_ch01_1",
+              "title": "The Last Lesson \u2014 Line-by-Line Explanation & Important Q&A",
+              "youtube_url": "https://www.youtube.com/watch?v=G9EEwMHSo7Y",
+              "duration": "19 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch01_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            },
+            {
+              "id": "eng_ch01_3",
+              "title": "Class 12 English Board Marathon \u2014 Most Expected Questions",
+              "youtube_url": "https://www.youtube.com/watch?v=bg_i-cO4rks",
+              "duration": "4h 51m",
+              "author": "Anurag Sir"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_02",
+          "subject_id": "english",
+          "number": 2,
+          "name": "Lost Spring",
+          "folder": "english/02_lost_spring",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Saheb in Seemapuri",
+            "Mukesh in Firozabad glass bangle industry"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/02_lost_spring/ncert/ch02_lost_spring.pdf",
+          "notes": [
+            {
+              "title": "Ch02 Lost Spring Notes",
+              "filename": "ch02_lost_spring_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/02_lost_spring/notes/ch02_lost_spring_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch02 Lost Spring Dpp",
+              "filename": "ch02_lost_spring_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/02_lost_spring/dpp/ch02_lost_spring_dpp.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "flamingo_ch02_dpp01",
+              "title": "Lost Spring \u2014 Prose Chapter 2 - Part 1 (Saheb) DPP",
+              "filename": "flamingo_ch02_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/02_lost_spring/quizzes/flamingo_ch02_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "flamingo_ch02_dpp02",
+              "title": "Lost Spring \u2014 Prose Chapter 2 - Part 2 (Mukesh) DPP",
+              "filename": "flamingo_ch02_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/02_lost_spring/quizzes/flamingo_ch02_dpp02.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_ch02_1",
+              "title": "Lost Spring \u2014 Line-by-Line Explanation & Character Sketches",
+              "youtube_url": "https://www.youtube.com/watch?v=wcmk4H05le4",
+              "duration": "17 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch02_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            },
+            {
+              "id": "eng_ch02_3",
+              "title": "Class 12 English Board Marathon",
+              "youtube_url": "https://www.youtube.com/watch?v=84VZv7u7S4M",
+              "duration": "5h 33m",
+              "author": "Anurag Sir"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_03",
+          "subject_id": "english",
+          "number": 3,
+          "name": "Deep Water",
+          "folder": "english/03_deep_water",
+          "weightage_marks": 5,
+          "key_topics": [
+            "YMCA Pool incident",
+            "Overcoming hydrophobia with instructor"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/03_deep_water/ncert/ch03_deep_water.pdf",
+          "notes": [
+            {
+              "title": "Ch03 Deep Water Notes",
+              "filename": "ch03_deep_water_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/03_deep_water/notes/ch03_deep_water_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch03 Deep Water Dpp",
+              "filename": "ch03_deep_water_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/03_deep_water/dpp/ch03_deep_water_dpp.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "flamingo_ch03_dpp01",
+              "title": "Deep Water \u2014 Prose Chapter 3 - Part 1 DPP",
+              "filename": "flamingo_ch03_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/03_deep_water/quizzes/flamingo_ch03_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "flamingo_ch03_dpp02",
+              "title": "Deep Water \u2014 Prose Chapter 3 - Part 2 DPP",
+              "filename": "flamingo_ch03_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/03_deep_water/quizzes/flamingo_ch03_dpp02.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_ch03_1",
+              "title": "Deep Water \u2014 Summary, Questions & Notes",
+              "youtube_url": "https://www.youtube.com/watch?v=Yw2YlZDNpb0",
+              "duration": "15 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch03_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_04",
+          "subject_id": "english",
+          "number": 4,
+          "name": "The Rattrap",
+          "folder": "english/04_the_rattrap",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Crofter's 30 kronor",
+            "Ramsjo Ironworks",
+            "Edla Willmansson's kindness"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/ncert/ch04_the_rattrap.pdf",
+          "notes": [
+            {
+              "title": "Ch04 The Rattrap Notes",
+              "filename": "ch04_the_rattrap_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/notes/ch04_the_rattrap_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch04 The Rattrap Part1 Dpp",
+              "filename": "ch04_the_rattrap_part1_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/dpp/ch04_the_rattrap_part1_dpp.pdf"
+            },
+            {
+              "title": "Ch04 The Rattrap Part2 Dpp",
+              "filename": "ch04_the_rattrap_part2_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/dpp/ch04_the_rattrap_part2_dpp.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "flamingo_ch04_dpp01",
+              "title": "The Rattrap \u2014 Prose Chapter 4 - Part 1 DPP",
+              "filename": "flamingo_ch04_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/quizzes/flamingo_ch04_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "flamingo_ch04_dpp02",
+              "title": "The Rattrap \u2014 Prose Chapter 4 - Part 2 DPP",
+              "filename": "flamingo_ch04_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/04_the_rattrap/quizzes/flamingo_ch04_dpp02.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_ch04_1",
+              "title": "The Rattrap \u2014 Best Explanation + Board PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=XwoE0vR8qes",
+              "duration": "20 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch04_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_05",
+          "subject_id": "english",
+          "number": 5,
+          "name": "Indigo",
+          "folder": "english/05_indigo",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Rajkumar Shukla",
+            "Champaran Sharecroppers",
+            "Civil Disobedience Triumph"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/05_indigo/ncert/ch05_indigo.pdf",
+          "notes": [
+            {
+              "title": "Ch05 Indigo Notes",
+              "filename": "ch05_indigo_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/05_indigo/notes/ch05_indigo_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch05 Indigo Dpp",
+              "filename": "ch05_indigo_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/05_indigo/dpp/ch05_indigo_dpp.pdf"
+            }
+          ],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_ch05_1",
+              "title": "Indigo \u2014 Most Important Questions & Summary",
+              "youtube_url": "https://www.youtube.com/watch?v=jiQn2mAdZKY",
+              "duration": "25 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch05_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_06",
+          "subject_id": "english",
+          "number": 6,
+          "name": "Poets and Pancakes",
+          "folder": "english/06_poets_and_pancakes",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Gemini Studios",
+            "Office Boy",
+            "Subbu",
+            "Stephen Spender visit"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/06_poets_and_pancakes/ncert/ch06_poets_and_pancakes.pdf",
+          "notes": [
+            {
+              "title": "Ch06 Poets And Pancakes Notes",
+              "filename": "ch06_poets_and_pancakes_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/06_poets_and_pancakes/notes/ch06_poets_and_pancakes_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch06 Poets And Pancakes Dpp",
+              "filename": "ch06_poets_and_pancakes_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/06_poets_and_pancakes/dpp/ch06_poets_and_pancakes_dpp.pdf"
+            }
+          ],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_ch06_1",
+              "title": "Poets And Pancakes \u2014 Full Summary & Questions",
+              "youtube_url": "https://www.youtube.com/watch?v=-_QUxyfoAhU",
+              "duration": "31 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch06_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_07",
+          "subject_id": "english",
+          "number": 7,
+          "name": "The Interview",
+          "folder": "english/07_the_interview",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Interviews: pros & cons",
+            "Umberto Eco interview with Mukund"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/07_the_interview/ncert/ch07_the_interview.pdf",
+          "notes": [
+            {
+              "title": "Ch07 The Interview Notes",
+              "filename": "ch07_the_interview_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/07_the_interview/notes/ch07_the_interview_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch07 The Interview Dpp",
+              "filename": "ch07_the_interview_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/07_the_interview/dpp/ch07_the_interview_dpp.pdf"
+            }
+          ],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_ch07_1",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            },
+            {
+              "id": "eng_ch07_2",
+              "title": "Complete English in 1 Shot || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=VyiGw_hWwEw",
+              "duration": "3h 11m",
+              "author": "Anurag Sir"
+            }
+          ]
+        },
+        {
+          "id": "eng_flam_08",
+          "subject_id": "english",
+          "number": 8,
+          "name": "Going Places",
+          "folder": "english/08_going_places",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Sophie's fantasies",
+            "Danny Casey hero worship",
+            "Jansie's realism"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/08_going_places/ncert/ch08_going_places.pdf",
+          "notes": [
+            {
+              "title": "Ch08 Going Places Notes",
+              "filename": "ch08_going_places_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/08_going_places/notes/ch08_going_places_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Ch08 Going Places Dpp",
+              "filename": "ch08_going_places_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/08_going_places/dpp/ch08_going_places_dpp.pdf"
+            }
+          ],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_ch08_1",
+              "title": "Going Places \u2014 Full Explanation With PYQ",
+              "youtube_url": "https://www.youtube.com/watch?v=wK7bu5YTRgM",
+              "duration": "22 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_ch08_2",
+              "title": "Flamingo Prose Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=LPiWaeK7MmE",
+              "duration": "4h 13m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_poem_01",
+          "subject_id": "english",
+          "number": 9,
+          "name": "My Mother at Sixty-Six",
+          "folder": "english/09_my_mother_at_sixty_six",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Aging & filial duty",
+            "Winter's moon simile",
+            "Smile and smile and smile"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/09_my_mother_at_sixty_six/ncert/poem01_my_mother_at_sixty_six.pdf",
+          "notes": [
+            {
+              "title": "Poem01 My Mother At Sixty Six Notes",
+              "filename": "poem01_my_mother_at_sixty_six_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/09_my_mother_at_sixty_six/notes/poem01_my_mother_at_sixty_six_notes.pdf"
+            }
+          ],
+          "dpps": [],
+          "quizzes": [
+            {
+              "id": "flamingo_poem01_dpp01",
+              "title": "My Mother at Sixty-Six \u2014 Poem 1 DPP",
+              "filename": "flamingo_poem01_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/09_my_mother_at_sixty_six/quizzes/flamingo_poem01_dpp01.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_p01_1",
+              "title": "My Mother At Sixty Six \u2014 Detailed Explanation with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=yTz0qfIqqTs",
+              "duration": "18 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_p01_2",
+              "title": "Flamingo Poetry Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=4vTs1moBSUU",
+              "duration": "3h 10m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_poem_02",
+          "subject_id": "english",
+          "number": 10,
+          "name": "Keeping Quiet",
+          "folder": "english/10_keeping_quiet",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Introspection & silence",
+            "Counting to twelve",
+            "Earth teaches renewal"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/10_keeping_quiet/ncert/poem02_keeping_quiet.pdf",
+          "notes": [
+            {
+              "title": "Poem02 Keeping Quiet Notes",
+              "filename": "poem02_keeping_quiet_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/10_keeping_quiet/notes/poem02_keeping_quiet_notes.pdf"
+            }
+          ],
+          "dpps": [
+            {
+              "title": "Poem02 Keeping Quiet Dpp",
+              "filename": "poem02_keeping_quiet_dpp.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/10_keeping_quiet/dpp/poem02_keeping_quiet_dpp.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "flamingo_poem02_dpp01",
+              "title": "Keeping Quiet \u2014 Poem 2 DPP",
+              "filename": "flamingo_poem02_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/10_keeping_quiet/quizzes/flamingo_poem02_dpp01.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_p02_1",
+              "title": "Keeping Quiet \u2014 Detailed Explanation & Themes",
+              "youtube_url": "https://www.youtube.com/watch?v=SHGayrunu4M",
+              "duration": "16 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_p02_2",
+              "title": "Flamingo Poetry Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=4vTs1moBSUU",
+              "duration": "3h 10m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_poem_03",
+          "subject_id": "english",
+          "number": 11,
+          "name": "A Thing of Beauty",
+          "folder": "english/11_a_thing_of_beauty",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Endless fountain of immortal drink",
+            "Bower quiet for us",
+            "Pall of despondence"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/11_a_thing_of_beauty/ncert/poem03_a_thing_of_beauty.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [
+            {
+              "id": "flamingo_poem03_dpp01",
+              "title": "A Thing of Beauty \u2014 Poem 3 DPP",
+              "filename": "flamingo_poem03_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/11_a_thing_of_beauty/quizzes/flamingo_poem03_dpp01.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_p03_1",
+              "title": "A Thing Of Beauty \u2014 Central Idea & Important Q&A",
+              "youtube_url": "https://www.youtube.com/watch?v=2xdFbHoseps",
+              "duration": "20 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_p03_2",
+              "title": "Flamingo Poetry Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=4vTs1moBSUU",
+              "duration": "3h 10m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_poem_04",
+          "subject_id": "english",
+          "number": 12,
+          "name": "A Roadside Stand",
+          "folder": "english/12_a_roadside_stand",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Rural-urban economic divide",
+            "Childish longing in vain",
+            "Selfish cars"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/12_a_roadside_stand/ncert/poem04_a_roadside_stand.pdf",
+          "notes": [
+            {
+              "title": "Poem04 A Roadside Stand Notes",
+              "filename": "poem04_a_roadside_stand_notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/12_a_roadside_stand/notes/poem04_a_roadside_stand_notes.pdf"
+            }
+          ],
+          "dpps": [],
+          "quizzes": [
+            {
+              "id": "flamingo_poem04_dpp01",
+              "title": "A Roadside Stand \u2014 Poem 4 DPP",
+              "filename": "flamingo_poem04_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/12_a_roadside_stand/quizzes/flamingo_poem04_dpp01.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "eng_p04_1",
+              "title": "A Roadside Stand \u2014 Full Explanation, Summary & Theme",
+              "youtube_url": "https://www.youtube.com/watch?v=JY8tT8_MZJs",
+              "duration": "21 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_p04_2",
+              "title": "Flamingo Poetry Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=4vTs1moBSUU",
+              "duration": "3h 10m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_poem_05",
+          "subject_id": "english",
+          "number": 13,
+          "name": "Aunt Jennifer's Tigers",
+          "folder": "english/13_aunt_jennifers_tigers",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Patriarchal oppression",
+            "Chivalric certainty",
+            "Massive weight of Uncle's wedding band"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/13_aunt_jennifers_tigers/ncert/poem05_aunt_jennifers_tigers.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_p05_1",
+              "title": "Aunt Jennifer's Tigers \u2014 Explanations & Board Tricks",
+              "youtube_url": "https://www.youtube.com/watch?v=M4cpBdumrE8",
+              "duration": "17 mins",
+              "author": "Dear Sir"
+            },
+            {
+              "id": "eng_p05_2",
+              "title": "Flamingo Poetry Complete One-Shot Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=4vTs1moBSUU",
+              "duration": "3h 10m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_01",
+          "subject_id": "english",
+          "number": 14,
+          "name": "The Third Level",
+          "folder": "english/14_the_third_level",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Grand Central Station",
+            "Charley & Louisa",
+            "Sam's letter from 1894 Galesburg"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/14_the_third_level/ncert/ch01_the_third_level.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_1",
+              "title": "The Third Level \u2014 Complete Explanation",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_02",
+          "subject_id": "english",
+          "number": 15,
+          "name": "The Tiger King",
+          "folder": "english/15_the_tiger_king",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Jilani Jung Jung Bahadur",
+            "Astrologer prediction",
+            "The 100th wooden tiger"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/15_the_tiger_king/ncert/ch02_the_tiger_king.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_2",
+              "title": "The Tiger King \u2014 Full Explanation",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_03",
+          "subject_id": "english",
+          "number": 16,
+          "name": "Journey to the End of the Earth",
+          "folder": "english/16_journey_to_the_end_of_the_earth",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Antarctica expedition",
+            "Students on Ice program",
+            "Global warming impact"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/16_journey_to_the_end_of_the_earth/ncert/ch03_journey_to_the_end_of_the_earth.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_3",
+              "title": "Journey to the End of the Earth \u2014 Summary",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_04",
+          "subject_id": "english",
+          "number": 17,
+          "name": "The Enemy",
+          "folder": "english/17_the_enemy",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Dr. Sadao Hoki & Hana",
+            "American POW Tom",
+            "Duty as doctor vs patriotism"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/17_the_enemy/ncert/ch04_the_enemy.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_4",
+              "title": "The Enemy \u2014 Detailed Character Study & Explanation",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_05",
+          "subject_id": "english",
+          "number": 18,
+          "name": "On the Face of It",
+          "folder": "english/18_on_the_face_of_it",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Derry's burned face",
+            "Mr. Lamb's tin leg & apple garden",
+            "Positive outlook on life"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/18_on_the_face_of_it/ncert/ch05_on_the_face_of_it.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_5",
+              "title": "On the Face of It \u2014 Theme & Summary",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        },
+        {
+          "id": "eng_vis_06",
+          "subject_id": "english",
+          "number": 19,
+          "name": "Memories of Childhood",
+          "folder": "english/19_memories_of_childhood",
+          "weightage_marks": 4,
+          "key_topics": [
+            "The Cutting of My Long Hair (Zitkala-Sa)",
+            "We Too are Human Beings (Bama)",
+            "Caste & racial bias"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/19_memories_of_childhood/ncert/ch06_memories_of_childhood.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "eng_vis_6",
+              "title": "Memories of Childhood \u2014 Full Lesson",
+              "youtube_url": "https://www.youtube.com/watch?v=FLeSUqA12vo",
+              "duration": "3h 8m",
+              "author": "Anurag Sir VIJETA 2026"
+            }
+          ]
+        }
+      ],
+      "writing_section_notes": [
+        {
+          "title": "Class 12th Writing Section Formats",
+          "filename": "class_12th_writing_section_formats.pdf",
+          "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/writing_section/notes/class_12th_writing_section_formats.pdf"
+        },
+        {
+          "title": "Class 12th Writing Section Handwritten",
+          "filename": "class_12th_writing_section_handwritten.pdf",
+          "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/writing_section/notes/class_12th_writing_section_handwritten.pdf"
+        },
+        {
+          "title": "Class 12th Writing Section Overview",
+          "filename": "class_12th_writing_section_overview.pdf",
+          "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/english/writing_section/notes/class_12th_writing_section_overview.pdf"
+        }
+      ]
+    },
+    {
+      "id": "physics",
+      "name": "Physics",
+      "code": "042",
+      "stream": "Science",
+      "total_theory_marks": 70,
+      "total_practical_marks": 30,
+      "icon_name": "bolt",
+      "chapters": [
+        {
+          "id": "phy_01",
+          "subject_id": "physics",
+          "number": 1,
+          "name": "Electric Charges and Fields",
+          "folder": "physics/01_electric_charges_and_fields",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Coulomb's Law",
+            "Electric Dipole",
+            "Gauss's Law Applications"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/01_electric_charges_and_fields/ncert/ch01_electric_charges_and_fields.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_01_oneshot",
+              "title": "Electric Charges and Fields Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=9nU2YZ2HVPA",
+              "duration": "4 hr 42 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_02",
+          "subject_id": "physics",
+          "number": 2,
+          "name": "Electrostatic Potential and Capacitance",
+          "folder": "physics/02_electrostatic_potential_and_capacitance",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Potential due to Dipole",
+            "Capacitor Dielectrics",
+            "Energy Stored"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/02_electrostatic_potential_and_capacitance/ncert/ch02_electrostatic_potential_and_capacitance.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_02_oneshot",
+              "title": "Electrostatic Potential and Capacitance Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=2tG-hx2JHr8",
+              "duration": "4 hr 10 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_03",
+          "subject_id": "physics",
+          "number": 3,
+          "name": "Current Electricity",
+          "folder": "physics/03_current_electricity",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Drift Velocity Derivation",
+            "Kirchhoff's Rules",
+            "Wheatstone Bridge"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/03_current_electricity/ncert/ch03_current_electricity.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_03_oneshot",
+              "title": "Current Electricity Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=vUCDSDWyX4c",
+              "duration": "4 hr 2 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_04",
+          "subject_id": "physics",
+          "number": 4,
+          "name": "Moving Charges and Magnetism",
+          "folder": "physics/04_moving_charges_and_magnetism",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Biot-Savart Loop Axis",
+            "Ampere's Solenoid",
+            "Parallel Currents Force"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/04_moving_charges_and_magnetism/ncert/ch04_moving_charges_and_magnetism.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_04_oneshot",
+              "title": "Moving Charges and Magnetism Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=lYqCUYI9D7Y",
+              "duration": "3 hr 25 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_05",
+          "subject_id": "physics",
+          "number": 5,
+          "name": "Magnetism and Matter",
+          "folder": "physics/05_magnetism_and_matter",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Magnetic Dipole Moment",
+            "Magnetic Field Lines",
+            "Para, Dia, Ferromagnetism"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/05_magnetism_and_matter/ncert/ch05_magnetism_and_matter.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_05_oneshot",
+              "title": "Magnetism and Matter Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=lWbUXCr3FOk",
+              "duration": "2 hr 41 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_06",
+          "subject_id": "physics",
+          "number": 6,
+          "name": "Electromagnetic Induction",
+          "folder": "physics/06_electromagnetic_induction",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Faraday's Law",
+            "Lenz's Law",
+            "Motional EMF Derivation"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/06_electromagnetic_induction/ncert/ch06_electromagnetic_induction.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_06_oneshot",
+              "title": "Electromagnetic Induction Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=GaLQhuyaUNg",
+              "duration": "3 hr 8 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_07",
+          "subject_id": "physics",
+          "number": 7,
+          "name": "Alternating Current",
+          "folder": "physics/07_alternating_current",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Series LCR Phasor",
+            "Resonance Condition",
+            "Transformer Working"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/07_alternating_current/ncert/ch07_alternating_current.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_07_oneshot",
+              "title": "Alternating Current Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=tMIfXYlnJ5U",
+              "duration": "3 hr 47 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_08",
+          "subject_id": "physics",
+          "number": 8,
+          "name": "Electromagnetic Waves",
+          "folder": "physics/08_electromagnetic_waves",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Displacement Current",
+            "EM Wave Characteristics",
+            "Electromagnetic Spectrum"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/08_electromagnetic_waves/ncert/ch08_electromagnetic_waves.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_08_oneshot",
+              "title": "Electromagnetic Waves Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=NsO6M28xPTs",
+              "duration": "1 hr 37 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_09",
+          "subject_id": "physics",
+          "number": 9,
+          "name": "Ray Optics and Optical Instruments",
+          "folder": "physics/09_ray_optics_and_optical_instruments",
+          "weightage_marks": 9,
+          "key_topics": [
+            "Spherical Surface Refraction",
+            "Lens Maker's Formula",
+            "Astronomical Telescope"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/09_ray_optics_and_optical_instruments/ncert/ch09_ray_optics_and_optical_instruments.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_09_oneshot",
+              "title": "Ray Optics and Optical Instruments Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=V3JXWwBXv-4",
+              "duration": "4 hr 50 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_10",
+          "subject_id": "physics",
+          "number": 10,
+          "name": "Wave Optics",
+          "folder": "physics/10_wave_optics",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Huygens Wavefront Proof",
+            "YDSE Fringe Width",
+            "Diffraction"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/10_wave_optics/ncert/ch10_wave_optics.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_10_oneshot",
+              "title": "Wave Optics Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=6M_Y2FesSfA",
+              "duration": "2 hr 40 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_11",
+          "subject_id": "physics",
+          "number": 11,
+          "name": "Dual Nature of Radiation and Matter",
+          "folder": "physics/11_dual_nature_of_radiation_and_matter",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Photoelectric Effect",
+            "Einstein Equation",
+            "de Broglie Wavelength"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/11_dual_nature_of_radiation_and_matter/ncert/ch11_dual_nature_of_radiation_and_matter.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_11_oneshot",
+              "title": "Dual Nature of Matter and Radiation Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=7naR68Z6xEs",
+              "duration": "2 hr 8 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_12",
+          "subject_id": "physics",
+          "number": 12,
+          "name": "Atoms",
+          "folder": "physics/12_atoms",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Rutherford Model",
+            "Bohr Postulates",
+            "Hydrogen Spectrum Rydberg Formula"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/12_atoms/ncert/ch12_atoms.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_12_oneshot",
+              "title": "Atoms and Nuclei Class 12 Physics One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=YuU3gaY34dI",
+              "duration": "2 hr 21 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_13",
+          "subject_id": "physics",
+          "number": 13,
+          "name": "Nuclei",
+          "folder": "physics/13_nuclei",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Nuclear Density",
+            "Mass Defect & Binding Energy",
+            "Nuclear Fission & Fusion"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/13_nuclei/ncert/ch13_nuclei.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_13_oneshot",
+              "title": "Atoms and Nuclei Class 12 Physics One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=YuU3gaY34dI",
+              "duration": "2 hr 21 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        },
+        {
+          "id": "phy_14",
+          "subject_id": "physics",
+          "number": 14,
+          "name": "Semiconductor Electronics",
+          "folder": "physics/14_semiconductor_electronics",
+          "weightage_marks": 7,
+          "key_topics": [
+            "p-n Junction Biasing",
+            "Full Wave Rectifier"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/14_semiconductor_electronics/ncert/ch14_semiconductor_electronics.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "phys_14_oneshot",
+              "title": "Semiconductor Electronics Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=XGc2OCsjIdk",
+              "duration": "1 hr 49 min",
+              "author": "Akshay Sir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "chemistry",
+      "name": "Chemistry",
+      "code": "043",
+      "stream": "Science",
+      "total_theory_marks": 70,
+      "total_practical_marks": 30,
+      "icon_name": "science",
+      "chapters": [
+        {
+          "id": "chem_01",
+          "subject_id": "chemistry",
+          "number": 1,
+          "name": "Solutions",
+          "folder": "chemistry/01_solutions",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Raoult's Law",
+            "Colligative Properties",
+            "Van't Hoff Factor"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/01_solutions/ncert/ch01_solutions.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_01_oneshot",
+              "title": "Solutions Chemistry Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=3VVSOY_iQX8",
+              "duration": "4 hr 40 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_02",
+          "subject_id": "chemistry",
+          "number": 2,
+          "name": "Electrochemistry",
+          "folder": "chemistry/02_electrochemistry",
+          "weightage_marks": 9,
+          "key_topics": [
+            "Nernst Equation",
+            "Kohlrausch Law",
+            "Fuel Cells"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/02_electrochemistry/ncert/ch02_electrochemistry.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_02_oneshot",
+              "title": "Electrochemistry Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=94Gq-VdBoAY",
+              "duration": "6 hr 13 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_03",
+          "subject_id": "chemistry",
+          "number": 3,
+          "name": "Chemical Kinetics",
+          "folder": "chemistry/03_chemical_kinetics",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Rate Law & Order",
+            "Integrated First Order Rate Equation",
+            "Arrhenius Equation"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/03_chemical_kinetics/ncert/ch03_chemical_kinetics.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_03_oneshot",
+              "title": "Chemical Kinetics Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=XI2eLUjOt5Q",
+              "duration": "5 hr 36 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_04",
+          "subject_id": "chemistry",
+          "number": 4,
+          "name": "d and f Block Elements",
+          "folder": "chemistry/04_d_and_f_block_elements",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Transition Metals Trends",
+            "KMnO4 & K2Cr2O7",
+            "Lanthanoid Contraction"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/04_d_and_f_block_elements/ncert/ch04_d_and_f_block_elements.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_04_oneshot",
+              "title": "d- and f-Block Elements Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=atz_SW4Ovg8",
+              "duration": "4 hr 44 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_05",
+          "subject_id": "chemistry",
+          "number": 5,
+          "name": "Coordination Compounds",
+          "folder": "chemistry/05_coordination_compounds",
+          "weightage_marks": 7,
+          "key_topics": [
+            "IUPAC Nomenclature",
+            "Valence Bond Theory",
+            "Crystal Field Splitting"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/05_coordination_compounds/ncert/ch05_coordination_compounds.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_05_oneshot",
+              "title": "Coordination Compounds Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=RgEnbei373Q",
+              "duration": "3 hr 40 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_06",
+          "subject_id": "chemistry",
+          "number": 6,
+          "name": "Haloalkanes and Haloarenes",
+          "folder": "chemistry/06_haloalkanes_and_haloarenes",
+          "weightage_marks": 6,
+          "key_topics": [
+            "SN1 vs SN2 Mechanisms",
+            "Sandmeyer Reaction",
+            "Swarts Reaction"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/06_haloalkanes_and_haloarenes/ncert/ch06_haloalkanes_and_haloarenes.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_06_oneshot",
+              "title": "Haloalkanes and Haloarenes Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=2GT9GM7k9_k",
+              "duration": "3 hr 42 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_07",
+          "subject_id": "chemistry",
+          "number": 7,
+          "name": "Alcohols, Phenols and Ethers",
+          "folder": "chemistry/07_alcohols_phenols_and_ethers",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Hydroboration-Oxidation",
+            "Kolbe & Reimer-Tiemann",
+            "Williamson Synthesis"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/07_alcohols_phenols_and_ethers/ncert/ch07_alcohols_phenols_and_ethers.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_07_oneshot",
+              "title": "Alcohol Phenol and Ethers Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=p5m6oUmk2DE",
+              "duration": "3 hr 13 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_08",
+          "subject_id": "chemistry",
+          "number": 8,
+          "name": "Aldehydes, Ketones and Carboxylic Acids",
+          "folder": "chemistry/08_aldehydes_ketones_and_carboxylic_acids",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Aldol Condensation",
+            "Cannizzaro Reaction",
+            "Tollens & Fehling Tests"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/08_aldehydes_ketones_and_carboxylic_acids/ncert/ch08_aldehydes_ketones_and_carboxylic_acids.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_08_oneshot",
+              "title": "Aldehydes Ketones and Carboxylic Acids Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=uxZlQlbrvmw",
+              "duration": "4 hr 22 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        },
+        {
+          "id": "chem_09",
+          "subject_id": "chemistry",
+          "number": 9,
+          "name": "Amines",
+          "folder": "chemistry/09_amines",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Hoffmann Bromamide",
+            "Gabriel Phthalimide",
+            "Carbylamine Test"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/09_amines/ncert/ch09_amines.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_09_oneshot",
+              "title": "Amines Class 12 One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=_ICiy7jCaCQ",
+              "duration": "2 hr 38 min",
+              "author": "Shourya Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "chem_10",
+          "subject_id": "chemistry",
+          "number": 10,
+          "name": "Biomolecules",
+          "folder": "chemistry/10_biomolecules",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Glucose Structure",
+            "Proteins Denaturation",
+            "DNA Double Helix"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/10_biomolecules/ncert/ch10_biomolecules.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "chem_10_oneshot",
+              "title": "Biomolecules Class 12 Chemistry One Shot | NCERT Full Revision",
+              "youtube_url": "https://www.youtube.com/watch?v=neCiz1bHXGQ",
+              "duration": "3 hr 21 min",
+              "author": "Sunil Sir"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "maths",
+      "name": "Mathematics",
+      "code": "041",
+      "stream": "PCM",
+      "total_theory_marks": 80,
+      "total_practical_marks": 20,
+      "icon_name": "functions",
+      "chapters": [
+        {
+          "id": "math_01",
+          "subject_id": "maths",
+          "number": 1,
+          "name": "Relations and Functions",
+          "folder": "maths/01_relations_and_functions",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Equivalence Relations",
+            "Bijective Functions"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/01_relations_and_functions/ncert/ch01_relations_and_functions.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_02",
+          "subject_id": "maths",
+          "number": 2,
+          "name": "Inverse Trigonometric Functions",
+          "folder": "maths/02_inverse_trigonometric_functions",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Principal Value Branches"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/02_inverse_trigonometric_functions/ncert/ch02_inverse_trigonometric_functions.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_03",
+          "subject_id": "maths",
+          "number": 3,
+          "name": "Matrices",
+          "folder": "maths/03_matrices",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Matrix Multiplication",
+            "Symmetric & Skew Symmetric",
+            "Elementary Transformations"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/03_matrices/ncert/ch03_matrices.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_04",
+          "subject_id": "maths",
+          "number": 4,
+          "name": "Determinants",
+          "folder": "maths/04_determinants",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Adjoint & Inverse of Matrix",
+            "Solving Linear Equations using Inverse"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/04_determinants/ncert/ch04_determinants.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_05",
+          "subject_id": "maths",
+          "number": 5,
+          "name": "Continuity and Differentiability",
+          "folder": "maths/05_continuity_and_differentiability",
+          "weightage_marks": 9,
+          "key_topics": [
+            "Chain Rule",
+            "Logarithmic Differentiation",
+            "Parametric Equations"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/05_continuity_and_differentiability/ncert/ch05_continuity_and_differentiability.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_06",
+          "subject_id": "maths",
+          "number": 6,
+          "name": "Application of Derivatives",
+          "folder": "maths/06_application_of_derivatives",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Increasing/Decreasing Functions",
+            "Maxima and Minima"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/06_application_of_derivatives/ncert/ch06_application_of_derivatives.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_07",
+          "subject_id": "maths",
+          "number": 7,
+          "name": "Integrals",
+          "folder": "maths/07_integrals",
+          "weightage_marks": 9,
+          "key_topics": [
+            "Partial Fractions",
+            "Integration by Parts",
+            "Definite Integral Properties"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/07_integrals/ncert/ch07_integrals.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_08",
+          "subject_id": "maths",
+          "number": 8,
+          "name": "Application of Integrals",
+          "folder": "maths/08_application_of_integrals",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Area Under Simple Curves",
+            "Area Bounded by Lines, Parabolas & Circles"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/08_application_of_integrals/ncert/ch08_application_of_integrals.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_09",
+          "subject_id": "maths",
+          "number": 9,
+          "name": "Differential Equations",
+          "folder": "maths/09_differential_equations",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Order and Degree",
+            "Separable Variables",
+            "Homogeneous & Linear DEs"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/09_differential_equations/ncert/ch09_differential_equations.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_10",
+          "subject_id": "maths",
+          "number": 10,
+          "name": "Vector Algebra",
+          "folder": "maths/10_vector_algebra",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Dot Product",
+            "Cross Product",
+            "Scalar Triple Product"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/10_vector_algebra/ncert/ch10_vector_algebra.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_11",
+          "subject_id": "maths",
+          "number": 11,
+          "name": "Three Dimensional Geometry",
+          "folder": "maths/11_three_dimensional_geometry",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Direction Cosines & Ratios",
+            "Equation of Line in Space",
+            "Shortest Distance Between Skew Lines"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/11_three_dimensional_geometry/ncert/ch11_three_dimensional_geometry.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_12",
+          "subject_id": "maths",
+          "number": 12,
+          "name": "Linear Programming",
+          "folder": "maths/12_linear_programming",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Mathematical Formulation",
+            "Corner Point Graphical Method",
+            "Bounded Feasible Region"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/12_linear_programming/ncert/ch12_linear_programming.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "math_13",
+          "subject_id": "maths",
+          "number": 13,
+          "name": "Probability",
+          "folder": "maths/13_probability",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Conditional Probability",
+            "Multiplication Rule",
+            "Bayes' Theorem"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/13_probability/ncert/ch13_probability.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        }
+      ]
+    },
+    {
+      "id": "biology",
+      "name": "Biology",
+      "code": "044",
+      "stream": "PCB",
+      "total_theory_marks": 70,
+      "total_practical_marks": 30,
+      "icon_name": "biotech",
+      "chapters": [
+        {
+          "id": "bio_01",
+          "subject_id": "biology",
+          "number": 1,
+          "name": "Sexual Reproduction in Flowering Plants",
+          "folder": "biology/01_sexual_reproduction_in_flowering_plants",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Double Fertilization",
+            "Endosperm Development",
+            "Outbreeding Devices"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/ncert/ch01_sexual_reproduction_in_flowering_plants.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Dpp 01 4",
+              "filename": "DPP 01-4.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 01-4.pdf"
+            },
+            {
+              "title": "Dpp 02 3",
+              "filename": "DPP 02-3.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 02-3.pdf"
+            },
+            {
+              "title": "Dpp 03 5",
+              "filename": "DPP 03-5.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 03-5.pdf"
+            },
+            {
+              "title": "Dpp 04",
+              "filename": "DPP 04.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 04.pdf"
+            },
+            {
+              "title": "Dpp 05",
+              "filename": "DPP 05.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 05.pdf"
+            },
+            {
+              "title": "Dpp 06",
+              "filename": "DPP 06.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 06.pdf"
+            },
+            {
+              "title": "Dpp 07 1",
+              "filename": "DPP 07-1.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 07-1.pdf"
+            },
+            {
+              "title": "Dpp 08 1",
+              "filename": "DPP 08-1.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/dpp/DPP 08-1.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_01_dpp01",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 01 (Flower Parts & Morphology)",
+              "filename": "bio_01_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp01.json",
+              "total_questions": 14
+            },
+            {
+              "id": "bio_01_dpp02",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 02 (Pollen Grains & Microsporogenesis)",
+              "filename": "bio_01_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp02.json",
+              "total_questions": 15
+            },
+            {
+              "id": "bio_01_dpp03",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 03 (Pistil, Megasporogenesis & Embryo Sac)",
+              "filename": "bio_01_dpp03.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp03.json",
+              "total_questions": 13
+            },
+            {
+              "id": "bio_01_dpp04",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 04 (Embryo Sac & Sporangium)",
+              "filename": "bio_01_dpp04.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp04.json",
+              "total_questions": 19
+            },
+            {
+              "id": "bio_01_dpp05",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 05 (Outbreeding Devices & Pollination Types)",
+              "filename": "bio_01_dpp05.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp05.json",
+              "total_questions": 15
+            },
+            {
+              "id": "bio_01_dpp06",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 06 (Pollination Adaptations)",
+              "filename": "bio_01_dpp06.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp06.json",
+              "total_questions": 15
+            },
+            {
+              "id": "bio_01_dpp07",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 07 (Double Fertilization & Endosperm)",
+              "filename": "bio_01_dpp07.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp07.json",
+              "total_questions": 15
+            },
+            {
+              "id": "bio_01_dpp08",
+              "title": "Sexual Reproduction in Flowering Plants - DPP 08 (Post-Fertilization: Seeds & Fruits)",
+              "filename": "bio_01_dpp08.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/quizzes/bio_01_dpp08.json",
+              "total_questions": 14
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_01_oneshot",
+              "title": "Sexual Reproduction in Flowering Plants Class 12 One Shot | NCERT + Diagram + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=lW8hbdNGhBE",
+              "duration": "1 hr 55 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_02",
+          "subject_id": "biology",
+          "number": 2,
+          "name": "Human Reproduction",
+          "folder": "biology/02_human_reproduction",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Gametogenesis",
+            "Menstrual Cycle",
+            "Embryo Development"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/ncert/ch02_human_reproduction.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Dpp 01 3",
+              "filename": "DPP 01-3.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/dpp/DPP 01-3.pdf"
+            },
+            {
+              "title": "Dpp 02 2",
+              "filename": "DPP 02-2.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/dpp/DPP 02-2.pdf"
+            },
+            {
+              "title": "Dpp 03 4",
+              "filename": "DPP 03-4.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/dpp/DPP 03-4.pdf"
+            },
+            {
+              "title": "Dpp 07",
+              "filename": "DPP 07.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/dpp/DPP 07.pdf"
+            },
+            {
+              "title": "Dpp 08",
+              "filename": "DPP 08.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/dpp/DPP 08.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_02_dpp01",
+              "title": "Human Reproduction - DPP 01 (Male Reproductive System)",
+              "filename": "bio_02_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/quizzes/bio_02_dpp01.json",
+              "total_questions": 8
+            },
+            {
+              "id": "bio_02_dpp02",
+              "title": "Human Reproduction - DPP 02 (Female Reproductive System)",
+              "filename": "bio_02_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/quizzes/bio_02_dpp02.json",
+              "total_questions": 7
+            },
+            {
+              "id": "bio_02_dpp03",
+              "title": "Human Reproduction - DPP 03 (Gametogenesis & Fallopian Tube)",
+              "filename": "bio_02_dpp03.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/quizzes/bio_02_dpp03.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_02_dpp04",
+              "title": "Human Reproduction - DPP 04 (Fertilization, Morula & Blastocyst)",
+              "filename": "bio_02_dpp04.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/quizzes/bio_02_dpp04.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_02_dpp05",
+              "title": "Human Reproduction - DPP 05 (Implantation, Stem Cells & Embryonic Development)",
+              "filename": "bio_02_dpp05.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/quizzes/bio_02_dpp05.json",
+              "total_questions": 9
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_02_oneshot",
+              "title": "Human Reproduction Class 12 One Shot | NCERT + Diagram + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=jsiE37y8goA",
+              "duration": "2 hr 59 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_03",
+          "subject_id": "biology",
+          "number": 3,
+          "name": "Reproductive Health",
+          "folder": "biology/03_reproductive_health",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Contraceptive Methods",
+            "STIs & MTP",
+            "ART (IVF, ZIFT, ICSI)"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/ncert/ch03_reproductive_health.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Dpp 01 5",
+              "filename": "DPP 01-5.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/dpp/DPP 01-5.pdf"
+            },
+            {
+              "title": "Dpp 02 4",
+              "filename": "DPP 02-4.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/dpp/DPP 02-4.pdf"
+            },
+            {
+              "title": "Dpp 03 6",
+              "filename": "DPP 03-6.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/dpp/DPP 03-6.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_03_dpp01",
+              "title": "Reproductive Health - DPP 01 (Problems, Strategies & Population)",
+              "filename": "bio_03_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/quizzes/bio_03_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_03_dpp02",
+              "title": "Reproductive Health - DPP 02 (Contraception & Birth Control Methods)",
+              "filename": "bio_03_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/quizzes/bio_03_dpp02.json",
+              "total_questions": 13
+            },
+            {
+              "id": "bio_03_dpp03",
+              "title": "Reproductive Health - DPP 03 (STDs, Infertility & Assisted Reproductive Technologies)",
+              "filename": "bio_03_dpp03.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/quizzes/bio_03_dpp03.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_03_oneshot",
+              "title": "Reproductive Health Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=48gImtbYLsQ",
+              "duration": "1 hr 18 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_04",
+          "subject_id": "biology",
+          "number": 4,
+          "name": "Principles of Inheritance and Variation",
+          "folder": "biology/04_principles_of_inheritance_and_variation",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Mendelian Crosses",
+            "Linkage & Recombination",
+            "Genetic Disorders"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/ncert/ch04_principles_of_inheritance_and_variation.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 01",
+              "filename": "Principles Of Inheritance and Variation DPP 01.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 01.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 02",
+              "filename": "Principles Of Inheritance and Variation DPP 02.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 02.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 03",
+              "filename": "Principles Of Inheritance and Variation DPP 03.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 03.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 04",
+              "filename": "Principles Of Inheritance and Variation DPP 04.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 04.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 05",
+              "filename": "Principles Of Inheritance and Variation DPP 05.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 05.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 06",
+              "filename": "Principles Of Inheritance and Variation DPP 06.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 06.pdf"
+            },
+            {
+              "title": "Principles Of Inheritance And Variation Dpp 07",
+              "filename": "Principles Of Inheritance and Variation DPP 07.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/dpp/Principles Of Inheritance and Variation DPP 07.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_04_dpp01",
+              "title": "Principles of Inheritance and Variation - DPP 01 (Mendel's Experiments)",
+              "filename": "bio_04_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp01.json",
+              "total_questions": 11
+            },
+            {
+              "id": "bio_04_dpp02",
+              "title": "Principles of Inheritance and Variation - DPP 02 (Monohybrid Cross & Dominance)",
+              "filename": "bio_04_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp02.json",
+              "total_questions": 8
+            },
+            {
+              "id": "bio_04_dpp03",
+              "title": "Principles of Inheritance and Variation - DPP 03 (Incomplete Dominance & Codominance)",
+              "filename": "bio_04_dpp03.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp03.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_04_dpp04",
+              "title": "Principles of Inheritance and Variation - DPP 04 (Dihybrid Cross & Non-Mendelian Ratios)",
+              "filename": "bio_04_dpp04.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp04.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_04_dpp05",
+              "title": "Principles of Inheritance and Variation - DPP 05 (Sex Determination & Chromosomes)",
+              "filename": "bio_04_dpp05.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp05.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_04_dpp06",
+              "title": "Principles of Inheritance and Variation - DPP 06 (Linkage, Recombination & Genetic Mapping)",
+              "filename": "bio_04_dpp06.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp06.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_04_dpp07",
+              "title": "Principles of Inheritance and Variation - DPP 07 (Mutations & Genetic Disorders)",
+              "filename": "bio_04_dpp07.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/quizzes/bio_04_dpp07.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_04_oneshot",
+              "title": "Principles of Inheritance and Variation Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=fuglbkNZ7ac",
+              "duration": "3 hr 15 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_05",
+          "subject_id": "biology",
+          "number": 5,
+          "name": "Molecular Basis of Inheritance",
+          "folder": "biology/05_molecular_basis_of_inheritance",
+          "weightage_marks": 8,
+          "key_topics": [
+            "DNA Replication",
+            "Transcription & Translation",
+            "Lac Operon"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/05_molecular_basis_of_inheritance/ncert/ch05_molecular_basis_of_inheritance.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_05_oneshot",
+              "title": "Molecular Basis of Inheritance Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=eEz_nv3u1JY",
+              "duration": "3 hr 46 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_06",
+          "subject_id": "biology",
+          "number": 6,
+          "name": "Evolution",
+          "folder": "biology/06_evolution",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Origin of Life",
+            "Darwinian Natural Selection",
+            "Hardy-Weinberg Principle"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/ncert/ch06_evolution.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Evolution Dpp 01",
+              "filename": "Evolution DPP 01.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/dpp/Evolution DPP 01.pdf"
+            },
+            {
+              "title": "Evolution Dpp 02 (of Lecture 03)",
+              "filename": "Evolution DPP 02 (Of Lecture 03).pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/dpp/Evolution DPP 02 (Of Lecture 03).pdf"
+            },
+            {
+              "title": "Evolution Dpp 03 (of Lecture 04)",
+              "filename": "Evolution DPP 03 (Of Lecture 04).pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/dpp/Evolution DPP 03 (Of Lecture 04).pdf"
+            },
+            {
+              "title": "Evolution Dpp 04 (of Lecture 05)",
+              "filename": "Evolution DPP 04 (Of Lecture 05).pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/dpp/Evolution DPP 04 (Of Lecture 05).pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_06_dpp01",
+              "title": "Evolution - DPP 01 (Origin of Life & Miller's Experiment)",
+              "filename": "bio_06_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/quizzes/bio_06_dpp01.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_06_dpp02",
+              "title": "Evolution - DPP 02 (Lamarckism, Natural Selection & Evidences)",
+              "filename": "bio_06_dpp02.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/quizzes/bio_06_dpp02.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_06_dpp03",
+              "title": "Evolution - DPP 03 (Adaptive Radiation & Divergent/Convergent Evolution)",
+              "filename": "bio_06_dpp03.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/quizzes/bio_06_dpp03.json",
+              "total_questions": 10
+            },
+            {
+              "id": "bio_06_dpp04",
+              "title": "Evolution - DPP 04 (Biological Evolution & Human Origins)",
+              "filename": "bio_06_dpp04.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/quizzes/bio_06_dpp04.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_06_oneshot",
+              "title": "Evolution Class 12 Biology One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=V4KU17K8h5Q",
+              "duration": "2 hr 2 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_07",
+          "subject_id": "biology",
+          "number": 7,
+          "name": "Human Health and Diseases",
+          "folder": "biology/07_human_health_and_diseases",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Infectious Diseases (Malaria, Typhoid)",
+            "Immunity (Innate vs Acquired)",
+            "AIDS & Cancer"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/07_human_health_and_diseases/ncert/ch07_human_health_and_disease.pdf",
+          "notes": [],
+          "dpps": [
+            {
+              "title": "Human Health And Diseases Dpp 01",
+              "filename": "Human Health and Diseases DPP 01.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/07_human_health_and_diseases/dpp/Human Health and Diseases DPP 01.pdf"
+            }
+          ],
+          "quizzes": [
+            {
+              "id": "bio_07_dpp01",
+              "title": "Human Health and Diseases - DPP 01 (Infectious Diseases & Pathogens)",
+              "filename": "bio_07_dpp01.json",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/07_human_health_and_diseases/quizzes/bio_07_dpp01.json",
+              "total_questions": 10
+            }
+          ],
+          "videos": [
+            {
+              "id": "bio_07_oneshot",
+              "title": "Human Health and Disease Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=FSN4b5MgAq8",
+              "duration": "2 hr 7 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_08",
+          "subject_id": "biology",
+          "number": 8,
+          "name": "Microbes in Human Welfare",
+          "folder": "biology/08_microbes_in_human_welfare",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Household & Industrial Products",
+            "Sewage Treatment Plant",
+            "Biocontrol Agents & Biofertilizers"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/08_microbes_in_human_welfare/ncert/ch08_microbes_in_human_welfare.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_08_oneshot",
+              "title": "Microbes in Human Welfare Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=ka_rvqVnlNo",
+              "duration": "59 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_09",
+          "subject_id": "biology",
+          "number": 9,
+          "name": "Biotechnology: Principles and Processes",
+          "folder": "biology/09_biotechnology_principles_and_processes",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Restriction Enzymes",
+            "Recombinant DNA Plasmids",
+            "PCR & Gel Electrophoresis"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/09_biotechnology_principles_and_processes/ncert/ch09_biotechnology_principles_and_processes.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_09_oneshot",
+              "title": "Biotechnology Principles and Processes Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=pumZiybEwdE",
+              "duration": "1 hr 31 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_10",
+          "subject_id": "biology",
+          "number": 10,
+          "name": "Biotechnology and its Applications",
+          "folder": "biology/10_biotechnology_and_its_applications",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Bt Cotton",
+            "RNA Interference (RNAi)",
+            "Genetically Engineered Insulin",
+            "Gene Therapy"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/10_biotechnology_and_its_applications/ncert/ch10_biotechnology_and_its_applications.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_10_oneshot",
+              "title": "Biotechnology and its Applications Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=530GYX9C1vU",
+              "duration": "1 hr 7 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_11",
+          "subject_id": "biology",
+          "number": 11,
+          "name": "Organisms and Populations",
+          "folder": "biology/11_organisms_and_populations",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Population Attributes",
+            "Growth Models (Exponential & Logistic)",
+            "Population Interactions"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/11_organisms_and_populations/ncert/ch11_organisms_and_populations.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_11_oneshot",
+              "title": "Organism and Population Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=k2XIpxQgSHo",
+              "duration": "1 hr 17 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_12",
+          "subject_id": "biology",
+          "number": 12,
+          "name": "Ecosystem",
+          "folder": "biology/12_ecosystem",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Productivity & Decomposition",
+            "Energy Flow & Ecological Pyramids"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/12_ecosystem/ncert/ch12_ecosystem.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_12_oneshot",
+              "title": "Ecosystem Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=042LD-Xnt3A",
+              "duration": "48 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        },
+        {
+          "id": "bio_13",
+          "subject_id": "biology",
+          "number": 13,
+          "name": "Biodiversity and its Conservation",
+          "folder": "biology/13_biodiversity_and_conservation",
+          "weightage_marks": 3,
+          "key_topics": [
+            "Levels of Biodiversity",
+            "Loss of Biodiversity (The Evil Quartet)",
+            "In-situ & Ex-situ Conservation"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/13_biodiversity_and_conservation/ncert/ch13_biodiversity_and_conservation.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": [
+            {
+              "id": "bio_13_oneshot",
+              "title": "Biodiversity and Conservation Class 12 One Shot | NCERT + PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=XLRxoLcyhuw",
+              "duration": "57 min",
+              "author": "Aarushi Ma'am"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "physical_education",
+      "name": "Physical Education",
+      "code": "048",
+      "stream": "General",
+      "total_theory_marks": 70,
+      "total_practical_marks": 30,
+      "icon_name": "fitness_center",
+      "chapters": [
+        {
+          "id": "pe_01",
+          "subject_id": "physical_education",
+          "number": 1,
+          "name": "Management of Sporting Events",
+          "folder": "physical_education/01_management_of_sporting_events",
+          "weightage_marks": 5,
+          "key_topics": [
+            "Functions of Sports Management",
+            "Committees & Responsibilities",
+            "Fixtures: Knock-Out & League"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/01_management_of_sporting_events/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_02",
+          "subject_id": "physical_education",
+          "number": 2,
+          "name": "Children and Women in Sports",
+          "folder": "physical_education/02_children_and_women_in_sports",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Exercise Guidelines of WHO",
+            "Common Postural Deformities",
+            "Female Athlete Triad"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/02_children_and_women_in_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_03",
+          "subject_id": "physical_education",
+          "number": 3,
+          "name": "Yoga as Preventive Measure for Lifestyle Disease",
+          "folder": "physical_education/03_yoga_as_preventive_measure_for_lifestyle_disease",
+          "weightage_marks": 6,
+          "key_topics": [
+            "Obesity Asanas",
+            "Diabetes Asanas",
+            "Asthma & Hypertension Asanas"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/03_yoga_as_preventive_measure_for_lifestyle_disease/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_04",
+          "subject_id": "physical_education",
+          "number": 4,
+          "name": "Physical Education & Sports for CWSN",
+          "folder": "physical_education/04_physical_education_and_sports_for_cwsn",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Disability Etiquettes",
+            "Concept of Inclusion",
+            "Adaptive Sports & Special Olympics"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/04_physical_education_and_sports_for_cwsn/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_05",
+          "subject_id": "physical_education",
+          "number": 5,
+          "name": "Sports & Nutrition",
+          "folder": "physical_education/05_sports_and_nutrition",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Balanced Diet & Macro/Micro Nutrients",
+            "Nutritive vs Non-Nutritive Components",
+            "Eating Disorders"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/05_sports_and_nutrition/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_06",
+          "subject_id": "physical_education",
+          "number": 6,
+          "name": "Test and Measurement in Sports",
+          "folder": "physical_education/06_test_and_measurement_in_sports",
+          "weightage_marks": 8,
+          "key_topics": [
+            "Fitness Test: SAI Khelo India",
+            "Rikli & Jones Senior Citizen Test",
+            "Basal Metabolic Rate"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/06_test_and_measurement_in_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_07",
+          "subject_id": "physical_education",
+          "number": 7,
+          "name": "Physiology & Injuries in Sports",
+          "folder": "physical_education/07_physiology_and_injuries_in_sports",
+          "weightage_marks": 4,
+          "key_topics": [
+            "Physiological Factors Determining Fitness",
+            "Sports Injuries Classification",
+            "FIRST AID: PRICE / PRICER"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/07_physiology_and_injuries_in_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_08",
+          "subject_id": "physical_education",
+          "number": 8,
+          "name": "Biomechanics and Sports",
+          "folder": "physical_education/08_biomechanics_and_sports",
+          "weightage_marks": 10,
+          "key_topics": [
+            "Newton's Laws of Motion in Sports",
+            "Equilibrium & Centre of Gravity",
+            "Friction & Projectile Trajectory"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/08_biomechanics_and_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_09",
+          "subject_id": "physical_education",
+          "number": 9,
+          "name": "Psychology and Sports",
+          "folder": "physical_education/09_psychology_and_sports",
+          "weightage_marks": 7,
+          "key_topics": [
+            "Big Five Personality Traits",
+            "Aggression in Sports",
+            "Psychological Attributes: Self-esteem, Goal setting"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/09_psychology_and_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        },
+        {
+          "id": "pe_10",
+          "subject_id": "physical_education",
+          "number": 10,
+          "name": "Training in Sports",
+          "folder": "physical_education/10_training_in_sports",
+          "weightage_marks": 9,
+          "key_topics": [
+            "Talent Identification",
+            "Strength, Endurance & Speed Development",
+            "Circuit Training"
+          ],
+          "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physical_education/10_training_in_sports/ncert/physical_education_class12.pdf",
+          "notes": [],
+          "dpps": [],
+          "quizzes": [],
+          "videos": []
+        }
+      ]
+    }
+  ],
+  "sample_papers": [
+    {
+      "title": "CBSE Class 12 2026-27 Biology Marking Scheme",
+      "filename": "Biology-MS.pdf",
+      "subject": "Biology",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Biology Sample Question Paper",
+      "filename": "Biology-SQP.pdf",
+      "subject": "Biology",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-SQP.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Marking Scheme",
+      "filename": "Chemistry-MS.pdf",
+      "subject": "Chemistry",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Sample Question Paper",
+      "filename": "Chemistry-SQP.pdf",
+      "subject": "Chemistry",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-SQP.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Marking Scheme",
+      "filename": "EnglishCore-MS.pdf",
+      "subject": "EnglishCore",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Sample Question Paper",
+      "filename": "EnglishCore-SQP.pdf",
+      "subject": "EnglishCore",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-SQP.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Maths Marking Scheme",
+      "filename": "Maths-MS.pdf",
+      "subject": "Maths",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Maths-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Maths Sample Question Paper",
+      "filename": "Maths-SQP.pdf",
+      "subject": "Maths",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Maths-SQP.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 PhysicalEducation Marking Scheme",
+      "filename": "PhysicalEducation-MS.pdf",
+      "subject": "PhysicalEducation",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/PhysicalEducation-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 PhysicalEducation Sample Question Paper",
+      "filename": "PhysicalEducation-SQP.pdf",
+      "subject": "PhysicalEducation",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/PhysicalEducation-SQP.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Marking Scheme",
+      "filename": "Physics-MS.pdf",
+      "subject": "Physics",
+      "type": "ms",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-MS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Sample Question Paper",
+      "filename": "Physics-SQP.pdf",
+      "subject": "Physics",
+      "type": "sqp",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-SQP.pdf"
+    }
+  ]
+}

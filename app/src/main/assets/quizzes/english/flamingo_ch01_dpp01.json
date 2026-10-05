@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "The Last Lesson",
+  "title": "The Last Lesson — Prose Chapter 1 - Part 1 DPP",
+  "source_pdf": "DPP 01.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Why was Franz afraid of going to school that day?",
+      "options": [
+        "He was late for a test.",
+        "He hadn’t learned his lesson on participles.",
+        "He had argued with M. Hamel.",
+        "He didn’t complete his homework."
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Franz was afraid of going to school that day because M. Hamel had announced there would be a test on participles , and Franz hadn’t prepared for it . He admits to himself that he preferred roaming the countryside instead of studying his grammar. He even thinks about skipping school and enjoying the day outside, but eventually heads to class. So, the main reason for his fear was: He hadn’t learned his lesson on participles , making Option B the correct answer."
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What special attire was M. Hamel wearing that day?",
+      "options": [
+        "A plain black suit",
+        "His beautiful green coat, frilled shirt, and embroidered silk cap",
+        "His gardening clothes",
+        "A military uniform"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Correct answer: B Explanation: He wore his best—green coat, frilled shirt, and embroidered black silk cap— reserved for special days."
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What surprised Franz the most about the classroom?",
+      "options": [
+        "Students were cheering.",
+        "No one was present.",
+        "Village elders were sitting on the back benches.",
+        "M. Hamel was crying."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Franz expected the usual noise and bustle in the classroom. But instead, he found the room unusually quiet and solemn. What truly surprised him the most was seeing the village elders—such as old Hauser—sitting quietly at the back benches , which were usually empty. They were there to honor M. Hamel and show respect for their mother tongue, French, which was being banned by the Prussian authorities after the annexation of Alsace and Lorraine. This moment re ﬂects the theme of the story: the value of language, identity, and the regret people feel when they realize the importance of something only after it's gone."
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "What was unusual about the classroom that day?",
+      "options": [
+        "It was locked and empty.",
+        "The desks were rearranged.",
+        "It was silent and solemn, like a Sunday.",
+        "The students were celebrating."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "When Franz arrives at school, he notices something very unusual . Normally, there's a lot of noise – the opening and closing of desks, lessons being repeated loudly, the teacher’s ruler tapping on the desk. But on that day, the classroom is unusually quiet. Franz says: “It was all so still! I had counted on the commotion to get to my desk without being seen; but, of course, that day everything had to be as quiet as Sunday morning.” | |"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "Why did Wachter, the blacksmith, call out to Franz?",
+      "options": [
+        "To warn him of the news",
+        "To tease him about being late",
+        "To oﬀer him a ride",
+        "To remind him of homework"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "In \"The Last Lesson,\" as Franz was hurrying to school, feeling anxious because he hadn’t prepared his lesson on participles, Wachter, the blacksmith, called out from his smithy with a mocking tone and said something like, “Don’t go so fast, boy; you’ll get to your school in plenty of time!” This was meant to tease Franz, because he thought Franz was rushing and didn't know about the new order that this would be the last French lesson. At that point, Franz still didn’t know the full seriousness of the day."
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "What was the announcement made by M. Hamel during the lesson?",
+      "options": [
+        "There would be a surprise test",
+        "He was retiring",
+        "The school would be closed indeﬁnitely",
+        "Only German would be taught in the schools of Alsace and Lorraine"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Correct Answer: (d) Explanation: M. Hamel informed the class that the order had come from Berlin to teach only German in schools, ending French lessons."
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What was M. Hamel's opinion about the French language?",
+      "options": [
+        "It was the most diﬃcult language in the world.",
+        "It was inferior to other languages.",
+        "It was the most beautiful, clear, and logical language.",
+        "It was irrelevant to the people's freedom."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Correct Answer: (c) Explanation: M. Hamel called French the most beautiful and logical language, encouraging students to hold on to it as a key to their freedom."
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What tempting sights distracted Franz from going to school?",
+      "options": [
+        "A fair in the village",
+        "Birds chirping and soldiers drilling",
+        "A football match",
+        "A traveling circus"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "In The Last Lesson, Franz, the narrator, is a little schoolboy who is reluctant to go to school. On the day the story takes place, he is especially hesitant because he hasn't prepared his lesson on participles. As he walks to school, he's distracted by the sights and sounds around him , which seem more tempting than going to class. Speciﬁcally, he mentions: The warm, bright weather The birds chirping on the trees The Prussian soldiers drilling in the open ﬁeld behind the sawmill These pleasant and lively scenes tempt him to skip school and spend the day outdoors , rather than face his teacher, M. Hamel. So, the tempting sights that distracted Franz were: Birds chirping and soldiers drilling — which makes Option B the correct answer."
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "There was usually great bustle and noise when school began, but it was all very quiet. Which of the following describes Franz' emotions most accurately? [The Last Lesson]",
+      "options": [
+        "Shock and awe",
+        "Disappointment and anxiety",
+        "Confusion and distress",
+        "Curiosity and uncertainty | | DPP: 1 Android App iOS App PW Website The Last Lesson (Part - 01) PARISHRAM 2027 English"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Correct Option: C Confusion: Franz was accustomed to using the typical morning commotion (opening/closing desks, lessons shouted in unison) as a cover to sneak into class late unnoticed. The \"Sunday morning\" stillness left him with no way to enter without being seen, making the situation deeply confusing and \"strange\" to him. Distress: The text speci ﬁcally mentions how he \"blushed\" and was \"frightened\" to walk into the silent room in front of everyone. This sudden shift from the expected environment to a solemn, quiet one created immediate emotional distress as he had to face his strict teacher, M. Hamel, without the usual cover of noise."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What do the marching soldiers under the windows represent?",
+      "options": [
+        "The Dawn of Prussia in the defeat of French people",
+        "The defeat of Prussia",
+        "The victory of French",
+        "None of these | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "In \"The Last Lesson\" by Alphonse Daudet, the marching soldiers under the windows symbolize the Prussian takeover of Alsace and Lorraine after France’s defeat in the Franco-Prussian War (1870-71). The soldiers represent Prussian dominance and the loss of French identity in the region. Their presence outside the classroom reinforces the harsh reality that French is being replaced with German. It highlights the powerlessness of the French people , who must now accept Prussian rule. Why Not the Other Options? | |"
+    }
+  ]
+}

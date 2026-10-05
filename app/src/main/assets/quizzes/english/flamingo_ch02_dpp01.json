@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "Lost Spring",
+  "title": "Lost Spring — Prose Chapter 2 - Part 1 (Saheb) DPP",
+  "source_pdf": "Flamingo DPP 04.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Why did Saheb’s family leave their home in Dhaka?",
+      "options": [
+        "To get better education",
+        "Due to war and political unrest",
+        "Because storms destroyed their ﬁelds and homes",
+        "To live near relatives"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Because storms destroyed their ﬁelds and homes"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What does the name “Saheb-e-Alam” mean?",
+      "options": [
+        "King of dreams",
+        "Lord of the universe",
+        "Master of gold",
+        "Fighter of poverty"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Lord of the universe"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "Why does the author feel embarrassed when Saheb asks about the school?",
+      "options": [
+        "She forgot to invite him",
+        "She never meant her promise seriously",
+        "The school was not ready yet",
+        "She had no funds to build it"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "She never meant her promise seriously"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "Why do some children not wear chappals according to the boys?",
+      "options": [
+        "They prefer being barefoot",
+        "They enjoy walking freely",
+        "Their parents can't afford them or they follow tradition",
+        "They believe it's lucky"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Their parents can't afford them or they follow tradition"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "What contrast does the author observe in the story from Udipi?",
+      "options": [
+        "Between barefoot boys and those with branded shoes",
+        "Between rich priests and poor ragpickers",
+        "Between the boy’s childhood prayer for shoes and the current reality of school-going children wearing shoes",
+        "Between the temple and the school"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Between the boy’s childhood prayer for shoes and the current reality of school-going children wearing shoes"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "What does Seemapuri lack, despite housing thousands of people?",
+      "options": [
+        "Food and shelter",
+        "Education and temples",
+        "Sewage, drainage, and running water",
+        "Police and law"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Sewage, drainage, and running water"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What do ration cards provide the people of Seemapuri with?",
+      "options": [
+        "Identity and shelter",
+        "Voting rights and food",
+        "Money and free healthcare",
+        "Passports and jobs"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Voting rights and food"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "How does garbage hold a different meaning for children than for adults in Seemapuri?",
+      "options": [
+        "It is a game for children",
+        "It’s a symbol of art",
+        "For children, it’s hope and wonder; for adults, it’s survival",
+        "Children are unaware of its use"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "For children, it’s hope and wonder; for adults, it’s survival"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "Why does Saheb wear tennis shoes even though they don’t match his clothes?",
+      "options": [
+        "He likes showing off",
+        "They were gifted to him",
+        "He plays tennis regularly",
+        "He found them in the garbage"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "They were gifted to him"
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What literary device is used in “Garbage to them is gold”?",
+      "options": [
+        "Metaphor",
+        "Hyperbole",
+        "Simile",
+        "Irony | | Android App iOS App PW Website DPP: 4 PARISHRAM 2027 English Lost Spring I - Sometimes I Find A Rupee In The Garbage"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Metaphor"
+    }
+  ]
+}

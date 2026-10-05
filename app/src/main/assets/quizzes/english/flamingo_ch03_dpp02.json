@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "Deep Water",
+  "title": "Deep Water — Prose Chapter 3 - Part 2 DPP",
+  "source_pdf": "Flamingo DPP 08.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Why did the author speciﬁcally mention that his fear of water originated at the age of three at California beach?",
+      "options": [
+        "To exaggerate the intensity of the sea waves",
+        "To dramatize the story’s opening",
+        "To trace the root of his phobia and highlight its persistence",
+        "To criticize his father's careless behavior"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "The author says, “Terror had me in its grip... My legs paralyzed, rigid with fear.” This is an example of:",
+      "options": [
+        "Hyperbole and metaphor",
+        "Personiﬁcation and sensory imagery",
+        "Simile and irony",
+        "Alliteration and satire"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": ""
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "Which of the following best captures the central message of Deep Water?",
+      "options": [
+        "Fear is a natural instinct and must be avoided.",
+        "Real courage is the ability to move forward in spite of fear.",
+        "Adults must supervise children near water.",
+        "Past trauma always haunts a person."
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": ""
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "Douglas mentions Roosevelt’s quote: \"All we have to fear is fear itself.\" What purpose does this serve in the narrative?",
+      "options": [
+        "To introduce political ideology",
+        "To justify irrational panic",
+        "To emphasize that fear is more dangerous than the object feared",
+        "To connect historical context to his swimming lessons"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "Why does the author feel “released, free to walk the trails and climb the peaks”?",
+      "options": [
+        "Because he had ﬁnally gone on a nature hike",
+        "Because he had overcome his fear of heights",
+        "Because conquering his fear of water had mentally liberated him",
+        "Because he left his job and retired to the mountains"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "The author's use of short, fragmented sentences like “I was suﬀocating. I tried to yell…” serves to:",
+      "options": [
+        "Create a humorous tone",
+        "Slow the pace of the narrative",
+        "Mimic the panicked rhythm of his thoughts",
+        "Provide factual information"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "The resolution of the story, when Douglas ﬁnally swims across the Warm Lake, symbolizes:",
+      "options": [
+        "Revenge against the childhood bully",
+        "The start of his career in public service",
+        "Triumph over irrational fear and full recovery",
+        "The end of his swimming lessons"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What role does the swimming instructor play in the narrative structure of Deep Water?",
+      "options": [
+        "He introduces conﬂict into the story",
+        "He serves as the antagonist",
+        "He is the mentor ﬁgure helping the protagonist overcome internal struggle",
+        "He represents society's pressure"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": ""
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "Douglas writes the piece in the ﬁrst person mainly to: | | Android App iOS App PW Website DPP: 8 Parishram 2027 English Deep Water (Part - 02)",
+      "options": [
+        "Add ﬁctional drama",
+        "Provide objectivity",
+        "Make the story more factual",
+        "Allow readers to emotionally connect with his personal fear and journey"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": ""
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "Why did Douglas mother recommend that he should learn swimming at the Y. M. C. A. swimming pool?",
+      "options": [
+        "Because it was local",
+        "Because it was safe",
+        "Because it was shallow",
+        "Because it was shallow and safe | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Because it was shallow and safe"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "The Last Lesson",
+  "title": "The Last Lesson — Prose Chapter 1 - Part 2 DPP",
+  "source_pdf": "DPP.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "\"I never saw him look so tall\". Which of the following best captures M. Hamel on the last day of school? [The Last Lesson]",
+      "options": [
+        "Cranky, miserable, dedicated, resigned",
+        "Patient, digniﬁed, emotional, courageous",
+        "Calm, nostalgic, disappointed, patriotic",
+        "Proud, reproachful, persistent, heroic"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "In \"The Last Lesson\" by Alphonse Daudet, M. Hamel, the French teacher, delivers his ﬁnal lesson with great patience, dignity, and emotion, knowing that it is his last day teaching French before the German rule enforces the German language. Patient – He does not scold the students but instead teaches them with deep sincerity. Digniﬁed – Despite his grief, he maintains self-respect and carries out his duty as a teacher. Emotional – He is visibly moved , especially towards the end of the lesson, as he realizes he will never teach again. Courageous – Even in the face of oppression, he remains strong and urges his students to love and preserve their language. The line \"I never saw him look so tall\" symbolizes how Franz sees M. Hamel as a heroic ﬁgure—a man standing strong despite losing his position, language, and country’s freedom."
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What was unusual about the classroom that day?",
+      "options": [
+        "It was locked and empty.",
+        "The desks were rearranged.",
+        "It was silent and solemn, like a Sunday.",
+        "The students were celebrating."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "When Franz arrives at school, he notices something very unusual . Normally, there's a lot of noise – the opening and closing of desks, lessons being repeated loudly, the teacher’s ruler tapping on the desk. But on that day, the classroom is unusually quiet. Franz says: “It was all so still! I had counted on the commotion to get to my desk without being seen; but, of course, that day everything had to be as quiet as Sunday morning.” This Sunday-like silence and solemnity reﬂects the seriousness of the occasion — it was the last French lesson , as the German authorities had ordered that only German would be taught in schools from the next day. So, the unusual thing about the classroom that day was its quiet, serious atmosphere , which makes: Option C the correct answer."
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What was the reason behind the solemn atmosphere in the classroom?",
+      "options": [
+        "It was a rainy day",
+        "The students were sad about M. Hamel leaving",
+        "The village people were present",
+        "The students were scared of M. Hamel"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Correct Answer: (b) Explanation: The classroom was ﬁlled with an unusual silence because it was M. Hamel’s last French lesson, and everyone felt sad and guilty."
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "Why did Wachter, the blacksmith, call out to Franz?",
+      "options": [
+        "To warn him of the news",
+        "To tease him about being late",
+        "To oﬀer him a ride",
+        "To remind him of homework"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "In \"The Last Lesson,\" as Franz was hurrying to school, feeling anxious because he hadn’t prepared his lesson on participles, Wachter, the blacksmith, called out from his smithy with a mocking tone and said something like, “Don’t go so fast, boy; you’ll get to your school in plenty of time!” This was meant to tease Franz, because he thought Franz was rushing and didn't know about the new order that this would be the last French lesson. At that point, Franz still didn’t know the full seriousness of the day."
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "Why did M. Hamel say the people outside would reproach the students?",
+      "options": [
+        "For not attending school regularly",
+        "For not being able to speak or write French properly",
+        "For not respecting their teachers",
+        "For being late to class"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Correct Answer: (b) Explanation: M. Hamel believed the students and villagers would be blamed for neglecting their language and losing it to foreign rule."
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "What does old Hauser bringing a primer symbolize?",
+      "options": [
+        "His regret for missing school",
+        "His deﬁance toward new rulers",
+        "His hope for change",
+        "His anger toward the teacher"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Old Hauser is a village man who attends the last French lesson along with the schoolchildren and other villagers. He brings an old primer (elementary French book) and holds it on his knees, wearing his glasses. This action symbolizes deep regret — not just his own, but also that of the villagers — for not valuing their education earlier , especially their mother tongue, French . Now that it’s being taken away from them, they realize its importance. His presence and the act of bringing a primer shows his sorrow, nostalgia, and guilt for not having learned more when he had the chance. So, Old Hauser bringing a primer symbolizes his regret for missing school , making Option A the correct answer."
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What was M. Hamel's opinion about the French language?",
+      "options": [
+        "It was the most diﬃcult language in the world.",
+        "It was inferior to other languages.",
+        "It was the most beautiful, clear, and logical language.",
+        "It was irrelevant to the people's freedom."
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Correct Answer: (c) Explanation: M. Hamel called French the most beautiful and logical language, encouraging students to hold on to it as a key to their freedom."
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What had the bulletin-board in front of the town hall become associated with?",
+      "options": [
+        "Local celebrations",
+        "School announcements",
+        "Bad news and military orders",
+        "Political posters"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Franz mentions that for the past two years, ever since the Prussians had started invading and occupying parts of France, the bulletin- board in front of the town hall had become a place people dreaded. It was used to post oﬃcial notices, and every time people gathered around it, it usually meant bad news — such as new military orders, conscriptions, or restrictions. On the day of the last lesson, people had gathered around it again, which added to Franz’s sense of unease. So, the bulletin-board had become associated with: C. Bad news and military orders."
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "For how long had all the bad news typically come from the bulletin-board at the town hall?",
+      "options": [
+        "One year",
+        "Two years",
+        "Three years",
+        "Forty years"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Correct answer: B Explanation: Franz notes that for the last two years all their bad news had come from there."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What was Franz’s realization during the lesson?",
+      "options": [
+        "He disliked school even more",
+        "He wanted to run away",
+        "He wished he had paid more attention to his lessons",
+        "He was glad school was ending | | DPP: 2 Android App iOS App PW Website PARISHRAM 2027 English The Last Lesson (Part - 02)"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "In \"The Last Lesson\" by Alphonse Daudet , Franz experiences a deep realization during the lesson. When he learns that this is the last French lesson , he regrets not taking his studies seriously. He suddenly ﬁnds French easy to understand, but it is too late to make up for all the lost time. He feels guilty for not listening to M. Hamel and for wasting time on distractions like playing outside. The realization makes him appreciate his language and culture , which are being taken away by the Prussian rule. Why Not the Other Options? A (He disliked school even more): Instead of disliking school, he develops a newfound respect for learning. B (He wanted to run away): Earlier, he thought about skipping school , but after the announcement, he wants to stay and learn. D (He was glad school was ending): He was not happy but rather sad and regretful. Thus, Franz realizes that he should have valued his lessons more, making option C the correct answer."
+    }
+  ]
+}

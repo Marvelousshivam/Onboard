@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "Lost Spring",
+  "title": "Lost Spring — Prose Chapter 2 - Part 2 (Mukesh) DPP",
+  "source_pdf": "Flamingo DPP 05.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Which industry is Firozabad famous for?",
+      "options": [
+        "Carpet weaving",
+        "Fireworks",
+        "Bangles",
+        "Brass utensils"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Bangles"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What does the bangle-making industry symbolise in the story?",
+      "options": [
+        "Tradition and poverty",
+        "Joy and freedom",
+        "Beauty and prosperity",
+        "Modernity and change"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Tradition and poverty"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "Why can’t the people of Firozabad organise themselves into co-operatives?",
+      "options": [
+        "They lack money",
+        "They lack leaders",
+        "They fear police and middlemen",
+        "They are illiterate"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "They fear police and middlemen"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "How does the community react to Mukesh’s unconventional dream?",
+      "options": [
+        "They fully support him",
+        "They ridicule or doubt it quietly",
+        "They make him a leader",
+        "They offer him money"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "They ridicule or doubt it quietly"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "What hazards do the bangle makers face?",
+      "options": [
+        "Water pollution",
+        "Traffic accidents",
+        "Poor eyesight and accidents in furnaces",
+        "None of these"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Poor eyesight and accidents in furnaces"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "What does Mukesh’s dream signify in the story?",
+      "options": [
+        "Acceptance of fate",
+        "Hope and determination",
+        "Greed for money",
+        "Hatred for his family"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Hope and determination"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What does the author suggest is the greatest obstacle preventing the children of Firozabad from breaking free of poverty?",
+      "options": [
+        "Lack of education alone",
+        "Their parents’ selfishness",
+        "A vicious cycle of poverty, tradition, and exploitation",
+        "Government aid programmes"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "A vicious cycle of poverty, tradition, and exploitation"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What does the description of the lanes of Firozabad reveal about the living conditions of the bangle makers?",
+      "options": [
+        "Clean and hygienic surroundings",
+        "Spacious houses with gardens",
+        "Modern facilities with good sanitation",
+        "Congested, stinking lanes with overcrowded huts"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Congested, stinking lanes with overcrowded huts"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "What does Mukesh’s insistence on becoming a motor mechanic reveal about his character?",
+      "options": [
+        "He is disrespectful towards elders",
+        "He blindly follows tradition",
+        "He is stubborn and determined to carve his own path",
+        "He wants to become rich quickly"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "He is stubborn and determined to carve his own path"
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What social evil does the bangle-making industry indirectly perpetuate in Mukesh’s community?",
+      "options": [
+        "Illiteracy and child labour | | Android App iOS App PW Website DPP: 5 PARISHRAM 2027 English Lost Spring II - I want to drive a car",
+        "Luxury and wastefulness",
+        "Corruption among traders",
+        "Dowry deaths | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Illiteracy and child labour"
+    }
+  ]
+}

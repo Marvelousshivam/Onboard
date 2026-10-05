@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "The Rattrap",
+  "title": "The Rattrap — Prose Chapter 4 - Part 2 DPP",
+  "source_pdf": "Flamingo - The Rattrap (Part - 02) DPP.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Which detail best highlights the harsh working conditions in the forge?",
+      "options": [
+        "The use of wooden shoes",
+        "The glow of light through the panes",
+        "The men dripping with perspiration despite minimal clothing",
+        "The noise of the waterfall outside"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "The men dripping with perspiration despite minimal clothing"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "The author’s description of the forge emphasises:",
+      "options": [
+        "Stillness and solemnity",
+        "A chaotic mix of sounds and activity",
+        "The luxury of the iron mill",
+        "The warmth and silence of the workplace"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": ""
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "Why did the blacksmiths not pay attention to the tramp?",
+      "options": [
+        "They were afraid of him",
+        "They mistook him for the ironmaster",
+        "Vagabonds often came to the forge for warmth",
+        "They were instructed not to speak to strangers"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Vagabonds often came to the forge for warmth"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "The tramp decided not to reveal his real identity to the ironmaster because:",
+      "options": [
+        "He enjoyed deceiving people",
+        "He thought it might earn him some money",
+        "He wanted to avenge himself on the ironmaster",
+        "He planned to steal from the forge"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "He thought it might earn him some money"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "The tramp’s reluctance to visit the manor house is described as:",
+      "options": [
+        "Embarrassment due to his clothes",
+        "Fear of being exposed and caught",
+        "Desire to return to his regiment",
+        "Annoyance with the blacksmiths"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Fear of being exposed and caught"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Which quality of Edla Willmansson ultimately persuaded the tramp?",
+      "options": [
+        "Her stern authority",
+        "Her gentle compassion and reassurance",
+        "Her father’s wealth",
+        "Her insistence on military discipline"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Her gentle compassion and reassurance"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "Edla’s thought, “Either he has stolen something or else he has escaped from jail,” reveals her:",
+      "options": [
+        "Trusting innocence",
+        "Sharp intuition despite compassion",
+        "Cold suspicion",
+        "Lack of judgment"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Sharp intuition despite compassion"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "The ironmaster’s disappointment the next morning arose from:",
+      "options": [
+        "His daughter’s compassion",
+        "The tramp’s refusal to leave",
+        "The recognition that he had mistaken a stranger for his comrade",
+        "The failure of the forge work"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "| |"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "Which statement best captures the thematic relevance of this episode?",
+      "options": [
+        "Human dignity is more important than material wealth",
+        "Loneliness often leads people to seek false companionship",
+        "| | Android App iOS App PW Website Parishram 2027 English The Rattrap (Part - 02) DPP: 11 Compassion has the power to transform even the most fallen souls",
+        "Social class determines a man’s worth"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Compassion has the power to transform even the most fallen souls"
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "The tramp’s words, “At worst I can put on my rags again and go away,” signify:",
+      "options": [
+        "His indifference towards the ironmaster’s anger",
+        "His readiness to leave without confrontation",
+        "His acceptance of the temporary nature of borrowed respectability",
+        "His arrogance against the wealthy | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "His acceptance of the temporary nature of borrowed respectability"
+    }
+  ]
+}

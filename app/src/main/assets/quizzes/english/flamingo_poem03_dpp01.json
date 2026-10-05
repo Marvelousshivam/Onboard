@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "A Thing of Beauty",
+  "title": "A Thing of Beauty — Poem 3 DPP",
+  "source_pdf": "Flamingo DPP 09.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "What does the poet imply when he says \"A thing of beauty is a joy forever\"?",
+      "options": [
+        "Beautiful things last forever physically",
+        "Beauty has lasting psychological and emotional value",
+        "Beauty is always expensive and valuable",
+        "Only natural beauty brings joy"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Beauty has lasting psychological and emotional value"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "Why does the poet use images like “gloomy days,” “despondence,” and “inhuman dearth”?",
+      "options": [
+        "To praise beauty more eﬀectively",
+        "To exaggerate human joy",
+        "To show the need for natural beauty as an escape from life's hardships",
+        "To show the poet’s hatred towards life"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "To show the need for natural beauty as an escape from life's hardships"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "How does the idea of the \"bower\" symbolize beauty in the poem?",
+      "options": [
+        "It represents the commercial value of nature",
+        "It is a literal resting place for people",
+        "It signiﬁes a permanent shelter created by beauty in our imagination",
+        "It is a part of religious worship"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "It signiﬁes a permanent shelter created by beauty in our imagination"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "Why is beauty referred to as a “ﬂowery band”?",
+      "options": [
+        "It is meant to describe a physical garland",
+        "It highlights how nature traps us in illusions",
+        "It represents how beauty connects us gently to life despite hardships",
+        "It shows beauty’s fragility"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "It represents how beauty connects us gently to life despite hardships"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "What does the phrase “simple sheep” most likely symbolize in the context of the poem?",
+      "options": [
+        "Ordinary rural life",
+        "Innocence and peacefulness",
+        "Stubbornness of humans",
+        "Religious imagery"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Innocence and peacefulness"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Why does the poet consider the “sun, moon, trees” as things of beauty?",
+      "options": [
+        "They are rare and expensive",
+        "They are reminders of the divine order of life",
+        "They bring spiritual and emotional solace despite life's trials",
+        "They are often mentioned in poetry"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "They bring spiritual and emotional solace despite life's trials"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What does the phrase “an endless fountain of immortal drink” imply?",
+      "options": [
+        "To describe literal water sources",
+        "To suggest that beauty nourishes the soul endlessly",
+        "To show the power of wealth",
+        "To represent modern life"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "To suggest that beauty nourishes the soul endlessly"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "The line “Some shape of beauty moves away the pall / From our dark spirits” implies that—",
+      "options": [
+        "Beauty is a momentary distraction from grief",
+        "Beauty can remove gloom and despair from our minds",
+        "Beauty makes us forget responsibilities",
+        "Beauty brings confusion to the soul"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "Beauty can remove gloom and despair from our minds"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "What does the line, ‘Therefore, are we wreathing a ﬂowery band to bind us to earth’ suggest?",
+      "options": [
+        "We are creating beauty to escape the hardships of life.",
+        "We are binding ourselves to the earth through beautiful things.",
+        "We are using ﬂowers to symbolize our journey to the afterlife.",
+        "We are trying to escape sorrow through imagination. | | Android App iOS App PW Website DPP: 9 Parishram 2027 English A Thing of Beauty"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The line refers to how beauty and nature connect us to life and the world around us, even amidst suﬀering."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "Why is ‘grandeur’ associated with the ‘mighty dead’?",
+      "options": [
+        "Because they were powerful rulers who shaped history.",
+        "Because their wealth and possessions are now a part of history.",
+        "Because their heroic deeds and sacriﬁces are remembered and celebrated.",
+        "Because they were associated with mythical stories of grandeur. | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Because their heroic deeds and sacri ﬁces are remembered and celebrated."
+    }
+  ]
+}

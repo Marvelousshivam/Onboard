@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "Keeping Quiet",
+  "title": "Keeping Quiet — Poem 2 DPP",
+  "source_pdf": "Flamingo - Keeping Quiet DPP 06.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "What does number 12 represent?",
+      "options": [
+        "Hours of the day and months of a year",
+        "Earth",
+        "Cricket players",
+        "Clock"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Hours of the day and months of a year"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What is the essence or message of the poem?",
+      "options": [
+        "Introspection and retrospection to be more peaceful and be in harmony",
+        "To prosper",
+        "To reach out more people",
+        "To be happier"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Correct Answer: A) Introspection and retrospection to be more peaceful and be in harmony Explanation: The essence of the poem \"Keeping Quiet\" by Pablo Neruda is to encourage self-reﬂection (introspection) and looking back at our actions (retrospection). By doing so, we can ﬁnd inner peace and live in harmony with ourselves, others, and nature."
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What symbol from nature the poet uses to prove that keeping quiet is not total inactivity?",
+      "options": [
+        "Sun",
+        "Soil",
+        "Earth",
+        "Plant"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Correct Answer: C) Earth Explanation: The poet uses Earth as a symbol to show that keeping quiet is not total inactivity. Even when Earth appears still, life continues beneath the surface—seeds sprout, trees grow, and regeneration happens silently. This proves that silence can be full of life and productive."
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "How will keeping quiet protect our environment?",
+      "options": [
+        "By creating peace and brotherhood feelings",
+        "No noise will be there",
+        "People will not ﬁght",
+        "None"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "By creating peace and brotherhood feelings"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "What does the poet feel is needed to be at peace?",
+      "options": [
+        "Meeting with people",
+        "Talking with people",
+        "Interaction with the people",
+        "Soul searching"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Correct Answer: D) Soul searching Explanation: The poet believes that true peace comes from within, through soul searching—a deep pause to reﬂect on our actions, thoughts, and existence. He advocates for silence and stillness to help individuals connect with themselves and promote global harmony."
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Why does the poet ask people not to speak?",
+      "options": [
+        "Because it creates noise",
+        "He doesn't like noise",
+        "It makes things unpleasant",
+        "Because it creates barriers or obstacles in the form of misunderstanding amongst people"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Correct Answer: D) Because it creates barriers or obstacles in the form of misunderstanding amongst people | |"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "Why is the poet asking everyone not to speak any language?",
+      "options": [
+        "To avoid noise",
+        "To avoid loud voices",
+        "To avoid people",
+        "To avoid conﬂicts and misunderstandings"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "To avoid conﬂicts and misunderstandings"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What is destroying the environment?",
+      "options": [
+        "Unthoughtful actions",
+        "Violent actions",
+        "Speaking without thinking",
+        "All"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "All"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "What can human beings learn from nature?",
+      "options": [
+        "beauty",
+        "keeping quiet",
+        "working with silence",
+        "to be happy"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "The correct answer is: C) working with silence Explanation: In Pablo Neruda’s poem “Keeping Quiet”, the poet suggests that nature does not speak but still works peacefully. This implies that humans can learn to work with silence, embracing calmness and reﬂection without constant activity or noise."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "According to the poet what creates barriers?",
+      "options": [
+        "Interactions",
+        "Reactions",
+        "Fighting",
+        "Languages | | Android App iOS App PW Website DPP: 6 Parishram 2027 English Keeping Quiet"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "Correct Answer: D) Languages Explanation: According to the poet Pablo Neruda in \"Keeping Quiet\", languages create barriers between people, as they often lead to misunderstandings, divisions, and conﬂict. He suggests that silence can help bridge these gaps and promote unity."
+    }
+  ]
+}

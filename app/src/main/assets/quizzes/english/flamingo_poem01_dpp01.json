@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "My Mother at Sixty-Six",
+  "title": "My Mother at Sixty-Six — Poem 1 DPP",
+  "source_pdf": "DPP 03.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "What do the parting words “See you soon Amma” signify?",
+      "options": [
+        "her carelessness",
+        "Her optimistic farewell full of cheerfulness",
+        "she bids goodbye like this",
+        "she is in a hurry"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "In My Mother at Sixty-Six by Kamala Das, the poet says “See you soon, Amma” as she bids farewell to her aging mother. Although she feels deep sorrow and fear of losing her mother, she chooses to hide her emotions and express hope instead. These words reﬂect an optimistic and cheerful farewell, even though internally, she is struggling with the pain of separation and the realization of her mother’s frailty."
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What does the phrase “smile and smile and smile” signify?",
+      "options": [
+        "The poet is extremely happy",
+        "She is forcing herself to smile despite feeling sad",
+        "She is laughing loudly",
+        "She is mocking her mother"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The repetition of “smile” emphasizes the poet’s forced cheerfulness to hide her pain."
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What does the contrast between “sprinting trees” and “pale mother” signify?",
+      "options": [
+        "The beauty of nature",
+        "The contrast between youth and old age",
+        "The poet’s happiness",
+        "The changing seasons"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "“Sprinting trees” symbolize youth and life, while the mother’s paleness represents aging and approaching death."
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "What realization strikes the poet while traveling?",
+      "options": [
+        "That her mother is lonely",
+        "That her mother is growing old and frail",
+        "That she should visit more often",
+        "That her mother needs medical attention"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The poet suddenly realizes how old and fragile her mother has become, ﬁlling her with sadness."
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "How does the poet feel while looking at her mother?",
+      "options": [
+        "Angry",
+        "Worried and sorrowful",
+        "Happy",
+        "Indiﬀerent"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The poet is ﬁlled with worry and sorrow, realizing her mother’s age and the fear of losing her."
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Why does the poet look at the trees and children outside?",
+      "options": [
+        "She enjoys nature",
+        "She wants to distract herself from her painful thoughts",
+        "She loves watching children play",
+        "She is tired of looking at her mother"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "To avoid confronting the painful reality of her mother’s aging, she shifts her focus to the vibrant life outside, symbolizing contrast between youth and old age."
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What is the tone of the poem?",
+      "options": [
+        "Humorous",
+        "Sad and reﬂective",
+        "Indiﬀerent",
+        "Excited"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The poem has a sad and reﬂective tone, as the poet contemplates aging, separation, and mortality."
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "What does the poet notice about her mother while sitting beside her in the car?",
+      "options": [
+        "She is sleeping peacefully",
+        "She looks young and cheerful",
+        "She has turned pale and lifeless like a corpse",
+        "She is reading a book"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "The poet observes her mother’s pale, weak face, comparing it to a lifeless body, symbolizing aging and approaching death."
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "What does the phrase “familiar ache” signify?",
+      "options": [
+        "A constant headache",
+        "The poet’s habitual sadness over her mother’s aging",
+        "A physical pain the poet feels",
+        "A longing for childhood memories"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "“Familiar ache” refers to the poet’s deep, recurring pain of knowing that one day she will lose her mother."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What does the phrase “wan, pale” suggest about the poet’s mother?",
+      "options": [
+        "She is cheerful",
+        "She is weak and aging",
+        "She is excited",
+        "She is angry | | Android App iOS App PW Website Foundation"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "The phrase “wan, pale” suggests that the poet’s mother is weak and aging (Option B). In My Mother at Sixty-Six by Kamala Das, the poet describes her mother’s face as “wan, pale as a late winter’s moon,” highlighting her frailty and old age. The comparison to a winter’s moon symbolizes dullness and lack of vitality, indicating that the mother is growing weaker and nearing the end of her life. This realization ﬁlls the poet with sorrow and a fear of losing her mother."
+    }
+  ]
+}

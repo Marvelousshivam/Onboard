@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "The Rattrap",
+  "title": "The Rattrap — Prose Chapter 4 - Part 1 DPP",
+  "source_pdf": "Flamingo - The Rattrap (Part - 01) DPP.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "What was the main source of income for the old crofter at the time the peddler visited him?",
+      "options": [
+        "Selling rattraps",
+        "Working at the ironworks",
+        "His cow’s milk",
+        "Government pension"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "His cow’s milk"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "Why did the peddler return to the crofter’s cottage after saying goodbye?",
+      "options": [
+        "To return a forgotten item",
+        "To seek more food",
+        "To steal the money",
+        "To borrow clothes"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "To steal the money"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "What does the peddler’s idea of the world being a “rattrap” symbolize?",
+      "options": [
+        "His skills in trap-making",
+        "His wish to trap others",
+        "His cynical view of life and temptation",
+        "His religious beliefs"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "His cynical view of life and temptation"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "Which of the following statements is/are TRUE? I. The crofter was a lonely man happy to ﬁnd someone to talk to. II. The peddler played cards and smoked with the crofter. III. The crofter worked at the iron mill with the blacksmiths.",
+      "options": [
+        "I and II only",
+        "II and III only",
+        "I and III only",
+        "All of the above"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "I and II only"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "Which statements about the peddler are CORRECT? I. He made and sold rattraps from materials he begged for. II. He was welcomed by everyone during his travels. III. He believed the world tricked people like a rattrap.",
+      "options": [
+        "I and II only",
+        "I and III only",
+        "II and III only",
+        "All of the above"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "I and III only"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Why does the forest feel like a “prison” to the peddler after stealing the money?",
+      "options": [
+        "He is afraid of wild animals",
+        "He is physically unwell",
+        "His guilt and fear manifest as entrapment",
+        "He enjoys being in nature"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "His guilt and fear manifest as entrapment"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "What does “hunger gleamed in his eyes” most likely mean?",
+      "options": [
+        "He had shiny eyes",
+        "He was eager to hunt",
+        "He was desperate and starving",
+        "He enjoyed food"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "He was desperate and starving"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "The phrase “the world…was nothing but a big rattrap” is an example of:",
+      "options": [
+        "Simile",
+        "Irony",
+        "Metaphor",
+        "Hyperbole"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "Metaphor"
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "Was the crofter’s trust in the peddler justiﬁed? Choose the best answer.",
+      "options": [
+        "Yes, because he oﬀered food",
+        "No, because it led to him being robbed",
+        "Yes, because all strangers are trustworthy",
+        "No, because he should not have shown the money | | Android App iOS App PW Website Parishram 2027 English The Rattrap (Part - 01) DPP: 10"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "No, because it led to him being robbed"
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "What lesson does the peddler learn after getting lost in the forest?",
+      "options": [
+        "That he should stop selling rattraps",
+        "That he’s a victim of social injustice",
+        "That the world traps people when they fall for temptation",
+        "That he should have been kinder to the crofter | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "That the world traps people when they fall for temptation"
+    }
+  ]
+}

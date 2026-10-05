@@ -1,0 +1,150 @@
+{
+  "subject": "English Core",
+  "book": "Flamingo",
+  "chapter": "Deep Water",
+  "title": "Deep Water — Prose Chapter 3 - Part 1 DPP",
+  "source_pdf": "Flamingo DPP 07.pdf",
+  "total_questions": 10,
+  "questions": [
+    {
+      "id": "q_1",
+      "q_no": 1,
+      "question": "Why did Douglas choose the Y .M.C.A. pool instead of the Yakima River?",
+      "options": [
+        "He loved indoor pools",
+        "His mother advised it was safer",
+        "His friends forced him",
+        "He was training for a competition"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "His mother advised it was safer"
+    },
+    {
+      "id": "q_2",
+      "q_no": 2,
+      "question": "What early incident triggered Douglas’s fear of water?",
+      "options": [
+        "A boating accident",
+        "Being pushed by a friend",
+        "Falling off a dock",
+        "A wave knocking him down at the beach"
+      ],
+      "correct_option_index": 3,
+      "correct_answer_letter": "D",
+      "explanation": "A wave knocking him down at the beach"
+    },
+    {
+      "id": "q_3",
+      "q_no": 3,
+      "question": "How did Douglas feel about his physical build at the pool?",
+      "options": [
+        "He felt strong and confident",
+        "He felt self-conscious and skinny",
+        "He did not care",
+        "He felt competitive"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "He felt self-conscious and skinny"
+    },
+    {
+      "id": "q_4",
+      "q_no": 4,
+      "question": "What was Douglas’s initial plan when he found himself sinking in the pool?",
+      "options": [
+        "To call for help",
+        "To swim to the edge",
+        "To come back to the surface and grab the side",
+        "To hold his breath until rescued"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "To come back to the surface and grab the side"
+    },
+    {
+      "id": "q_5",
+      "q_no": 5,
+      "question": "Which phrase best describes Douglas’s experience when he went down the pool for the first time?",
+      "options": [
+        "A thrilling adventure",
+        "A calm moment",
+        "A nightmare-like suffocation",
+        "A heroic struggle"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "A nightmare-like suffocation"
+    },
+    {
+      "id": "q_6",
+      "q_no": 6,
+      "question": "Which line best shows Douglas’s determination in this experience?",
+      "options": [
+        "“I was paralysed under water.”",
+        "“I gathered all my strength and made a great spring upwards.”",
+        "“I was resigned to my fate.”",
+        "“I hated swimming pools forever.”"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "“I gathered all my strength and made a great spring upwards.”"
+    },
+    {
+      "id": "q_7",
+      "q_no": 7,
+      "question": "Why is the title ‘Deep Water’ suitable for this part of the narrative?",
+      "options": [
+        "It refers only to the swimming pool",
+        "It symbolises the depth of fear that gripped Douglas",
+        "It indicates the pool’s measurement",
+        "It suggests fun and adventure"
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "It symbolises the depth of fear that gripped Douglas"
+    },
+    {
+      "id": "q_8",
+      "q_no": 8,
+      "question": "How did the experience at the YMCA pool affect Douglas?",
+      "options": [
+        "It motivated him to become a swimming coach.",
+        "It left him with a deep-seated fear of water.",
+        "It made him enjoy diving and underwater sports.",
+        "It made him indifferent towards water-related activities."
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "It left him with a deep-seated fear of water."
+    },
+    {
+      "id": "q_9",
+      "q_no": 9,
+      "question": "How did the instructor “build a swimmer” out of Douglas?",
+      "options": [
+        "By forcing him to swim in deep rivers immediately.",
+        "By using a rope and pulley system to help him float and practice step by step. | | Android App iOS App PW Website DPP: 7 Parishram 2027 English Deep Water (Part - 01)",
+        "By encouraging Douglas to mimic professional swimmers.",
+        "By allowing him to face his fear alone in the water."
+      ],
+      "correct_option_index": 1,
+      "correct_answer_letter": "B",
+      "explanation": "By using a rope and pulley system to help him float and practice step by step."
+    },
+    {
+      "id": "q_10",
+      "q_no": 10,
+      "question": "How did Douglas overcome his fear of water?",
+      "options": [
+        "By completely avoiding swimming and water bodies.",
+        "By going through counseling and therapy.",
+        "By gradually training with a swimming instructor using scientific techniques.",
+        "By reading books on swimming. | | Android App iOS App PW Website"
+      ],
+      "correct_option_index": 2,
+      "correct_answer_letter": "C",
+      "explanation": "By gradually training with a swimming instructor using scientific techniques."
+    }
+  ]
+}
