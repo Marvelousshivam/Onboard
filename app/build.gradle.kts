@@ -50,6 +50,13 @@ android {
             useLegacyPackaging = true
         }
     }
+
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+            isReturnDefaultValues = true
+        }
+    }
 }
 
 dependencies {
@@ -104,8 +111,21 @@ dependencies {
     implementation("io.github.junkfood02.youtubedl-android:library:0.18.1")
     implementation("io.github.junkfood02.youtubedl-android:ffmpeg:0.18.1")
 
+    // ============================================================
+    // OnBOARD Reader — PDF engine
+    // - Android PdfRenderer (framework) handles fast page rendering.
+    // - PdfBox-Android (Apache 2.0, pure Java) provides genuine
+    //   full-document text extraction for search + text selection
+    //   without raising minSdk or shipping native binaries.
+    // ============================================================
+    implementation("com.tom-roush:pdfbox-android:2.0.27.0")
+
     // Testing
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
+    testImplementation("androidx.room:room-testing:2.6.1")
+    testImplementation("org.robolectric:robolectric:4.13")
+    testImplementation("androidx.test:core:1.6.1")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")

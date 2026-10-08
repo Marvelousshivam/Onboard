@@ -16,11 +16,25 @@ sealed class Screen(val route: String) {
             return "player/$lectureId?url=$encodedUrl&title=$encodedTitle"
         }
     }
-    object PdfViewer : Screen("pdf_viewer?url={url}&title={title}") {
-        fun createRoute(url: String, title: String): String {
+    object PdfViewer : Screen("pdf_viewer?url={url}&title={title}&pairedUrl={pairedUrl}&pairedTitle={pairedTitle}&pairedRole={pairedRole}") {
+        /**
+         * Create a route for opening a PDF. The three paired* params are
+         * optional and are used by the Sample Papers flow to wire up the
+         * question-paper <-> marking-scheme switcher inside the reader.
+         */
+        fun createRoute(
+            url: String,
+            title: String,
+            pairedUrl: String = "",
+            pairedTitle: String = "",
+            pairedRole: String = "GENERAL"
+        ): String {
             val encodedUrl = java.net.URLEncoder.encode(url, "UTF-8")
             val encodedTitle = java.net.URLEncoder.encode(title, "UTF-8")
-            return "pdf_viewer?url=$encodedUrl&title=$encodedTitle"
+            val encodedPairedUrl = java.net.URLEncoder.encode(pairedUrl, "UTF-8")
+            val encodedPairedTitle = java.net.URLEncoder.encode(pairedTitle, "UTF-8")
+            val encodedPairedRole = java.net.URLEncoder.encode(pairedRole, "UTF-8")
+            return "pdf_viewer?url=$encodedUrl&title=$encodedTitle&pairedUrl=$encodedPairedUrl&pairedTitle=$encodedPairedTitle&pairedRole=$encodedPairedRole"
         }
     }
     object Quiz : Screen("quiz/{quizFile}?title={title}") {

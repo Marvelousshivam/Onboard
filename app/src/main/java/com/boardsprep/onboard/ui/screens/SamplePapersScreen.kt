@@ -24,15 +24,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boardsprep.onboard.core.pdf.LocalDocumentScanner
+import com.boardsprep.onboard.core.pdf.PdfPairedRole
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.models.SamplePaper
 import com.boardsprep.onboard.data.repository.BoardsRepository
+
+/**
+ * Callback for opening a PDF. Carries optional paired-document info so the
+ * in-reader question-paper <-> marking-scheme switcher can be wired up.
+ */
+typealias OnOpenPdfWithPair = (
+    url: String,
+    title: String,
+    pairedUrl: String,
+    pairedTitle: String,
+    pairedRole: PdfPairedRole
+) -> Unit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SamplePapersScreen(
     initialSubjectId: String = "",
-    onOpenPdf: (url: String, title: String) -> Unit,
+    onOpenPdf: OnOpenPdfWithPair,
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -356,7 +369,7 @@ fun SamplePapersScreen(
 private fun SamplePaperCard(
     paper: SamplePaper,
     allPapers: List<SamplePaper>,
-    onOpenPdf: (url: String, title: String) -> Unit
+    onOpenPdf: OnOpenPdfWithPair
 ) {
     val context = LocalContext.current
     val isSqp = paper.type.equals("sqp", ignoreCase = true)
@@ -406,13 +419,30 @@ private fun SamplePaperCard(
         LocalDocumentScanner.findSamplePaper(context, paper.filename)
     }
 
+    /**
+     * Compute the paired document (url, title, role) for the *current* paper.
+     * Used when the user opens this paper directly — the in-reader switcher
+     * can then jump to the sibling SQP/MS in one tap.
+     */
+    fun pairedInfo(): Triple<String, String, PdfPairedRole> {
+        val p = pairedPaper ?: return Triple("", "", PdfPairedRole.GENERAL)
+        val pairedLocal = LocalDocumentScanner.findSamplePaper(context, p.filename)
+        val pUrl = pairedLocal?.absolutePath ?: p.url
+        val pTitle = p.title
+            .replace("EnglishCore", "English Core")
+            .replace("PhysicalEducation", "Physical Education")
+        val role = if (isSqp) PdfPairedRole.MARKING_SCHEME else PdfPairedRole.QUESTION_PAPER
+        return Triple(pUrl, pTitle, role)
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .clip(ExpressiveCardLarge)
             .clickable {
                 val openUrl = localCached?.absolutePath ?: paper.url
-                onOpenPdf(openUrl, displayTitle)
+                val (pairUrl, pairTitle, pairRole) = pairedInfo()
+                onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
             },
         shape = ExpressiveCardLarge,
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
@@ -513,7 +543,8 @@ private fun SamplePaperCard(
                 Button(
                     onClick = {
                         val openUrl = localCached?.absolutePath ?: paper.url
-                        onOpenPdf(openUrl, displayTitle)
+                        val (pairUrl, pairTitle, pairRole) = pairedInfo()
+                        onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
                     },
                     modifier = Modifier.weight(1f),
                     shape = ExpressiveCardMedium,
@@ -539,10 +570,13 @@ private fun SamplePaperCard(
                         onClick = {
                             val pairedLocal = LocalDocumentScanner.findSamplePaper(context, pairedPaper.filename)
                             val openUrl = pairedLocal?.absolutePath ?: pairedPaper.url
-                            val pairedTitle = pairedPaper.title
+                            val pairedTitleText = pairedPaper.title
                                 .replace("EnglishCore", "English Core")
                                 .replace("PhysicalEducation", "Physical Education")
-                            onOpenPdf(openUrl, pairedTitle)
+                            // When opening the *paired* paper, the original paper becomes the pair.
+                            val originalRole = if (isSqp) PdfPairedRole.QUESTION_PAPER else PdfPairedRole.MARKING_SCHEME
+                            val originalUrl = localCached?.absolutePath ?: paper.url
+                            onOpenPdf(openUrl, pairedTitleText, originalUrl, displayTitle, originalRole)
                         },
                         modifier = Modifier.weight(1f),
                         shape = ExpressiveCardMedium
