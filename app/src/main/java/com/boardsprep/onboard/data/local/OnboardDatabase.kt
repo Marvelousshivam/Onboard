@@ -67,130 +67,149 @@ abstract class OnboardDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: OnboardDatabase? = null
 
+        private fun createReaderTables(db: SupportSQLiteDatabase) {
+            // pdf_reading_state
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS pdf_reading_state (
+                    documentId TEXT NOT NULL PRIMARY KEY,
+                    pageIndex INTEGER NOT NULL,
+                    pageOffsetY REAL NOT NULL,
+                    zoom REAL NOT NULL,
+                    readingMode TEXT NOT NULL,
+                    fitMode TEXT NOT NULL,
+                    canvasTheme TEXT NOT NULL,
+                    fullscreen INTEGER NOT NULL,
+                    brightnessOverride REAL,
+                    pageSpacingDp INTEGER NOT NULL,
+                    lastOpenedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            // pdf_bookmarks
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS pdf_bookmarks (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    documentId TEXT NOT NULL,
+                    pageIndex INTEGER NOT NULL,
+                    label TEXT NOT NULL,
+                    note TEXT NOT NULL,
+                    forRevision INTEGER NOT NULL,
+                    createdAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_bookmarks_documentId ON pdf_bookmarks(documentId)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_bookmarks_documentId_pageIndex ON pdf_bookmarks(documentId, pageIndex)")
+            // pdf_annotations
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS pdf_annotations (
+                    id TEXT NOT NULL PRIMARY KEY,
+                    documentId TEXT NOT NULL,
+                    pageIndex INTEGER NOT NULL,
+                    type TEXT NOT NULL,
+                    rectsJson TEXT NOT NULL,
+                    color INTEGER NOT NULL,
+                    strokeWidth REAL NOT NULL,
+                    strokesJson TEXT NOT NULL,
+                    noteText TEXT NOT NULL,
+                    createdAt INTEGER NOT NULL,
+                    updatedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_annotations_documentId ON pdf_annotations(documentId)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_annotations_documentId_pageIndex ON pdf_annotations(documentId, pageIndex)")
+        }
+
+        private fun createStudySprintTables(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS error_vault (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    questionId TEXT NOT NULL,
+                    chapterId TEXT NOT NULL,
+                    subjectId TEXT NOT NULL,
+                    questionText TEXT NOT NULL,
+                    optionA TEXT NOT NULL,
+                    optionB TEXT NOT NULL,
+                    optionC TEXT NOT NULL,
+                    optionD TEXT NOT NULL,
+                    correctOptionIndex INTEGER NOT NULL,
+                    userSelectedOptionIndex INTEGER NOT NULL,
+                    explanation TEXT NOT NULL,
+                    mistakeCategory TEXT NOT NULL,
+                    failureCount INTEGER NOT NULL,
+                    isResolved INTEGER NOT NULL,
+                    lastAttemptedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_error_vault_chapterId ON error_vault(chapterId)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_error_vault_isResolved ON error_vault(isResolved)")
+
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS spaced_reviews (
+                    itemId TEXT PRIMARY KEY NOT NULL,
+                    chapterId TEXT NOT NULL,
+                    subjectId TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    prompt TEXT NOT NULL,
+                    answer TEXT NOT NULL,
+                    category TEXT NOT NULL,
+                    intervalDays INTEGER NOT NULL,
+                    easeFactor REAL NOT NULL,
+                    repetitions INTEGER NOT NULL,
+                    nextReviewDate INTEGER NOT NULL,
+                    lastReviewedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS focus_sessions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    sessionType TEXT NOT NULL,
+                    targetSubjectId TEXT NOT NULL,
+                    durationMinutes INTEGER NOT NULL,
+                    completedMinutes INTEGER NOT NULL,
+                    wasInterrupted INTEGER NOT NULL,
+                    timestamp INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+        }
+
         /**
          * Version 1 -> 2 migration: adds the three OnBOARD Reader tables.
          */
         val MIGRATION_1_2 = object : Migration(1, 2) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                // pdf_reading_state
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS pdf_reading_state (
-                        documentId TEXT NOT NULL PRIMARY KEY,
-                        pageIndex INTEGER NOT NULL,
-                        pageOffsetY REAL NOT NULL,
-                        zoom REAL NOT NULL,
-                        readingMode TEXT NOT NULL,
-                        fitMode TEXT NOT NULL,
-                        canvasTheme TEXT NOT NULL,
-                        fullscreen INTEGER NOT NULL,
-                        brightnessOverride REAL,
-                        pageSpacingDp INTEGER NOT NULL,
-                        lastOpenedAt INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
-                // pdf_bookmarks
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS pdf_bookmarks (
-                        id TEXT NOT NULL PRIMARY KEY,
-                        documentId TEXT NOT NULL,
-                        pageIndex INTEGER NOT NULL,
-                        label TEXT NOT NULL,
-                        note TEXT NOT NULL,
-                        forRevision INTEGER NOT NULL,
-                        createdAt INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_bookmarks_documentId ON pdf_bookmarks(documentId)")
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_bookmarks_documentId_pageIndex ON pdf_bookmarks(documentId, pageIndex)")
-                // pdf_annotations
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS pdf_annotations (
-                        id TEXT NOT NULL PRIMARY KEY,
-                        documentId TEXT NOT NULL,
-                        pageIndex INTEGER NOT NULL,
-                        type TEXT NOT NULL,
-                        rectsJson TEXT NOT NULL,
-                        color INTEGER NOT NULL,
-                        strokeWidth REAL NOT NULL,
-                        strokesJson TEXT NOT NULL,
-                        noteText TEXT NOT NULL,
-                        createdAt INTEGER NOT NULL,
-                        updatedAt INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_annotations_documentId ON pdf_annotations(documentId)")
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_pdf_annotations_documentId_pageIndex ON pdf_annotations(documentId, pageIndex)")
+                createReaderTables(db)
             }
         }
 
         /**
-         * Version 2 -> 3 migration: adds Error Vault, Spaced Reviews, and Focus Sessions.
+         * Version 2 -> 3 migration: ensures both study sprint tables AND reader tables exist.
          */
         val MIGRATION_2_3 = object : Migration(2, 3) {
             override fun migrate(db: SupportSQLiteDatabase) {
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS error_vault (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                        questionId TEXT NOT NULL,
-                        chapterId TEXT NOT NULL,
-                        subjectId TEXT NOT NULL,
-                        questionText TEXT NOT NULL,
-                        optionA TEXT NOT NULL,
-                        optionB TEXT NOT NULL,
-                        optionC TEXT NOT NULL,
-                        optionD TEXT NOT NULL,
-                        correctOptionIndex INTEGER NOT NULL,
-                        userSelectedOptionIndex INTEGER NOT NULL,
-                        explanation TEXT NOT NULL,
-                        mistakeCategory TEXT NOT NULL,
-                        failureCount INTEGER NOT NULL,
-                        isResolved INTEGER NOT NULL,
-                        lastAttemptedAt INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_error_vault_chapterId ON error_vault(chapterId)")
-                db.execSQL("CREATE INDEX IF NOT EXISTS index_error_vault_isResolved ON error_vault(isResolved)")
+                createReaderTables(db)
+                createStudySprintTables(db)
+            }
+        }
 
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS spaced_reviews (
-                        itemId TEXT PRIMARY KEY NOT NULL,
-                        chapterId TEXT NOT NULL,
-                        subjectId TEXT NOT NULL,
-                        title TEXT NOT NULL,
-                        prompt TEXT NOT NULL,
-                        answer TEXT NOT NULL,
-                        category TEXT NOT NULL,
-                        intervalDays INTEGER NOT NULL,
-                        easeFactor REAL NOT NULL,
-                        repetitions INTEGER NOT NULL,
-                        nextReviewDate INTEGER NOT NULL,
-                        lastReviewedAt INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
-
-                db.execSQL(
-                    """
-                    CREATE TABLE IF NOT EXISTS focus_sessions (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-                        sessionType TEXT NOT NULL,
-                        targetSubjectId TEXT NOT NULL,
-                        durationMinutes INTEGER NOT NULL,
-                        completedMinutes INTEGER NOT NULL,
-                        wasInterrupted INTEGER NOT NULL,
-                        timestamp INTEGER NOT NULL
-                    )
-                    """.trimIndent()
-                )
+        /**
+         * Version 1 -> 3 migration: creates all new tables directly.
+         */
+        val MIGRATION_1_3 = object : Migration(1, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createReaderTables(db)
+                createStudySprintTables(db)
             }
         }
 
@@ -201,7 +220,7 @@ abstract class OnboardDatabase : RoomDatabase() {
                     OnboardDatabase::class.java,
                     "onboard_app.db"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
