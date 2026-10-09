@@ -19,6 +19,13 @@ class OnboardApplication : Application() {
         database = OnboardDatabase.getInstance(this)
         repository = BoardsRepository(this)
 
+        // Initialize Cloud Firebase & Firestore Synchronization
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(this)
+        } catch (e: Exception) {
+            android.util.Log.e("OnboardApp", "Failed to initialize FirebaseSyncManager: ${e.message}")
+        }
+
         // Ensure the external lectures directory exists for user-added lectures
         LocalLectureScanner.getLecturesDirectory(this)
         

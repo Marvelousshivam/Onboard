@@ -25,6 +25,10 @@ import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
 import com.boardsprep.onboard.data.models.Lecture
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
+import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.expressiveBounce
 import kotlinx.coroutines.launch
 import java.io.File
 import java.text.SimpleDateFormat
@@ -96,87 +100,35 @@ fun DownloadsScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            TabRow(
+            val downloadsTabs = listOf(
+                ExpressiveTabItem(
+                    title = "In-App Downloads",
+                    icon = Icons.Default.CloudDownload,
+                    badge = "${downloads.size}"
+                ),
+                ExpressiveTabItem(
+                    title = "Local Storage",
+                    icon = Icons.Default.Folder,
+                    badge = "${localLectures.size}"
+                )
+            )
+
+            ExpressiveSegmentedTabs(
+                tabs = downloadsTabs,
                 selectedTabIndex = selectedTabIndex,
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-            ) {
-                Tab(
-                    selected = selectedTabIndex == 0,
-                    onClick = { selectedTabIndex = 0 },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.CloudDownload,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    text = {
-                        Text(
-                            text = "In-App Downloads (${downloads.size})",
-                            fontWeight = if (selectedTabIndex == 0) FontWeight.Bold else FontWeight.Medium,
-                            fontSize = 13.sp
-                        )
-                    }
-                )
-                Tab(
-                    selected = selectedTabIndex == 1,
-                    onClick = { selectedTabIndex = 1 },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Folder,
-                            contentDescription = null,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    text = {
-                        Text(
-                            text = "Local Storage (${localLectures.size})",
-                            fontWeight = if (selectedTabIndex == 1) FontWeight.Bold else FontWeight.Medium,
-                            fontSize = 13.sp
-                        )
-                    }
-                )
-            }
+                onTabSelected = { selectedTabIndex = it },
+                accentColor = MaterialTheme.colorScheme.primary
+            )
 
             if (selectedTabIndex == 0) {
                 // In-App Downloads
                 if (downloads.isEmpty()) {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(32.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.surfaceVariant,
-                                modifier = Modifier.size(72.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Default.CloudDownload,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(36.dp),
-                                        tint = MaterialTheme.colorScheme.outline
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.height(16.dp))
-                            Text(
-                                text = "No Downloads Yet",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = "Tap the download icon on any lecture video or PDF to save it for 100% offline study.",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                            )
-                        }
-                    }
+                    ExpressiveEmptyState(
+                        icon = Icons.Default.CloudDownload,
+                        title = "No Offline Downloads Yet",
+                        description = "Tap the download icon on any lecture video or PDF across your subjects to study 100% offline without distractions.",
+                        tintColor = MaterialTheme.colorScheme.primary
+                    )
                 } else {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -268,35 +220,12 @@ fun DownloadsScreen(
 
                     if (validLocalLectures.isEmpty()) {
                         item {
-                            Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(vertical = 40.dp),
-                                contentAlignment = Alignment.Center
-                            ) {
-                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Surface(
-                                        shape = CircleShape,
-                                        color = MaterialTheme.colorScheme.surfaceVariant,
-                                        modifier = Modifier.size(64.dp)
-                                    ) {
-                                        Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = Icons.Default.FolderOpen,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(32.dp),
-                                                tint = MaterialTheme.colorScheme.outline
-                                            )
-                                        }
-                                    }
-                                    Spacer(modifier = Modifier.height(12.dp))
-                                    Text(
-                                        text = "No user lectures found in directory",
-                                        style = MaterialTheme.typography.bodyMedium,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                            }
+                            ExpressiveEmptyState(
+                                icon = Icons.Default.FolderOpen,
+                                title = "No Local Media Files Found",
+                                description = "Copy your own lecture files (.mp4, .mkv) into OnBOARD's lectures directory to watch them anytime offline.",
+                                tintColor = MaterialTheme.colorScheme.secondary
+                            )
                         }
                     } else {
                         items(validLocalLectures, key = { it.id }) { lecture ->

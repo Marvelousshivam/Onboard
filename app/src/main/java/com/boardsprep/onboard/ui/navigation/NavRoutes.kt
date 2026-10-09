@@ -37,4 +37,8 @@ sealed class Screen(val route: String) {
     object SamplePapers : Screen("sample_papers?subjectId={subjectId}") {
         fun createRoute(subjectId: String = "") = if (subjectId.isBlank()) "sample_papers" else "sample_papers?subjectId=$subjectId"
     }
+    object OnboardingSync : Screen("onboarding_sync")
+    object ErrorVault : Screen("error_vault")
+    object DailyBlitz : Screen("daily_blitz")
 }
+

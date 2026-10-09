@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "last_updated": "2026-10-05T04:48:04.135379+00:00",
+  "last_updated": "2026-10-08T16:24:06.990048+00:00",
   "base_raw_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main",
   "subjects": [
     {
@@ -2451,7 +2451,22 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch01_1",
+              "title": "Management of Sporting Events \u2014 Unit 1 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=oOQlTPCjHyc",
+              "duration": "51 mins",
+              "author": "Zaki Saudagar"
+            },
+            {
+              "id": "pe_ch01_2",
+              "title": "How to Draw Fixtures (Knockout, League & Combination Tournament)",
+              "youtube_url": "https://www.youtube.com/watch?v=9BVCgNSVvzc",
+              "duration": "1h 10m",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_02",
@@ -2469,7 +2484,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch02_1",
+              "title": "Children & Women in Sports \u2014 Unit 2 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=_AhNBAjbYNI",
+              "duration": "1h 03m",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_03",
@@ -2487,7 +2510,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch03_1",
+              "title": "Yoga as Preventive Measures \u2014 Unit 3 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=QlDOo4AEu7o",
+              "duration": "1h 15m",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_04",
@@ -2505,7 +2536,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch04_1",
+              "title": "PE & Sports for CWSN \u2014 Unit 4 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=xDrvCGbGvok",
+              "duration": "43 mins",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_05",
@@ -2523,7 +2562,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch05_1",
+              "title": "Sports & Nutrition \u2014 Unit 5 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=5_dB_wETsNs",
+              "duration": "51 mins",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_06",
@@ -2541,7 +2588,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch06_1",
+              "title": "Test & Measurement in Sports \u2014 Unit 6 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=PFDIcpe9I9Y",
+              "duration": "48 mins",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_07",
@@ -2559,7 +2614,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch07_1",
+              "title": "Physiology & Injuries in Sports \u2014 Unit 7 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=f3ooYobT-ZE",
+              "duration": "38 mins",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_08",
@@ -2577,7 +2640,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "pe_ch08_1",
+              "title": "Biomechanics & Sports \u2014 Unit 8 One-Shot with PYQs",
+              "youtube_url": "https://www.youtube.com/watch?v=nZDjbciZtGY",
+              "duration": "38 mins",
+              "author": "Zaki Saudagar"
+            }
+          ]
         },
         {
           "id": "pe_09",

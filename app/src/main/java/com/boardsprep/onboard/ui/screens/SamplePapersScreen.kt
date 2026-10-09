@@ -27,6 +27,10 @@ import com.boardsprep.onboard.core.pdf.LocalDocumentScanner
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.models.SamplePaper
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
+import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.expressiveBounce
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -125,39 +129,31 @@ fun SamplePapersScreen(
                 )
             )
 
-            // Paper Type Selector Chips (All, SQP, MS)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                FilterChip(
-                    selected = selectedTypeFilter == "all",
-                    onClick = { selectedTypeFilter = "all" },
-                    label = { Text("All Papers (${allPapers.size})", fontSize = 12.sp, maxLines = 1, softWrap = false) },
-                    shape = ExpressivePillSmall
-                )
-                FilterChip(
-                    selected = selectedTypeFilter == "sqp",
-                    onClick = { selectedTypeFilter = "sqp" },
-                    label = { Text("Question Papers (SQP)", fontSize = 12.sp, maxLines = 1, softWrap = false) },
-                    leadingIcon = {
-                        Icon(Icons.Default.Description, contentDescription = null, modifier = Modifier.size(14.dp))
-                    },
-                    shape = ExpressivePillSmall
-                )
-                FilterChip(
-                    selected = selectedTypeFilter == "ms",
-                    onClick = { selectedTypeFilter = "ms" },
-                    label = { Text("Marking Schemes (MS)", fontSize = 12.sp, maxLines = 1, softWrap = false) },
-                    leadingIcon = {
-                        Icon(Icons.Default.CheckCircle, contentDescription = null, modifier = Modifier.size(14.dp))
-                    },
-                    shape = ExpressivePillSmall
-                )
+            // Paper Type Segmented Tabs (All, SQP, MS)
+            val typeTabs = listOf(
+                ExpressiveTabItem("All Papers", badge = "${allPapers.size}"),
+                ExpressiveTabItem("Question Papers (SQP)", icon = Icons.Default.Description),
+                ExpressiveTabItem("Marking Schemes (MS)", icon = Icons.Default.CheckCircle)
+            )
+            val selectedTypeIndex = when (selectedTypeFilter) {
+                "sqp" -> 1
+                "ms" -> 2
+                else -> 0
             }
+
+            ExpressiveSegmentedTabs(
+                tabs = typeTabs,
+                selectedTabIndex = selectedTypeIndex,
+                onTabSelected = {
+                    selectedTypeFilter = when (it) {
+                        1 -> "sqp"
+                        2 -> "ms"
+                        else -> "all"
+                    }
+                },
+                accentColor = MaterialTheme.colorScheme.primary,
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
+            )
 
             // Subject Filter Horizontal Scroll
             Row(
@@ -296,47 +292,18 @@ fun SamplePapersScreen(
 
                 if (filteredPapers.isEmpty()) {
                     item {
-                        Card(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 32.dp),
-                            shape = ExpressiveCardLarge,
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
-                        ) {
-                            Column(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(28.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally,
-                                verticalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                Surface(
-                                    shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.surfaceVariant,
-                                    modifier = Modifier.size(56.dp)
-                                ) {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Icon(
-                                            imageVector = Icons.Default.Description,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.outline,
-                                            modifier = Modifier.size(28.dp)
-                                        )
-                                    }
-                                }
-                                Text(
-                                    text = "No papers found matching criteria",
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 14.sp,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                                Text(
-                                    text = "Try clearing filters or changing the search keyword.",
-                                    fontSize = 12.sp,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                                )
+                        ExpressiveEmptyState(
+                            icon = Icons.Default.Description,
+                            title = "No Papers Found",
+                            description = "No sample papers match your current filters. Try selecting 'All Papers' or clearing the search keyword.",
+                            tintColor = MaterialTheme.colorScheme.primary,
+                            actionText = "Reset Filters",
+                            onActionClick = {
+                                selectedTypeFilter = "all"
+                                selectedSubjectId = ""
+                                searchQuery = ""
                             }
-                        }
+                        )
                     }
                 } else {
                     items(filteredPapers) { paper ->

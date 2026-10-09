@@ -187,27 +187,9 @@ fun PdfViewerScreen(
             contentAlignment = Alignment.Center
         ) {
             if (isLoading) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    CircularProgressIndicator(
-                        color = PrimaryBlue,
-                        modifier = Modifier.size(42.dp),
-                        strokeWidth = 3.dp
-                    )
-                    Spacer(modifier = Modifier.height(14.dp))
-                    Text(
-                        text = "Rendering high-resolution textbook pages...",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = "Cached locally for offline study",
-                        fontSize = 11.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
+                com.boardsprep.onboard.ui.components.PdfAsymmetricLoadingView(title = title)
             } else if (currentBitmap != null) {
+
                 // Interactive Zoom & Pan Surface
                 Box(
                     modifier = Modifier

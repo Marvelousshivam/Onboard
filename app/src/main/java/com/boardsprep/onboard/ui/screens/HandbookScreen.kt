@@ -27,6 +27,10 @@ import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.models.DerivationItem
 import com.boardsprep.onboard.data.models.NamedReactionItem
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
+import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.expressiveBounce
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,50 +88,28 @@ fun HandbookScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Tab Selector with Crisp Vector Icons
-            TabRow(
+            val handbookTabs = listOf(
+                ExpressiveTabItem(
+                    title = "Physics Derivations",
+                    icon = Icons.Default.Bolt,
+                    badge = "${derivations.size}"
+                ),
+                ExpressiveTabItem(
+                    title = "Chemistry Reactions",
+                    icon = Icons.Default.Science,
+                    badge = "${reactions.size}"
+                )
+            )
+
+            ExpressiveSegmentedTabs(
+                tabs = handbookTabs,
                 selectedTabIndex = selectedTabIndex,
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
-            ) {
-                Tab(
-                    selected = selectedTabIndex == 0,
-                    onClick = { selectedTabIndex = 0; searchQuery = "" },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Bolt,
-                            contentDescription = null,
-                            tint = if (selectedTabIndex == 0) PrimaryBlue else MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    text = {
-                        Text(
-                            text = "Physics Derivations (${derivations.size})",
-                            fontWeight = if (selectedTabIndex == 0) FontWeight.Bold else FontWeight.Medium,
-                            fontSize = 13.sp
-                        )
-                    }
-                )
-                Tab(
-                    selected = selectedTabIndex == 1,
-                    onClick = { selectedTabIndex = 1; searchQuery = "" },
-                    icon = {
-                        Icon(
-                            imageVector = Icons.Default.Science,
-                            contentDescription = null,
-                            tint = if (selectedTabIndex == 1) ChemistryMint else MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(18.dp)
-                        )
-                    },
-                    text = {
-                        Text(
-                            text = "Chemistry Reactions (${reactions.size})",
-                            fontWeight = if (selectedTabIndex == 1) FontWeight.Bold else FontWeight.Medium,
-                            fontSize = 13.sp
-                        )
-                    }
-                )
-            }
+                onTabSelected = {
+                    selectedTabIndex = it
+                    searchQuery = ""
+                },
+                accentColor = if (selectedTabIndex == 0) PhysicsAccent else ChemistryAccent
+            )
 
             // Expressive Capsule Search Bar
             OutlinedTextField(
@@ -175,22 +157,33 @@ fun HandbookScreen(
                     accentColor = PrimaryBlue
                 )
 
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
-                ) {
-                    items(filteredDerivations, key = { it.id }) { item ->
-                        val isMastered = item.id in masteredIds
-                        DerivationCard(
-                            item = item,
-                            isMastered = isMastered,
-                            onToggleMastered = { checked ->
-                                scope.launch {
-                                    repository.setMastered(item.id, "derivation", checked)
+                if (filteredDerivations.isEmpty()) {
+                    ExpressiveEmptyState(
+                        icon = Icons.Default.Search,
+                        title = "No Derivations Found",
+                        description = "No physics derivations match '$searchQuery'. Try searching by law name (e.g. Gauss, Coulomb) or chapter name.",
+                        tintColor = PhysicsAccent,
+                        actionText = "Clear Search",
+                        onActionClick = { searchQuery = "" }
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        items(filteredDerivations, key = { it.id }) { item ->
+                            val isMastered = item.id in masteredIds
+                            DerivationCard(
+                                item = item,
+                                isMastered = isMastered,
+                                onToggleMastered = { checked ->
+                                    scope.launch {
+                                        repository.setMastered(item.id, "derivation", checked)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             } else {
@@ -215,22 +208,33 @@ fun HandbookScreen(
                     accentColor = SuccessGreen
                 )
 
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
-                ) {
-                    items(filteredReactions, key = { it.id }) { item ->
-                        val isMastered = item.id in masteredIds
-                        ReactionCard(
-                            item = item,
-                            isMastered = isMastered,
-                            onToggleMastered = { checked ->
-                                scope.launch {
-                                    repository.setMastered(item.id, "reaction", checked)
+                if (filteredReactions.isEmpty()) {
+                    ExpressiveEmptyState(
+                        icon = Icons.Default.Search,
+                        title = "No Reactions Found",
+                        description = "No organic named reactions match '$searchQuery'. Try searching by reaction name (e.g. Aldol, Sandmeyer) or reagent.",
+                        tintColor = ChemistryAccent,
+                        actionText = "Clear Search",
+                        onActionClick = { searchQuery = "" }
+                    )
+                } else {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        items(filteredReactions, key = { it.id }) { item ->
+                            val isMastered = item.id in masteredIds
+                            ReactionCard(
+                                item = item,
+                                isMastered = isMastered,
+                                onToggleMastered = { checked ->
+                                    scope.launch {
+                                        repository.setMastered(item.id, "reaction", checked)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

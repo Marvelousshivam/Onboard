@@ -95,11 +95,11 @@ val BiologyLightBg = Color(0xFFE6F7FF)        // 10% Sky tint container
 val BiologyLightOnBg = Color(0xFF0C5274)      // Deep cerulean ink (WCAG 7:1)
 val BiologyAccent = Color(0xFF0284C7)
 
-val EnglishRose = Color(0xFFFFB3BA)
-val EnglishRoseContainer = Color(0xFF4E1620)
-val EnglishLightBg = Color(0xFFFFEEF0)        // 10% Rose tint container
-val EnglishLightOnBg = Color(0xFF8C1D40)      // Deep crimson ink (WCAG 7:1)
-val EnglishAccent = Color(0xFFE11D48)
+val EnglishRose = Color(0xFFFBCFE8)
+val EnglishRoseContainer = Color(0xFF4A102A)
+val EnglishLightBg = Color(0xFFFDF2F8)        // 10% Rose tint container
+val EnglishLightOnBg = Color(0xFF831843)      // Deep garnet ink (WCAG 7.5:1)
+val EnglishAccent = Color(0xFFBE185D)         // Soothing cranberry rose (replaces alarming neon red)
 
 // High-Yield Accent Tokens
 val AccentAmber = Color(0xFFFFC043)
@@ -114,3 +114,29 @@ val SuccessGreenDark = Color(0xFF68D391)
 val ErrorRed = Color(0xFFF56565)
 val PrimaryBlue = Color(0xFFD0BCFF)
 
+/**
+ * Semantic container and accent tokens for academic subjects
+ * Supports true OLED dark mode containers and high-contrast light mode pastels
+ */
+data class SubjectThemeTokens(
+    val containerColor: Color,
+    val onContainerColor: Color,
+    val accentColor: Color
+)
+
+fun getAdaptiveSubjectTokens(subjectId: String, isDark: Boolean): SubjectThemeTokens {
+    return when (subjectId.lowercase()) {
+        "physics" -> if (isDark) SubjectThemeTokens(PhysicsLavenderContainer, MdOnSurfaceDark, PhysicsLavender)
+                     else SubjectThemeTokens(PhysicsLightBg, PhysicsLightOnBg, PhysicsAccent)
+        "chemistry" -> if (isDark) SubjectThemeTokens(ChemistryMintContainer, MdOnSurfaceDark, ChemistryMint)
+                       else SubjectThemeTokens(ChemistryLightBg, ChemistryLightOnBg, ChemistryAccent)
+        "maths" -> if (isDark) SubjectThemeTokens(MathsPeachContainer, MdOnSurfaceDark, MathsPeach)
+                   else SubjectThemeTokens(MathsLightBg, MathsLightOnBg, MathsAccent)
+        "biology" -> if (isDark) SubjectThemeTokens(BiologySkyContainer, MdOnSurfaceDark, BiologySky)
+                     else SubjectThemeTokens(BiologyLightBg, BiologyLightOnBg, BiologyAccent)
+        "english" -> if (isDark) SubjectThemeTokens(EnglishRoseContainer, MdOnSurfaceDark, EnglishRose)
+                     else SubjectThemeTokens(EnglishLightBg, EnglishLightOnBg, EnglishAccent)
+        else -> if (isDark) SubjectThemeTokens(MdSurfaceVariantDark, MdOnSurfaceDark, MdPrimaryDark)
+                else SubjectThemeTokens(MdSurfaceVariantLight, MdOnSurfaceVariantLight, MdPrimaryLight)
+    }
+}

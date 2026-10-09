@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -37,6 +38,7 @@ import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.models.Chapter
 import com.boardsprep.onboard.data.models.Subject
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.expressiveBounce
 import java.util.Calendar
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
@@ -45,24 +47,7 @@ import java.util.concurrent.TimeUnit
 fun Modifier.springBounceClick(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit
-): Modifier {
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.95f else 1f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        ),
-        label = "bounce_anim"
-    )
-    return this
-        .scale(scale)
-        .clickable(
-            interactionSource = interactionSource,
-            indication = null,
-            onClick = onClick
-        )
-}
+): Modifier = this.expressiveBounce(scaleOnPress = 0.95f, onClick = onClick)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,14 +56,26 @@ fun DashboardScreen(
     onSubjectClick: (String) -> Unit,
     onHandbookClick: (String) -> Unit,
     onDownloadsClick: () -> Unit,
-    onSamplePapersClick: (String) -> Unit = {}
+    onSamplePapersClick: (String) -> Unit = {},
+    onAccountClick: () -> Unit = {},
+    onErrorVaultClick: () -> Unit = {},
+    onDailyBlitzClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val repository = remember { BoardsRepository(context) }
+    val syncManager = remember { com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context) }
+    val streakInfo by syncManager.streakState.collectAsState()
+    val accountInfo by syncManager.accountState.collectAsState()
+    val unresolvedErrorCount by repository.getUnresolvedErrorCount().collectAsState(initial = 0)
     var showStreakDialog by remember { mutableStateOf(false) }
     var showSearchDialog by remember { mutableStateOf(false) }
 
+
     // Live countdown to CBSE Board Exams 2027 (Feb 15, 2027)
+    val isDark = isSystemInDarkTheme()
+    val physicsTokens = remember(isDark) { getAdaptiveSubjectTokens("physics", isDark) }
+    val chemistryTokens = remember(isDark) { getAdaptiveSubjectTokens("chemistry", isDark) }
+
     val daysRemaining = remember {
         val examCal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata")).apply {
             set(2027, Calendar.FEBRUARY, 15, 10, 30, 0)
@@ -141,30 +138,54 @@ fun DashboardScreen(
                     }
                 },
                 actions = {
-                    // WCAG AA Compliant High-Contrast 7d Streak Pill
+                    // WCAG AA Compliant High-Contrast Dynamic Streak Pill (Synced with Cloud & Web)
+                    val streakDays = streakInfo.currentStreak
+                    val streakText = if (streakDays > 0) "${streakDays}d Streak" else "Start Streak"
+                    val isToday = streakInfo.isStreakActiveToday
+                    val pillBg = if (isToday) AccentAmber else AccentAmberLight
+                    val pillContent = if (isToday) Color.White else AccentAmberOnBg
+
                     Surface(
                         onClick = { showStreakDialog = true },
                         shape = ExpressivePillSmall,
-                        color = AccentAmberLight,
+                        color = pillBg,
                         border = androidx.compose.foundation.BorderStroke(1.dp, AccentAmber.copy(alpha = 0.5f)),
-                        modifier = Modifier.padding(end = 12.dp)
+                        modifier = Modifier.padding(end = 6.dp)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp)
                         ) {
                             Icon(
                                 imageVector = Icons.Default.LocalFireDepartment,
                                 contentDescription = "Study Streak",
-                                tint = AccentAmberOnBg,
-                                modifier = Modifier.size(18.dp)
+                                tint = pillContent,
+                                modifier = Modifier.size(16.dp)
                             )
-                            Spacer(modifier = Modifier.width(5.dp))
+                            Spacer(modifier = Modifier.width(4.dp))
                             Text(
-                                text = "7d Streak",
+                                text = streakText,
                                 style = MaterialTheme.typography.labelMedium,
                                 fontWeight = FontWeight.ExtraBold,
-                                color = AccentAmberOnBg
+                                color = pillContent
+                            )
+                        }
+                    }
+
+                    // Account & Cloud Sync Profile Button
+                    Surface(
+                        onClick = onAccountClick,
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
+                        modifier = Modifier.padding(end = 12.dp).size(34.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = if (accountInfo.isAnonymous) Icons.Default.CloudSync else Icons.Default.AccountCircle,
+                                contentDescription = "Account & Cloud Sync",
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(18.dp)
                             )
                         }
                     }
@@ -317,30 +338,11 @@ fun DashboardScreen(
                                     }
                                 }
                             }
-
-                            Spacer(modifier = Modifier.height(16.dp))
-                            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f))
-                            Spacer(modifier = Modifier.height(12.dp))
-
-                            // Features Badges Row
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                ExpressiveFeatureBadge(
-                                    icon = Icons.Default.OfflinePin,
-                                    label = "Offline NCERT & Lectures"
-                                )
-                                ExpressiveFeatureBadge(
-                                    icon = Icons.Default.Block,
-                                    label = "100% Ad-Free"
-                                )
-                            }
                         }
                     }
                 }
 
-                // Tier 2: High-Yield Revision Tool Cards (Unified Light M3 Expressive)
+                // Tier 1.5: Behavioral Micro-Sprint & Mistake Defense Runway
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -348,125 +350,152 @@ fun DashboardScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "High-Yield Board Decks",
+                            text = "Daily Mastery & Defense",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
                         )
-                        Text(
-                            text = "Guaranteed 70/70",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.Bold
-                        )
+                        Surface(
+                            shape = ExpressivePillSmall,
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                        ) {
+                            Text(
+                                text = "High-Agency",
+                                style = MaterialTheme.typography.labelSmall,
+                                color = MaterialTheme.colorScheme.primary,
+                                fontWeight = FontWeight.Bold,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
+                            )
+                        }
                     }
                     Spacer(modifier = Modifier.height(10.dp))
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        // Physics Derivations - Pastel Lavender (No Dark Mode Clash!)
-                        M3ExpressiveDeckCard(
-                            title = "Physics Derivations",
-                            subtitle = "Top 30 Guaranteed",
-                            badge = "15-20 Marks",
-                            icon = Icons.Default.Bolt,
-                            containerColor = PhysicsLightBg,
-                            onContainerColor = PhysicsLightOnBg,
-                            accentColor = PhysicsAccent,
-                            modifier = Modifier.weight(1f),
-                            onClick = { onHandbookClick("physics") }
-                        )
-
-                        // Named Reactions - Pastel Mint (No Dark Mode Clash!)
-                        M3ExpressiveDeckCard(
-                            title = "Named Reactions",
-                            subtitle = "Top 25 Organic",
-                            badge = "12-15 Marks",
-                            icon = Icons.Default.Science,
-                            containerColor = ChemistryLightBg,
-                            onContainerColor = ChemistryLightOnBg,
-                            accentColor = ChemistryAccent,
-                            modifier = Modifier.weight(1f),
-                            onClick = { onHandbookClick("chemistry") }
-                        )
-                    }
-                }
-
-                // Tier 2.5: Official CBSE 2027 Sample Papers & Marking Schemes Bento Card
-                item {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .springBounceClick { onSamplePapersClick("") },
-                        shape = M3EBentoTileShape,
-                        colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f)
-                        ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-                    ) {
-                        Row(
+                        // 1. Daily 5-Min Spaced Repetition Blitz
+                        Card(
+                            onClick = onDailyBlitzClick,
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(18.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                                .weight(1f)
+                                .springBounceClick(onClick = onDailyBlitzClick),
+                            shape = AsymmetricLeafHero,
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                            )
                         ) {
-                            Surface(
-                                shape = CircleShape,
-                                color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.2f),
-                                modifier = Modifier.size(46.dp)
-                            ) {
-                                Box(contentAlignment = Alignment.Center) {
-                                    Icon(
-                                        imageVector = Icons.Default.Description,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.secondary,
-                                        modifier = Modifier.size(24.dp)
-                                    )
-                                }
-                            }
-                            Spacer(modifier = Modifier.width(14.dp))
-                            Column(modifier = Modifier.weight(1f)) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Text(
-                                        text = "CBSE 2027 Sample Papers",
-                                        style = MaterialTheme.typography.titleSmall,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.onSecondaryContainer
-                                    )
-                                    Spacer(modifier = Modifier.width(8.dp))
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                                        modifier = Modifier.size(36.dp)
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = Icons.Default.Bolt,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.primary,
+                                                modifier = Modifier.size(20.dp)
+                                            )
+                                        }
+                                    }
                                     Surface(
                                         shape = ExpressivePillSmall,
-                                        color = MaterialTheme.colorScheme.secondary
+                                        color = MaterialTheme.colorScheme.primary
                                     ) {
                                         Text(
-                                            text = "12 SQP & MS",
-                                            fontSize = 9.sp,
-                                            fontWeight = FontWeight.Black,
-                                            color = MaterialTheme.colorScheme.onSecondary,
-                                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                            text = "5-Min",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.onPrimary,
+                                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
                                         )
                                     }
                                 }
+                                Spacer(modifier = Modifier.height(12.dp))
+                                Text(
+                                    text = "Daily Recall Blitz",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    fontWeight = FontWeight.Black,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
                                 Spacer(modifier = Modifier.height(2.dp))
                                 Text(
-                                    text = "Official Sample Question Papers & step-by-step marking schemes for all 6 subjects.",
+                                    text = "Ebbinghaus Deck Active",
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.85f),
-                                    lineHeight = 16.sp
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSecondaryContainer,
-                                modifier = Modifier.size(20.dp)
+                        }
+
+                        // 2. Mistake Notebook (Error Vault)
+                        Card(
+                            onClick = onErrorVaultClick,
+                            modifier = Modifier
+                                .weight(1f)
+                                .springBounceClick(onClick = onErrorVaultClick),
+                            shape = AsymmetricLeafHero,
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f)
                             )
+                        ) {
+                            Column(modifier = Modifier.padding(16.dp)) {
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
+                                        modifier = Modifier.size(36.dp)
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = Icons.Default.AutoFixHigh,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.tertiary,
+                                                modifier = Modifier.size(20.dp)
+                                            )
+                                        }
+                                    }
+                                    Surface(
+                                        shape = ExpressivePillSmall,
+                                        color = if (unresolvedErrorCount > 0) MaterialTheme.colorScheme.errorContainer else SuccessGreen.copy(alpha = 0.2f)
+                                    ) {
+                                        Text(
+                                            text = if (unresolvedErrorCount > 0) "$unresolvedErrorCount Open" else "Clean",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = if (unresolvedErrorCount > 0) MaterialTheme.colorScheme.onErrorContainer else SuccessGreen,
+                                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.height(12.dp))
+                                Text(
+                                    text = "Mistake Notebook",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    fontWeight = FontWeight.Black,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Spacer(modifier = Modifier.height(2.dp))
+                                Text(
+                                    text = "Convert slips into +10M",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
                         }
                     }
                 }
 
-                // Tier 3: Core Curricula Header
+                // Tier 2: Academic Subjects Header (Option A: 2-Column M3 Expressive Grid)
                 item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -479,20 +508,40 @@ fun DashboardScreen(
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
                         )
-                        Text(
-                            text = "${subjects.size} Core Curricula",
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                        Surface(
+                            shape = ExpressivePillSmall,
+                            color = MaterialTheme.colorScheme.surfaceVariant
+                        ) {
+                            Text(
+                                text = "${subjects.size} Curricula",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                            )
+                        }
                     }
                 }
 
-                // Subject Cards with WCAG AA Compliant High-Contrast Typography
-                items(subjects) { subject ->
-                    M3ExpressiveSubjectCard(
-                        subject = subject,
-                        onClick = { onSubjectClick(subject.id) }
-                    )
+                // Option A: 2-Column Compact M3 Expressive Subject Grid
+                val subjectPairs = subjects.chunked(2)
+                items(subjectPairs) { pair ->
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        pair.forEach { subject ->
+                            Box(modifier = Modifier.weight(1f)) {
+                                M3ExpressiveSubjectGridTile(
+                                    subject = subject,
+                                    onClick = { onSubjectClick(subject.id) }
+                                )
+                            }
+                        }
+                        if (pair.size == 1) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
+                    }
                 }
             }
 
@@ -574,9 +623,9 @@ fun DashboardScreen(
         }
     }
 
-    // Interactive 7-Day Streak Psychological Reinforcement Modal
+    // Interactive Streak Psychological Reinforcement Modal
     if (showStreakDialog) {
-        StreakBreakdownDialog(onDismiss = { showStreakDialog = false })
+        StreakBreakdownDialog(streak = streakInfo, onDismiss = { showStreakDialog = false })
     }
 
     // In-Dashboard Instant Quick Search Sheet
@@ -701,22 +750,132 @@ fun M3ExpressiveDeckCard(
 }
 
 @Composable
+fun M3ExpressiveSubjectGridTile(
+    subject: Subject,
+    onClick: () -> Unit
+) {
+    val isDark = isSystemInDarkTheme()
+    val tokens = getAdaptiveSubjectTokens(subject.id, isDark)
+    val cardBg = tokens.containerColor
+    val onCardColor = tokens.onContainerColor
+    val accentColor = tokens.accentColor
+
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .springBounceClick(onClick = onClick)
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f),
+                shape = M3EBentoTileShape
+            ),
+        shape = M3EBentoTileShape,
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                // Saturated Squircle Icon Container
+                Surface(
+                    shape = M3EIconContainerShape,
+                    color = cardBg,
+                    modifier = Modifier.size(42.dp)
+                ) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = when (subject.id) {
+                                "english" -> Icons.AutoMirrored.Filled.MenuBook
+                                "physics" -> Icons.Default.Bolt
+                                "chemistry" -> Icons.Default.Science
+                                "maths" -> Icons.Default.Calculate
+                                "biology" -> Icons.Default.Biotech
+                                else -> Icons.Default.School
+                            },
+                            contentDescription = null,
+                            tint = accentColor,
+                            modifier = Modifier.size(22.dp)
+                        )
+                    }
+                }
+
+                Surface(
+                    shape = ExpressivePillSmall,
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Text(
+                        text = "Code ${subject.code}",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                    )
+                }
+            }
+
+            Column {
+                Text(
+                    text = subject.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1
+                )
+                Spacer(modifier = Modifier.height(2.dp))
+                Text(
+                    text = "${subject.chapters.size} Ch • ${subject.totalTheoryMarks}M Th",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 1
+                )
+            }
+
+            // Quick Status Pill
+            Surface(
+                shape = ExpressivePillSmall,
+                color = cardBg
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(6.dp)
+                            .background(accentColor, CircleShape)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = "4 Pillars Ready",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = onCardColor,
+                        fontSize = 10.sp
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun M3ExpressiveSubjectCard(
     subject: Subject,
     onClick: () -> Unit
 ) {
-    val (cardBg, onCardColor, accentColor) = when (subject.id) {
-        "physics" -> Triple(PhysicsLightBg, PhysicsLightOnBg, PhysicsAccent)
-        "chemistry" -> Triple(ChemistryLightBg, ChemistryLightOnBg, ChemistryAccent)
-        "maths" -> Triple(MathsLightBg, MathsLightOnBg, MathsAccent)
-        "biology" -> Triple(BiologyLightBg, BiologyLightOnBg, BiologyAccent)
-        "english" -> Triple(EnglishLightBg, EnglishLightOnBg, EnglishAccent)
-        else -> Triple(
-            MaterialTheme.colorScheme.surfaceVariant,
-            MaterialTheme.colorScheme.onSurface,
-            MaterialTheme.colorScheme.primary
-        )
-    }
+    val isDark = isSystemInDarkTheme()
+    val tokens = getAdaptiveSubjectTokens(subject.id, isDark)
+    val cardBg = tokens.containerColor
+    val onCardColor = tokens.onContainerColor
+    val accentColor = tokens.accentColor
 
     Card(
         modifier = Modifier
@@ -863,7 +1022,13 @@ fun ExpressiveFeatureBadge(icon: ImageVector, label: String) {
 }
 
 @Composable
-fun StreakBreakdownDialog(onDismiss: () -> Unit) {
+fun StreakBreakdownDialog(
+    streak: com.boardsprep.onboard.core.sync.StreakInfo = com.boardsprep.onboard.core.sync.StreakInfo(),
+    onDismiss: () -> Unit
+) {
+    val current = streak.currentStreak
+    val longest = streak.longestStreak
+
     AlertDialog(
         onDismissRequest = onDismiss,
         icon = {
@@ -884,7 +1049,7 @@ fun StreakBreakdownDialog(onDismiss: () -> Unit) {
         },
         title = {
             Text(
-                text = "7-Day Study Momentum",
+                text = if (current > 0) "$current-Day Study Streak 🔥" else "Start Your Study Streak!",
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
@@ -892,7 +1057,11 @@ fun StreakBreakdownDialog(onDismiss: () -> Unit) {
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
                 Text(
-                    text = "You've studied 7 days in a row! Spaced repetition primes long-term synaptic retention leading up to CBSE 2027.",
+                    text = if (current > 0) {
+                        "You've maintained a $current-day study momentum! Personal best: $longest days. Spaced repetition primes long-term synaptic retention leading up to CBSE 2027."
+                    } else {
+                        "Complete at least 5 minutes of lectures, 1 DPP Quiz, or master a high-yield derivation today to ignite your study streak!"
+                    },
                     style = MaterialTheme.typography.bodyMedium
                 )
 
@@ -909,33 +1078,58 @@ fun StreakBreakdownDialog(onDismiss: () -> Unit) {
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
-                        Spacer(modifier = Modifier.height(10.dp))
+                        val todayCal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"))
+                        val currentDayOfWeek = todayCal.get(Calendar.DAY_OF_WEEK)
+                        // Calendar: Sunday = 1, Monday = 2, Tuesday = 3, Wednesday = 4, Thursday = 5, Friday = 6, Saturday = 7
+                        // Map to 0..6 where Monday = 0:
+                        val todayIdx = (currentDayOfWeek + 5) % 7
+
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween
                         ) {
                             listOf("M", "T", "W", "T", "F", "S", "S").forEachIndexed { index, day ->
+                                val isToday = index == todayIdx
+                                val isCompleted = if (isToday) {
+                                    streak.isStreakActiveToday
+                                } else {
+                                    index < todayIdx && index >= (todayIdx - streak.currentStreak + (if (streak.isStreakActiveToday) 1 else 0))
+                                }
+
                                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                     Surface(
                                         shape = CircleShape,
-                                        color = if (index <= 6) SuccessGreen else MaterialTheme.colorScheme.surface,
+                                        color = when {
+                                            isCompleted -> SuccessGreen
+                                            isToday -> AccentAmberLight
+                                            else -> MaterialTheme.colorScheme.surface
+                                        },
+                                        border = if (!isCompleted && !isToday) androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f)) else null,
                                         modifier = Modifier.size(28.dp)
                                     ) {
                                         Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = Icons.Default.Check,
-                                                contentDescription = null,
-                                                tint = Color.White,
-                                                modifier = Modifier.size(16.dp)
-                                            )
+                                            when {
+                                                isCompleted -> Icon(
+                                                    imageVector = Icons.Default.Check,
+                                                    contentDescription = "Completed",
+                                                    tint = Color.White,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                                isToday -> Icon(
+                                                    imageVector = Icons.Default.LocalFireDepartment,
+                                                    contentDescription = "Today",
+                                                    tint = AccentAmberOnBg,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                            }
                                         }
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
                                     Text(
                                         text = day,
                                         style = MaterialTheme.typography.labelSmall,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        fontWeight = if (isToday) FontWeight.Black else FontWeight.Bold,
+                                        color = if (isToday) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
                             }

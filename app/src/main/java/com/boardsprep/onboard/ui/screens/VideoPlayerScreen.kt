@@ -140,6 +140,16 @@ fun VideoPlayerScreen(
     var currentPositionMs by remember { mutableLongStateOf(0L) }
     var totalDurationMs by remember { mutableLongStateOf(0L) }
 
+    // Synced Video Progress (Cross-platform resume from Web or local Room DB)
+    val savedProgress by remember(lectureId) {
+        repository.getVideoProgress(lectureId)
+    }.collectAsState(initial = null)
+
+    val startSeconds = remember(savedProgress) {
+        val pos = savedProgress?.positionMillis ?: 0L
+        if (pos > 5000L) pos / 1000L else 0L
+    }
+
     // Remembered WebView for YouTube
     val webView = remember(youtubeVideoId) {
         if (isYouTube && youtubeVideoId != null) {
@@ -205,7 +215,7 @@ fun VideoPlayerScreen(
                         <div class="container">
                             <iframe 
                                 id="ytplayer"
-                                src="https://www.youtube-nocookie.com/embed/$youtubeVideoId?autoplay=1&controls=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&fs=1" 
+                                src="https://www.youtube-nocookie.com/embed/$youtubeVideoId?autoplay=1&controls=1&rel=0&modestbranding=1&enablejsapi=1&playsinline=1&fs=1&start=$startSeconds" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" 
                                 allowfullscreen="true"
                                 webkitallowfullscreen="true"
@@ -364,6 +374,9 @@ fun VideoPlayerScreen(
                 val mediaItem = MediaItem.fromUri(Uri.parse(url))
                 exoPlayer.setMediaItem(mediaItem)
                 exoPlayer.prepare()
+                if (startSeconds > 0) {
+                    exoPlayer.seekTo(startSeconds * 1000L)
+                }
             } catch (e: Exception) {
                 playbackError = "Failed to load media: ${e.message}"
                 isVideoLoading = false
@@ -390,6 +403,24 @@ fun VideoPlayerScreen(
         } else {
             onDispose {
                 webView?.let { wv ->
+                    wv.evaluateJavascript(
+                        "(function() { var v = document.querySelector('video'); return v ? Math.floor(v.currentTime * 1000) : 0; })();"
+                    ) { posStr ->
+                        val pos = posStr?.toLongOrNull() ?: 0L
+                        if (pos > 3000L) {
+                            coroutineScope.launch {
+                                repository.saveVideoProgress(
+                                    VideoProgressEntity(
+                                        videoId = lectureId,
+                                        chapterId = currentChapter?.id ?: "",
+                                        positionMillis = pos,
+                                        durationMillis = totalDurationMs,
+                                        isCompleted = false
+                                    )
+                                )
+                            }
+                        }
+                    }
                     wv.stopLoading()
                     wv.loadUrl("about:blank")
                     wv.destroy()
@@ -594,7 +625,7 @@ fun VideoPlayerScreen(
                                 .background(Color.Black.copy(alpha = 0.7f), RoundedCornerShape(12.dp))
                                 .padding(16.dp)
                         ) {
-                            CircularProgressIndicator(color = MaterialTheme.colorScheme.primary, modifier = Modifier.size(36.dp))
+                            com.boardsprep.onboard.ui.components.MorphingOrganicLoader(modifier = Modifier.size(44.dp), tintColor = Color.White)
                             Spacer(modifier = Modifier.height(8.dp))
                             Text("Loading Board Lecture...", color = Color.White, fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
                         }

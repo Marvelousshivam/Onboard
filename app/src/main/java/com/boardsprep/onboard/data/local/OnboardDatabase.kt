@@ -14,6 +14,12 @@ import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
+import com.boardsprep.onboard.data.local.entities.ErrorVaultEntity
+import com.boardsprep.onboard.data.local.entities.SpacedReviewEntity
+import com.boardsprep.onboard.data.local.entities.FocusSessionEntity
+import com.boardsprep.onboard.data.local.dao.ErrorVaultDao
+import com.boardsprep.onboard.data.local.dao.SpacedReviewDao
+import com.boardsprep.onboard.data.local.dao.FocusSessionDao
 
 @Database(
     entities = [
@@ -21,9 +27,12 @@ import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
         VideoProgressEntity::class,
         DownloadedFileEntity::class,
         QuizAttemptEntity::class,
-        MasteredItemEntity::class
+        MasteredItemEntity::class,
+        ErrorVaultEntity::class,
+        SpacedReviewEntity::class,
+        FocusSessionEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class OnboardDatabase : RoomDatabase() {
@@ -33,6 +42,10 @@ abstract class OnboardDatabase : RoomDatabase() {
     abstract fun downloadsDao(): DownloadsDao
     abstract fun quizDao(): QuizDao
     abstract fun handbookDao(): HandbookDao
+    abstract fun errorVaultDao(): ErrorVaultDao
+    abstract fun spacedReviewDao(): SpacedReviewDao
+    abstract fun focusSessionDao(): FocusSessionDao
+
 
     companion object {
         @Volatile

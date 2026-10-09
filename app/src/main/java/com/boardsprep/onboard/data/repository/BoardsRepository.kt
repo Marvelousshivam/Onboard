@@ -558,33 +558,45 @@ class BoardsRepository(private val context: Context) {
 
     suspend fun saveMastery(entity: ChapterMasteryEntity) = withContext(Dispatchers.IO) {
         db.masteryDao().saveMastery(entity)
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncChapterMastery(entity)
+        } catch (_: Exception) {}
     }
 
     fun getVideoProgress(videoId: String): Flow<VideoProgressEntity?> = db.videoProgressDao().getProgress(videoId)
 
     suspend fun saveVideoProgress(entity: VideoProgressEntity) = withContext(Dispatchers.IO) {
         db.videoProgressDao().saveProgress(entity)
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncVideoProgress(entity)
+        } catch (_: Exception) {}
     }
 
     suspend fun recordQuizAttempt(quizId: String, score: Int, total: Int, timeSecs: Long) = withContext(Dispatchers.IO) {
-        db.quizDao().saveAttempt(
-            QuizAttemptEntity(
-                quizId = quizId,
-                score = score,
-                totalQuestions = total,
-                timeTakenSeconds = timeSecs
-            )
+        val entity = QuizAttemptEntity(
+            quizId = quizId,
+            score = score,
+            totalQuestions = total,
+            timeTakenSeconds = timeSecs
         )
+        db.quizDao().saveAttempt(entity)
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncQuizAttempt(entity)
+        } catch (_: Exception) {}
     }
 
     fun getAllMastered(): Flow<List<com.boardsprep.onboard.data.local.entities.MasteredItemEntity>> = db.handbookDao().getAllMastered()
 
     suspend fun setMastered(itemId: String, category: String, isMastered: Boolean) = withContext(Dispatchers.IO) {
+        val entity = com.boardsprep.onboard.data.local.entities.MasteredItemEntity(itemId = itemId, category = category, isMastered = isMastered)
         if (isMastered) {
-            db.handbookDao().setMastered(com.boardsprep.onboard.data.local.entities.MasteredItemEntity(itemId = itemId, category = category, isMastered = true))
+            db.handbookDao().setMastered(entity)
         } else {
             db.handbookDao().removeMastered(itemId)
         }
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncMasteredItem(entity, isMastered)
+        } catch (_: Exception) {}
     }
 
     fun getAllDownloads(): Flow<List<com.boardsprep.onboard.data.local.entities.DownloadedFileEntity>> = db.downloadsDao().getAllDownloads()
@@ -629,7 +641,193 @@ class BoardsRepository(private val context: Context) {
         }
         return null
     }
+
+    // ==========================================
+    // Error Vault ("Mistake Notebook") Operations
+    // ==========================================
+    val errorVaultDao get() = db.errorVaultDao()
+
+    fun getUnresolvedErrors(): Flow<List<com.boardsprep.onboard.data.local.entities.ErrorVaultEntity>> =
+        db.errorVaultDao().getUnresolvedErrors()
+
+    fun getAllErrors(): Flow<List<com.boardsprep.onboard.data.local.entities.ErrorVaultEntity>> =
+        db.errorVaultDao().getAllErrors()
+
+    fun getUnresolvedErrorCount(): Flow<Int> =
+        db.errorVaultDao().getUnresolvedCount()
+
+    fun getResolvedErrorCount(): Flow<Int> =
+        db.errorVaultDao().getResolvedCount()
+
+    suspend fun saveQuizMistake(
+        questionId: String,
+        chapterId: String = "",
+        subjectId: String = "",
+        questionText: String,
+        optionA: String,
+        optionB: String,
+        optionC: String,
+        optionD: String,
+        correctOptionIndex: Int,
+        userSelectedOptionIndex: Int,
+        explanation: String = "",
+        mistakeCategory: String = "conceptual"
+    ) = withContext(Dispatchers.IO) {
+        val entity = com.boardsprep.onboard.data.local.entities.ErrorVaultEntity(
+            questionId = questionId,
+            chapterId = chapterId,
+            subjectId = subjectId,
+            questionText = questionText,
+            optionA = optionA,
+            optionB = optionB,
+            optionC = optionC,
+            optionD = optionD,
+            correctOptionIndex = correctOptionIndex,
+            userSelectedOptionIndex = userSelectedOptionIndex,
+            explanation = explanation,
+            mistakeCategory = mistakeCategory,
+            isResolved = false,
+            lastAttemptedAt = System.currentTimeMillis()
+        )
+        db.errorVaultDao().insertError(entity)
+    }
+
+    suspend fun resolveMistake(id: Long) = withContext(Dispatchers.IO) {
+        db.errorVaultDao().markResolved(id)
+    }
+
+    suspend fun reattemptMistakeFailed(id: Long) = withContext(Dispatchers.IO) {
+        db.errorVaultDao().recordReattemptFailure(id)
+    }
+
+    suspend fun deleteMistake(id: Long) = withContext(Dispatchers.IO) {
+        db.errorVaultDao().deleteError(id)
+    }
+
+    // ==========================================
+    // Spaced Repetition Blitz (Ebbinghaus SM-2) Operations
+    // ==========================================
+    val spacedReviewDao get() = db.spacedReviewDao()
+
+    fun getDueReviews(limit: Int = 5): Flow<List<com.boardsprep.onboard.data.local.entities.SpacedReviewEntity>> =
+        db.spacedReviewDao().getDueReviews(System.currentTimeMillis() + 86400000L, limit)
+
+    suspend fun updateSpacedReview(entity: com.boardsprep.onboard.data.local.entities.SpacedReviewEntity, knewIt: Boolean) = withContext(Dispatchers.IO) {
+        val newRepetitions = if (knewIt) entity.repetitions + 1 else 0
+        val newEaseFactor = if (knewIt) {
+            (entity.easeFactor + 0.1f).coerceIn(1.3f, 2.8f)
+        } else {
+            (entity.easeFactor - 0.2f).coerceAtLeast(1.3f)
+        }
+        val nextIntervalDays = when {
+            !knewIt -> 1
+            newRepetitions == 1 -> 1
+            newRepetitions == 2 -> 3
+            newRepetitions == 3 -> 6
+            else -> (entity.intervalDays * newEaseFactor).toInt().coerceAtLeast(7)
+        }
+        val nextDate = System.currentTimeMillis() + nextIntervalDays * 86400000L
+        val updated = entity.copy(
+            repetitions = newRepetitions,
+            easeFactor = newEaseFactor,
+            intervalDays = nextIntervalDays,
+            nextReviewDate = nextDate,
+            lastReviewedAt = System.currentTimeMillis()
+        )
+        db.spacedReviewDao().updateReview(updated)
+    }
+
+    suspend fun seedSpacedReviewsIfEmpty() = withContext(Dispatchers.IO) {
+        if (db.spacedReviewDao().getCount() == 0) {
+            val defaultDeck = listOf(
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "phy_lens_maker",
+                    subjectId = "physics",
+                    title = "Lens Maker's Formula",
+                    prompt = "State the Lens Maker's Formula for a thin convex lens in terms of refractive index and radii of curvature.",
+                    answer = "1/f = (μ - 1) * [ (1/R₁) - (1/R₂) ]\nNote: For equiconvex lens of index μ=1.5, f = R.",
+                    category = "formula"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "chem_reimer_tiemann",
+                    subjectId = "chemistry",
+                    title = "Reimer-Tiemann Reaction",
+                    prompt = "What is the product and electrophile when Phenol reacts with CHCl₃ + aq. NaOH?",
+                    answer = "Product: Salicylaldehyde (o-hydroxybenzaldehyde).\nActive Electrophile: Dichlorocarbene (:CCl₂).",
+                    category = "name_reaction"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "phy_ampere_maxwell",
+                    subjectId = "physics",
+                    title = "Ampere-Maxwell Law",
+                    prompt = "Write the generalized Ampere-Maxwell circulating loop equation including displacement current.",
+                    answer = "∮ B · dl = μ₀(Ic + Id) = μ₀[Ic + ε₀(dΦ_E/dt)]\nWhere Id = ε₀(dΦ_E/dt) is the displacement current.",
+                    category = "formula"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "math_std_integral",
+                    subjectId = "maths",
+                    title = "Special Integral: √(a² - x²)",
+                    prompt = "Evaluate ∫ √(a² - x²) dx without limits.",
+                    answer = "(x/2)√(a² - x²) + (a²/2)sin⁻¹(x/a) + C",
+                    category = "formula"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "bio_dihybrid_cross",
+                    subjectId = "biology",
+                    title = "Mendelian Dihybrid Ratio",
+                    prompt = "State the phenotypic and genotypic ratios of Mendel's F2 dihybrid cross (Yellow Round x Green Wrinkled).",
+                    answer = "Phenotypic: 9:3:3:1\nGenotypic: 1:2:2:4:1:2:1:2:1 (9 distinct genotypes).",
+                    category = "definition"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "chem_aldol",
+                    subjectId = "chemistry",
+                    title = "Aldol Condensation Criteria",
+                    prompt = "What structural feature is strictly required in aldehydes/ketones to undergo self-Aldol condensation?",
+                    answer = "Must contain at least one α-hydrogen atom (e.g., Acetaldehyde, Acetone). Formaldehyde and Benzaldehyde lack α-H and undergo Cannizzaro reaction instead.",
+                    category = "name_reaction"
+                ),
+                com.boardsprep.onboard.data.local.entities.SpacedReviewEntity(
+                    itemId = "phy_bohr_radii",
+                    subjectId = "physics",
+                    title = "Bohr Radius of nth Orbit",
+                    prompt = "State how the radius r_n of an electron in a hydrogen-like atom scales with principal quantum number n and atomic number Z.",
+                    answer = "r_n ∝ (n² / Z)\nr_n = 0.529 Å * (n² / Z). Radius scales with n squared!",
+                    category = "formula"
+                )
+            )
+            db.spacedReviewDao().insertReviews(defaultDeck)
+        }
+    }
+
+    // ==========================================
+    // Focus Session Chamber Operations
+    // ==========================================
+    val focusSessionDao get() = db.focusSessionDao()
+
+    fun getRecentFocusSessions(): Flow<List<com.boardsprep.onboard.data.local.entities.FocusSessionEntity>> =
+        db.focusSessionDao().getRecentSessions()
+
+    suspend fun recordFocusSession(
+        sessionType: String,
+        targetSubjectId: String,
+        durationMinutes: Int,
+        completedMinutes: Int,
+        wasInterrupted: Boolean
+    ) = withContext(Dispatchers.IO) {
+        val session = com.boardsprep.onboard.data.local.entities.FocusSessionEntity(
+            sessionType = sessionType,
+            targetSubjectId = targetSubjectId,
+            durationMinutes = durationMinutes,
+            completedMinutes = completedMinutes,
+            wasInterrupted = wasInterrupted,
+            timestamp = System.currentTimeMillis()
+        )
+        db.focusSessionDao().recordSession(session)
+    }
 }
+
 
 data class LectureContext(
     val currentSubject: Subject,

@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.boardsprep.onboard.core.theme.*
@@ -36,27 +38,14 @@ import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.models.Chapter
 import com.boardsprep.onboard.data.models.Lecture
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
+import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.expressiveBounce
 
 @Composable
-private fun Modifier.detailSpringBounce(onClick: () -> Unit): Modifier {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.96f else 1f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        ),
-        label = "detail_bounce"
-    )
-    return this
-        .scale(scale)
-        .clickable(
-            interactionSource = interactionSource,
-            indication = null,
-            onClick = onClick
-        )
-}
+private fun Modifier.detailSpringBounce(onClick: () -> Unit): Modifier = this.expressiveBounce(onClick = onClick)
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -73,9 +62,13 @@ fun ChapterDetailScreen(
 ) {
     var selectedTabIndex by remember { mutableIntStateOf(0) }
 
-    val (cardBg, onCardColor, accentColor) = remember(chapter.subjectId) {
-        getSubjectThemeTokens(chapter.subjectId)
+    val isDark = isSystemInDarkTheme()
+    val subjectTokens = remember(chapter.subjectId, isDark) {
+        getAdaptiveSubjectTokens(chapter.subjectId, isDark)
     }
+    val cardBg = subjectTokens.containerColor
+    val onCardColor = subjectTokens.onContainerColor
+    val accentColor = subjectTokens.accentColor
 
     // Counts for M3 Expressive Tabs
     val validLectures = remember(lectures) { lectures.filter { it.title.isNotBlank() } }
@@ -100,10 +93,10 @@ fun ChapterDetailScreen(
     }
 
     val tabs = listOf(
-        TabItem(Icons.Default.PlayCircle, "Lectures", "${validLectures.size}"),
-        TabItem(Icons.AutoMirrored.Filled.MenuBook, "NCERT & Notes", "$notesCount"),
-        TabItem(Icons.Default.Quiz, "DPPs", "$quizzesCount"),
-        TabItem(Icons.Default.CheckCircle, "Mastery", "$completedPillars/4")
+        ExpressiveTabItem("Lectures", Icons.Default.PlayCircle, "${validLectures.size}"),
+        ExpressiveTabItem("NCERT & Notes", Icons.AutoMirrored.Filled.MenuBook, "$notesCount"),
+        ExpressiveTabItem("DPPs", Icons.Default.Quiz, "$quizzesCount"),
+        ExpressiveTabItem("Mastery", Icons.Default.CheckCircle, "$completedPillars/4")
     )
 
     Scaffold(
@@ -170,59 +163,13 @@ fun ChapterDetailScreen(
                 .padding(innerPadding)
         ) {
             // M3 Expressive Pill Tabs Row
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-                    .horizontalScroll(rememberScrollState()),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                tabs.forEachIndexed { index, tabItem ->
-                    val isSelected = selectedTabIndex == index
-                    Surface(
-                        shape = ExpressivePillSmall,
-                        color = if (isSelected) accentColor else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f),
-                        modifier = Modifier
-                            .height(38.dp)
-                            .detailSpringBounce { selectedTabIndex = index }
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .padding(horizontal = 12.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.Center
-                        ) {
-                            Icon(
-                                imageVector = tabItem.icon,
-                                contentDescription = null,
-                                tint = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(
-                                text = tabItem.title,
-                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                fontSize = 12.sp,
-                                color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Surface(
-                                shape = ExpressivePillSmall,
-                                color = if (isSelected) Color.White.copy(alpha = 0.25f) else MaterialTheme.colorScheme.background.copy(alpha = 0.6f)
-                            ) {
-                                Text(
-                                    text = tabItem.badge,
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant,
-                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 1.dp)
-                                )
-                            }
-                        }
-                    }
-                }
-            }
+            ExpressiveSegmentedTabs(
+                tabs = tabs,
+                selectedTabIndex = selectedTabIndex,
+                onTabSelected = { selectedTabIndex = it },
+                accentColor = accentColor
+            )
+
 
             // Tab Content
             when (selectedTabIndex) {
@@ -311,49 +258,12 @@ fun ExpressiveLecturesTab(
 
         if (lectures.isEmpty()) {
             item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp),
-                    shape = M3EBentoTileShape,
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
-                ) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(28.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        Surface(
-                            shape = CircleShape,
-                            color = accentColor.copy(alpha = 0.15f),
-                            modifier = Modifier.size(52.dp)
-                        ) {
-                            Box(contentAlignment = Alignment.Center) {
-                                Icon(
-                                    imageVector = Icons.Default.SmartDisplay,
-                                    contentDescription = null,
-                                    tint = accentColor,
-                                    modifier = Modifier.size(28.dp)
-                                )
-                            }
-                        }
-                        Text(
-                            text = "No Video Lectures Linked Yet",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 15.sp,
-                            color = MaterialTheme.colorScheme.onSurface
-                        )
-                        Text(
-                            text = "Add YouTube links in chapter manifest or place offline .mp4 video files in the 'lectures/' directory.",
-                            fontSize = 12.sp,
-                            lineHeight = 17.sp,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center
-                        )
-                    }
-                }
+                ExpressiveEmptyState(
+                    icon = Icons.Default.SmartDisplay,
+                    title = "No Video Lectures Linked Yet",
+                    description = "Add YouTube links in chapter manifest or place offline .mp4 video files in the 'lectures/' directory.",
+                    tintColor = accentColor
+                )
             }
         } else {
             items(lectures) { lecture ->
@@ -614,17 +524,26 @@ fun ExpressivePdfCard(
             Surface(
                 shape = M3ESquircleBadgeShape,
                 color = color.copy(alpha = 0.15f),
-                modifier = Modifier.size(46.dp)
+                modifier = Modifier.size(44.dp)
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(24.dp))
+                    Icon(icon, contentDescription = null, tint = color, modifier = Modifier.size(22.dp))
                 }
             }
             Spacer(modifier = Modifier.width(12.dp))
             Column(modifier = Modifier.weight(1f)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(title, fontWeight = FontWeight.Bold, fontSize = 14.sp)
-                    Spacer(modifier = Modifier.width(6.dp))
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(6.dp)
+                ) {
+                    Text(
+                        text = title,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 13.5.sp,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.weight(1f, fill = false)
+                    )
                     Surface(
                         shape = ExpressivePillSmall,
                         color = color.copy(alpha = 0.15f)
@@ -634,28 +553,35 @@ fun ExpressivePdfCard(
                             fontSize = 9.sp,
                             fontWeight = FontWeight.Bold,
                             color = color,
+                            maxLines = 1,
+                            softWrap = false,
                             modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
                         )
                     }
                 }
                 Spacer(modifier = Modifier.height(3.dp))
-                Text(subtitle, fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, lineHeight = 15.sp)
+                Text(
+                    text = subtitle,
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                    lineHeight = 15.sp
+                )
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(10.dp))
             Surface(
-                shape = ExpressivePillSmall,
-                color = color,
-                modifier = Modifier
-                    .height(34.dp)
-                    .detailSpringBounce(onClick = onClick)
+                shape = CircleShape,
+                color = color.copy(alpha = 0.12f),
+                modifier = Modifier.size(34.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(horizontal = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("Read PDF", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = Color.White)
+                Box(contentAlignment = Alignment.Center) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.MenuBook,
+                        contentDescription = "Read PDF",
+                        tint = color,
+                        modifier = Modifier.size(16.dp)
+                    )
                 }
             }
         }
@@ -1028,11 +954,80 @@ fun ExpressiveMasteryChecklistTab(
             )
         }
 
+        // Section: CBSE Step-Marking Rubric Assistant ("Examiner Mode")
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
+            Column {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = "CBSE Examiner Step-Marking Rubrics",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 14.sp,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = AccentAmber.copy(alpha = 0.15f)
+                    ) {
+                        Text(
+                            text = "Examiner Mode",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = AccentAmber,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                }
+                Text(
+                    text = "See exactly where examiners award or deduct marks for Chapter ${chapter.number} questions.",
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+
+        item {
+            val sampleRubric = remember(chapter.name) {
+                com.boardsprep.onboard.ui.components.CbseQuestionRubric(
+                    questionTitle = "High-Yield Derivation / Core Problem: ${chapter.name}",
+                    totalMarks = 3.0f,
+                    subject = chapter.subjectId,
+                    steps = listOf(
+                        com.boardsprep.onboard.ui.components.CbseRubricStep(
+                            stepNumber = 1,
+                            title = "Formula Statement & Labeled Diagram",
+                            marks = 1.0f,
+                            description = "State governing laws, definitions, or draw standard circuit/ray diagram with directional arrows.",
+                            examinerKeyNote = "Deducts 0.5M if arrows on rays or magnetic fields are omitted."
+                        ),
+                        com.boardsprep.onboard.ui.components.CbseRubricStep(
+                            stepNumber = 2,
+                            title = "Algebraic Substitution & Integration",
+                            marks = 1.5f,
+                            description = "Perform mathematical derivation or numerical substitution with explicit intermediate algebraic steps.",
+                            examinerKeyNote = "Do not skip directly to final answer; intermediate working must be visible."
+                        ),
+                        com.boardsprep.onboard.ui.components.CbseRubricStep(
+                            stepNumber = 3,
+                            title = "Final Result in Box with SI Units",
+                            marks = 0.5f,
+                            description = "Enclose final numerical answer or formula in standard rectangle and write full SI units.",
+                            examinerKeyNote = "Mandatory -0.5M penalty if SI unit is omitted or incorrect."
+                        )
+                    ),
+                    commonExaminerTrap = "In CBSE evaluations, over 40% of students lose 0.5M by omitting units (e.g. 'm/s' or 'T') or drawing diagrams without direction arrows, even with 100% correct calculations!"
+                )
+            }
+            com.boardsprep.onboard.ui.components.CbseRubricAccordion(rubric = sampleRubric)
+        }
+
         item {
             Spacer(modifier = Modifier.height(28.dp))
         }
     }
 }
+
 
 @Composable
 fun ExpressiveChecklistItem(

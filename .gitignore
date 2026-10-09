@@ -54,3 +54,7 @@ google-services.json
 /*.webp
 /context.md
 /scratch/
+
+# Web Frontend
+BoardsPrep Web/
+

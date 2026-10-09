@@ -63,9 +63,19 @@ class MainActivity : ComponentActivity() {
                             },
                             onSamplePapersClick = { subjectId ->
                                 navController.navigate(Screen.SamplePapers.createRoute(subjectId))
+                            },
+                            onAccountClick = {
+                                navController.navigate(Screen.OnboardingSync.route)
+                            },
+                            onErrorVaultClick = {
+                                navController.navigate(Screen.ErrorVault.route)
+                            },
+                            onDailyBlitzClick = {
+                                navController.navigate(Screen.DailyBlitz.route)
                             }
                         )
                     }
+
 
                     // Subject Hub Screen
                     composable(
@@ -279,8 +289,32 @@ class MainActivity : ComponentActivity() {
                             onBackClick = { navController.popBackStack() }
                         )
                     }
+
+                    // Dedicated Onboarding & Cloud Sync Screen
+                    composable(Screen.OnboardingSync.route) {
+                        OnboardingSyncScreen(
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
+
+                    // Mistake Notebook (Error Vault) Screen
+                    composable(Screen.ErrorVault.route) {
+                        ErrorVaultScreen(
+                            repository = repository,
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
+
+                    // 5-Min Spaced Repetition Daily Blitz Screen
+                    composable(Screen.DailyBlitz.route) {
+                        DailyBlitzScreen(
+                            repository = repository,
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
                 }
             }
+
         }
     }
 }

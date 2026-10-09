@@ -9,6 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -37,42 +38,17 @@ import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.models.Chapter
 import com.boardsprep.onboard.data.models.Subject
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.expressiveBounce
 import kotlinx.coroutines.launch
 
 @Composable
-private fun Modifier.hubSpringBounce(onClick: () -> Unit): Modifier {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.96f else 1f,
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow
-        ),
-        label = "hub_bounce"
-    )
-    return this
-        .scale(scale)
-        .clickable(
-            interactionSource = interactionSource,
-            indication = null,
-            onClick = onClick
-        )
-}
+private fun Modifier.hubSpringBounce(onClick: () -> Unit): Modifier = this.expressiveBounce(onClick = onClick)
 
 fun getSubjectThemeTokens(subjectId: String): Triple<Color, Color, Color> {
-    return when (subjectId.lowercase()) {
-        "physics" -> Triple(PhysicsLightBg, PhysicsLightOnBg, PhysicsAccent)
-        "chemistry" -> Triple(ChemistryLightBg, ChemistryLightOnBg, ChemistryAccent)
-        "maths" -> Triple(MathsLightBg, MathsLightOnBg, MathsAccent)
-        "biology" -> Triple(BiologyLightBg, BiologyLightOnBg, BiologyAccent)
-        "english" -> Triple(EnglishLightBg, EnglishLightOnBg, EnglishAccent)
-        else -> Triple(
-            Color(0xFFF3EDFF),
-            Color(0xFF381E72),
-            Color(0xFF6750A4)
-        )
-    }
+    val tokens = getAdaptiveSubjectTokens(subjectId, false)
+    return Triple(tokens.containerColor, tokens.onContainerColor, tokens.accentColor)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -100,7 +76,11 @@ fun SubjectHubScreen(
     val allMastery by repository.getAllMastery().collectAsState(initial = emptyList())
     val masteryMap = remember(allMastery) { allMastery.associateBy { it.chapterId } }
 
-    val (cardBg, onCardColor, accentColor) = remember(subject.id) { getSubjectThemeTokens(subject.id) }
+    val isDark = isSystemInDarkTheme()
+    val subjectTokens = remember(subject.id, isDark) { getAdaptiveSubjectTokens(subject.id, isDark) }
+    val cardBg = subjectTokens.containerColor
+    val onCardColor = subjectTokens.onContainerColor
+    val accentColor = subjectTokens.accentColor
 
     // Mastery Metrics for Psychology & Progress Architecture
     val totalChapters = subject.chapters.size
@@ -324,7 +304,7 @@ fun SubjectHubScreen(
                         ) {
                             Surface(
                                 shape = RoundedCornerShape(12.dp),
-                                color = Color.White.copy(alpha = 0.7f),
+                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
                                 modifier = Modifier
                                     .weight(1f)
                                     .height(44.dp)
@@ -386,7 +366,7 @@ fun SubjectHubScreen(
                             if (subjectVideos.isNotEmpty()) {
                                 Surface(
                                     shape = RoundedCornerShape(12.dp),
-                                    color = if (subject.id != "physics" && subject.id != "chemistry") accentColor else Color.White.copy(alpha = 0.7f),
+                                    color = if (subject.id != "physics" && subject.id != "chemistry") accentColor else MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
                                     modifier = Modifier
                                         .weight(1.1f)
                                         .height(44.dp)
@@ -543,42 +523,33 @@ fun SubjectHubScreen(
 
                     Spacer(modifier = Modifier.height(10.dp))
 
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .horizontalScroll(rememberScrollState()),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
-                    ) {
-                        val filterOptions = listOf(
-                            "All" to "All ($totalChapters)",
-                            "High-Yield (>6M)" to "High-Yield ($highYieldChaptersCount)",
-                            "In Progress" to "In Progress ($inProgressChaptersCount)",
-                            "Mastered" to "Mastered ($masteredChaptersCount)"
-                        )
-
-                        filterOptions.forEach { (key, label) ->
-                            val isSelected = selectedFilter == key
-                            Surface(
-                                shape = ExpressivePillSmall,
-                                color = if (isSelected) accentColor else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.7f),
-                                modifier = Modifier
-                                    .height(34.dp)
-                                    .hubSpringBounce { selectedFilter = key }
-                            ) {
-                                Box(
-                                    contentAlignment = Alignment.Center,
-                                    modifier = Modifier.padding(horizontal = 14.dp)
-                                ) {
-                                    Text(
-                                        text = label,
-                                        fontSize = 12.sp,
-                                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                        color = if (isSelected) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                }
-                            }
-                        }
+                    val filterTabs = listOf(
+                        ExpressiveTabItem("All", badge = "$totalChapters"),
+                        ExpressiveTabItem("High-Yield (>6M)", badge = "$highYieldChaptersCount"),
+                        ExpressiveTabItem("In Progress", badge = "$inProgressChaptersCount"),
+                        ExpressiveTabItem("Mastered", badge = "$masteredChaptersCount")
+                    )
+                    val selectedIndex = when (selectedFilter) {
+                        "High-Yield (>6M)" -> 1
+                        "In Progress" -> 2
+                        "Mastered" -> 3
+                        else -> 0
                     }
+
+                    ExpressiveSegmentedTabs(
+                        tabs = filterTabs,
+                        selectedTabIndex = selectedIndex,
+                        onTabSelected = { idx ->
+                            selectedFilter = when (idx) {
+                                1 -> "High-Yield (>6M)"
+                                2 -> "In Progress"
+                                3 -> "Mastered"
+                                else -> "All"
+                            }
+                        },
+                        accentColor = accentColor,
+                        contentPadding = PaddingValues(0.dp)
+                    )
                 }
             }
 

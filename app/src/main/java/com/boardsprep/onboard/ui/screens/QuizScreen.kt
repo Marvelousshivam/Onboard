@@ -77,23 +77,15 @@ fun QuizScreen(
                 )
             }
         ) { innerPadding ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding),
-                contentAlignment = Alignment.Center
-            ) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-                    Spacer(modifier = Modifier.height(12.dp))
-                    Text("Loading CBSE Board Questions...", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-            }
+            com.boardsprep.onboard.ui.components.QuizAsymmetricLoadingView(
+                modifier = Modifier.padding(innerPadding)
+            )
         }
         return
     }
 
-    val totalQ = if (currentQuiz.totalQuestions > 0) currentQuiz.totalQuestions else currentQuiz.questions.size
+
+    val totalQ = (if (currentQuiz.totalQuestions > 0) currentQuiz.totalQuestions else currentQuiz.questions.size).coerceAtLeast(1)
     val correctCount = currentQuiz.questions.indices.count { i ->
         userAnswers[i] == currentQuiz.questions.getOrNull(i)?.correctOptionIndex
     }
@@ -111,9 +103,32 @@ fun QuizScreen(
     fun finishQuiz() {
         coroutineScope.launch {
             repository.recordQuizAttempt(quizFile, correctCount, totalQ, elapsedSeconds)
+            // Auto-ingest missed questions into Error Vault (Mistake Notebook)
+            currentQuiz?.questions?.forEachIndexed { idx, q ->
+                val userPick = userAnswers[idx]
+                if (userPick != null && userPick != q.correctOptionIndex) {
+                    val opts = q.options
+                    repository.saveQuizMistake(
+                        questionId = "${quizFile}_q$idx",
+                        chapterId = quizFile,
+                        subjectId = "",
+                        questionText = q.question,
+                        optionA = opts.getOrNull(0) ?: "",
+                        optionB = opts.getOrNull(1) ?: "",
+                        optionC = opts.getOrNull(2) ?: "",
+                        optionD = opts.getOrNull(3) ?: "",
+                        correctOptionIndex = q.correctOptionIndex,
+                        userSelectedOptionIndex = userPick,
+                        explanation = q.explanation,
+                        mistakeCategory = "conceptual"
+                    )
+
+                }
+            }
         }
         isQuizCompleted = true
     }
+
 
     Scaffold(
         topBar = {
@@ -316,9 +331,46 @@ fun QuizScreen(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(24.dp))
+                if (incorrectCount > 0) {
+                    Spacer(modifier = Modifier.height(14.dp))
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = MaterialTheme.colorScheme.tertiaryContainer.copy(alpha = 0.5f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha = 0.35f)),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(12.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Security,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.tertiary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Spacer(modifier = Modifier.width(10.dp))
+                            Column {
+                                Text(
+                                    text = "Auto-Saved to Mistake Notebook",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+                                Text(
+                                    text = "$incorrectCount missed question(s) saved to Error Vault for re-attack.",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = 0.85f)
+                                )
+                            }
+                        }
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(18.dp))
 
                 // Action Buttons
+
                 Button(
                     onClick = { isReviewMode = true },
                     shape = RoundedCornerShape(12.dp),
@@ -545,16 +597,17 @@ fun QuizScreen(
                             val isAnsWrong = isPracticeMode && isAnswered && userAnswers[i] != currentQuiz.questions.getOrNull(i)?.correctOptionIndex
 
                             val chipBg = when {
-                                isCurrent -> PrimaryBlue
+                                isCurrent -> MaterialTheme.colorScheme.primary
                                 isAnsCorrect -> SuccessGreen
                                 isAnsWrong -> ErrorRed
-                                isAnswered -> PrimaryBlue.copy(alpha = 0.35f)
+                                isAnswered -> MaterialTheme.colorScheme.primaryContainer
                                 else -> MaterialTheme.colorScheme.surfaceVariant
                             }
 
                             val textColor = when {
-                                isCurrent || isAnsCorrect || isAnsWrong -> Color.White
-                                isAnswered -> PrimaryBlue
+                                isCurrent -> MaterialTheme.colorScheme.onPrimary
+                                isAnsCorrect || isAnsWrong -> Color.White
+                                isAnswered -> MaterialTheme.colorScheme.onPrimaryContainer
                                 else -> MaterialTheme.colorScheme.onSurfaceVariant
                             }
 
