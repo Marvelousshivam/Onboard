@@ -7,6 +7,9 @@ import androidx.room.Query
 import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
+import com.boardsprep.onboard.data.local.entities.PdfAnnotationEntity
+import com.boardsprep.onboard.data.local.entities.PdfBookmarkEntity
+import com.boardsprep.onboard.data.local.entities.PdfReadingStateEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
 import kotlinx.coroutines.flow.Flow
@@ -146,3 +149,63 @@ interface FocusSessionDao {
     suspend fun recordSession(entity: com.boardsprep.onboard.data.local.entities.FocusSessionEntity)
 }
 
+// ===========================================================================
+// OnBOARD Reader DAOs
+// ===========================================================================
+
+@Dao
+interface PdfReadingStateDao {
+    @Query("SELECT * FROM pdf_reading_state WHERE documentId = :documentId")
+    suspend fun get(documentId: String): PdfReadingStateEntity?
+
+    @Query("SELECT * FROM pdf_reading_state ORDER BY lastOpenedAt DESC LIMIT :limit")
+    fun recent(limit: Int = 20): Flow<List<PdfReadingStateEntity>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(entity: PdfReadingStateEntity)
+
+    @Query("DELETE FROM pdf_reading_state WHERE documentId = :documentId")
+    suspend fun delete(documentId: String)
+}
+
+@Dao
+interface PdfBookmarkDao {
+    @Query("SELECT * FROM pdf_bookmarks WHERE documentId = :documentId ORDER BY pageIndex ASC")
+    fun bookmarksForDocument(documentId: String): Flow<List<PdfBookmarkEntity>>
+
+    @Query("SELECT * FROM pdf_bookmarks WHERE documentId = :documentId ORDER BY pageIndex ASC")
+    suspend fun bookmarksForDocumentOnce(documentId: String): List<PdfBookmarkEntity>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM pdf_bookmarks WHERE documentId = :documentId AND pageIndex = :pageIndex LIMIT 1)")
+    suspend fun isBookmarked(documentId: String, pageIndex: Int): Boolean
+
+    @Query("SELECT * FROM pdf_bookmarks WHERE documentId = :documentId AND pageIndex = :pageIndex")
+    suspend fun bookmarksForPage(documentId: String, pageIndex: Int): List<PdfBookmarkEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(entity: PdfBookmarkEntity)
+
+    @Query("DELETE FROM pdf_bookmarks WHERE id = :id")
+    suspend fun delete(id: String)
+
+    @Query("DELETE FROM pdf_bookmarks WHERE documentId = :documentId AND pageIndex = :pageIndex")
+    suspend fun deleteForPage(documentId: String, pageIndex: Int)
+}
+
+@Dao
+interface PdfAnnotationDao {
+    @Query("SELECT * FROM pdf_annotations WHERE documentId = :documentId ORDER BY pageIndex ASC, updatedAt ASC")
+    fun annotationsForDocument(documentId: String): Flow<List<PdfAnnotationEntity>>
+
+    @Query("SELECT * FROM pdf_annotations WHERE documentId = :documentId AND pageIndex = :pageIndex")
+    suspend fun annotationsForPage(documentId: String, pageIndex: Int): List<PdfAnnotationEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsert(entity: PdfAnnotationEntity)
+
+    @Query("DELETE FROM pdf_annotations WHERE id = :id")
+    suspend fun delete(id: String)
+
+    @Query("DELETE FROM pdf_annotations WHERE documentId = :documentId")
+    suspend fun deleteAllForDocument(documentId: String)
+}

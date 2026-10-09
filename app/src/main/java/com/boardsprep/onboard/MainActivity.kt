@@ -13,10 +13,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.boardsprep.onboard.core.playback.DownloadState
 import com.boardsprep.onboard.core.playback.LectureDownloader
+import com.boardsprep.onboard.core.pdf.PdfPairedRole
 import com.boardsprep.onboard.core.theme.OnboardTheme
 import com.boardsprep.onboard.data.repository.BoardsRepository
 import com.boardsprep.onboard.ui.navigation.Screen
 import com.boardsprep.onboard.ui.screens.*
+import com.boardsprep.onboard.ui.screens.pdf.PdfViewerScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.net.URLDecoder
@@ -202,23 +204,54 @@ class MainActivity : ComponentActivity() {
                         )
                     }
 
-                    // In-App PDF Viewer Screen
+                    // In-App PDF Viewer Screen (OnBOARD Reader)
                     composable(
                         route = Screen.PdfViewer.route,
                         arguments = listOf(
                             navArgument("url") { type = NavType.StringType; defaultValue = "" },
-                            navArgument("title") { type = NavType.StringType; defaultValue = "" }
+                            navArgument("title") { type = NavType.StringType; defaultValue = "" },
+                            navArgument("pairedUrl") { type = NavType.StringType; defaultValue = "" },
+                            navArgument("pairedTitle") { type = NavType.StringType; defaultValue = "" },
+                            navArgument("pairedRole") { type = NavType.StringType; defaultValue = "GENERAL" }
                         )
                     ) { backStackEntry ->
-                        val encodedUrl = backStackEntry.arguments?.getString("url") ?: ""
-                        val encodedTitle = backStackEntry.arguments?.getString("title") ?: ""
-                        val decodedUrl = URLDecoder.decode(encodedUrl, "UTF-8")
-                        val decodedTitle = URLDecoder.decode(encodedTitle, "UTF-8")
+                        val args = backStackEntry.arguments
+                        fun decode(v: String?): String =
+                            if (v.isNullOrEmpty()) "" else try { URLDecoder.decode(v, "UTF-8") } catch (_: Exception) { v }
+                        val decodedUrl = decode(args?.getString("url"))
+                        val decodedTitle = decode(args?.getString("title"))
+                        val decodedPairedUrl = decode(args?.getString("pairedUrl"))
+                        val decodedPairedTitle = decode(args?.getString("pairedTitle"))
+                        val decodedPairedRoleStr = decode(args?.getString("pairedRole"))
+                        val pairedRole = runCatching { PdfPairedRole.valueOf(decodedPairedRoleStr) }
+                            .getOrDefault(PdfPairedRole.GENERAL)
 
                         PdfViewerScreen(
                             url = decodedUrl,
                             title = decodedTitle,
-                            onBackClick = { navController.popBackStack() }
+                            onBackClick = { navController.popBackStack() },
+                            pairedSource = decodedPairedUrl.ifBlank { null },
+                            pairedTitle = decodedPairedTitle.ifBlank { null },
+                            pairedRole = pairedRole,
+                            onNavigateToPairedOverride = { src, ttl ->
+                                // When the user taps the QP<->MS switcher, navigate to the paired
+                                // document. We pass the *original* document back as the new pair so
+                                // the switcher remains bidirectional.
+                                val newPairedRole = if (pairedRole == PdfPairedRole.QUESTION_PAPER)
+                                    PdfPairedRole.MARKING_SCHEME else PdfPairedRole.QUESTION_PAPER
+                                navController.navigate(
+                                    Screen.PdfViewer.createRoute(
+                                        url = src,
+                                        title = ttl,
+                                        pairedUrl = decodedUrl,
+                                        pairedTitle = decodedTitle,
+                                        pairedRole = newPairedRole.name
+                                    )
+                                ) {
+                                    // Replace so the back stack doesn't grow unboundedly.
+                                    popUpTo(Screen.PdfViewer.route) { inclusive = true }
+                                }
+                            }
                         )
                     }
 
@@ -283,8 +316,16 @@ class MainActivity : ComponentActivity() {
                         val subjectId = backStackEntry.arguments?.getString("subjectId") ?: ""
                         SamplePapersScreen(
                             initialSubjectId = subjectId,
-                            onOpenPdf = { url, title ->
-                                navController.navigate(Screen.PdfViewer.createRoute(url, title))
+                            onOpenPdf = { url, title, pairedUrl, pairedTitle, pairedRole ->
+                                navController.navigate(
+                                    Screen.PdfViewer.createRoute(
+                                        url = url,
+                                        title = title,
+                                        pairedUrl = pairedUrl,
+                                        pairedTitle = pairedTitle,
+                                        pairedRole = pairedRole.name
+                                    )
+                                )
                             },
                             onBackClick = { navController.popBackStack() }
                         )

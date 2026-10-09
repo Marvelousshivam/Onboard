@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- App-private cached PDFs (downloaded NCERT / sample papers / notes) -->
+    <files-path
+        name="cached_pdfs"
+        path="cached_pdfs/" />
+
+    <!-- Application files root (covers any other local document the reader opens) -->
+    <files-path
+        name="files_root"
+        path="." />
+
+    <!-- External app-specific storage: notes, ncert, dpp, sample_papers folders -->
+    <external-files-path
+        name="external_notes"
+        path="notes/" />
+    <external-files-path
+        name="external_ncert"
+        path="ncert/" />
+    <external-files-path
+        name="external_dpp"
+        path="dpp/" />
+    <external-files-path
+        name="external_sample_papers"
+        path="sample_papers/" />
+    <external-files-path
+        name="external_root"
+        path="." />
+</paths>
