@@ -5,30 +5,36 @@ import android.content.Context
 import android.content.ContextWrapper
 import android.view.WindowManager
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BugReport
-import androidx.compose.material.icons.filled.CloudDownload
-import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material.icons.filled.Tune
-import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,11 +42,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import com.boardsprep.onboard.core.theme.ExpressivePillSmall
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -128,15 +137,11 @@ fun PdfReaderScreen(
     var showJump by remember { mutableStateOf(false) }
     var showOverflow by remember { mutableStateOf(false) }
     var showErrorLog by remember { mutableStateOf(false) }
-    var showNoteDialog by remember { mutableStateOf(false) }
+    var showNoteSheet by remember { mutableStateOf(false) }
     var showSearch by remember { mutableStateOf(false) }
-    var showOfflineModePrompt by remember { mutableStateOf(false) }
-
-    // Online/Offline mode selection dialog — shown once when the PDF first
-    // becomes ready, before the user sees the document.
-    var showModeSelectionDialog by remember { mutableStateOf(true) }
 
     val isFullscreen = ui.appearance.fullscreen
+    val haptic = LocalHapticFeedback.current
 
     // Apply brightness to the window whenever it changes.
     val activity = remember(context) { context.findActivity() }
@@ -148,9 +153,11 @@ fun PdfReaderScreen(
         onDispose { activity?.let { state.restoreBrightness(it) } }
     }
 
-    // Back button: exit fullscreen / close sheets before leaving the document.
-    BackHandler(enabled = isFullscreen || showAppearance || showBookmarks || showAnnotations || showOutline || showJump || showErrorLog || showNoteDialog || showOverflow || showSearch || showOfflineModePrompt) {
+    // Back button: exit annotation studio / exit fullscreen / close sheets before leaving the document.
+    val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
+    BackHandler(enabled = isFullscreen || isAnnotating || showAppearance || showBookmarks || showAnnotations || showOutline || showJump || showErrorLog || showNoteSheet || showOverflow || showSearch) {
         when {
+            isAnnotating -> state.exitAnnotationStudio()
             isFullscreen -> state.toggleFullscreen()
             showAppearance -> showAppearance = false
             showBookmarks -> showBookmarks = false
@@ -158,9 +165,8 @@ fun PdfReaderScreen(
             showOutline -> showOutline = false
             showJump -> showJump = false
             showErrorLog -> showErrorLog = false
-            showNoteDialog -> showNoteDialog = false
+            showNoteSheet -> showNoteSheet = false
             showSearch -> showSearch = false
-            showOfflineModePrompt -> showOfflineModePrompt = false
             showOverflow -> showOverflow = false
         }
     }
@@ -182,7 +188,7 @@ fun PdfReaderScreen(
                             )
                             if (ui.totalPages > 0) {
                                 Text(
-                                    text = "OnBOARD Reader • Page ${ui.currentPage + 1} of ${ui.totalPages}",
+                                    text = "CBSE Class 12 • Page ${ui.currentPage + 1} of ${ui.totalPages}",
                                     fontSize = 11.sp,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -195,84 +201,104 @@ fun PdfReaderScreen(
                         }
                     },
                     actions = {
-                        // --- Minimal always-visible icons to prevent overlap ---
-                        // Top bar icons: Offline, Sketch, Appearance, More.
-                        // Search & Bookmark are in the overflow menu (not the top bar)
-                        // to prevent overlap. Sketch stays visible per user request.
+                        // 1. Paired Document Switcher Pill (Question Paper ↔ Marking Scheme)
+                        val pairedDoc = ui.pairedDocument
+                        if (pairedDoc != null) {
+                            val isMs = pairedDoc.role == PdfPairedRole.MARKING_SCHEME
+                            Surface(
+                                shape = ExpressivePillSmall,
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                modifier = Modifier
+                                    .clickable { state.switchToPaired(onNavigateToPaired) }
+                                    .padding(horizontal = 4.dp)
+                            ) {
+                                Row(
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.SwapHoriz,
+                                        contentDescription = "Switch Document",
+                                        modifier = Modifier.size(15.dp),
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Spacer(Modifier.width(3.dp))
+                                    Text(
+                                        text = if (isMs) "View MS" else "View QP",
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+                        }
 
-                        // Offline mode toggle
+                        // 2. Direct 1-Tap Search
+                        IconButton(onClick = { showSearch = true }) {
+                            Icon(Icons.Default.Search, contentDescription = "Search in document")
+                        }
+
+                        // 3. Direct 1-Tap Bookmark with Celebratory Haptic Pulse
+                        val isBookmarked = remember(ui.bookmarks, ui.currentPage) {
+                            ui.bookmarks.any { it.pageIndex == ui.currentPage }
+                        }
                         IconButton(onClick = {
-                            if (ui.offlineModeEnabled) {
-                                state.disableOfflineMode()
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            state.toggleBookmarkOnCurrentPage()
+                        }) {
+                            Icon(
+                                imageVector = if (isBookmarked) Icons.Filled.Bookmark else Icons.Outlined.BookmarkBorder,
+                                contentDescription = if (isBookmarked) "Bookmarked" else "Bookmark this page",
+                                tint = if (isBookmarked) AccentAmber else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+
+                        // 4. Sketch / Pen / Annotation Studio toggle
+                        IconButton(onClick = {
+                            if (isAnnotating) {
+                                state.exitAnnotationStudio()
                             } else {
-                                showModeSelectionDialog = true
+                                state.toggleSketchMode()
                             }
                         }) {
                             Icon(
-                                imageVector = if (ui.offlineModeEnabled) Icons.Default.CloudOff else Icons.Default.CloudDownload,
-                                contentDescription = if (ui.offlineModeEnabled) "Offline mode ON" else "Offline mode OFF",
-                                tint = if (ui.offlineModeEnabled) AccentAmber else MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-
-                        // Sketch (freehand pen) toggle — visible in top bar
-                        IconButton(onClick = { state.toggleSketchMode() }) {
-                            Icon(
                                 imageVector = Icons.Default.Edit,
-                                contentDescription = "Sketch",
-                                tint = if (ui.sketchMode) AccentAmber else MaterialTheme.colorScheme.onSurface
+                                contentDescription = "Sketch & Highlight",
+                                tint = if (isAnnotating) AccentAmber else MaterialTheme.colorScheme.onSurface
                             )
                         }
 
-                        // Appearance
+                        // 5. Appearance
                         IconButton(onClick = { showAppearance = true }) {
                             Icon(Icons.Default.Tune, "Appearance")
                         }
 
-                        // More (overflow) — contains Search, Highlight, Bookmark, etc.
+                        // 6. More (Overflow menu for secondary study tools)
                         IconButton(onClick = { showOverflow = true }) {
-                            Icon(Icons.Default.MoreVert, "More")
+                            Icon(Icons.Default.MoreVert, "More options")
                         }
 
                         DropdownMenu(expanded = showOverflow, onDismissRequest = { showOverflow = false }) {
-                            // Search (opens search sheet if offline mode is on,
-                            // otherwise shows the offline mode prompt)
-                            DropdownMenuItem(
-                                text = { Text("Search in document") },
-                                onClick = {
-                                    showOverflow = false
-                                    if (ui.offlineModeEnabled) {
-                                        showSearch = true
-                                    } else {
-                                        showOfflineModePrompt = true
-                                    }
-                                }
-                            )
-                            // Highlight toggle
                             DropdownMenuItem(
                                 text = { Text(if (ui.highlightMode) "✓ Highlight mode" else "Highlight mode") },
                                 onClick = { showOverflow = false; state.toggleHighlightMode() }
                             )
-                            androidx.compose.material3.HorizontalDivider()
-                            // Bookmark current page
                             DropdownMenuItem(
-                                text = { Text(if (remember(ui.bookmarks, ui.currentPage) { ui.bookmarks.any { it.pageIndex == ui.currentPage } }) "✓ Bookmark this page" else "Bookmark this page") },
-                                onClick = { showOverflow = false; state.toggleBookmarkOnCurrentPage() }
+                                text = { Text(if (ui.eraserMode) "✓ Eraser mode" else "Eraser mode") },
+                                onClick = { showOverflow = false; state.toggleEraserMode() }
                             )
-                            // Bookmarks & revision list
                             DropdownMenuItem(
-                                text = { Text("Bookmarks & revision") },
+                                text = { Text("Add study note on this page") },
+                                onClick = { showOverflow = false; showNoteSheet = true }
+                            )
+                            androidx.compose.material3.HorizontalDivider()
+                            DropdownMenuItem(
+                                text = { Text("Bookmarks & revision list") },
                                 onClick = { showOverflow = false; showBookmarks = true }
                             )
-                            // Notes & highlights list
                             DropdownMenuItem(
-                                text = { Text("Notes & highlights") },
+                                text = { Text("Notes & highlights list") },
                                 onClick = { showOverflow = false; showAnnotations = true }
-                            )
-                            // Add note on this page
-                            DropdownMenuItem(
-                                text = { Text("Add note on this page") },
-                                onClick = { showOverflow = false; showNoteDialog = true }
                             )
                             androidx.compose.material3.HorizontalDivider()
                             DropdownMenuItem(
@@ -313,16 +339,7 @@ fun PdfReaderScreen(
                     )
                 }
                 ui.isReady -> {
-                    // Online mode = single-page (fast, simple, like the original app).
-                    // Offline mode = continuous vertical (full document available
-                    // for search + scrolling). The user can still switch modes
-                    // from the appearance sheet.
-                    val effectiveMode = if (ui.offlineModeEnabled) {
-                        ui.appearance.readingMode
-                    } else {
-                        // Online: always single-page for speed and stability.
-                        PdfReadingMode.SINGLE_PAGE
-                    }
+                    val effectiveMode = ui.appearance.readingMode
                     when (effectiveMode) {
                         PdfReadingMode.CONTINUOUS_VERTICAL -> PdfContinuousCanvas(
                             stateHolder = state,
@@ -340,31 +357,73 @@ fun PdfReaderScreen(
                 }
             }
 
-            // Floating bottom dock (auto-hide while reading).
+            // Bottom docked bar — reading dock or study annotation studio
             AnimatedVisibility(
                 visible = chromeVisible && ui.isReady,
                 enter = fadeIn(),
                 exit = fadeOut(),
                 modifier = Modifier.align(Alignment.BottomCenter)
             ) {
-                PdfBottomDock(
-                    currentPage = ui.currentPage,
-                    totalPages = ui.totalPages,
-                    zoom = ui.zoom,
-                    readingMode = ui.appearance.readingMode,
-                    canUndo = ui.canUndo,
-                    canRedo = ui.canRedo,
-                    onUndo = { state.undo() },
-                    onRedo = { state.redo() },
-                    onPrev = { state.previousPage() },
-                    onNext = { state.nextPage() },
-                    onJump = { showJump = true },
-                    onZoomIn = { state.setZoom(ui.zoom + 0.5f) },
-                    onZoomOut = { state.setZoom(ui.zoom - 0.5f) },
-                    onZoomReset = { state.resetZoom() },
-                    onToggleAppearance = { showAppearance = true },
-                    onToggleFullscreen = { state.toggleFullscreen() }
-                )
+                AnimatedContent(
+                    targetState = ui.highlightMode || ui.sketchMode || ui.eraserMode,
+                    transitionSpec = {
+                        fadeIn() togetherWith fadeOut()
+                    },
+                    label = "BottomStudioBarTransition"
+                ) { isAnnotationStudio ->
+                    if (isAnnotationStudio) {
+                        PdfAnnotationStudioBar(
+                            highlightMode = ui.highlightMode,
+                            sketchMode = ui.sketchMode,
+                            eraserMode = ui.eraserMode,
+                            currentColor = if (ui.highlightMode) ui.highlightColor else ui.sketchColor,
+                            currentStrokeWidth = ui.strokeWidth,
+                            canUndo = ui.canUndo,
+                            canRedo = ui.canRedo,
+                            currentPage = ui.currentPage,
+                            totalPages = ui.totalPages,
+                            onPrevPage = { state.previousPage() },
+                            onNextPage = { state.nextPage() },
+                            onUndo = { state.undo() },
+                            onRedo = { state.redo() },
+                            onClearPage = { state.clearAllAnnotationsOnPage(ui.currentPage) },
+                            onSelectHighlighter = { c ->
+                                state.setHighlightColor(c)
+                                if (!ui.highlightMode) state.toggleHighlightMode()
+                            },
+                            onSelectPen = { c ->
+                                state.setSketchColor(c)
+                                if (!ui.sketchMode) state.toggleSketchMode()
+                            },
+                            onSelectEraser = {
+                                if (!ui.eraserMode) state.toggleEraserMode()
+                            },
+                            onSelectStrokeWidth = { w -> state.setStrokeWidth(w) },
+                            onClose = {
+                                state.exitAnnotationStudio()
+                            }
+                        )
+                    } else {
+                        PdfBottomDock(
+                            currentPage = ui.currentPage,
+                            totalPages = ui.totalPages,
+                            zoom = ui.zoom,
+                            readingMode = ui.appearance.readingMode,
+                            canUndo = ui.canUndo,
+                            canRedo = ui.canRedo,
+                            onUndo = { state.undo() },
+                            onRedo = { state.redo() },
+                            onPrev = { state.previousPage() },
+                            onNext = { state.nextPage() },
+                            onJump = { showJump = true },
+                            onZoomIn = { state.setZoom(ui.zoom + 0.5f) },
+                            onZoomOut = { state.setZoom(ui.zoom - 0.5f) },
+                            onZoomReset = { state.resetZoom() },
+                            onToggleAppearance = { showAppearance = true },
+                            onToggleFullscreen = { state.toggleFullscreen() }
+                        )
+                    }
+                }
             }
 
             // Floating exit-fullscreen button when immersive.
@@ -432,11 +491,21 @@ fun PdfReaderScreen(
         )
     }
     if (showJump) {
-        PdfPageJumpDialog(
+        PdfExpressiveJumpSheet(
             currentPage = ui.currentPage,
             totalPages = ui.totalPages,
+            bookmarks = ui.bookmarks,
             onJump = { state.jumpToPage(it) },
             onDismiss = { showJump = false }
+        )
+    }
+    if (showNoteSheet) {
+        PdfExpressiveNoteSheet(
+            currentPage = ui.currentPage,
+            onSaveNote = { page, text, color ->
+                state.addNoteAnnotation(page, text, color)
+            },
+            onDismiss = { showNoteSheet = false }
         )
     }
     if (showErrorLog) {
@@ -444,183 +513,5 @@ fun PdfReaderScreen(
             onClear = { PdfErrorLog.clear() },
             onDismiss = { showErrorLog = false }
         )
-    }
-
-    // Offline mode prompt — shown when the user taps Search while offline mode is off.
-    if (showOfflineModePrompt) {
-        androidx.compose.material3.AlertDialog(
-            onDismissRequest = { showOfflineModePrompt = false },
-            icon = { Icon(Icons.Default.CloudDownload, null) },
-            title = { Text("Enable Offline Mode?", fontWeight = FontWeight.Bold) },
-            text = {
-                Text(
-                    "Text search requires the full document to be parsed locally. " +
-                    "This downloads the text layer (a few seconds for large textbooks) " +
-                    "and enables word search across the entire PDF.\n\n" +
-                    "You can turn it off later from the top bar cloud icon.",
-                    fontSize = 13.sp
-                )
-            },
-            confirmButton = {
-                androidx.compose.material3.Button(
-                    onClick = {
-                        showOfflineModePrompt = false
-                        state.enableOfflineMode()
-                        showSearch = true
-                    }
-                ) { Text("Enable & Search") }
-            },
-            dismissButton = {
-                androidx.compose.material3.TextButton(onClick = { showOfflineModePrompt = false }) {
-                    Text("Cancel")
-                }
-            }
-        )
-    }
-
-    // Offline mode loading overlay.
-    if (ui.offlineModeLoading) {
-        androidx.compose.material3.AlertDialog(
-            onDismissRequest = {},
-            confirmButton = {},
-            title = { Text("Preparing offline mode…", fontWeight = FontWeight.Bold) },
-            text = {
-                androidx.compose.foundation.layout.Column(
-                    horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    androidx.compose.material3.CircularProgressIndicator(
-                        color = androidx.compose.ui.graphics.Color(0xFFD0BCFF),
-                        modifier = Modifier.size(40.dp)
-                    )
-                    androidx.compose.foundation.layout.Spacer(Modifier.size(12.dp))
-                    Text(
-                        "Extracting text layer from the document.\nThis happens once per document.",
-                        fontSize = 12.sp,
-                        textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-                }
-            }
-        )
-    }
-
-    // Online/Offline mode selection dialog — shown when the PDF is ready
-    // and the user hasn't chosen yet.
-    if (ui.isReady && showModeSelectionDialog) {
-        androidx.compose.material3.AlertDialog(
-            onDismissRequest = {
-                // Dismissing = Online mode (safe default).
-                showModeSelectionDialog = false
-            },
-            title = { Text("Open this PDF", fontWeight = FontWeight.Bold) },
-            text = {
-                Text(
-                    "Online mode opens quickly with basic reading (zoom, colors, " +
-                    "fullscreen, bookmarks).\n\n" +
-                    "Offline mode downloads the full text layer for word search " +
-                    "and continuous scrolling — takes a few extra seconds for " +
-                    "large textbooks.",
-                    fontSize = 13.sp
-                )
-            },
-            confirmButton = {
-                androidx.compose.material3.Button(
-                    onClick = {
-                        showModeSelectionDialog = false
-                        state.enableOfflineMode()
-                    }
-                ) {
-                    Icon(Icons.Default.CloudDownload, null, modifier = Modifier.size(16.dp))
-                    androidx.compose.foundation.layout.Spacer(Modifier.size(6.dp))
-                    Text("Offline")
-                }
-            },
-            dismissButton = {
-                androidx.compose.material3.OutlinedButton(
-                    onClick = { showModeSelectionDialog = false }
-                ) {
-                    Icon(Icons.Default.Wifi, null, modifier = Modifier.size(16.dp))
-                    androidx.compose.foundation.layout.Spacer(Modifier.size(6.dp))
-                    Text("Online")
-                }
-            }
-        )
-    }
-
-    // Note dialog — opens a text input for the user to type a note.
-    if (showNoteDialog) {
-        var noteText by remember { mutableStateOf("") }
-        androidx.compose.material3.AlertDialog(
-            onDismissRequest = { showNoteDialog = false },
-            title = { Text("Add note on page ${ui.currentPage + 1}", fontWeight = FontWeight.Bold) },
-            text = {
-                androidx.compose.material3.OutlinedTextField(
-                    value = noteText,
-                    onValueChange = { noteText = it },
-                    modifier = Modifier.fillMaxWidth(),
-                    placeholder = { Text("Type your note here…") },
-                    minLines = 3
-                )
-            },
-            confirmButton = {
-                androidx.compose.material3.Button(
-                    onClick = {
-                        if (noteText.isNotBlank()) {
-                            state.addNoteAnnotation(ui.currentPage, noteText, AccentAmber.toArgb())
-                        }
-                        showNoteDialog = false
-                    }
-                ) { Text("Save note") }
-            },
-            dismissButton = {
-                androidx.compose.material3.TextButton(onClick = { showNoteDialog = false }) {
-                    Text("Cancel")
-                }
-            }
-        )
-    }
-
-    // Sketch color picker — shown when sketch mode is on.
-    if (ui.sketchMode) {
-        androidx.compose.foundation.layout.Box(modifier = Modifier.fillMaxSize()) {
-            androidx.compose.foundation.layout.Box(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(top = 70.dp)
-            ) {
-                androidx.compose.material3.Surface(
-                    shape = androidx.compose.foundation.shape.RoundedCornerShape(24.dp),
-                    color = MaterialTheme.colorScheme.surface,
-                    shadowElevation = 4.dp
-                ) {
-                    androidx.compose.foundation.layout.Row(
-                        modifier = Modifier.padding(8.dp),
-                        horizontalArrangement = Arrangement.spacedBy(6.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        val colors = listOf(
-                            0xFFFF1744.toInt() to "Red",
-                            0xFF2979FF.toInt() to "Blue",
-                            0xFF00E676.toInt() to "Green",
-                            0xFFFFD600.toInt() to "Yellow",
-                            0xFF000000.toInt() to "Black"
-                        )
-                        colors.forEach { (color, _) ->
-                            val isSelected = ui.sketchColor == color
-                            androidx.compose.foundation.layout.Box(
-                                modifier = Modifier
-                                    .size(if (isSelected) 32.dp else 28.dp)
-                                    .background(
-                                        color = androidx.compose.ui.graphics.Color(color),
-                                        shape = androidx.compose.foundation.shape.CircleShape
-                                    )
-                                    .clickable { state.setSketchColor(color) }
-                            )
-                        }
-                    }
-                }
-            }
-        }
     }
 }

@@ -1,0 +1,425 @@
+{
+  "version": 1,
+  "lastUpdated": "2026-10-09",
+  "derivations": [
+    {
+      "id": "d1",
+      "chapterId": "phy_01",
+      "chapterName": "Electric Charges & Fields",
+      "title": "Electric Field on Axial Line of an Electric Dipole",
+      "formula": "E_{axial} = \\frac{1}{4\\pi\\varepsilon_0} \\frac{2pr}{(r^2 - a^2)^2} \\approx \\frac{2p}{4\\pi\\varepsilon_0 r^3}",
+      "steps": [
+        "Place dipole -q and +q separated by 2a along the dipole axis",
+        "Calculate field due to -q and +q at point P distance r from centre",
+        "Take vector difference: E = E_+q - E_-q along dipole moment vector",
+        "Apply binomial approximation for short dipole (r >> a)"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d2",
+      "chapterId": "phy_01",
+      "chapterName": "Electric Charges & Fields",
+      "title": "Electric Field on Equatorial Line of Dipole",
+      "formula": "E_{eq} = \\frac{1}{4\\pi\\varepsilon_0} \\frac{p}{(r^2 + a^2)^{3/2}} \\approx \\frac{p}{4\\pi\\varepsilon_0 r^3}",
+      "steps": [
+        "Draw symmetric triangle with charges at -a and +a, point P at height r",
+        "Decompose fields into cos theta (axial) and sin theta (normal) components",
+        "Notice sin theta components cancel completely by symmetry",
+        "Sum cos theta components: E = 2 E_1 \\cos\\theta pointing antiparallel to p"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d3",
+      "chapterId": "phy_01",
+      "chapterName": "Electric Charges & Fields",
+      "title": "Gauss's Theorem: Field due to Infinitely Long Straight Wire",
+      "formula": "E = \\frac{\\lambda}{2\\pi\\varepsilon_0 r}",
+      "steps": [
+        "Choose coaxial cylindrical Gaussian surface of radius r and length L",
+        "Flux through flat circular ends is zero (E perpendicular to area vector)",
+        "Curved surface flux = E * (2 * pi * r * L)",
+        "By Gauss's Law: E (2*pi*r*L) = (lambda * L) / epsilon_0 => E = lambda / (2*pi*epsilon_0*r)"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d4",
+      "chapterId": "phy_01",
+      "chapterName": "Electric Charges & Fields",
+      "title": "Gauss's Theorem: Field due to Uniformly Charged Infinite Plane Sheet",
+      "formula": "E = \\frac{\\sigma}{2\\varepsilon_0}",
+      "steps": [
+        "Construct cylindrical pillbox perpendicular to sheet of cross-section A",
+        "Curved surface contributes zero flux (E parallel to surface)",
+        "Total flux through two circular ends = 2 * E * A",
+        "Charge enclosed q = sigma * A => 2 E A = (sigma * A) / epsilon_0 => E = sigma / (2*epsilon_0)"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d5",
+      "chapterId": "phy_02",
+      "chapterName": "Electrostatic Potential & Capacitance",
+      "title": "Capacitance of Parallel Plate Capacitor with Dielectric Slab",
+      "formula": "C = \\frac{\\varepsilon_0 A}{d - t + \\frac{t}{K}}",
+      "steps": [
+        "Original uniform field in air E0 = sigma / epsilon0",
+        "Dielectric slab of thickness t reduces field inside to E = E0 / K",
+        "Potential difference V = E0 (d - t) + E t = E0 [d - t + t/K]",
+        "Use C = Q / V to obtain final formula"
+      ],
+      "importance": "High"
+    },
+    {
+      "id": "d6",
+      "chapterId": "phy_03",
+      "chapterName": "Current Electricity",
+      "title": "Relation between Current and Drift Velocity & Ohm's Law Deduction",
+      "formula": "I = n e A v_d \\quad \\text{and} \\quad \\rho = \\frac{m}{n e^2 \\tau}",
+      "steps": [
+        "Volume of conductor of length l is V = A * l",
+        "Total mobile charge in conductor Q = n * e * A * l",
+        "Time taken by electrons to drift through t = l / v_d",
+        "Current I = Q / t = n e A v_d",
+        "Substitute v_d = (e E tau) / m to deduce Ohm's law V = I R"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d7",
+      "chapterId": "phy_04",
+      "chapterName": "Moving Charges & Magnetism",
+      "title": "Biot-Savart Law: Magnetic Field on Axis of Circular Current Loop",
+      "formula": "B_{axis} = \\frac{\\mu_0 I R^2}{2(R^2 + x^2)^{3/2}}",
+      "steps": [
+        "Take current element dl on ring perimeter of radius R",
+        "dB = (mu_0 / 4pi) * (I dl / r^2) where r = sqrt(R^2 + x^2)",
+        "Resolve dB into dB_x (along axis) and dB_perp (perpendicular to axis)",
+        "dB_perp cancels by symmetry; integrate dB_x over full circular loop"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d8",
+      "chapterId": "phy_04",
+      "chapterName": "Moving Charges & Magnetism",
+      "title": "Force Between Two Parallel Current-Carrying Conductors",
+      "formula": "\\frac{F}{L} = \\frac{\\mu_0 I_1 I_2}{2\\pi d}",
+      "steps": [
+        "Field due to conductor 1 at conductor 2: B1 = (mu_0 * I_1) / (2*pi*d)",
+        "Force on length L of conductor 2: F2 = I_2 * L * B_1 * sin(90 deg)",
+        "F2 = (mu_0 * I_1 * I_2 * L) / (2*pi*d)",
+        "Like currents attract; opposite currents repel (Official CBSE 1A definition)"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d9",
+      "chapterId": "phy_06",
+      "chapterName": "Electromagnetic Induction",
+      "title": "Motional EMF Induced in a Rod Moving in Magnetic Field",
+      "formula": "\\mathcal{E} = B v l",
+      "steps": [
+        "Consider conducting rod PQ of length l moving with velocity v in field B",
+        "Magnetic Lorentz force on charge q is F = q (v x B)",
+        "Work done moving charge along rod W = F * l = q * v * B * l",
+        "Induced EMF = W / q = B * v * l"
+      ],
+      "importance": "High"
+    },
+    {
+      "id": "d10",
+      "chapterId": "phy_06",
+      "chapterName": "Electromagnetic Induction",
+      "title": "Mutual Inductance of Two Co-axial Long Solenoids",
+      "formula": "M = \\mu_0 n_1 n_2 \\pi r_1^2 l",
+      "steps": [
+        "Inner solenoid 1 has radius r1, turns n1; outer solenoid 2 has n2",
+        "Current I2 in outer solenoid produces uniform field B2 = mu_0 * n2 * I2",
+        "Magnetic flux linked with solenoid 1: Phi1 = N1 * B2 * A1 = (n1 * l)(mu_0 * n2 * I2)(pi * r1^2)",
+        "By definition Phi1 = M * I2 => M = mu_0 * n1 * n2 * pi * r1^2 * l"
+      ],
+      "importance": "High"
+    },
+    {
+      "id": "d11",
+      "chapterId": "phy_07",
+      "chapterName": "Alternating Current",
+      "title": "Series LCR Circuit: Impedance & Resonant Frequency",
+      "formula": "Z = \\sqrt{R^2 + (X_L - X_C)^2} \\quad \\text{and} \\quad f_r = \\frac{1}{2\\pi\\sqrt{LC}}",
+      "steps": [
+        "Draw phasor diagram with current phasor I_0 along x-axis",
+        "V_R is in phase with I, V_L leads by 90 deg, V_C lags by 90 deg",
+        "Resultant voltage V_0^2 = V_R^2 + (V_L - V_C)^2 = I_0^2 [R^2 + (X_L - X_C)^2]",
+        "At resonance X_L = X_C => omega * L = 1 / (omega * C) => f_r = 1 / (2*pi*sqrt(L*C))"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d12",
+      "chapterId": "phy_09",
+      "chapterName": "Ray Optics",
+      "title": "Lens Maker's Formula for a Thin Convex Lens",
+      "formula": "\\frac{1}{f} = (\\mu - 1)\\left(\\frac{1}{R_1} - \\frac{1}{R_2}\\right)",
+      "steps": [
+        "Refraction at first surface (radius R1): (mu / v1) - (1 / u) = (mu - 1) / R1",
+        "Refraction at second surface (radius R2): (1 / v) - (mu / v1) = (1 - mu) / R2",
+        "Add equations: (1 / v) - (1 / u) = (mu - 1) * (1 / R1 - 1 / R2)",
+        "For u = infinity, v = f, yielding the Lens Maker's formula"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d13",
+      "chapterId": "phy_09",
+      "chapterName": "Ray Optics",
+      "title": "Refraction Through a Triangular Prism & Minimum Deviation",
+      "formula": "\\mu = \\frac{\\sin\\left(\\frac{A + D_m}{2}\\right)}{\\sin\\left(\\frac{A}{2}\\right)}",
+      "steps": [
+        "For prism: A = r1 + r2 and Deviation D = (i + e) - A",
+        "At minimum deviation: i = e and r1 = r2 = r",
+        "Then r = A / 2 and D_m = 2i - A => i = (A + D_m) / 2",
+        "Apply Snell's law mu = sin(i) / sin(r) to obtain prism equation"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d14",
+      "chapterId": "phy_10",
+      "chapterName": "Wave Optics",
+      "title": "Huygens' Principle: Proof of Laws of Reflection & Refraction",
+      "formula": "i = r \\quad \\text{and} \\quad \\frac{\\sin i}{\\sin r} = \\frac{v_1}{v_2} = \\mu",
+      "steps": [
+        "Incident plane wavefront AB hits boundary at angle i",
+        "Secondary wavelet from A travels to C in time t (distance = v * t)",
+        "Draw envelope from B to contact point D",
+        "Use congruent/similar right triangles to prove laws geometrically"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d15",
+      "chapterId": "phy_10",
+      "chapterName": "Wave Optics",
+      "title": "Young's Double Slit Experiment: Fringe Width Expression",
+      "formula": "\\beta = \\frac{\\lambda D}{d}",
+      "steps": [
+        "Path difference between waves from slits S1 and S2: delta x = S2 P - S1 P",
+        "Using geometry: (S2 P)^2 - (S1 P)^2 = 2 y d => delta x approx (y * d) / D",
+        "Condition for bright fringes: delta x = n * lambda => y_n = (n * lambda * D) / d",
+        "Fringe width beta = y_{n+1} - y_n = (lambda * D) / d"
+      ],
+      "importance": "Very High"
+    },
+    {
+      "id": "d16",
+      "chapterId": "phy_12",
+      "chapterName": "Atoms",
+      "title": "Bohr's Postulate: Radius and Energy of Orbit in Hydrogen Atom",
+      "formula": "r_n = \\frac{n^2 h^2 \\varepsilon_0}{\\pi m e^2} \\quad \\text{and} \\quad E_n = -\\frac{13.6}{n^2} \\text{ eV}",
+      "steps": [
+        "Centripetal force = Electrostatic attraction: (m v^2) / r = (1 / 4 pi epsilon_0) * (e^2 / r^2)",
+        "Bohr's quantization postulate: m v r = (n h) / (2 pi) => v = (n h) / (2 pi m r)",
+        "Substitute v to solve for radius r_n proportional to n^2",
+        "Total energy E = K + U = -e^2 / (8 pi epsilon_0 r) = -13.6 / n^2 eV"
+      ],
+      "importance": "Very High"
+    }
+  ],
+  "namedReactions": [
+    {
+      "id": "r1",
+      "chapter": "Haloalkanes & Haloarenes",
+      "title": "Sandmeyer Reaction",
+      "equation": "Ar-N_2^+ X^- + Cu_2Cl_2 / HCl \\rightarrow Ar-Cl + N_2",
+      "reagents": "Cu2Cl2/HCl or Cu2Br2/HBr",
+      "significance": "Key method to synthesize chlorobenzene and bromobenzene from aniline diazonium salts with high yield"
+    },
+    {
+      "id": "r2",
+      "chapter": "Haloalkanes & Haloarenes",
+      "title": "Finkelstein Reaction",
+      "equation": "R-X + NaI \\xrightarrow{dry\\,acetone} R-I + NaX \\downarrow",
+      "reagents": "NaI in dry acetone (nucleophilic halide exchange)",
+      "significance": "Halogen exchange specifically designed for synthesizing alkyl iodides; NaCl/NaBr precipitate drives equilibrium forward"
+    },
+    {
+      "id": "r3",
+      "chapter": "Haloalkanes & Haloarenes",
+      "title": "Swarts Reaction",
+      "equation": "R-Cl / R-Br + AgF \\rightarrow R-F + AgCl \\downarrow",
+      "reagents": "Metallic fluorides (AgF, Hg2F2, CoF2, SbF3)",
+      "significance": "Best laboratory synthesis method for alkyl fluorides via metal fluoride exchange"
+    },
+    {
+      "id": "r4",
+      "chapter": "Haloalkanes & Haloarenes",
+      "title": "Wurtz-Fittig & Fittig Reactions",
+      "equation": "Ar-X + 2 Na + R-X \\xrightarrow{dry\\,ether} Ar-R + 2 NaX",
+      "reagents": "Sodium metal in dry ether",
+      "significance": "Coupling of aryl halide with alkyl halide (Wurtz-Fittig) or two aryl halides (Fittig) to form biphenyl compounds"
+    },
+    {
+      "id": "r5",
+      "chapter": "Alcohols, Phenols & Ethers",
+      "title": "Kolbe's Reaction",
+      "equation": "Phenol + NaOH + CO_2 \\xrightarrow{400K, 4-7 atm} \\xrightarrow{H^+} Salicylic\\,Acid",
+      "reagents": "1. NaOH 2. CO2 gas (weak electrophile) 3. Dilute H2SO4/HCl",
+      "significance": "Industrial conversion of phenol to 2-hydroxybenzoic acid (salicylic acid), direct precursor for Aspirin"
+    },
+    {
+      "id": "r6",
+      "chapter": "Alcohols, Phenols & Ethers",
+      "title": "Reimer-Tiemann Reaction",
+      "equation": "Phenol + CHCl_3 + aq\\,NaOH \\xrightarrow{\\Delta} \\xrightarrow{H^+} Salicylaldehyde",
+      "reagents": "Chloroform (CHCl3) + 3 NaOH (generates :CCl2 dichlorocarbene)",
+      "significance": "Electrophilic formylation yielding ortho-salicylaldehyde as the major board exam product"
+    },
+    {
+      "id": "r7",
+      "chapter": "Alcohols, Phenols & Ethers",
+      "title": "Williamson Ether Synthesis",
+      "equation": "R-X + R'-O^- Na^+ \\rightarrow R-O-R' + NaX",
+      "reagents": "Primary alkyl halide + Sodium alkoxide (SN2 mechanism)",
+      "significance": "Preparation of symmetrical and unsymmetrical ethers. Board rule: Alkyl halide MUST be 1° to prevent elimination"
+    },
+    {
+      "id": "r8",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Rosenmund Reduction",
+      "equation": "R-COCl + H_2 \\xrightarrow{Pd / BaSO_4, \\, S} R-CHO + HCl",
+      "reagents": "Pd poisoned with BaSO4 and sulfur/quinoline",
+      "significance": "Selective catalytic reduction of acyl chlorides to aldehydes without over-reducing to alcohols"
+    },
+    {
+      "id": "r9",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Stephen Reaction",
+      "equation": "R-CN + SnCl_2 + HCl \\rightarrow R-CH=NH \\cdot HCl \\xrightarrow{H_3O^+} R-CHO",
+      "reagents": "SnCl2 + conc. HCl followed by steam hydrolysis",
+      "significance": "Reduction of nitriles to imines followed by acidic hydrolysis to yield aldehydes"
+    },
+    {
+      "id": "r10",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Etard Reaction",
+      "equation": "Toluene + CrO_2Cl_2 \\xrightarrow{CS_2} \\text{Chromium Complex} \\xrightarrow{H_3O^+} Benzaldehyde",
+      "reagents": "Chromyl chloride (CrO2Cl2) in CS2 or CCl4 solvent",
+      "significance": "Direct controlled mild oxidation of methylbenzene (toluene) to benzaldehyde"
+    },
+    {
+      "id": "r11",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Gattermann-Koch Reaction",
+      "equation": "Benzene + CO + HCl \\xrightarrow{anhyd.\\,AlCl_3 / CuCl} Benzaldehyde + HCl",
+      "reagents": "Carbon monoxide + HCl in presence of anhydrous AlCl3",
+      "significance": "Industrial formylation of benzene ring directly to benzaldehyde"
+    },
+    {
+      "id": "r12",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Clemmensen Reduction",
+      "equation": "\\text{>C=O} + 4 [H] \\xrightarrow{Zn-Hg \\, / \\, conc.\\,HCl} \\text{>CH}_2 + H_2O",
+      "reagents": "Zinc amalgam (Zn-Hg) and concentrated hydrochloric acid",
+      "significance": "Reduction of carbonyl group into methylene under acidic conditions"
+    },
+    {
+      "id": "r13",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Wolff-Kishner Reduction",
+      "equation": "\\text{>C=O} \\xrightarrow{NH_2NH_2} \\text{>C=N-NH}_2 \\xrightarrow{KOH / glycol, \\Delta} \\text{>CH}_2 + N_2",
+      "reagents": "Hydrazine (NH2NH2) followed by heating with KOH in ethylene glycol",
+      "significance": "Reduction of carbonyl into methylene under strongly basic conditions (ideal for acid-sensitive substrates)"
+    },
+    {
+      "id": "r14",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Aldol Condensation & Cross Aldol",
+      "equation": "2 CH_3CHO \\xrightarrow{dil.\\,NaOH} CH_3-CH(OH)-CH_2-CHO \\xrightarrow{\\Delta, -H_2O} CH_3-CH=CH-CHO",
+      "reagents": "Dilute NaOH or Ba(OH)2 + Heat",
+      "significance": "Self or cross condensation of aldehydes/ketones possessing at least one alpha-hydrogen to form alpha,beta-unsaturated carbonyls"
+    },
+    {
+      "id": "r15",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Cannizzaro Reaction",
+      "equation": "2 HCHO + conc.\\,KOH (50\\%) \\rightarrow CH_3OH + HCOOK",
+      "reagents": "Concentrated alkali (50% NaOH or KOH)",
+      "significance": "Self oxidation-reduction (disproportionation) of aldehydes lacking alpha-hydrogens (e.g. Formaldehyde, Benzaldehyde)"
+    },
+    {
+      "id": "r16",
+      "chapter": "Aldehydes, Ketones & Carboxylic Acids",
+      "title": "Hell-Volhard-Zelinsky (HVZ) Reaction",
+      "equation": "R-CH_2-COOH + X_2 \\xrightarrow{red\\,P} \\xrightarrow{H_2O} R-CH(X)-COOH",
+      "reagents": "Halogen (Cl2 or Br2) in presence of small amount of red phosphorus",
+      "significance": "Alpha-halogenation of aliphatic carboxylic acids containing an alpha-hydrogen"
+    },
+    {
+      "id": "r17",
+      "chapter": "Amines",
+      "title": "Gabriel Phthalimide Synthesis",
+      "equation": "\\text{Phthalimide} \\xrightarrow{KOH} \\xrightarrow{R-X} \\xrightarrow{aq.\\,NaOH} R-NH_2 \\text{ (pure 1°)}",
+      "reagents": "Phthalimide, ethanolic KOH, primary alkyl halide, aq. NaOH",
+      "significance": "Best method for synthesizing pure primary aliphatic amines without secondary or tertiary contamination"
+    },
+    {
+      "id": "r18",
+      "chapter": "Amines",
+      "title": "Hoffmann Bromamide Degradation",
+      "equation": "R-CONH_2 + Br_2 + 4 NaOH \\rightarrow R-NH_2 + Na_2CO_3 + 2 NaBr + 2 H_2O",
+      "reagents": "Bromine in aqueous or ethanolic NaOH",
+      "significance": "Step-down reaction: converts an acid amide into a primary amine with ONE LESS carbon atom"
+    },
+    {
+      "id": "r19",
+      "chapter": "Amines",
+      "title": "Carbylamine Test (Isocyanide Test)",
+      "equation": "R-NH_2 + CHCl_3 + 3 alc.\\,KOH \\xrightarrow{\\Delta} R-NC + 3 KCl + 3 H_2O",
+      "reagents": "Chloroform and alcoholic KOH with heat",
+      "significance": "Diagnostic chemical test for primary amines; releases an unmistakable foul odor of isocyanide"
+    },
+    {
+      "id": "r20",
+      "chapter": "Amines",
+      "title": "Hinsberg Test for Amines",
+      "equation": "C_6H_5SO_2Cl + R-NH_2 \\rightarrow C_6H_5SO_2NHR \\xrightarrow{NaOH} \\text{Soluble salt}",
+      "reagents": "Benzenesulfonyl chloride (Hinsberg's reagent) + alkali",
+      "significance": "Distinguishes 1° amine (ppt soluble in alkali), 2° amine (ppt insoluble in alkali), 3° amine (does not react)"
+    }
+  ],
+  "formulas": [
+    {
+      "id": "f_math_01",
+      "subjectId": "maths",
+      "chapterId": "math_05",
+      "chapterName": "Continuity & Differentiability",
+      "topic": "Logarithmic Differentiation",
+      "formulaText": "d/dx [u(x)^v(x)] = u(x)^v(x) * [ v'(x) ln(u(x)) + (v(x) u'(x)) / u(x) ]",
+      "latex": "\\frac{d}{dx}[u^v] = u^v \\left( v' \\ln u + \\frac{v u'}{u} \\right)",
+      "notes": "Essential for functions where both base and exponent vary with x"
+    },
+    {
+      "id": "f_math_02",
+      "subjectId": "maths",
+      "chapterId": "math_07",
+      "chapterName": "Integrals",
+      "topic": "Integration by Parts",
+      "formulaText": "∫ u v dx = u ∫ v dx - ∫ [ u' (∫ v dx) ] dx",
+      "latex": "\\int u v \\, dx = u \\int v \\, dx - \\int \\left( u' \\int v \\, dx \\right) dx",
+      "notes": "Prioritize choice of u using ILATE rule (Inverse, Log, Algebraic, Trig, Exponential)"
+    },
+    {
+      "id": "f_math_03",
+      "subjectId": "maths",
+      "chapterId": "math_11",
+      "chapterName": "Three Dimensional Geometry",
+      "topic": "Shortest Distance Between Two Skew Lines",
+      "formulaText": "d = | (a2 - a1) · (b1 x b2) | / | b1 x b2 |",
+      "latex": "d = \\frac{|(\\vec{a}_2 - \\vec{a}_1) \\cdot (\\vec{b}_1 \\times \\vec{b}_2)|}{|\\vec{b}_1 \\times \\vec{b}_2|}",
+      "notes": "Guaranteed 5-mark question in Section D/E of CBSE Class 12 Maths"
+    }
+  ]
+}

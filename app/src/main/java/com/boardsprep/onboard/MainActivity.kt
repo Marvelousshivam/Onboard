@@ -38,6 +38,22 @@ class MainActivity : ComponentActivity() {
                 val coroutineScope = rememberCoroutineScope()
                 var subjects by remember { mutableStateOf(repository.getSubjects()) }
 
+                // Request Notification Permission on Android 13+ (API 33+) for persistent download notifications
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                    val notifLauncher = androidx.activity.compose.rememberLauncherForActivityResult(
+                        androidx.activity.result.contract.ActivityResultContracts.RequestPermission()
+                    ) { _ -> }
+                    LaunchedEffect(Unit) {
+                        if (androidx.core.content.ContextCompat.checkSelfPermission(
+                                this@MainActivity,
+                                android.Manifest.permission.POST_NOTIFICATIONS
+                            ) != android.content.pm.PackageManager.PERMISSION_GRANTED
+                        ) {
+                            notifLauncher.launch(android.Manifest.permission.POST_NOTIFICATIONS)
+                        }
+                    }
+                }
+
                 // Silent background sync with GitHub manifest on app launch
                 LaunchedEffect(Unit) {
                     val synced = repository.manifestManager.syncManifest()
@@ -74,6 +90,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onDailyBlitzClick = {
                                 navController.navigate(Screen.DailyBlitz.route)
+                            },
+                            onToolsClick = {
+                                navController.navigate(Screen.Tools.route)
                             }
                         )
                     }
@@ -146,7 +165,7 @@ class MainActivity : ComponentActivity() {
                                             title = lecture.title,
                                             chapterId = chapter.id,
                                             url = downloadUrl,
-                                            formatSelector = "bestvideo[height<=720]+bestaudio/best[height<=720]/best",
+                                            formatSelector = "720",
                                             isAudioOnly = false,
                                             progressFlow = progressFlow
                                         )
@@ -327,6 +346,52 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
                             },
+                            onStartExamSimulation = { paperTitle, subject, paperUrl, msUrl ->
+                                navController.navigate(
+                                    Screen.ExamSimulation.createRoute(
+                                        paperTitle = paperTitle,
+                                        subject = subject,
+                                        paperUrl = paperUrl,
+                                        msUrl = msUrl
+                                    )
+                                )
+                            },
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
+
+                    // 3-Hour Exam Simulation Screen
+                    composable(
+                        route = Screen.ExamSimulation.route,
+                        arguments = listOf(
+                            navArgument("paperTitle") { type = NavType.StringType; defaultValue = "CBSE Sample Paper" },
+                            navArgument("subject") { type = NavType.StringType; defaultValue = "Class 12" },
+                            navArgument("paperUrl") { type = NavType.StringType; defaultValue = "" },
+                            navArgument("msUrl") { type = NavType.StringType; defaultValue = "" }
+                        )
+                    ) { backStackEntry ->
+                        fun decode(v: String?): String =
+                            if (v.isNullOrEmpty()) "" else try { URLDecoder.decode(v, "UTF-8") } catch (_: Exception) { v }
+                        val paperTitle = decode(backStackEntry.arguments?.getString("paperTitle"))
+                        val subject = decode(backStackEntry.arguments?.getString("subject"))
+                        val paperUrl = decode(backStackEntry.arguments?.getString("paperUrl"))
+                        val msUrl = decode(backStackEntry.arguments?.getString("msUrl"))
+
+                        ExamSimulationScreen(
+                            paperTitle = paperTitle,
+                            subject = subject,
+                            paperUrl = paperUrl,
+                            markingSchemeUrl = msUrl,
+                            onOpenPdf = { url, title ->
+                                navController.navigate(Screen.PdfViewer.createRoute(url = url, title = title))
+                            },
+                            onBackClick = { navController.popBackStack() }
+                        )
+                    }
+
+                    // CBSE Class 12 Master Tools Screen
+                    composable(Screen.Tools.route) {
+                        ToolsScreen(
                             onBackClick = { navController.popBackStack() }
                         )
                     }

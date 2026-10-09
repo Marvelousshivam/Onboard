@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
     <!-- App-private cached PDFs (downloaded NCERT / sample papers / notes) -->
+    <cache-path
+        name="cached_pdfs_cache"
+        path="cached_pdfs/" />
     <files-path
         name="cached_pdfs"
         path="cached_pdfs/" />

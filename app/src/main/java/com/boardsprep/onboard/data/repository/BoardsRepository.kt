@@ -242,20 +242,21 @@ class BoardsRepository(private val context: Context) {
         }
 
         val cleanName = filename.substringAfterLast("/").substringAfterLast("\\")
-        try {
-            val assetPath = "quizzes/english/$cleanName"
-            context.assets.open(assetPath).use { stream ->
-                InputStreamReader(stream, "UTF-8").use { reader ->
-                    val parsed = gson.fromJson(reader, Quiz::class.java)
-                    if (parsed != null) {
-                        val computedTotal = if (parsed.totalQuestions > 0) parsed.totalQuestions else parsed.questions.size
-                        val quizId = if (parsed.id.isNotBlank()) parsed.id else cleanName.removeSuffix(".json")
-                        return@withContext parsed.copy(id = quizId, totalQuestions = computedTotal)
+        val possibleFolders = listOf("english", "biology", "physics", "chemistry", "maths", "physical_education")
+        for (folder in possibleFolders) {
+            try {
+                val assetPath = "quizzes/$folder/$cleanName"
+                context.assets.open(assetPath).use { stream ->
+                    InputStreamReader(stream, "UTF-8").use { reader ->
+                        val parsed = gson.fromJson(reader, Quiz::class.java)
+                        if (parsed != null) {
+                            val computedTotal = if (parsed.totalQuestions > 0) parsed.totalQuestions else parsed.questions.size
+                            val quizId = if (parsed.id.isNotBlank()) parsed.id else cleanName.removeSuffix(".json")
+                            return@withContext parsed.copy(id = quizId, totalQuestions = computedTotal)
+                        }
                     }
                 }
-            }
-        } catch (_: Exception) {
-            // Asset not found in English folder; generate authentic subject-specific CBSE 2027 Board DPP
+            } catch (_: Exception) {}
         }
         return@withContext generateFallbackQuiz(cleanName)
     }
@@ -507,6 +508,24 @@ class BoardsRepository(private val context: Context) {
     }
 
     fun getPhysicsDerivations(): List<DerivationItem> {
+        val remote = manifestManager.getDerivations()
+        if (remote.isNotEmpty()) {
+            return remote.map {
+                DerivationItem(
+                    id = it.id,
+                    chapterId = it.chapterId,
+                    chapterName = it.chapterName,
+                    title = it.title,
+                    formulaStatement = it.formula,
+                    keySteps = it.steps,
+                    probabilityRating = it.importance
+                )
+            }
+        }
+        return getBaselinePhysicsDerivations()
+    }
+
+    fun getBaselinePhysicsDerivations(): List<DerivationItem> {
         return listOf(
             DerivationItem("d1", "phy_01", "Electric Charges & Fields", "Electric Field on Axial Line of an Electric Dipole", "E_{axial} = \\frac{1}{4\\pi\\varepsilon_0} \\frac{2pr}{(r^2 - a^2)^2} \\approx \\frac{2p}{4\\pi\\varepsilon_0 r^3}", listOf("Place dipole -q and +q separated by 2a", "Calculate field due to -q and +q at point P distance r from centre", "Take vector difference: E = E_+q - E_-q", "Apply binomial approximation for short dipole r >> a"), "Very High"),
             DerivationItem("d2", "phy_01", "Electric Charges & Fields", "Electric Field on Equatorial Line of Dipole", "E_{eq} = \\frac{1}{4\\pi\\varepsilon_0} \\frac{p}{(r^2 + a^2)^{3/2}} \\approx \\frac{p}{4\\pi\\varepsilon_0 r^3}", listOf("Draw symmetric triangle with charges at -a and +a, P at height r", "Decompose fields into cos theta (axial) and sin theta (normal) components", "Notice sin theta components cancel completely", "Sum cos theta components: E = 2 E_1 \\cos\\theta"), "Very High"),
@@ -528,6 +547,23 @@ class BoardsRepository(private val context: Context) {
     }
 
     fun getChemistryNamedReactions(): List<NamedReactionItem> {
+        val remote = manifestManager.getNamedReactions()
+        if (remote.isNotEmpty()) {
+            return remote.map {
+                NamedReactionItem(
+                    id = it.id,
+                    chapterName = it.chapter,
+                    reactionName = it.title,
+                    equation = it.equation,
+                    reagents = it.reagents,
+                    keyApplication = it.significance
+                )
+            }
+        }
+        return getBaselineChemistryNamedReactions()
+    }
+
+    fun getBaselineChemistryNamedReactions(): List<NamedReactionItem> {
         return listOf(
             NamedReactionItem("r1", "Haloalkanes & Haloarenes", "Sandmeyer Reaction", "Ar-N_2^+ X^- + Cu_2Cl_2 / HCl \\rightarrow Ar-Cl + N_2", "Cu2Cl2/HCl or Cu2Br2/HBr", "Key method to synthesize chlorobenzene and bromobenzene from aniline diazonium salts with high yield"),
             NamedReactionItem("r2", "Haloalkanes & Haloarenes", "Finkelstein Reaction", "R-X + NaI \\xrightarrow{dry\\,acetone} R-I + NaX \\downarrow", "NaI in dry acetone (acts as nucleophilic halide exchange)", "Halogen exchange specifically designed for synthesizing alkyl iodides; NaCl/NaBr precipitate drives equilibrium forward"),
@@ -690,10 +726,19 @@ class BoardsRepository(private val context: Context) {
             lastAttemptedAt = System.currentTimeMillis()
         )
         db.errorVaultDao().insertError(entity)
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncQuizMistake(entity)
+        } catch (_: Exception) {}
     }
 
     suspend fun resolveMistake(id: Long) = withContext(Dispatchers.IO) {
+        val mistake = db.errorVaultDao().getAllErrorsList().firstOrNull { it.id == id }
         db.errorVaultDao().markResolved(id)
+        if (mistake != null) {
+            try {
+                com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncMistakeResolved(mistake.questionId)
+            } catch (_: Exception) {}
+        }
     }
 
     suspend fun reattemptMistakeFailed(id: Long) = withContext(Dispatchers.IO) {
@@ -735,6 +780,9 @@ class BoardsRepository(private val context: Context) {
             lastReviewedAt = System.currentTimeMillis()
         )
         db.spacedReviewDao().updateReview(updated)
+        try {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context).syncSpacedReview(updated)
+        } catch (_: Exception) {}
     }
 
     suspend fun seedSpacedReviewsIfEmpty() = withContext(Dispatchers.IO) {

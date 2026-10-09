@@ -6,6 +6,7 @@ build/
 **/build/
 .kotlin/
 *.apk
+!app/release/*.apk
 *.aab
 
 # Local machine configuration

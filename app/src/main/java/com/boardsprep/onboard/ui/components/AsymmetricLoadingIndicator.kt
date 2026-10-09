@@ -499,3 +499,92 @@ fun QuizAsymmetricLoadingView(
     }
 }
 
+/**
+ * Asymmetrical Shimmer Skeleton for an individual PDF Page.
+ * Displays textbook-like paragraph bars, headers, and formula boxes
+ * with an organic dual-harmonic shimmer wave while the page bitmap renders.
+ */
+@Composable
+fun PdfPageShimmerSkeleton(
+    modifier: Modifier = Modifier
+) {
+    val brush = rememberExpressiveShimmerBrush()
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp, vertical = 6.dp)
+            .aspectRatio(0.707f), // Standard A4 / CBSE textbook page ratio (1 : 1.414)
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(20.dp),
+            verticalArrangement = Arrangement.SpaceBetween
+        ) {
+            // Page Header line
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .width(100.dp)
+                        .height(14.dp)
+                        .clip(ExpressivePillSmall)
+                        .background(brush)
+                )
+                Box(
+                    modifier = Modifier
+                        .size(18.dp)
+                        .clip(CircleShape)
+                        .background(brush)
+                )
+            }
+
+            // Paragraph 1
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Box(modifier = Modifier.fillMaxWidth(0.95f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+                Box(modifier = Modifier.fillMaxWidth(0.9f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+                Box(modifier = Modifier.fillMaxWidth(0.82f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+                Box(modifier = Modifier.fillMaxWidth(0.65f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+            }
+
+            // Asymmetric Diagram / Equation Callout Card
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(90.dp)
+                    .clip(AsymmetricOptionCard)
+                    .background(brush)
+            )
+
+            // Paragraph 2
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Box(modifier = Modifier.fillMaxWidth(0.92f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+                Box(modifier = Modifier.fillMaxWidth(0.85f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+                Box(modifier = Modifier.fillMaxWidth(0.4f).height(12.dp).clip(RoundedCornerShape(6.dp)).background(brush))
+            }
+
+            // Page Footer
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .width(36.dp)
+                        .height(10.dp)
+                        .clip(RoundedCornerShape(5.dp))
+                        .background(brush)
+                )
+            }
+        }
+    }
+}
+

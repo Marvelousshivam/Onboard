@@ -30,6 +30,7 @@ import com.boardsprep.onboard.data.repository.BoardsRepository
 import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
 import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
 import com.boardsprep.onboard.ui.components.ExpressiveTabItem
+import com.boardsprep.onboard.ui.components.MathFormulaView
 import com.boardsprep.onboard.ui.components.expressiveBounce
 import kotlinx.coroutines.launch
 
@@ -360,13 +361,12 @@ private fun DerivationCard(
                         color = PrimaryBlue,
                         fontWeight = FontWeight.Bold
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = item.formulaStatement,
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
+                    Spacer(modifier = Modifier.height(6.dp))
+                    MathFormulaView(
+                        latex = item.formulaStatement,
+                        textColor = MaterialTheme.colorScheme.onSurface,
+                        fontSizeSp = 15,
+                        height = 80.dp
                     )
                 }
             }
@@ -473,13 +473,12 @@ private fun ReactionCard(
                         color = SuccessGreen,
                         fontWeight = FontWeight.Bold
                     )
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        text = item.equation,
-                        fontFamily = FontFamily.Monospace,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        color = MaterialTheme.colorScheme.onSurface
+                    Spacer(modifier = Modifier.height(6.dp))
+                    MathFormulaView(
+                        latex = item.equation,
+                        textColor = MaterialTheme.colorScheme.onSurface,
+                        fontSizeSp = 14,
+                        height = 64.dp
                     )
                 }
             }

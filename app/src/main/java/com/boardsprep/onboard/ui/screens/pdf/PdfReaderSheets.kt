@@ -21,6 +21,8 @@ import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.Note
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.ChevronLeft
+import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
@@ -43,6 +45,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -206,7 +212,17 @@ fun PdfSearchSheet(
             Spacer(Modifier.height(10.dp))
             when {
                 extractorState is PdfTextExtractor.ExtractionState.Extracting -> {
-                    Text("Extracting text layer…", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        modifier = Modifier.padding(vertical = 6.dp)
+                    ) {
+                        com.boardsprep.onboard.ui.components.MorphingOrganicLoader(
+                            modifier = Modifier.size(24.dp),
+                            tintColor = PrimaryBlue
+                        )
+                        Text("Indexing document text for search…", fontSize = 12.sp, fontWeight = FontWeight.SemiBold, color = PrimaryBlue)
+                    }
                 }
                 result == null && query.isBlank() -> {
                     Text("Type to search the entire document.", fontSize = 12.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -570,6 +586,257 @@ fun PdfErrorLogSheet(
                     }
                 }
             }
+        }
+    }
+}
+
+// ===========================================================================
+// Expressive page jump sheet — slider, quick +/- and bookmark chips
+// ===========================================================================
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PdfExpressiveJumpSheet(
+    currentPage: Int,
+    totalPages: Int,
+    bookmarks: List<com.boardsprep.onboard.core.pdf.PdfBookmark> = emptyList(),
+    onJump: (Int) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var sliderValue by remember(currentPage) { mutableFloatStateOf((currentPage + 1).toFloat()) }
+
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 10.dp)
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Jump to Page", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Surface(
+                    shape = ExpressivePillSmall,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Text(
+                        text = "Page ${sliderValue.roundToInt()} of $totalPages",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 12.sp,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Smooth Slider with fast +/- buttons
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = { sliderValue = (sliderValue - 1).coerceAtLeast(1f) },
+                    enabled = sliderValue > 1f
+                ) {
+                    Icon(Icons.Default.ChevronLeft, "Previous page")
+                }
+                Slider(
+                    value = sliderValue,
+                    onValueChange = { sliderValue = it },
+                    valueRange = 1f..totalPages.toFloat().coerceAtLeast(1f),
+                    colors = SliderDefaults.colors(thumbColor = PrimaryBlue, activeTrackColor = PrimaryBlue),
+                    modifier = Modifier.weight(1f)
+                )
+                IconButton(
+                    onClick = { sliderValue = (sliderValue + 1).coerceAtMost(totalPages.toFloat()) },
+                    enabled = sliderValue < totalPages.toFloat()
+                ) {
+                    Icon(Icons.Default.ChevronRight, "Next page")
+                }
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            // Quick Bookmark chips (if any)
+            if (bookmarks.isNotEmpty()) {
+                Text(
+                    text = "Bookmarked Pages",
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Spacer(Modifier.height(6.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    bookmarks.take(4).forEach { bm ->
+                        Surface(
+                            shape = ExpressivePillSmall,
+                            color = AccentAmber.copy(alpha = 0.18f),
+                            modifier = Modifier.clickable {
+                                onJump(bm.pageIndex)
+                                onDismiss()
+                            }
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(Icons.Default.Bookmark, null, tint = AccentAmber, modifier = Modifier.size(13.dp))
+                                Spacer(Modifier.width(4.dp))
+                                Text("Page ${bm.pageIndex + 1}", fontSize = 11.sp, fontWeight = FontWeight.Bold)
+                            }
+                        }
+                    }
+                }
+                Spacer(Modifier.height(14.dp))
+            }
+
+            // Direct jump button
+            Button(
+                onClick = {
+                    val target = (sliderValue.roundToInt() - 1).coerceIn(0, (totalPages - 1).coerceAtLeast(0))
+                    onJump(target)
+                    onDismiss()
+                },
+                shape = ExpressivePillSmall,
+                colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Go to Page ${sliderValue.roundToInt()}", fontWeight = FontWeight.Bold)
+            }
+
+            Spacer(Modifier.height(16.dp))
+        }
+    }
+}
+
+// ===========================================================================
+// Expressive study note sheet — tagging, colors, focused takeaways
+// ===========================================================================
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PdfExpressiveNoteSheet(
+    currentPage: Int,
+    onSaveNote: (pageIndex: Int, text: String, color: Int) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    var noteText by remember { mutableStateOf("") }
+    val tags = listOf(
+        "#PYQ_Trap" to AccentAmber,
+        "#Important_Formula" to PrimaryBlue,
+        "#Must_Revise" to SuccessGreen,
+        "#Teacher_Tip" to Color(0xFFAB47BC)
+    )
+    var selectedTag by remember { mutableStateOf<String?>(null) }
+    var selectedColor by remember { mutableStateOf(AccentAmber.toArgb()) }
+
+    ModalBottomSheet(onDismissRequest = onDismiss, sheetState = sheetState) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 20.dp, vertical = 8.dp)
+                .fillMaxWidth()
+        ) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text("Add Study Note", fontWeight = FontWeight.Bold, fontSize = 18.sp)
+                Surface(
+                    shape = ExpressivePillSmall,
+                    color = MaterialTheme.colorScheme.primaryContainer
+                ) {
+                    Text(
+                        text = "Page ${currentPage + 1}",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 11.sp,
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(12.dp))
+
+            // Quick CBSE Tag Chips
+            Text(
+                text = "Study Focus Tag:",
+                fontSize = 11.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(Modifier.height(6.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                tags.forEach { (tag, color) ->
+                    val isSelected = selectedTag == tag
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = if (isSelected) color else color.copy(alpha = 0.15f),
+                        modifier = Modifier.clickable {
+                            if (isSelected) {
+                                selectedTag = null
+                            } else {
+                                selectedTag = tag
+                                selectedColor = color.toArgb()
+                            }
+                        }
+                    ) {
+                        Text(
+                            text = tag,
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = if (isSelected) Color.White else color,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                        )
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(14.dp))
+
+            OutlinedTextField(
+                value = noteText,
+                onValueChange = { noteText = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(130.dp),
+                placeholder = {
+                    Text("Type key derivation steps, formulas, or exam warning traps...", fontSize = 13.sp)
+                },
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick = {
+                    if (noteText.isNotBlank()) {
+                        val fullNote = if (selectedTag != null) "$selectedTag\n$noteText" else noteText
+                        onSaveNote(currentPage, fullNote, selectedColor)
+                        onDismiss()
+                    }
+                },
+                enabled = noteText.isNotBlank(),
+                shape = ExpressivePillSmall,
+                colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Save Note to Page ${currentPage + 1}", fontWeight = FontWeight.Bold)
+            }
+
+            Spacer(Modifier.height(16.dp))
         }
     }
 }

@@ -51,6 +51,13 @@ sealed class Screen(val route: String) {
     object SamplePapers : Screen("sample_papers?subjectId={subjectId}") {
         fun createRoute(subjectId: String = "") = if (subjectId.isBlank()) "sample_papers" else "sample_papers?subjectId=$subjectId"
     }
+    object ExamSimulation : Screen("exam_simulation?paperTitle={paperTitle}&subject={subject}&paperUrl={paperUrl}&msUrl={msUrl}") {
+        fun createRoute(paperTitle: String, subject: String, paperUrl: String, msUrl: String): String {
+            val enc = { s: String -> java.net.URLEncoder.encode(s, "UTF-8") }
+            return "exam_simulation?paperTitle=${enc(paperTitle)}&subject=${enc(subject)}&paperUrl=${enc(paperUrl)}&msUrl=${enc(msUrl)}"
+        }
+    }
+    object Tools : Screen("tools")
     object OnboardingSync : Screen("onboarding_sync")
     object ErrorVault : Screen("error_vault")
     object DailyBlitz : Screen("daily_blitz")

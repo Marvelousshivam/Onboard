@@ -1,7 +1,9 @@
 package com.boardsprep.onboard.data.models
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 
+@Keep
 data class Subject(
     val id: String,
     val name: String,
@@ -13,6 +15,7 @@ data class Subject(
     val chapters: List<Chapter> = emptyList()
 )
 
+@Keep
 data class ResourceItem(
     val title: String,
     val url: String,
@@ -20,6 +23,7 @@ data class ResourceItem(
     val type: String = "pdf"
 )
 
+@Keep
 data class QuizItem(
     val id: String,
     val title: String,
@@ -28,6 +32,7 @@ data class QuizItem(
     val totalQuestions: Int = 10
 )
 
+@Keep
 data class Chapter(
     val id: String,
     val subjectId: String,
@@ -47,6 +52,7 @@ data class Chapter(
     val videosList: List<Lecture> = emptyList()
 )
 
+@Keep
 data class Lecture(
     val id: String,
     val chapterId: String,
@@ -60,6 +66,7 @@ data class Lecture(
     val author: String = "Curated"
 )
 
+@Keep
 data class Quiz(
     val id: String = "",
     val subject: String = "",
@@ -71,6 +78,7 @@ data class Quiz(
     val questions: List<Question> = emptyList()
 )
 
+@Keep
 data class Question(
     val id: String = "",
     @SerializedName("q_no") val qNo: Int = 1,
@@ -81,6 +89,7 @@ data class Question(
     val explanation: String = ""
 )
 
+@Keep
 data class DerivationItem(
     val id: String,
     val chapterId: String,
@@ -92,6 +101,7 @@ data class DerivationItem(
     val isMastered: Boolean = false
 )
 
+@Keep
 data class NamedReactionItem(
     val id: String,
     val chapterName: String,
@@ -102,6 +112,7 @@ data class NamedReactionItem(
     val isMastered: Boolean = false
 )
 
+@Keep
 data class BlueprintSection(
     val sectionName: String, // Section A, B, C, D, E
     val questionType: String, // MCQ, SA-I, SA-II, Case-Based, LA
@@ -110,6 +121,7 @@ data class BlueprintSection(
     val totalMarks: Int
 )
 
+@Keep
 data class BoardBlueprint(
     val subject: String,
     val subjectCode: String,
@@ -121,6 +133,7 @@ data class BoardBlueprint(
     val sections: List<BlueprintSection>
 )
 
+@Keep
 data class SamplePaper(
     val title: String,
     val filename: String,

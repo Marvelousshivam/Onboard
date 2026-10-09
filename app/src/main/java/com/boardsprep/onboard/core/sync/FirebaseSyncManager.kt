@@ -4,8 +4,11 @@ import android.content.Context
 import android.util.Log
 import com.boardsprep.onboard.data.local.OnboardDatabase
 import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
+import com.boardsprep.onboard.data.local.entities.ErrorVaultEntity
+import com.boardsprep.onboard.data.local.entities.FocusSessionEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
+import com.boardsprep.onboard.data.local.entities.SpacedReviewEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -288,6 +291,88 @@ class FirebaseSyncManager private constructor(private val context: Context) {
         }
         listeners.add(miSub)
 
+        // 5. Listen to Spaced Repetition Blitz Cards synced from Web / Cloud
+        val srRef = fs.collection("users").document(uid).collection("spaced_reviews")
+        val srSub = srRef.addSnapshotListener { snapshots, error ->
+            if (error != null || snapshots == null) return@addSnapshotListener
+            scope.launch {
+                for (change in snapshots.documentChanges) {
+                    val doc = change.document
+                    val itemId = doc.getString("itemId") ?: doc.id
+                    val chId = doc.getString("chapterId") ?: ""
+                    val subId = doc.getString("subjectId") ?: ""
+                    val title = doc.getString("title") ?: ""
+                    val prompt = doc.getString("prompt") ?: ""
+                    val answer = doc.getString("answer") ?: ""
+                    val category = doc.getString("category") ?: "formula"
+                    val interval = doc.getLong("intervalDays")?.toInt() ?: 1
+                    val ease = (doc.getDouble("easeFactor") ?: 2.5).toFloat()
+                    val reps = doc.getLong("repetitions")?.toInt() ?: 0
+                    val nextDate = doc.getLong("nextReviewDate") ?: (System.currentTimeMillis() + 86400000L)
+                    val lastRev = doc.getLong("lastReviewedAt") ?: System.currentTimeMillis()
+
+                    db.spacedReviewDao().updateReview(
+                        SpacedReviewEntity(
+                            itemId = itemId,
+                            chapterId = chId,
+                            subjectId = subId,
+                            title = title,
+                            prompt = prompt,
+                            answer = answer,
+                            category = category,
+                            intervalDays = interval,
+                            easeFactor = ease,
+                            repetitions = reps,
+                            nextReviewDate = nextDate,
+                            lastReviewedAt = lastRev
+                        )
+                    )
+                }
+            }
+        }
+        listeners.add(srSub)
+
+        // 6. Listen to Mistake Notebook (Error Vault) synced from Web / Cloud
+        val evRef = fs.collection("users").document(uid).collection("error_vault")
+        val evSub = evRef.addSnapshotListener { snapshots, error ->
+            if (error != null || snapshots == null) return@addSnapshotListener
+            scope.launch {
+                for (change in snapshots.documentChanges) {
+                    val doc = change.document
+                    val qId = doc.getString("questionId") ?: doc.id
+                    val isResolved = doc.getBoolean("isResolved") ?: false
+                    val existing = db.errorVaultDao().getErrorByQuestionId(qId)
+
+                    if (existing != null) {
+                        if (existing.isResolved != isResolved && isResolved) {
+                            db.errorVaultDao().markResolved(existing.id)
+                        }
+                    } else {
+                        db.errorVaultDao().insertError(
+                            ErrorVaultEntity(
+                                questionId = qId,
+                                chapterId = doc.getString("chapterId") ?: "",
+                                subjectId = doc.getString("subjectId") ?: "",
+                                questionText = doc.getString("questionText") ?: "",
+                                optionA = doc.getString("optionA") ?: "",
+                                optionB = doc.getString("optionB") ?: "",
+                                optionC = doc.getString("optionC") ?: "",
+                                optionD = doc.getString("optionD") ?: "",
+                                correctOptionIndex = doc.getLong("correctOptionIndex")?.toInt() ?: 0,
+                                userSelectedOptionIndex = doc.getLong("userSelectedOptionIndex")?.toInt() ?: 0,
+                                explanation = doc.getString("explanation") ?: "",
+                                mistakeCategory = doc.getString("mistakeCategory") ?: "conceptual",
+                                failureCount = doc.getLong("failureCount")?.toInt() ?: 1,
+                                isResolved = isResolved,
+                                lastAttemptedAt = doc.getLong("lastAttemptedAt") ?: System.currentTimeMillis()
+                            )
+                        )
+                    }
+                }
+            }
+        }
+        listeners.add(evSub)
+
         // Initial push of any offline local data
         syncAllLocalToCloud()
     }
@@ -448,9 +533,174 @@ class FirebaseSyncManager private constructor(private val context: Context) {
                         .set(data, SetOptions.merge())
                 }
 
+                // Upload error vault (mistakes)
+                val errors = db.errorVaultDao().getAllErrorsList()
+                for (e in errors) {
+                    val data = hashMapOf(
+                        "questionId" to e.questionId,
+                        "chapterId" to e.chapterId,
+                        "subjectId" to e.subjectId,
+                        "questionText" to e.questionText,
+                        "optionA" to e.optionA,
+                        "optionB" to e.optionB,
+                        "optionC" to e.optionC,
+                        "optionD" to e.optionD,
+                        "correctOptionIndex" to e.correctOptionIndex,
+                        "userSelectedOptionIndex" to e.userSelectedOptionIndex,
+                        "explanation" to e.explanation,
+                        "mistakeCategory" to e.mistakeCategory,
+                        "failureCount" to e.failureCount,
+                        "isResolved" to e.isResolved,
+                        "lastAttemptedAt" to e.lastAttemptedAt,
+                        "syncedAt" to FieldValue.serverTimestamp()
+                    )
+                    fs.collection("users").document(uid)
+                        .collection("error_vault").document(e.questionId)
+                        .set(data, SetOptions.merge())
+                }
+
+                // Upload spaced reviews
+                val reviews = db.spacedReviewDao().getAllReviewsList()
+                for (r in reviews) {
+                    val data = hashMapOf(
+                        "itemId" to r.itemId,
+                        "chapterId" to r.chapterId,
+                        "subjectId" to r.subjectId,
+                        "title" to r.title,
+                        "prompt" to r.prompt,
+                        "answer" to r.answer,
+                        "category" to r.category,
+                        "intervalDays" to r.intervalDays,
+                        "easeFactor" to r.easeFactor,
+                        "repetitions" to r.repetitions,
+                        "nextReviewDate" to r.nextReviewDate,
+                        "lastReviewedAt" to r.lastReviewedAt,
+                        "syncedAt" to FieldValue.serverTimestamp()
+                    )
+                    fs.collection("users").document(uid)
+                        .collection("spaced_reviews").document(r.itemId)
+                        .set(data, SetOptions.merge())
+                }
+
                 Log.d(TAG, "Full local sync to Firestore completed successfully")
             } catch (e: Exception) {
                 Log.w(TAG, "Full sync error: ${e.message}")
+            }
+        }
+    }
+
+    fun syncQuizMistake(entity: ErrorVaultEntity) {
+        val uid = auth?.currentUser?.uid ?: return
+        val fs = firestore ?: return
+        scope.launch {
+            try {
+                val data = hashMapOf(
+                    "questionId" to entity.questionId,
+                    "chapterId" to entity.chapterId,
+                    "subjectId" to entity.subjectId,
+                    "questionText" to entity.questionText,
+                    "optionA" to entity.optionA,
+                    "optionB" to entity.optionB,
+                    "optionC" to entity.optionC,
+                    "optionD" to entity.optionD,
+                    "correctOptionIndex" to entity.correctOptionIndex,
+                    "userSelectedOptionIndex" to entity.userSelectedOptionIndex,
+                    "explanation" to entity.explanation,
+                    "mistakeCategory" to entity.mistakeCategory,
+                    "failureCount" to entity.failureCount,
+                    "isResolved" to entity.isResolved,
+                    "lastAttemptedAt" to entity.lastAttemptedAt,
+                    "syncedAt" to FieldValue.serverTimestamp()
+                )
+                fs.collection("users").document(uid)
+                    .collection("error_vault").document(entity.questionId)
+                    .set(data, SetOptions.merge())
+                    .await()
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push quiz mistake: ${e.message}")
+            }
+        }
+    }
+
+    fun syncMistakeResolved(questionId: String) {
+        val uid = auth?.currentUser?.uid ?: return
+        val fs = firestore ?: return
+        scope.launch {
+            try {
+                fs.collection("users").document(uid)
+                    .collection("error_vault").document(questionId)
+                    .set(mapOf("isResolved" to true, "resolvedAt" to FieldValue.serverTimestamp()), SetOptions.merge())
+                    .await()
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to sync mistake resolved: ${e.message}")
+            }
+        }
+    }
+
+    fun syncSpacedReview(entity: SpacedReviewEntity) {
+        val uid = auth?.currentUser?.uid ?: return
+        val fs = firestore ?: return
+        scope.launch {
+            try {
+                val data = hashMapOf(
+                    "itemId" to entity.itemId,
+                    "chapterId" to entity.chapterId,
+                    "subjectId" to entity.subjectId,
+                    "title" to entity.title,
+                    "prompt" to entity.prompt,
+                    "answer" to entity.answer,
+                    "category" to entity.category,
+                    "intervalDays" to entity.intervalDays,
+                    "easeFactor" to entity.easeFactor,
+                    "repetitions" to entity.repetitions,
+                    "nextReviewDate" to entity.nextReviewDate,
+                    "lastReviewedAt" to entity.lastReviewedAt,
+                    "syncedAt" to FieldValue.serverTimestamp()
+                )
+                fs.collection("users").document(uid)
+                    .collection("spaced_reviews").document(entity.itemId)
+                    .set(data, SetOptions.merge())
+                    .await()
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push spaced review: ${e.message}")
+            }
+        }
+    }
+
+    fun syncExamSimulation(
+        id: String,
+        paperId: String,
+        paperTitle: String,
+        subject: String,
+        durationSeconds: Int = 10800,
+        timeSpentSeconds: Int,
+        tabSwitches: Int = 0,
+        status: String = "completed"
+    ) {
+        val uid = auth?.currentUser?.uid ?: return
+        val fs = firestore ?: return
+        scope.launch {
+            try {
+                val data = hashMapOf(
+                    "id" to id,
+                    "paperId" to paperId,
+                    "paperTitle" to paperTitle,
+                    "subject" to subject,
+                    "durationSeconds" to durationSeconds,
+                    "timeSpentSeconds" to timeSpentSeconds,
+                    "tabSwitches" to tabSwitches,
+                    "status" to status,
+                    "date" to getTodayDateStr(),
+                    "createdAt" to FieldValue.serverTimestamp()
+                )
+                fs.collection("users").document(uid)
+                    .collection("exam_simulations").document(id)
+                    .set(data, SetOptions.merge())
+                    .await()
+
+                updateStudyStreak("exam", timeSpentSeconds * 1000L)
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push exam simulation: ${e.message}")
             }
         }
     }

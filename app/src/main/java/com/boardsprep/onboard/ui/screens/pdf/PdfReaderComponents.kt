@@ -2,6 +2,8 @@ package com.boardsprep.onboard.ui.screens.pdf
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -23,12 +25,17 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.automirrored.filled.Redo
 import androidx.compose.material.icons.automirrored.filled.Undo
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.ui.draw.clip
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.FullscreenExit
@@ -49,6 +56,20 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.gestures.awaitEachGesture
+import androidx.compose.foundation.gestures.awaitFirstDown
+import androidx.compose.material.icons.filled.AutoFixNormal
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.DeleteOutline
+import androidx.compose.material.icons.filled.DeleteSweep
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.StrokeJoin
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import com.boardsprep.onboard.core.pdf.PdfAnnotationHitTest
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
@@ -90,6 +111,7 @@ import com.boardsprep.onboard.core.theme.AccentAmber
 import com.boardsprep.onboard.core.theme.ExpressiveDockShape
 import com.boardsprep.onboard.core.theme.ExpressivePillSmall
 import com.boardsprep.onboard.core.theme.PrimaryBlue
+import com.boardsprep.onboard.core.theme.SuccessGreen
 import kotlin.math.roundToInt
 
 // ---- Color matrices (shared across all canvas variants) -------------------
@@ -127,18 +149,71 @@ fun canvasBackgroundColor(theme: PdfCanvasTheme): Color = when (theme) {
     PdfCanvasTheme.SEPIA -> Color(0xFFF5E9D4)
 }
 
+/**
+ * Draw a smooth polyline using midpoint quadratic bezier interpolation.
+ * Normalised points (0..1) are scaled to current canvas dimensions.
+ */
+fun androidx.compose.ui.graphics.drawscope.DrawScope.drawSmoothPolyline(
+    points: List<android.graphics.PointF>,
+    color: Color,
+    strokeWidthPx: Float,
+    alpha: Float = 1f,
+    blendMode: androidx.compose.ui.graphics.BlendMode = androidx.compose.ui.graphics.drawscope.DrawScope.DefaultBlendMode
+) {
+    if (points.isEmpty()) return
+    val w = size.width
+    val h = size.height
+
+    if (points.size == 1) {
+        val p = points[0]
+        drawCircle(
+            color = color.copy(alpha = alpha),
+            radius = strokeWidthPx / 2f,
+            center = Offset(p.x * w, p.y * h),
+            blendMode = blendMode
+        )
+        return
+    }
+
+    val path = androidx.compose.ui.graphics.Path()
+    path.moveTo(points[0].x * w, points[0].y * h)
+
+    if (points.size == 2) {
+        path.lineTo(points[1].x * w, points[1].y * h)
+    } else {
+        for (i in 1 until points.size - 1) {
+            val p0 = points[i]
+            val p1 = points[i + 1]
+            val midX = (p0.x + p1.x) / 2f * w
+            val midY = (p0.y + p1.y) / 2f * h
+            path.quadraticTo(p0.x * w, p0.y * h, midX, midY)
+        }
+        val last = points.last()
+        path.lineTo(last.x * w, last.y * h)
+    }
+
+    drawPath(
+        path = path,
+        color = color.copy(alpha = alpha),
+        style = androidx.compose.ui.graphics.drawscope.Stroke(
+            width = strokeWidthPx,
+            cap = StrokeCap.Round,
+            join = StrokeJoin.Round
+        ),
+        blendMode = blendMode
+    )
+}
+
 // ===========================================================================
 // Single-page canvas — one page at a time with pinch zoom / pan
 // ===========================================================================
 
 /**
  * Single-page reading canvas. Shows one page at a time with pinch-to-zoom,
- * double-tap zoom, and drag-to-pan. Uses [ContentScale.Fit] so the page
- * maintains its aspect ratio and the surrounding canvas (dark / sepia / etc.)
- * is visible.
+ * double-tap zoom, and drag-to-pan.
  *
- * When highlight mode is on, zoom/pan gestures are replaced by a drag gesture
- * that creates highlight annotations.
+ * Annotations and active drawings are anchored in an aspect-ratio-locked box
+ * so they match the rendered PDF bitmap pixel-for-pixel with zero letterbox drift.
  */
 @Composable
 fun PdfSinglePageCanvas(
@@ -153,108 +228,122 @@ fun PdfSinglePageCanvas(
     val currentZoom by rememberUpdatedState(ui.zoom)
     var pan by remember(ui.currentPage) { mutableStateOf(Offset.Zero) }
 
-    // Highlight state
     val highlights = remember(ui.annotations, ui.currentPage) {
         ui.annotations.filter { it.pageIndex == ui.currentPage && it.type == PdfAnnotationType.HIGHLIGHT }
     }
     val sketches = remember(ui.annotations, ui.currentPage) {
         ui.annotations.filter { it.pageIndex == ui.currentPage && it.type == PdfAnnotationType.FREEHAND }
     }
-    var dragStart by remember { mutableStateOf<Offset?>(null) }
-    var dragEnd by remember { mutableStateOf<Offset?>(null) }
-    var containerSize by remember { mutableStateOf(IntSize.Zero) }
     var currentStroke by remember { mutableStateOf<List<android.graphics.PointF>>(emptyList()) }
+    var eraserPoint by remember { mutableStateOf<Offset?>(null) }
+    var containerSize by remember { mutableStateOf(IntSize.Zero) }
+    val density = LocalDensity.current
+    val haptic = LocalHapticFeedback.current
+
+    val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
+
+    val touchModifier = if (isAnnotating) {
+        Modifier.pointerInput(ui.currentPage, ui.highlightMode, ui.sketchMode, ui.eraserMode) {
+            when {
+                ui.eraserMode -> {
+                    awaitEachGesture {
+                        val down = awaitFirstDown(requireUnconsumed = false)
+                        eraserPoint = down.position
+                        if (containerSize.width > 0 && containerSize.height > 0) {
+                            val norm = android.graphics.PointF(down.position.x / containerSize.width, down.position.y / containerSize.height)
+                            stateHolder.eraseAtPoint(ui.currentPage, norm)
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        do {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull()
+                            if (change != null && change.pressed) {
+                                eraserPoint = change.position
+                                if (containerSize.width > 0 && containerSize.height > 0) {
+                                    val norm = android.graphics.PointF(change.position.x / containerSize.width, change.position.y / containerSize.height)
+                                    stateHolder.eraseAtPoint(ui.currentPage, norm)
+                                }
+                                change.consume()
+                            }
+                        } while (event.changes.any { it.pressed })
+                        eraserPoint = null
+                    }
+                }
+                ui.highlightMode || ui.sketchMode -> {
+                    awaitEachGesture {
+                        val down = awaitFirstDown(requireUnconsumed = false)
+                        currentStroke = listOf(android.graphics.PointF(down.position.x, down.position.y))
+                        do {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull()
+                            if (change != null && change.pressed) {
+                                currentStroke = currentStroke + android.graphics.PointF(change.position.x, change.position.y)
+                                change.consume()
+                            }
+                        } while (event.changes.any { it.pressed })
+
+                        if (currentStroke.isNotEmpty() && containerSize.width > 0 && containerSize.height > 0) {
+                            val normalised = currentStroke.map {
+                                android.graphics.PointF(it.x / containerSize.width, it.y / containerSize.height)
+                            }
+                            if (ui.highlightMode) {
+                                stateHolder.addHighlightStroke(
+                                    ui.currentPage,
+                                    listOf(normalised),
+                                    ui.highlightColor,
+                                    ui.strokeWidth
+                                )
+                            } else {
+                                stateHolder.addSketch(
+                                    ui.currentPage,
+                                    listOf(normalised),
+                                    ui.sketchColor,
+                                    ui.strokeWidth
+                                )
+                            }
+                        }
+                        currentStroke = emptyList()
+                    }
+                }
+            }
+        }
+    } else {
+        Modifier
+            .pointerInput(ui.currentPage) {
+                detectTapGestures(
+                    onDoubleTap = {
+                        if (currentZoom > 1.3f) {
+                            stateHolder.resetZoom()
+                            pan = Offset.Zero
+                        } else {
+                            stateHolder.setZoom(2.5f)
+                        }
+                    },
+                    onTap = { onToggleChrome() }
+                )
+            }
+            .pointerInput(ui.currentPage) {
+                detectTransformGestures { _, panDelta, zoomDelta, _ ->
+                    val newZoom = (currentZoom * zoomDelta).coerceIn(1f, 5f)
+                    stateHolder.setZoom(newZoom)
+                    pan = if (newZoom > 1f) pan + panDelta else Offset.Zero
+                }
+            }
+    }
 
     Box(
         modifier = modifier
             .fillMaxSize()
             .onGloballyPositioned { coords ->
                 stateHolder.onViewportSizeChanged(coords.size.width, coords.size.height)
-                containerSize = coords.size
-            }
-            .pointerInput(ui.currentPage, ui.highlightMode, ui.sketchMode) {
-                when {
-                    ui.sketchMode -> {
-                        // Sketch mode: freehand drawing
-                        detectDragGestures(
-                            onDragStart = { offset ->
-                                currentStroke = listOf(android.graphics.PointF(offset.x, offset.y))
-                            },
-                            onDragEnd = {
-                                if (currentStroke.isNotEmpty() && containerSize.width > 0 && containerSize.height > 0) {
-                                    val normalised = currentStroke.map {
-                                        android.graphics.PointF(it.x / containerSize.width, it.y / containerSize.height)
-                                    }
-                                    stateHolder.addSketch(ui.currentPage, listOf(normalised), ui.sketchColor, 4f)
-                                }
-                                currentStroke = emptyList()
-                            },
-                            onDrag = { change, _ ->
-                                currentStroke = currentStroke + android.graphics.PointF(change.position.x, change.position.y)
-                            }
-                        )
-                    }
-                    ui.highlightMode -> {
-                        // Highlight mode: drag to create highlights
-                        detectDragGestures(
-                            onDragStart = { offset -> dragStart = offset; dragEnd = offset },
-                            onDragEnd = {
-                                val start = dragStart
-                                val end = dragEnd
-                                if (start != null && end != null && containerSize.width > 0 && containerSize.height > 0 && bitmap != null) {
-                                    val left = minOf(start.x, end.x) / containerSize.width
-                                    val top = minOf(start.y, end.y) / containerSize.height
-                                    val right = maxOf(start.x, end.x) / containerSize.width
-                                    val bottom = maxOf(start.y, end.y) / containerSize.height
-                                    if (right - left > 0.01f && bottom - top > 0.01f) {
-                                        stateHolder.addHighlight(
-                                            ui.currentPage,
-                                            android.graphics.RectF(left, top, right, bottom),
-                                            0x66FFC043
-                                        )
-                                    }
-                                }
-                                dragStart = null
-                                dragEnd = null
-                            },
-                            onDrag = { change, _ -> dragEnd = change.position }
-                        )
-                    }
-                    else -> {
-                        // Normal mode: tap + pinch zoom
-                        detectTapGestures(
-                            onDoubleTap = {
-                                if (currentZoom > 1.3f) {
-                                    stateHolder.resetZoom()
-                                    pan = Offset.Zero
-                                } else {
-                                    stateHolder.setZoom(2.5f)
-                                }
-                            },
-                            onTap = { onToggleChrome() }
-                        )
-                    }
-                }
-            }
-            .pointerInput(ui.currentPage, ui.highlightMode, ui.sketchMode) {
-                if (!ui.highlightMode && !ui.sketchMode) {
-                    detectTransformGestures { _, panDelta, zoomDelta, _ ->
-                        val newZoom = (currentZoom * zoomDelta).coerceIn(1f, 5f)
-                        stateHolder.setZoom(newZoom)
-                        pan = if (newZoom > 1f) pan + panDelta else Offset.Zero
-                    }
-                }
             },
         contentAlignment = Alignment.Center
     ) {
         if (bitmap == null) {
-            CircularProgressIndicator(color = PrimaryBlue, strokeWidth = 3.dp, modifier = Modifier.size(40.dp))
+            com.boardsprep.onboard.ui.components.PdfPageShimmerSkeleton()
         } else {
-            Image(
-                bitmap = bitmap.bitmap.asImageBitmap(),
-                contentDescription = "Page ${ui.currentPage + 1} of ${ui.totalPages}",
-                colorFilter = colorFilter,
-                contentScale = ContentScale.Fit,
+            val pageAspect = (bitmap.renderedWidthPx.toFloat() / bitmap.renderedHeightPx.toFloat().coerceAtLeast(1f)).coerceAtLeast(0.1f)
+            Box(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(if (ui.appearance.fullscreen) 0.dp else 6.dp)
@@ -263,73 +352,109 @@ fun PdfSinglePageCanvas(
                         scaleY = currentZoom
                         translationX = pan.x
                         translationY = pan.y
-                    }
-            )
-            // Annotation overlay — highlights + sketches + current drawing
-            Canvas(modifier = Modifier.matchParentSize()) {
-                // Draw existing highlights
-                for (ann in highlights) {
-                    for (rect in ann.rects) {
-                        drawRect(
-                            color = Color(ann.color),
-                            topLeft = Offset(rect.left * size.width, rect.top * size.height),
-                            size = Size(
-                                (rect.right - rect.left) * size.width,
-                                (rect.bottom - rect.top) * size.height
-                            )
-                        )
-                    }
-                }
-                // Draw existing sketches
-                for (ann in sketches) {
-                    for (stroke in ann.strokes) {
-                        if (stroke.size < 2) continue
-                        val path = androidx.compose.ui.graphics.Path()
-                        val first = stroke[0]
-                        path.moveTo(first.x * size.width, first.y * size.height)
-                        for (i in 1 until stroke.size) {
-                            path.lineTo(stroke[i].x * size.width, stroke[i].y * size.height)
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .aspectRatio(pageAspect, matchHeightConstraintsFirst = false)
+                        .onGloballyPositioned { coords ->
+                            containerSize = coords.size
                         }
-                        drawPath(
-                            path = path,
-                            color = Color(ann.color),
-                            style = androidx.compose.ui.graphics.drawscope.Stroke(
-                                width = ann.strokeWidth * 2f,
-                                cap = androidx.compose.ui.graphics.StrokeCap.Round,
-                                join = androidx.compose.ui.graphics.StrokeJoin.Round
+                        .then(touchModifier)
+                ) {
+                    Image(
+                        bitmap = bitmap.bitmap.asImageBitmap(),
+                        contentDescription = "Page ${ui.currentPage + 1} of ${ui.totalPages}",
+                        colorFilter = colorFilter,
+                        contentScale = androidx.compose.ui.layout.ContentScale.Fit,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                    // Annotation overlay
+                    Canvas(modifier = Modifier.matchParentSize()) {
+                        // 1. Highlights
+                        for (ann in highlights) {
+                            val highlightColor = Color(ann.color)
+                            for (rect in ann.rects) {
+                                drawRect(
+                                    color = highlightColor.copy(alpha = 0.38f),
+                                    topLeft = Offset(rect.left * size.width, rect.top * size.height),
+                                    size = Size(
+                                        (rect.right - rect.left) * size.width,
+                                        (rect.bottom - rect.top) * size.height
+                                    )
+                                )
+                            }
+                            val strokeW = (ann.strokeWidth * 4f * density.density).coerceAtLeast(16.dp.toPx())
+                            for (stroke in ann.strokes) {
+                                drawSmoothPolyline(
+                                    points = stroke,
+                                    color = highlightColor,
+                                    strokeWidthPx = strokeW,
+                                    alpha = 0.38f
+                                )
+                            }
+                        }
+
+                        // 2. Sketches (pen)
+                        for (ann in sketches) {
+                            val penColor = Color(ann.color)
+                            val strokeW = (ann.strokeWidth * density.density).coerceAtLeast(2.dp.toPx())
+                            for (stroke in ann.strokes) {
+                                drawSmoothPolyline(
+                                    points = stroke,
+                                    color = penColor,
+                                    strokeWidthPx = strokeW,
+                                    alpha = 1f
+                                )
+                            }
+                        }
+
+                        // 3. Active wet stroke
+                        if (currentStroke.isNotEmpty() && size.width > 0 && size.height > 0) {
+                            val activeNorm = currentStroke.map { android.graphics.PointF(it.x / size.width, it.y / size.height) }
+                            if (ui.highlightMode) {
+                                val strokeW = (ui.strokeWidth * 4f * density.density).coerceAtLeast(16.dp.toPx())
+                                drawSmoothPolyline(
+                                    points = activeNorm,
+                                    color = Color(ui.highlightColor),
+                                    strokeWidthPx = strokeW,
+                                    alpha = 0.38f
+                                )
+                            } else if (ui.sketchMode) {
+                                val strokeW = (ui.strokeWidth * density.density).coerceAtLeast(2.dp.toPx())
+                                drawSmoothPolyline(
+                                    points = activeNorm,
+                                    color = Color(ui.sketchColor),
+                                    strokeWidthPx = strokeW,
+                                    alpha = 1f
+                                )
+                            }
+                        }
+
+                        // 4. Eraser cursor
+                        val ep = eraserPoint
+                        if (ep != null) {
+                            val eraserRadius = 22.dp.toPx()
+                            drawCircle(
+                                color = Color.White.copy(alpha = 0.55f),
+                                radius = eraserRadius,
+                                center = ep
                             )
-                        )
+                            drawCircle(
+                                color = Color(0xFFFF5252),
+                                radius = eraserRadius,
+                                center = ep,
+                                style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2.dp.toPx())
+                            )
+                            drawCircle(
+                                color = Color(0xFFFF5252),
+                                radius = 3.dp.toPx(),
+                                center = ep
+                            )
+                        }
                     }
-                }
-                // Draw current sketch stroke
-                if (currentStroke.size >= 2) {
-                    val path = androidx.compose.ui.graphics.Path()
-                    path.moveTo(currentStroke[0].x, currentStroke[0].y)
-                    for (i in 1 until currentStroke.size) {
-                        path.lineTo(currentStroke[i].x, currentStroke[i].y)
-                    }
-                    drawPath(
-                        path = path,
-                        color = Color(ui.sketchColor),
-                        style = androidx.compose.ui.graphics.drawscope.Stroke(
-                            width = 8f,
-                            cap = androidx.compose.ui.graphics.StrokeCap.Round,
-                            join = androidx.compose.ui.graphics.StrokeJoin.Round
-                        )
-                    )
-                }
-                // Draw current highlight drag selection
-                val start = dragStart
-                val end = dragEnd
-                if (start != null && end != null) {
-                    drawRect(
-                        color = Color(0x88FFC043),
-                        topLeft = Offset(minOf(start.x, end.x), minOf(start.y, end.y)),
-                        size = Size(
-                            kotlin.math.abs(end.x - start.x),
-                            kotlin.math.abs(end.y - start.y)
-                        )
-                    )
                 }
             }
         }
@@ -375,15 +500,20 @@ fun PdfContinuousCanvas(
             }
     }
 
+    val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
+
     LazyColumn(
         state = listState,
+        userScrollEnabled = !isAnnotating,
         modifier = modifier
             .fillMaxSize()
             .onGloballyPositioned { coords ->
                 stateHolder.onViewportSizeChanged(coords.size.width, coords.size.height)
             }
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { onToggleChrome() })
+            .pointerInput(isAnnotating) {
+                if (!isAnnotating) {
+                    detectTapGestures(onTap = { onToggleChrome() })
+                }
             },
         verticalArrangement = Arrangement.spacedBy(ui.appearance.pageSpacingDp.dp),
         contentPadding = PaddingValues(vertical = ui.appearance.pageSpacingDp.dp)
@@ -436,15 +566,20 @@ fun PdfHorizontalPagedCanvas(
             }
     }
 
+    val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
+
     HorizontalPager(
         state = pagerState,
+        userScrollEnabled = !isAnnotating,
         modifier = modifier
             .fillMaxSize()
             .onGloballyPositioned { coords ->
                 stateHolder.onViewportSizeChanged(coords.size.width, coords.size.height)
             }
-            .pointerInput(Unit) {
-                detectTapGestures(onTap = { onToggleChrome() })
+            .pointerInput(isAnnotating) {
+                if (!isAnnotating) {
+                    detectTapGestures(onTap = { onToggleChrome() })
+                }
             }
     ) { pageIndex ->
         PdfPageRenderBox(
@@ -499,73 +634,89 @@ fun PdfPageRenderBox(
         ui.annotations.filter { it.pageIndex == pageIndex && it.type == PdfAnnotationType.FREEHAND }
     }
 
-    // Highlight drag state
-    var dragStart by remember { mutableStateOf<Offset?>(null) }
-    var dragEnd by remember { mutableStateOf<Offset?>(null) }
+    val density = LocalDensity.current
+    val haptic = LocalHapticFeedback.current
+
+    var currentStroke by remember { mutableStateOf<List<android.graphics.PointF>>(emptyList()) }
+    var eraserPoint by remember { mutableStateOf<Offset?>(null) }
     var containerSize by remember { mutableStateOf(IntSize.Zero) }
 
-    // Sketch state
-    var currentStroke by remember { mutableStateOf<List<android.graphics.PointF>>(emptyList()) }
+    val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
+
+    val touchModifier = if (isAnnotating) {
+        Modifier.pointerInput(ui.sketchMode, ui.highlightMode, ui.eraserMode, pageIndex) {
+            when {
+                ui.eraserMode -> {
+                    awaitEachGesture {
+                        val down = awaitFirstDown(requireUnconsumed = false)
+                        eraserPoint = down.position
+                        if (containerSize.width > 0 && containerSize.height > 0) {
+                            val norm = android.graphics.PointF(down.position.x / containerSize.width, down.position.y / containerSize.height)
+                            stateHolder.eraseAtPoint(pageIndex, norm)
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        }
+                        do {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull()
+                            if (change != null && change.pressed) {
+                                eraserPoint = change.position
+                                if (containerSize.width > 0 && containerSize.height > 0) {
+                                    val norm = android.graphics.PointF(change.position.x / containerSize.width, change.position.y / containerSize.height)
+                                    stateHolder.eraseAtPoint(pageIndex, norm)
+                                }
+                                change.consume()
+                            }
+                        } while (event.changes.any { it.pressed })
+                        eraserPoint = null
+                    }
+                }
+                ui.highlightMode || ui.sketchMode -> {
+                    awaitEachGesture {
+                        val down = awaitFirstDown(requireUnconsumed = false)
+                        currentStroke = listOf(android.graphics.PointF(down.position.x, down.position.y))
+                        do {
+                            val event = awaitPointerEvent()
+                            val change = event.changes.firstOrNull()
+                            if (change != null && change.pressed) {
+                                currentStroke = currentStroke + android.graphics.PointF(change.position.x, change.position.y)
+                                change.consume()
+                            }
+                        } while (event.changes.any { it.pressed })
+
+                        if (currentStroke.isNotEmpty() && containerSize.width > 0 && containerSize.height > 0) {
+                            val normalised = currentStroke.map {
+                                android.graphics.PointF(it.x / containerSize.width, it.y / containerSize.height)
+                            }
+                            if (ui.highlightMode) {
+                                stateHolder.addHighlightStroke(
+                                    pageIndex,
+                                    listOf(normalised),
+                                    ui.highlightColor,
+                                    ui.strokeWidth
+                                )
+                            } else {
+                                stateHolder.addSketch(
+                                    pageIndex,
+                                    listOf(normalised),
+                                    ui.sketchColor,
+                                    ui.strokeWidth
+                                )
+                            }
+                        }
+                        currentStroke = emptyList()
+                    }
+                }
+            }
+        }
+    } else {
+        Modifier
+    }
 
     Box(
         modifier = modifier
             .fillMaxWidth()
             .onGloballyPositioned { containerSize = it.size }
-            .pointerInput(ui.highlightMode, ui.sketchMode, pageIndex) {
-                when {
-                    ui.sketchMode -> {
-                        // Sketch mode: freehand drawing
-                        detectDragGestures(
-                            onDragStart = { offset ->
-                                currentStroke = listOf(android.graphics.PointF(offset.x, offset.y))
-                            },
-                            onDragEnd = {
-                                if (currentStroke.isNotEmpty() && containerSize.width > 0 && containerSize.height > 0) {
-                                    val normalised = currentStroke.map {
-                                        android.graphics.PointF(it.x / containerSize.width, it.y / containerSize.height)
-                                    }
-                                    stateHolder.addSketch(pageIndex, listOf(normalised), ui.sketchColor, 4f)
-                                }
-                                currentStroke = emptyList()
-                            },
-                            onDrag = { change, _ ->
-                                currentStroke = currentStroke + android.graphics.PointF(change.position.x, change.position.y)
-                            }
-                        )
-                    }
-                    ui.highlightMode -> {
-                        // Highlight mode: rect drag
-                        detectDragGestures(
-                            onDragStart = { offset ->
-                                dragStart = offset
-                                dragEnd = offset
-                            },
-                            onDragEnd = {
-                                val start = dragStart
-                                val end = dragEnd
-                                if (start != null && end != null && containerSize.width > 0 && containerSize.height > 0) {
-                                    val left = minOf(start.x, end.x) / containerSize.width
-                                    val top = minOf(start.y, end.y) / containerSize.height
-                                    val right = maxOf(start.x, end.x) / containerSize.width
-                                    val bottom = maxOf(start.y, end.y) / containerSize.height
-                                    if (right - left > 0.01f && bottom - top > 0.01f) {
-                                        stateHolder.addHighlight(
-                                            pageIndex,
-                                            android.graphics.RectF(left, top, right, bottom),
-                                            0x66FFC043
-                                        )
-                                    }
-                                }
-                                dragStart = null
-                                dragEnd = null
-                            },
-                            onDrag = { change, _ ->
-                                dragEnd = change.position
-                            }
-                        )
-                    }
-                }
-            },
+            .then(touchModifier),
         contentAlignment = Alignment.Center
     ) {
         if (pb != null) {
@@ -576,13 +727,14 @@ fun PdfPageRenderBox(
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier.fillMaxWidth()
             )
-            // Annotation overlay — highlights + sketches + current drawing.
+            // Annotation overlay — highlights + sketches + current drawing + eraser cursor
             Canvas(modifier = Modifier.matchParentSize()) {
-                // Draw existing highlights
+                // 1. Draw existing highlights (both rects and smooth freehand strokes)
                 for (ann in highlights) {
+                    val highlightColor = Color(ann.color)
                     for (rect in ann.rects) {
                         drawRect(
-                            color = Color(ann.color),
+                            color = highlightColor.copy(alpha = 0.38f),
                             topLeft = Offset(rect.left * size.width, rect.top * size.height),
                             size = Size(
                                 (rect.right - rect.left) * size.width,
@@ -590,56 +742,72 @@ fun PdfPageRenderBox(
                             )
                         )
                     }
-                }
-                // Draw existing sketches
-                for (ann in sketches) {
+                    val strokeW = (ann.strokeWidth * 4f * density.density).coerceAtLeast(16.dp.toPx())
                     for (stroke in ann.strokes) {
-                        if (stroke.size < 2) continue
-                        val path = androidx.compose.ui.graphics.Path()
-                        val first = stroke[0]
-                        path.moveTo(first.x * size.width, first.y * size.height)
-                        for (i in 1 until stroke.size) {
-                            path.lineTo(stroke[i].x * size.width, stroke[i].y * size.height)
-                        }
-                        drawPath(
-                            path = path,
-                            color = Color(ann.color),
-                            style = androidx.compose.ui.graphics.drawscope.Stroke(
-                                width = ann.strokeWidth * 2f,
-                                cap = androidx.compose.ui.graphics.StrokeCap.Round,
-                                join = androidx.compose.ui.graphics.StrokeJoin.Round
-                            )
+                        drawSmoothPolyline(
+                            points = stroke,
+                            color = highlightColor,
+                            strokeWidthPx = strokeW,
+                            alpha = 0.38f
                         )
                     }
                 }
-                // Draw current sketch stroke
-                if (currentStroke.size >= 2) {
-                    val path = androidx.compose.ui.graphics.Path()
-                    path.moveTo(currentStroke[0].x, currentStroke[0].y)
-                    for (i in 1 until currentStroke.size) {
-                        path.lineTo(currentStroke[i].x, currentStroke[i].y)
-                    }
-                    drawPath(
-                        path = path,
-                        color = Color(ui.sketchColor),
-                        style = androidx.compose.ui.graphics.drawscope.Stroke(
-                            width = 8f,
-                            cap = androidx.compose.ui.graphics.StrokeCap.Round,
-                            join = androidx.compose.ui.graphics.StrokeJoin.Round
+
+                // 2. Draw existing sketches (pen)
+                for (ann in sketches) {
+                    val penColor = Color(ann.color)
+                    val strokeW = (ann.strokeWidth * density.density).coerceAtLeast(2.dp.toPx())
+                    for (stroke in ann.strokes) {
+                        drawSmoothPolyline(
+                            points = stroke,
+                            color = penColor,
+                            strokeWidthPx = strokeW,
+                            alpha = 1f
                         )
+                    }
+                }
+
+                // 3. Draw active wet stroke (while dragging)
+                if (currentStroke.isNotEmpty() && size.width > 0 && size.height > 0) {
+                    val activeNorm = currentStroke.map { android.graphics.PointF(it.x / size.width, it.y / size.height) }
+                    if (ui.highlightMode) {
+                        val strokeW = (ui.strokeWidth * 4f * density.density).coerceAtLeast(16.dp.toPx())
+                        drawSmoothPolyline(
+                            points = activeNorm,
+                            color = Color(ui.highlightColor),
+                            strokeWidthPx = strokeW,
+                            alpha = 0.38f
+                        )
+                    } else if (ui.sketchMode) {
+                        val strokeW = (ui.strokeWidth * density.density).coerceAtLeast(2.dp.toPx())
+                        drawSmoothPolyline(
+                            points = activeNorm,
+                            color = Color(ui.sketchColor),
+                            strokeWidthPx = strokeW,
+                            alpha = 1f
+                        )
+                    }
+                }
+
+                // 4. Draw eraser cursor circle
+                val ep = eraserPoint
+                if (ep != null) {
+                    val eraserRadius = 22.dp.toPx()
+                    drawCircle(
+                        color = Color.White.copy(alpha = 0.55f),
+                        radius = eraserRadius,
+                        center = ep
                     )
-                }
-                // Draw current highlight drag selection
-                val start = dragStart
-                val end = dragEnd
-                if (start != null && end != null) {
-                    drawRect(
-                        color = Color(0x88FFC043),
-                        topLeft = Offset(minOf(start.x, end.x), minOf(start.y, end.y)),
-                        size = Size(
-                            kotlin.math.abs(end.x - start.x),
-                            kotlin.math.abs(end.y - start.y)
-                        )
+                    drawCircle(
+                        color = Color(0xFFFF5252),
+                        radius = eraserRadius,
+                        center = ep,
+                        style = androidx.compose.ui.graphics.drawscope.Stroke(width = 2.dp.toPx())
+                    )
+                    drawCircle(
+                        color = Color(0xFFFF5252),
+                        radius = 3.dp.toPx(),
+                        center = ep
                     )
                 }
             }
@@ -651,11 +819,7 @@ fun PdfPageRenderBox(
                 modifier = Modifier.padding(16.dp)
             )
         } else {
-            CircularProgressIndicator(
-                color = PrimaryBlue,
-                strokeWidth = 2.dp,
-                modifier = Modifier.size(36.dp).padding(16.dp)
-            )
+            com.boardsprep.onboard.ui.components.PdfPageShimmerSkeleton()
         }
     }
 }
@@ -766,6 +930,303 @@ private fun DockIcon(
 ) {
     IconButton(onClick = onClick, enabled = enabled, modifier = Modifier.size(36.dp)) {
         Icon(imageVector, contentDescription = description, modifier = Modifier.size(20.dp))
+    }
+}
+
+/**
+ * Expressive tactile bottom palette for studying & annotations.
+ * Appears when highlighter, pen, or eraser mode is engaged.
+ */
+@Composable
+fun PdfAnnotationStudioBar(
+    highlightMode: Boolean,
+    sketchMode: Boolean,
+    eraserMode: Boolean,
+    currentColor: Int,
+    currentStrokeWidth: Float,
+    canUndo: Boolean,
+    canRedo: Boolean,
+    currentPage: Int,
+    totalPages: Int,
+    onPrevPage: () -> Unit,
+    onNextPage: () -> Unit,
+    onUndo: () -> Unit,
+    onRedo: () -> Unit,
+    onClearPage: () -> Unit,
+    onSelectHighlighter: (Int) -> Unit,
+    onSelectPen: (Int) -> Unit,
+    onSelectEraser: () -> Unit,
+    onSelectStrokeWidth: (Float) -> Unit,
+    onClose: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val highlighterPalette = listOf(
+        0x66FFEB3B.toInt() to "Yellow",
+        0x6681C784.toInt() to "Mint",
+        0x664DD0E1.toInt() to "Cyan",
+        0x66FF8A65.toInt() to "Coral",
+        0x66CE93D8.toInt() to "Lavender"
+    )
+    val penPalette = listOf(
+        0xFFFF1744.toInt() to "Red",
+        0xFF2979FF.toInt() to "Blue",
+        0xFF00E676.toInt() to "Green",
+        0xFF212121.toInt() to "Black",
+        0xFF9C27B0.toInt() to "Purple",
+        0xFFFF9100.toInt() to "Amber"
+    )
+
+    Surface(
+        modifier = modifier
+            .padding(horizontal = 10.dp)
+            .padding(bottom = 12.dp)
+            .shadow(16.dp, RoundedCornerShape(22.dp)),
+        shape = RoundedCornerShape(22.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.98f),
+        tonalElevation = 8.dp
+    ) {
+        Column(
+            modifier = Modifier.padding(horizontal = 10.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            // Row 1: Mode selectors + Quick Page Navigation + Undo/Redo/Done
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Tool selection pills (Pen, Highlighter, Eraser)
+                Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+                    // Pen pill
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = if (sketchMode) PrimaryBlue else MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.clickable { onSelectPen(penPalette.first().first) }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.Edit,
+                                contentDescription = "Pen",
+                                modifier = Modifier.size(15.dp),
+                                tint = if (sketchMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(Modifier.width(3.dp))
+                            Text(
+                                "Pen",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (sketchMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+
+                    // Highlighter pill
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = if (highlightMode) PrimaryBlue else MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.clickable { onSelectHighlighter(highlighterPalette.first().first) }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.Highlight,
+                                contentDescription = "Highlighter",
+                                modifier = Modifier.size(15.dp),
+                                tint = if (highlightMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(Modifier.width(3.dp))
+                            Text(
+                                "Highlight",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (highlightMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+
+                    // Eraser pill
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = if (eraserMode) Color(0xFFFF5252) else MaterialTheme.colorScheme.surface,
+                        modifier = Modifier.clickable { onSelectEraser() }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.AutoFixNormal,
+                                contentDescription = "Eraser",
+                                modifier = Modifier.size(15.dp),
+                                tint = if (eraserMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(Modifier.width(3.dp))
+                            Text(
+                                "Eraser",
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = if (eraserMode) Color.White else MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+
+                // Actions: Undo, Redo, Page Nav, Done
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(2.dp)) {
+                    IconButton(onClick = onUndo, enabled = canUndo, modifier = Modifier.size(28.dp)) {
+                        Icon(Icons.AutoMirrored.Filled.Undo, "Undo", modifier = Modifier.size(16.dp))
+                    }
+                    IconButton(onClick = onRedo, enabled = canRedo, modifier = Modifier.size(28.dp)) {
+                        Icon(Icons.AutoMirrored.Filled.Redo, "Redo", modifier = Modifier.size(16.dp))
+                    }
+
+                    VerticalDivider(modifier = Modifier.padding(horizontal = 2.dp).height(18.dp), color = MaterialTheme.colorScheme.outlineVariant)
+
+                    // Page switcher
+                    IconButton(onClick = onPrevPage, enabled = currentPage > 0, modifier = Modifier.size(26.dp)) {
+                        Icon(Icons.Default.ChevronLeft, "Prev Page", modifier = Modifier.size(16.dp))
+                    }
+                    Text(
+                        text = "${currentPage + 1}/$totalPages",
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    IconButton(onClick = onNextPage, enabled = currentPage < totalPages - 1, modifier = Modifier.size(26.dp)) {
+                        Icon(Icons.Default.ChevronRight, "Next Page", modifier = Modifier.size(16.dp))
+                    }
+
+                    VerticalDivider(modifier = Modifier.padding(horizontal = 2.dp).height(18.dp), color = MaterialTheme.colorScheme.outlineVariant)
+
+                    IconButton(onClick = onClose, modifier = Modifier.size(28.dp)) {
+                        Icon(Icons.Default.Check, "Done", modifier = Modifier.size(18.dp), tint = SuccessGreen)
+                    }
+                }
+            }
+
+            // Row 2: Contextual Tool Controls
+            if (eraserMode) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            Icons.Default.AutoFixNormal,
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = Color(0xFFFF5252)
+                        )
+                        Spacer(Modifier.width(6.dp))
+                        Text(
+                            text = "Tap or scrub across strokes to erase",
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.8f),
+                        modifier = Modifier.clickable { onClearPage() }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                Icons.Default.DeleteSweep,
+                                contentDescription = "Clear Page",
+                                modifier = Modifier.size(14.dp),
+                                tint = MaterialTheme.colorScheme.error
+                            )
+                            Spacer(Modifier.width(4.dp))
+                            Text(
+                                text = "Clear Page ${currentPage + 1}",
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colorScheme.error
+                            )
+                        }
+                    }
+                }
+            } else {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = if (highlightMode) "Color" else "Ink",
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    val activePalette = if (highlightMode) highlighterPalette else penPalette
+                    for ((c, name) in activePalette) {
+                        val isSelected = c == currentColor
+                        Box(
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clip(CircleShape)
+                                .background(Color(c))
+                                .border(
+                                    width = if (isSelected) 2.dp else 1.dp,
+                                    color = if (isSelected) MaterialTheme.colorScheme.primary else Color.Black.copy(alpha = 0.2f),
+                                    shape = CircleShape
+                                )
+                                .clickable {
+                                    if (highlightMode) onSelectHighlighter(c) else onSelectPen(c)
+                                },
+                            contentAlignment = Alignment.Center
+                        ) {
+                            if (isSelected) {
+                                Icon(
+                                    Icons.Default.Check,
+                                    contentDescription = name,
+                                    tint = if (highlightMode) Color.DarkGray else Color.White,
+                                    modifier = Modifier.size(14.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(Modifier.weight(1f))
+
+                    val widthOptions = if (highlightMode) {
+                        listOf(16f to "Fine", 24f to "Thick", 36f to "Chisel")
+                    } else {
+                        listOf(2f to "Fine", 4f to "Med", 8f to "Bold")
+                    }
+                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        widthOptions.forEach { (w, label) ->
+                            val isSelected = kotlin.math.abs(currentStrokeWidth - w) < 0.5f ||
+                                (!highlightMode && currentStrokeWidth == w) ||
+                                (highlightMode && currentStrokeWidth == w)
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface,
+                                modifier = Modifier.clickable { onSelectStrokeWidth(w) }
+                            ) {
+                                Text(
+                                    label,
+                                    fontSize = 9.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
+                                    modifier = Modifier.padding(horizontal = 6.dp, vertical = 3.dp)
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

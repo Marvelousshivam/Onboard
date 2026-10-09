@@ -20,6 +20,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.playback.DownloadState
+import com.boardsprep.onboard.core.playback.LectureDownloadManager
 import com.boardsprep.onboard.core.playback.LocalLectureScanner
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
@@ -50,6 +52,8 @@ fun DownloadsScreen(
 
     // Downloaded files from Room DB
     val downloads by repository.getAllDownloads().collectAsState(initial = emptyList())
+    // Active ongoing downloads from LectureDownloadManager
+    val activeDownloadsMap by LectureDownloadManager.activeDownloadsList.collectAsState()
 
     // Local user lectures scanned directly from storage
     val localLectures = remember(refreshKey) {
@@ -100,16 +104,17 @@ fun DownloadsScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            val totalInAppCount = downloads.size + activeDownloadsMap.size
             val downloadsTabs = listOf(
                 ExpressiveTabItem(
                     title = "In-App Downloads",
                     icon = Icons.Default.CloudDownload,
-                    badge = "${downloads.size}"
+                    badge = if (totalInAppCount > 0) "$totalInAppCount" else null
                 ),
                 ExpressiveTabItem(
                     title = "Local Storage",
                     icon = Icons.Default.Folder,
-                    badge = "${localLectures.size}"
+                    badge = if (localLectures.isNotEmpty()) "${localLectures.size}" else null
                 )
             )
 
@@ -122,7 +127,7 @@ fun DownloadsScreen(
 
             if (selectedTabIndex == 0) {
                 // In-App Downloads
-                if (downloads.isEmpty()) {
+                if (downloads.isEmpty() && activeDownloadsMap.isEmpty()) {
                     ExpressiveEmptyState(
                         icon = Icons.Default.CloudDownload,
                         title = "No Offline Downloads Yet",
@@ -135,6 +140,54 @@ fun DownloadsScreen(
                         contentPadding = PaddingValues(16.dp),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
+                        // Ongoing Active Downloads Section
+                        if (activeDownloadsMap.isNotEmpty()) {
+                            item {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(vertical = 4.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.DownloadForOffline,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.primary,
+                                        modifier = Modifier.size(16.dp)
+                                    )
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(
+                                        text = "DOWNLOADING NOW (${activeDownloadsMap.size})",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.primary
+                                    )
+                                }
+                            }
+
+                            items(activeDownloadsMap.entries.toList(), key = { it.key }) { (id, titleAndProg) ->
+                                val (title, prog) = titleAndProg
+                                ActiveDownloadCard(
+                                    title = title,
+                                    progress = prog,
+                                    onCancel = {
+                                        LectureDownloadManager.cancelDownload(context, id, title)
+                                    }
+                                )
+                            }
+
+                            if (downloads.isNotEmpty()) {
+                                item {
+                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Text(
+                                        text = "COMPLETED DOWNLOADS (${downloads.size})",
+                                        style = MaterialTheme.typography.labelMedium,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        }
+
+                        // Completed Downloads Section
                         items(downloads, key = { it.id }) { item ->
                             DownloadedItemCard(
                                 item = item,
@@ -411,3 +464,133 @@ private fun LocalLectureCard(
         }
     }
 }
+
+@Composable
+private fun ActiveDownloadCard(
+    title: String,
+    progress: DownloadState.Progress,
+    onCancel: () -> Unit
+) {
+    Card(
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.75f)),
+        shape = M3EBentoTileShape,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(modifier = Modifier.padding(14.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    modifier = Modifier.weight(1f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                        modifier = Modifier.size(32.dp)
+                    ) {
+                        Box(contentAlignment = Alignment.Center) {
+                            Icon(
+                                imageVector = Icons.Default.CloudDownload,
+                                contentDescription = null,
+                                tint = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Column {
+                        Text(
+                            text = title,
+                            style = MaterialTheme.typography.bodyMedium,
+                            fontWeight = FontWeight.Bold,
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                        )
+                        Text(
+                            text = "${progress.stage.label} • ${progress.percentage}%",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.primary,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+
+                IconButton(onClick = onCancel, modifier = Modifier.size(32.dp)) {
+                    Icon(
+                        imageVector = Icons.Default.Close,
+                        contentDescription = "Cancel Download",
+                        tint = MaterialTheme.colorScheme.error,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            LinearProgressIndicator(
+                progress = { progress.percentage / 100f },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(6.dp)
+                    .clip(ExpressivePillSmall),
+                color = MaterialTheme.colorScheme.primary,
+                trackColor = MaterialTheme.colorScheme.surface
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    // Speed
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Speed,
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.width(3.dp))
+                        Text(
+                            text = progress.speedFormatted,
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    // ETA
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Timer,
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                        Spacer(modifier = Modifier.width(3.dp))
+                        Text(
+                            text = progress.etaFormatted,
+                            fontSize = 11.sp,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                // Size
+                Text(
+                    text = progress.sizeFormatted,
+                    fontSize = 11.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontWeight = FontWeight.Medium
+                )
+            }
+        }
+    }
+}
+

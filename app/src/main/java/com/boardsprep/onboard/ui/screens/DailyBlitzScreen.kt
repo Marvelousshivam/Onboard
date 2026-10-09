@@ -28,6 +28,7 @@ import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.SpacedReviewEntity
 import com.boardsprep.onboard.data.repository.BoardsRepository
 import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
+import com.boardsprep.onboard.ui.components.MathFormulaView
 import com.boardsprep.onboard.ui.components.expressiveBounce
 import kotlinx.coroutines.launch
 
@@ -431,13 +432,22 @@ fun Flashcard3D(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp)
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
-                        Text(
-                            text = card.answer,
-                            style = MaterialTheme.typography.bodyLarge,
-                            fontWeight = FontWeight.Medium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            lineHeight = 26.sp
-                        )
+                        if (card.answer.contains("\\")) {
+                            MathFormulaView(
+                                latex = card.answer,
+                                textColor = MaterialTheme.colorScheme.onSurface,
+                                fontSizeSp = 15,
+                                height = 64.dp
+                            )
+                        } else {
+                            Text(
+                                text = card.answer,
+                                style = MaterialTheme.typography.bodyLarge,
+                                fontWeight = FontWeight.Medium,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                lineHeight = 26.sp
+                            )
+                        }
                     }
                 }
 

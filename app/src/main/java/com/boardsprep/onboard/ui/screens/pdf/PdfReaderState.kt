@@ -17,6 +17,7 @@ import androidx.compose.ui.platform.LocalContext
 import com.boardsprep.onboard.core.pdf.PdfAnnotation
 import com.boardsprep.onboard.core.pdf.PdfAnnotationType
 import com.boardsprep.onboard.core.pdf.PdfAppearanceSettings
+import com.boardsprep.onboard.core.pdf.PdfAnnotationHitTest
 import com.boardsprep.onboard.core.pdf.PdfAppearanceStore
 import com.boardsprep.onboard.core.pdf.PdfBookmark
 import com.boardsprep.onboard.core.pdf.PdfCoordinateTransforms
@@ -81,9 +82,9 @@ class PdfReaderState(
     private var prefetchJob: Job? = null
     private var searchJob: Job? = null
 
-    /** Undo/redo stacks for annotations (highlights, notes, sketches). */
-    private val undoStack = mutableListOf<PdfAnnotation>()
-    private val redoStack = mutableListOf<PdfAnnotation>()
+    /** Undo/redo stacks for annotations (highlights, notes, sketches), supporting single and batch actions. */
+    private val undoStack = mutableListOf<List<PdfAnnotation>>()
+    private val redoStack = mutableListOf<List<PdfAnnotation>>()
 
     /** Canonical document id, recomputed once the document is resolved. */
     private var documentId: String = repository.documentIdFor(source)
@@ -207,13 +208,25 @@ class PdfReaderState(
         prefetchAdjacent()
         persistReadingState()
 
-        // If the user requested offline mode before the document resolved,
-        // execute it now.
-        if (pendingOfflineMode) {
-            pendingOfflineMode = false
-            enableOfflineMode()
+        // Start background text extraction silently so search is instant
+        scope.launch(Dispatchers.IO) {
+            try {
+                val extractor = ensureTextExtractor()
+                extractor?.ensureExtracted()
+                _uiState.update {
+                    it.copy(
+                        offlineModeEnabled = true,
+                        offlineModeLoading = false,
+                        extractorState = extractor?.state?.value ?: PdfTextExtractor.ExtractionState.Idle,
+                        extractorHasTextLayer = (extractor?.state?.value as? PdfTextExtractor.ExtractionState.Ready)?.hasTextLayer
+                    )
+                }
+                PdfErrorLog.info(TAG, "Background text extraction completed")
+            } catch (e: Exception) {
+                PdfErrorLog.warn(TAG, "Background text extraction non-fatal error: ${e.message}")
+            }
         }
-        } catch (t: Throwable) {
+    } catch (t: Throwable) {
             PdfErrorLog.error(TAG, "onDocumentResolved failed: ${t.message}", t)
             _uiState.update {
                 it.copy(
@@ -418,7 +431,7 @@ class PdfReaderState(
                 updatedAt = System.currentTimeMillis()
             )
             readerRepository.upsertAnnotation(annotation)
-            undoStack.add(annotation)
+            undoStack.add(listOf(annotation))
             redoStack.clear()
             _uiState.update { it.copy(canUndo = true, canRedo = false) }
         }
@@ -429,19 +442,46 @@ class PdfReaderState(
             // Find the annotation to push to undo stack
             val ann = _uiState.value.annotations.find { it.id == id }
             if (ann != null) {
-                undoStack.add(ann)
+                undoStack.add(listOf(ann))
                 redoStack.clear()
             }
             readerRepository.deleteAnnotation(id)
         }
     }
 
-    /** Toggle highlight drawing mode. When on, dragging on a page creates a highlight. */
+    /** Toggle highlight drawing mode. When on, dragging on a page creates a translucent highlighter stroke. */
     fun toggleHighlightMode() {
-        _uiState.update { it.copy(highlightMode = !it.highlightMode, sketchMode = false) }
+        _uiState.update { it.copy(highlightMode = !it.highlightMode, sketchMode = false, eraserMode = false) }
     }
 
-    /** Add a highlight annotation at [rect] (normalised 0..1 page coords) on [pageIndex]. */
+    /** Toggle sketch (freehand pen) drawing mode. When on, dragging draws an ink stroke. */
+    fun toggleSketchMode() {
+        _uiState.update { it.copy(sketchMode = !it.sketchMode, highlightMode = false, eraserMode = false) }
+    }
+
+    /** Toggle tactile stroke eraser mode. When on, tapping or dragging across annotations erases them. */
+    fun toggleEraserMode() {
+        _uiState.update { it.copy(eraserMode = !it.eraserMode, sketchMode = false, highlightMode = false) }
+    }
+
+    /** Exit annotation studio mode and return to clean reading mode. */
+    fun exitAnnotationStudio() {
+        _uiState.update { it.copy(sketchMode = false, highlightMode = false, eraserMode = false) }
+    }
+
+    fun setSketchColor(color: Int) {
+        _uiState.update { it.copy(sketchColor = color) }
+    }
+
+    fun setHighlightColor(color: Int) {
+        _uiState.update { it.copy(highlightColor = color) }
+    }
+
+    fun setStrokeWidth(width: Float) {
+        _uiState.update { it.copy(strokeWidth = width) }
+    }
+
+    /** Add a rectangular highlight annotation (legacy or text-selection). */
     fun addHighlight(pageIndex: Int, rect: android.graphics.RectF, color: Int) {
         scope.launch(Dispatchers.IO) {
             val annotation = PdfAnnotation(
@@ -458,22 +498,36 @@ class PdfReaderState(
                 updatedAt = System.currentTimeMillis()
             )
             readerRepository.upsertAnnotation(annotation)
-            undoStack.add(annotation)
+            undoStack.add(listOf(annotation))
             redoStack.clear()
             _uiState.update { it.copy(canUndo = true, canRedo = false) }
         }
     }
 
-    /** Toggle sketch (freehand) drawing mode. When on, dragging draws a freehand stroke. */
-    fun toggleSketchMode() {
-        _uiState.update { it.copy(sketchMode = !it.sketchMode, highlightMode = false, sketchColor = it.sketchColor) }
+    /** Add a natural freehand highlighter stroke on [pageIndex]. */
+    fun addHighlightStroke(pageIndex: Int, strokes: List<List<android.graphics.PointF>>, color: Int, strokeWidth: Float) {
+        scope.launch(Dispatchers.IO) {
+            val annotation = PdfAnnotation(
+                id = java.util.UUID.randomUUID().toString(),
+                documentId = documentId,
+                pageIndex = pageIndex,
+                type = PdfAnnotationType.HIGHLIGHT,
+                rects = emptyList(),
+                color = color,
+                strokeWidth = strokeWidth,
+                strokes = strokes,
+                noteText = "",
+                createdAt = System.currentTimeMillis(),
+                updatedAt = System.currentTimeMillis()
+            )
+            readerRepository.upsertAnnotation(annotation)
+            undoStack.add(listOf(annotation))
+            redoStack.clear()
+            _uiState.update { it.copy(canUndo = true, canRedo = false) }
+        }
     }
 
-    fun setSketchColor(color: Int) {
-        _uiState.update { it.copy(sketchColor = color) }
-    }
-
-    /** Add a freehand sketch annotation on [pageIndex]. */
+    /** Add a freehand ink sketch annotation on [pageIndex]. */
     fun addSketch(pageIndex: Int, strokes: List<List<android.graphics.PointF>>, color: Int, strokeWidth: Float) {
         scope.launch(Dispatchers.IO) {
             val annotation = PdfAnnotation(
@@ -490,87 +544,91 @@ class PdfReaderState(
                 updatedAt = System.currentTimeMillis()
             )
             readerRepository.upsertAnnotation(annotation)
-            undoStack.add(annotation)
+            undoStack.add(listOf(annotation))
             redoStack.clear()
             _uiState.update { it.copy(canUndo = true, canRedo = false) }
         }
     }
 
-    /** Undo the last annotation action (add or delete). */
+    /** Erase any annotations (strokes or highlights) on [pageIndex] that intersect with [point]. */
+    fun eraseAtPoint(pageIndex: Int, point: android.graphics.PointF, toleranceNormalised: Float = 0.045f) {
+        val currentAnnotations = _uiState.value.annotations
+        val hits = PdfAnnotationHitTest.findHits(currentAnnotations, pageIndex, point, toleranceNormalised)
+        if (hits.isEmpty()) return
+        scope.launch(Dispatchers.IO) {
+            undoStack.add(hits)
+            for (ann in hits) {
+                readerRepository.deleteAnnotation(ann.id)
+            }
+            redoStack.clear()
+            _uiState.update { it.copy(canUndo = true, canRedo = false) }
+        }
+    }
+
+    /** Erase all annotations on [pageIndex] with full undo support. */
+    fun clearAllAnnotationsOnPage(pageIndex: Int) {
+        val onPage = _uiState.value.annotations.filter { it.pageIndex == pageIndex }
+        if (onPage.isEmpty()) return
+        scope.launch(Dispatchers.IO) {
+            undoStack.add(onPage)
+            for (ann in onPage) {
+                readerRepository.deleteAnnotation(ann.id)
+            }
+            redoStack.clear()
+            _uiState.update { it.copy(canUndo = true, canRedo = false) }
+        }
+    }
+
+    /** Undo the last annotation action (add or delete), supporting batch operations. */
     fun undo() {
         if (undoStack.isEmpty()) return
-        val last = undoStack.removeAt(undoStack.lastIndex)
+        val batch = undoStack.removeAt(undoStack.lastIndex)
         scope.launch(Dispatchers.IO) {
-            // If it exists in DB, delete it (undo add). If it doesn't, re-add it (undo delete).
-            val exists = _uiState.value.annotations.any { it.id == last.id }
-            if (exists) {
-                readerRepository.deleteAnnotation(last.id)
-            } else {
-                readerRepository.upsertAnnotation(last)
+            for (item in batch) {
+                val exists = _uiState.value.annotations.any { it.id == item.id }
+                if (exists) {
+                    readerRepository.deleteAnnotation(item.id)
+                } else {
+                    readerRepository.upsertAnnotation(item)
+                }
             }
-            redoStack.add(last)
+            redoStack.add(batch)
             _uiState.update { it.copy(canUndo = undoStack.isNotEmpty(), canRedo = true) }
         }
     }
 
-    /** Redo the last undone annotation action. */
+    /** Redo the last undone annotation action, supporting batch operations. */
     fun redo() {
         if (redoStack.isEmpty()) return
-        val last = redoStack.removeAt(redoStack.lastIndex)
+        val batch = redoStack.removeAt(redoStack.lastIndex)
         scope.launch(Dispatchers.IO) {
-            // If it exists in DB, delete it (redo delete). If it doesn't, re-add it (redo add).
-            val exists = _uiState.value.annotations.any { it.id == last.id }
-            if (exists) {
-                readerRepository.deleteAnnotation(last.id)
-            } else {
-                readerRepository.upsertAnnotation(last)
+            for (item in batch) {
+                val exists = _uiState.value.annotations.any { it.id == item.id }
+                if (exists) {
+                    readerRepository.deleteAnnotation(item.id)
+                } else {
+                    readerRepository.upsertAnnotation(item)
+                }
             }
-            undoStack.add(last)
+            undoStack.add(batch)
             _uiState.update { it.copy(canUndo = true, canRedo = redoStack.isNotEmpty()) }
         }
     }
 
-    // ---- Offline mode ----------------------------------------------------
+    // ---- Text extraction & Search ------------------------------------------
 
-    /** When true, offline mode will be enabled as soon as the document resolves. */
-    private var pendingOfflineMode = false
-
-    /**
-     * Enable offline mode: extracts the full text layer via PdfBox so that
-     * text search (and future offline-only features) become available.
-     *
-     * If the document hasn't resolved yet, the request is queued and will
-     * execute automatically once [onDocumentResolved] completes.
-     */
     fun enableOfflineMode() {
-        if (_uiState.value.offlineModeEnabled || _uiState.value.offlineModeLoading) return
-        // If the document isn't resolved yet, queue the request.
-        if (resolvedRef == null) {
-            PdfErrorLog.info(TAG, "enableOfflineMode: document not resolved yet, queuing")
-            pendingOfflineMode = true
-            _uiState.update { it.copy(offlineModeLoading = true) }
-            return
-        }
-        PdfErrorLog.info(TAG, "enableOfflineMode: starting text extraction")
-        _uiState.update { it.copy(offlineModeLoading = true) }
         scope.launch(Dispatchers.IO) {
             val extractor = ensureTextExtractor()
-            if (extractor == null) {
-                PdfErrorLog.error(TAG, "enableOfflineMode: could not open text extractor")
-                _uiState.update { it.copy(offlineModeLoading = false) }
-                return@launch
-            }
-            // Force extraction now.
-            extractor.ensureExtracted()
+            extractor?.ensureExtracted()
             _uiState.update {
                 it.copy(
                     offlineModeEnabled = true,
                     offlineModeLoading = false,
-                    extractorState = extractor.state.value,
-                    extractorHasTextLayer = (extractor.state.value as? PdfTextExtractor.ExtractionState.Ready)?.hasTextLayer
+                    extractorState = extractor?.state?.value ?: PdfTextExtractor.ExtractionState.Idle,
+                    extractorHasTextLayer = (extractor?.state?.value as? PdfTextExtractor.ExtractionState.Ready)?.hasTextLayer
                 )
             }
-            PdfErrorLog.info(TAG, "enableOfflineMode: complete")
         }
     }
 
@@ -595,14 +653,9 @@ class PdfReaderState(
     // ---- Search ------------------------------------------------------------
 
     /**
-     * Run a search. If offline mode is not enabled, this is a no-op — the UI
-     * is responsible for prompting the user to enable offline mode first.
+     * Run a search. Lazily ensures text extractor is initialized and parsed.
      */
     fun runSearch(query: String) {
-        if (!_uiState.value.offlineModeEnabled) {
-            PdfErrorLog.info(TAG, "runSearch ignored: offline mode not enabled")
-            return
-        }
         searchJob?.cancel()
         _uiState.update {
             it.copy(searchQuery = query, searchIndex = if (query.isBlank()) -1 else 0)
@@ -613,12 +666,13 @@ class PdfReaderState(
         }
         PdfErrorLog.info(TAG, "runSearch: query='$query'")
         searchJob = scope.launch(Dispatchers.IO) {
-            val extractor = textExtractor ?: run {
+            val extractor = ensureTextExtractor() ?: run {
                 _uiState.update {
                     it.copy(search = PdfSearchResult(query, emptyList(), 0, false))
                 }
                 return@launch
             }
+            extractor.ensureExtracted()
             val result = extractor.search(query)
             _uiState.update {
                 it.copy(
@@ -810,8 +864,11 @@ data class PdfReaderUiState(
     val offlineModeEnabled: Boolean = false,
     val offlineModeLoading: Boolean = false,
     val highlightMode: Boolean = false,
+    val highlightColor: Int = 0x66FFEB3B.toInt(), // Fluorescent yellow default
     val sketchMode: Boolean = false,
     val sketchColor: Int = 0xFFFF1744.toInt(),
+    val strokeWidth: Float = 4f,
+    val eraserMode: Boolean = false,
     val canUndo: Boolean = false,
     val canRedo: Boolean = false,
     val scrollRequest: Long = 0L

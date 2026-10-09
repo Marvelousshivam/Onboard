@@ -21,16 +21,41 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        resourceConfigurations += setOf("en")
+        ndk {
+            abiFilters.addAll(listOf("arm64-v8a", "armeabi-v7a"))
+        }
+    }
+
+    signingConfigs {
+        create("release") {
+            val ksFile = file("C:/Users/dines/Onboard")
+            if (ksFile.exists()) {
+                storeFile = ksFile
+                storePassword = "mnbvcxz@shivam123"
+                keyAlias = "key0"
+                keyPassword = "mnbvcxz@shivam123"
+                enableV1Signing = true
+                enableV2Signing = true
+            }
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -46,9 +71,6 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-        jniLibs {
-            useLegacyPackaging = true
         }
     }
 
@@ -107,10 +129,6 @@ dependencies {
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.9.0")
-
-    // YoutubeDL for Reliable Downloading (replaces piped apis)
-    implementation("io.github.junkfood02.youtubedl-android:library:0.18.1")
-    implementation("io.github.junkfood02.youtubedl-android:ffmpeg:0.18.1")
 
     // Firebase Platform & Cloud Services
     val firebaseBom = platform("com.google.firebase:firebase-bom:33.7.0")

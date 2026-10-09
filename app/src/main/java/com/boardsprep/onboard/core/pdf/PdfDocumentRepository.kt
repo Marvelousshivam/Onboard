@@ -51,10 +51,47 @@ class PdfDocumentRepository(
         // A 400-page NCERT textbook is typically 20–80MB; reserve a sensible
         // safety margin before any download starts.
         private const val DOWNLOAD_RESERVE_BYTES = 10L * 1024L * 1024L
+        // Strict 50 MB ceiling for cached chapter PDFs with LRU pruning down to 35 MB
+        const val MAX_PDF_CACHE_BYTES = 50L * 1024L * 1024L
+        const val TARGET_PRUNE_BYTES = 35L * 1024L * 1024L
     }
 
     private val cacheDir: File by lazy {
         File(context.filesDir, "cached_pdfs").apply { if (!exists()) mkdirs() }
+    }
+
+    /**
+     * Enforces the 50 MB LRU disk cache ceiling by evicting oldest accessed files.
+     */
+    fun enforceLruCacheLimit() {
+        try {
+            val files = cacheDir.listFiles() ?: return
+            var totalBytes = files.sumOf { it.length() }
+            if (totalBytes <= MAX_PDF_CACHE_BYTES) return
+
+            val sorted = files.sortedBy { it.lastModified() }
+            for (f in sorted) {
+                if (totalBytes <= TARGET_PRUNE_BYTES) break
+                val len = f.length()
+                if (f.delete()) {
+                    totalBytes -= len
+                }
+            }
+        } catch (_: Exception) {}
+    }
+
+    /**
+     * Clears all cached PDFs to instantly reclaim device storage.
+     */
+    fun clearCache(): Long {
+        return try {
+            val files = cacheDir.listFiles() ?: return 0L
+            val freed = files.sumOf { it.length() }
+            files.forEach { it.delete() }
+            freed
+        } catch (_: Exception) {
+            0L
+        }
     }
 
     sealed interface ResolveResult {
@@ -147,6 +184,7 @@ class PdfDocumentRepository(
         // 3. HTTPS URL — download atomically.
         val cached = cacheFileFor(source)
         if (cached.exists() && validatePdf(cached) is PdfValidity.Valid) {
+            cached.setLastModified(System.currentTimeMillis())
             return@withContext ResolveResult.Success(
                 PdfDocumentRef(documentId, source, title, cached, origin, paired),
                 fromCache = true
@@ -272,6 +310,8 @@ class PdfDocumentRepository(
             if (!part.renameTo(target)) {
                 part.copyTo(target, overwrite = true); part.delete()
             }
+            target.setLastModified(System.currentTimeMillis())
+            enforceLruCacheLimit()
             DownloadResult.Ok
         } catch (e: CancellationException) {
             part.delete()

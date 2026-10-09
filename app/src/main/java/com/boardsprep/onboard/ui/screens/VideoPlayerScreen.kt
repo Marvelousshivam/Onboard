@@ -60,6 +60,7 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.AspectRatioFrameLayout
 import androidx.media3.ui.PlayerView
 import com.boardsprep.onboard.core.playback.DownloadState
+import com.boardsprep.onboard.core.playback.LectureDownloadManager
 import com.boardsprep.onboard.core.playback.LectureDownloader
 import com.boardsprep.onboard.core.playback.StreamExtractor
 import com.boardsprep.onboard.core.theme.*
@@ -126,8 +127,11 @@ fun VideoPlayerScreen(
     var customFullscreenView by remember { mutableStateOf<View?>(null) }
     var customFullscreenCallback by remember { mutableStateOf<WebChromeClient.CustomViewCallback?>(null) }
 
-    val downloadState = remember { MutableStateFlow<DownloadState>(DownloadState.Idle) }
-    val currentDownloadState by downloadState.collectAsState()
+    // Persistent download state retrieved from global LectureDownloadManager
+    val downloadStateFlow = remember(lectureId, safeTitle) {
+        LectureDownloadManager.getDownloadState(context, lectureId, safeTitle)
+    }
+    val currentDownloadState by downloadStateFlow.collectAsState()
 
     // ExoPlayer instance for local/direct stream
     val exoPlayer = remember {
@@ -208,8 +212,20 @@ fun VideoPlayerScreen(
                             body, html { width: 100%; height: 100%; overflow: hidden; background: #000; }
                             .container { position: relative; width: 100%; height: 100%; }
                             iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; }
-                            .ytp-ad-module, .ytp-ad-overlay-container, .ytp-ad-player-overlay { display: none !important; }
+                            .ytp-ad-module, .ytp-ad-overlay-container, .ytp-ad-player-overlay, .video-ads, .ytp-ad-text, .ytp-ad-preview-container, .ytp-ad-skip-button-slot { display: none !important; opacity: 0 !important; pointer-events: none !important; }
                         </style>
+                        <script>
+                            // Continuous fast ad-suppression interval
+                            setInterval(function() {
+                                var ad = document.querySelector('.ad-showing, .ad-interrupting, .ytp-ad-player-overlay');
+                                var v = document.querySelector('video');
+                                if (ad && v && !isNaN(v.duration)) {
+                                    v.currentTime = v.duration;
+                                }
+                                var skip = document.querySelector('.ytp-ad-skip-button, .ytp-ad-skip-button-modern, .ytp-skip-ad-button');
+                                if (skip) skip.click();
+                            }, 250);
+                        </script>
                     </head>
                     <body>
                         <div class="container">
@@ -897,11 +913,11 @@ fun VideoPlayerScreen(
                                 }
                                 Spacer(modifier = Modifier.height(16.dp))
                                 val qualities = listOf(
-                                    Triple("1080p (Full HD)", "bestvideo[height<=1080]+bestaudio/best[height<=1080]/best", false),
-                                    Triple("720p (HD) [Recommended]", "bestvideo[height<=720]+bestaudio/best[height<=720]/best", false),
-                                    Triple("480p (Standard)", "bestvideo[height<=480]+bestaudio/best[height<=480]/best", false),
-                                    Triple("360p (Data Saver)", "bestvideo[height<=360]+bestaudio/best[height<=360]/best", false),
-                                    Triple("Audio Lecture (M4A)", "bestaudio[ext=m4a]/bestaudio/best", true)
+                                    Triple("1080p (Full HD)", "1080", false),
+                                    Triple("720p (HD) [Recommended]", "720", false),
+                                    Triple("480p (Standard)", "480", false),
+                                    Triple("360p (Data Saver)", "360", false),
+                                    Triple("Audio Lecture (M4A)", "audio", true)
                                 )
                                 qualities.forEach { (label, format, isAudio) ->
                                     ListItem(
@@ -926,21 +942,18 @@ fun VideoPlayerScreen(
                                             .clip(M3EBentoTileShape)
                                             .clickable {
                                                 showQualityDialog = false
-                                                coroutineScope.launch {
-                                                    val downloader = LectureDownloader(context)
-                                                    val targetUrl = if (isYouTube && youtubeVideoId != null) {
-                                                        "https://www.youtube.com/watch?v=$youtubeVideoId"
-                                                    } else url
-                                                    downloader.downloadLecture(
-                                                        id = lectureId,
-                                                        title = title,
-                                                        chapterId = currentChapter?.id ?: "chapter",
-                                                        url = targetUrl,
-                                                        formatSelector = format,
-                                                        isAudioOnly = isAudio,
-                                                        progressFlow = downloadState
-                                                    )
-                                                }
+                                                val targetUrl = if (isYouTube && youtubeVideoId != null) {
+                                                    "https://www.youtube.com/watch?v=$youtubeVideoId"
+                                                } else url
+                                                LectureDownloadManager.startDownload(
+                                                    context = context,
+                                                    id = lectureId,
+                                                    title = safeTitle,
+                                                    chapterId = currentChapter?.id ?: "chapter",
+                                                    url = targetUrl,
+                                                    formatSelector = format,
+                                                    isAudioOnly = isAudio
+                                                )
                                             }
                                     )
                                 }
@@ -948,40 +961,146 @@ fun VideoPlayerScreen(
                         }
                     }
 
-                    // Download Progress Feedback Card
+                    // Download Progress Feedback Card (Persistent across navigation & with Speed, ETA, Size)
                     when (val state = currentDownloadState) {
                         is DownloadState.Progress -> {
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
-                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.75f)),
                                 shape = M3EBentoTileShape
                             ) {
                                 Column(modifier = Modifier.padding(16.dp)) {
                                     Row(
                                         modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        Row(verticalAlignment = Alignment.CenterVertically) {
-                                            Icon(
-                                                imageVector = Icons.Default.CloudDownload,
-                                                contentDescription = null,
-                                                tint = MaterialTheme.colorScheme.primary,
-                                                modifier = Modifier.size(16.dp)
-                                            )
-                                            Spacer(modifier = Modifier.width(6.dp))
-                                            Text("Saving lecture offline...", fontSize = 12.sp, fontWeight = FontWeight.SemiBold)
+                                        Row(
+                                            verticalAlignment = Alignment.CenterVertically,
+                                            modifier = Modifier.weight(1f)
+                                        ) {
+                                            Surface(
+                                                shape = CircleShape,
+                                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                                modifier = Modifier.size(34.dp)
+                                            ) {
+                                                Box(contentAlignment = Alignment.Center) {
+                                                    Icon(
+                                                        imageVector = Icons.Default.CloudDownload,
+                                                        contentDescription = null,
+                                                        tint = MaterialTheme.colorScheme.primary,
+                                                        modifier = Modifier.size(18.dp)
+                                                    )
+                                                }
+                                            }
+                                            Spacer(modifier = Modifier.width(10.dp))
+                                            Column {
+                                                Text(
+                                                    text = state.stage.label,
+                                                    fontSize = 13.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    color = MaterialTheme.colorScheme.onSurface
+                                                )
+                                                if (state.qualityLabel.isNotBlank()) {
+                                                    Text(
+                                                        text = state.qualityLabel,
+                                                        fontSize = 11.sp,
+                                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                    )
+                                                }
+                                            }
                                         }
-                                        Text("${state.percentage}%", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+
+                                        Surface(
+                                            shape = ExpressivePillSmall,
+                                            color = MaterialTheme.colorScheme.primary
+                                        ) {
+                                            Text(
+                                                text = "${state.percentage}%",
+                                                fontSize = 12.sp,
+                                                fontWeight = FontWeight.ExtraBold,
+                                                color = MaterialTheme.colorScheme.onPrimary,
+                                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+                                            )
+                                        }
                                     }
-                                    Spacer(modifier = Modifier.height(8.dp))
+
+                                    Spacer(modifier = Modifier.height(12.dp))
+
                                     LinearProgressIndicator(
                                         progress = { state.percentage / 100f },
                                         modifier = Modifier
                                             .fillMaxWidth()
-                                            .height(6.dp)
+                                            .height(8.dp)
                                             .clip(ExpressivePillSmall),
-                                        color = MaterialTheme.colorScheme.primary
+                                        color = MaterialTheme.colorScheme.primary,
+                                        trackColor = MaterialTheme.colorScheme.surface
                                     )
+
+                                    Spacer(modifier = Modifier.height(10.dp))
+
+                                    // Metrics Row: Speed • ETA • Size & Cancel action
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.SpaceBetween,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Row(
+                                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                            verticalAlignment = Alignment.CenterVertically
+                                        ) {
+                                            // Speed
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Icon(
+                                                    imageVector = Icons.Default.Speed,
+                                                    contentDescription = null,
+                                                    tint = MaterialTheme.colorScheme.primary,
+                                                    modifier = Modifier.size(13.dp)
+                                                )
+                                                Spacer(modifier = Modifier.width(3.dp))
+                                                Text(
+                                                    text = state.speedFormatted,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.SemiBold,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+
+                                            // ETA
+                                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                                Icon(
+                                                    imageVector = Icons.Default.Timer,
+                                                    contentDescription = null,
+                                                    tint = MaterialTheme.colorScheme.primary,
+                                                    modifier = Modifier.size(13.dp)
+                                                )
+                                                Spacer(modifier = Modifier.width(3.dp))
+                                                Text(
+                                                    text = state.etaFormatted,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.SemiBold,
+                                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                                )
+                                            }
+
+                                            // Size
+                                            Text(
+                                                text = state.sizeFormatted,
+                                                fontSize = 11.sp,
+                                                fontWeight = FontWeight.Medium,
+                                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                                            )
+                                        }
+
+                                        TextButton(
+                                            onClick = {
+                                                LectureDownloadManager.cancelDownload(context, lectureId, safeTitle)
+                                            },
+                                            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
+                                        ) {
+                                            Text("Cancel", fontSize = 11.sp, color = MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -993,11 +1112,22 @@ fun VideoPlayerScreen(
                             ) {
                                 Row(
                                     modifier = Modifier.padding(14.dp),
-                                    verticalAlignment = Alignment.CenterVertically
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(20.dp))
-                                    Spacer(modifier = Modifier.width(10.dp))
-                                    Text("Downloaded! Available in Offline Library.", color = SuccessGreen, fontWeight = FontWeight.SemiBold, fontSize = 12.sp)
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(22.dp))
+                                        Spacer(modifier = Modifier.width(10.dp))
+                                        Column {
+                                            Text("Downloaded for Offline Study", color = SuccessGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp)
+                                            val sizeMb = state.localFile.length() / (1024.0 * 1024.0)
+                                            Text(
+                                                String.format(java.util.Locale.US, "Ready in offline library • %.1f MB", sizeMb),
+                                                color = SuccessGreen.copy(alpha = 0.85f),
+                                                fontSize = 11.sp
+                                            )
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -1009,11 +1139,22 @@ fun VideoPlayerScreen(
                             ) {
                                 Row(
                                     modifier = Modifier.padding(14.dp),
-                                    verticalAlignment = Alignment.CenterVertically
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    Icon(Icons.Default.Error, contentDescription = null, tint = ErrorRed, modifier = Modifier.size(20.dp))
-                                    Spacer(modifier = Modifier.width(10.dp))
-                                    Text("Download Failed: ${state.message}", color = MaterialTheme.colorScheme.onErrorContainer, fontSize = 12.sp)
+                                    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
+                                        Icon(Icons.Default.Error, contentDescription = null, tint = ErrorRed, modifier = Modifier.size(20.dp))
+                                        Spacer(modifier = Modifier.width(10.dp))
+                                        Text(
+                                            "Download Interrupted: ${state.message}",
+                                            color = MaterialTheme.colorScheme.onErrorContainer,
+                                            fontSize = 12.sp,
+                                            lineHeight = 16.sp
+                                        )
+                                    }
+                                    TextButton(onClick = { showQualityDialog = true }) {
+                                        Text("Retry", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                    }
                                 }
                             }
                         }

@@ -50,6 +50,7 @@ typealias OnOpenPdfWithPair = (
 fun SamplePapersScreen(
     initialSubjectId: String = "",
     onOpenPdf: OnOpenPdfWithPair,
+    onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit = { _, _, _, _ -> },
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
@@ -323,7 +324,8 @@ fun SamplePapersScreen(
                         SamplePaperCard(
                             paper = paper,
                             allPapers = allPapers,
-                            onOpenPdf = onOpenPdf
+                            onOpenPdf = onOpenPdf,
+                            onStartExamSimulation = onStartExamSimulation
                         )
                     }
                 }
@@ -336,7 +338,8 @@ fun SamplePapersScreen(
 private fun SamplePaperCard(
     paper: SamplePaper,
     allPapers: List<SamplePaper>,
-    onOpenPdf: OnOpenPdfWithPair
+    onOpenPdf: OnOpenPdfWithPair,
+    onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit
 ) {
     val context = LocalContext.current
     val isSqp = paper.type.equals("sqp", ignoreCase = true)
@@ -502,30 +505,62 @@ private fun SamplePaperCard(
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            // Action Buttons Row
+            // SQP 3-Hour Exam Simulation Quick Action
+            if (isSqp) {
+                Button(
+                    onClick = {
+                        val openUrl = localCached?.absolutePath ?: paper.url
+                        val pairedMsUrl = pairedPaper?.let { p ->
+                            val local = LocalDocumentScanner.findSamplePaper(context, p.filename)
+                            local?.absolutePath ?: p.url
+                        } ?: ""
+                        onStartExamSimulation(displayTitle, displaySubject, openUrl, pairedMsUrl)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = ExpressiveCardMedium,
+                    colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Bolt,
+                        contentDescription = null,
+                        modifier = Modifier.size(18.dp),
+                        tint = AccentAmberOnBg
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = "⚡ Start 3-Hour Exam Simulation",
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = AccentAmberOnBg
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(8.dp))
+            }
+
+            // Secondary Action Buttons Row
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Button(
+                OutlinedButton(
                     onClick = {
                         val openUrl = localCached?.absolutePath ?: paper.url
                         val (pairUrl, pairTitle, pairRole) = pairedInfo()
                         onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
                     },
                     modifier = Modifier.weight(1f),
-                    shape = ExpressiveCardMedium,
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
+                    shape = ExpressiveCardMedium
                 ) {
                     Icon(
-                        imageVector = if (isSqp) Icons.Default.EditNote else Icons.Default.CheckCircle,
+                        imageVector = if (isSqp) Icons.Default.MenuBook else Icons.Default.CheckCircle,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = if (isSqp) "Solve Paper" else "View Marking",
-                        fontSize = 13.sp,
+                        text = if (isSqp) "Open in Reader" else "View Marking",
+                        fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
                         maxLines = 1,
                         softWrap = false
@@ -540,7 +575,6 @@ private fun SamplePaperCard(
                             val pairedTitleText = pairedPaper.title
                                 .replace("EnglishCore", "English Core")
                                 .replace("PhysicalEducation", "Physical Education")
-                            // When opening the *paired* paper, the original paper becomes the pair.
                             val originalRole = if (isSqp) PdfPairedRole.QUESTION_PAPER else PdfPairedRole.MARKING_SCHEME
                             val originalUrl = localCached?.absolutePath ?: paper.url
                             onOpenPdf(openUrl, pairedTitleText, originalUrl, displayTitle, originalRole)

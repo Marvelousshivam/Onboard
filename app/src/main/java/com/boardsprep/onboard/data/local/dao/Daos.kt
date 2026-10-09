@@ -118,6 +118,12 @@ interface ErrorVaultDao {
     @Query("UPDATE error_vault SET failureCount = failureCount + 1, lastAttemptedAt = :now WHERE id = :id")
     suspend fun recordReattemptFailure(id: Long, now: Long = System.currentTimeMillis())
 
+    @Query("SELECT * FROM error_vault WHERE questionId = :questionId LIMIT 1")
+    suspend fun getErrorByQuestionId(questionId: String): com.boardsprep.onboard.data.local.entities.ErrorVaultEntity?
+
+    @Query("SELECT * FROM error_vault ORDER BY lastAttemptedAt DESC")
+    suspend fun getAllErrorsList(): List<com.boardsprep.onboard.data.local.entities.ErrorVaultEntity>
+
     @Query("DELETE FROM error_vault WHERE id = :id")
     suspend fun deleteError(id: Long)
 }
@@ -129,6 +135,9 @@ interface SpacedReviewDao {
 
     @Query("SELECT * FROM spaced_reviews ORDER BY nextReviewDate ASC")
     fun getAllReviews(): Flow<List<com.boardsprep.onboard.data.local.entities.SpacedReviewEntity>>
+
+    @Query("SELECT * FROM spaced_reviews ORDER BY nextReviewDate ASC")
+    suspend fun getAllReviewsList(): List<com.boardsprep.onboard.data.local.entities.SpacedReviewEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertReviews(entities: List<com.boardsprep.onboard.data.local.entities.SpacedReviewEntity>)

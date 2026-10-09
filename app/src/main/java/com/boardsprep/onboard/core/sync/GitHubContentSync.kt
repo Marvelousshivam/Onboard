@@ -10,22 +10,27 @@ import okhttp3.Request
 import java.io.File
 import java.util.concurrent.TimeUnit
 
+import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
+
+@Keep
 data class GitHubManifest(
-    val version: Int = 1,
-    val lastUpdated: String = "2026-10-04",
-    val githubRepo: String = "gtxPrime/BoardsPrep-Content",
-    val cdnBaseUrl: String = "https://cdn.jsdelivr.net/gh/gtxPrime/BoardsPrep-Content@main/",
-    val rawBaseUrl: String = "https://raw.githubusercontent.com/gtxPrime/BoardsPrep-Content/main/",
-    val chaptersNotesMap: Map<String, String> = emptyMap(),
-    val extraLectures: List<RemoteLectureItem> = emptyList()
+    @SerializedName(value = "version", alternate = ["v"]) val version: Int = 1,
+    @SerializedName(value = "last_updated", alternate = ["lastUpdated"]) val lastUpdated: String = "2026-10-04",
+    @SerializedName(value = "github_repo", alternate = ["githubRepo"]) val githubRepo: String = "gtxPrime/BoardsPrep-Content",
+    @SerializedName(value = "cdn_base_url", alternate = ["cdnBaseUrl"]) val cdnBaseUrl: String = "https://cdn.jsdelivr.net/gh/gtxPrime/BoardsPrep-Content@main/",
+    @SerializedName(value = "raw_base_url", alternate = ["rawBaseUrl"]) val rawBaseUrl: String = "https://raw.githubusercontent.com/gtxPrime/BoardsPrep-Content/main/",
+    @SerializedName(value = "chapters_notes_map", alternate = ["chaptersNotesMap"]) val chaptersNotesMap: Map<String, String> = emptyMap(),
+    @SerializedName(value = "extra_lectures", alternate = ["extraLectures"]) val extraLectures: List<RemoteLectureItem> = emptyList()
 )
 
+@Keep
 data class RemoteLectureItem(
-    val id: String,
-    val title: String,
-    val youtubeId: String,
-    val durationText: String,
-    val chapterName: String
+    @SerializedName("id") val id: String,
+    @SerializedName("title") val title: String,
+    @SerializedName(value = "youtube_id", alternate = ["youtubeId"]) val youtubeId: String,
+    @SerializedName(value = "duration_text", alternate = ["durationText"]) val durationText: String,
+    @SerializedName(value = "chapter_name", alternate = ["chapterName"]) val chapterName: String
 )
 
 object GitHubContentSync {
