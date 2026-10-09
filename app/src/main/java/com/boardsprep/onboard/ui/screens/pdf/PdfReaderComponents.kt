@@ -25,17 +25,17 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.automirrored.filled.Redo
+import androidx.compose.material.icons.automirrored.filled.Undo
 import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.FullscreenExit
 import androidx.compose.material.icons.filled.Highlight
-import androidx.compose.material.icons.filled.Redo
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.SwapHoriz
 import androidx.compose.material.icons.filled.Tune
-import androidx.compose.material.icons.filled.Undo
 import androidx.compose.material.icons.filled.ZoomIn
 import androidx.compose.material.icons.filled.ZoomOut
 import androidx.compose.material3.AlertDialog
@@ -704,8 +704,8 @@ fun PdfBottomDock(
         ) {
             // Undo/Redo — only visible when there's something to undo/redo
             if (showUndoRedo) {
-                DockIcon(Icons.Default.Undo, "Undo", enabled = canUndo, onClick = onUndo)
-                DockIcon(Icons.Default.Redo, "Redo", enabled = canRedo, onClick = onRedo)
+                DockIcon(Icons.AutoMirrored.Filled.Undo, "Undo", enabled = canUndo, onClick = onUndo)
+                DockIcon(Icons.AutoMirrored.Filled.Redo, "Redo", enabled = canRedo, onClick = onRedo)
                 VerticalDivider(modifier = Modifier.padding(horizontal = 3.dp).height(22.dp), color = MaterialTheme.colorScheme.outlineVariant)
             }
             // Page navigation
@@ -818,20 +818,10 @@ fun PdfPageJumpDialog(
 
 @Composable
 fun PdfLoadingState(progress: Float?, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        CircularProgressIndicator(color = PrimaryBlue, modifier = Modifier.size(42.dp), strokeWidth = 3.dp)
-        Spacer(Modifier.size(14.dp))
-        Text(
-            text = if (progress != null) "Downloading textbook… ${(progress * 100).roundToInt()}%" else "Loading document…",
-            fontSize = 13.sp, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onSurface
-        )
-        Spacer(Modifier.size(4.dp))
-        Text(text = "Cached locally for offline study", fontSize = 11.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
+    com.boardsprep.onboard.ui.components.PdfAsymmetricLoadingView(
+        progress = progress,
+        modifier = modifier
+    )
 }
 
 @Composable

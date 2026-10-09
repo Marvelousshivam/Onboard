@@ -18,12 +18,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.clickable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.Note
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Note
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.WarningAmber
 import androidx.compose.material3.Button
@@ -360,7 +360,7 @@ fun PdfAnnotationsSheet(
                         ) {
                             Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Icon(
-                                    imageVector = if (ann.type == PdfAnnotationType.NOTE) Icons.Default.Note else Icons.Default.Bookmark,
+                                    imageVector = if (ann.type == PdfAnnotationType.NOTE) Icons.AutoMirrored.Filled.Note else Icons.Default.Bookmark,
                                     contentDescription = null,
                                     tint = AccentAmber,
                                     modifier = Modifier.size(18.dp)

@@ -294,6 +294,7 @@ fun ChapterListSkeleton(
 @Composable
 fun PdfAsymmetricLoadingView(
     title: String = "CBSE Document",
+    progress: Float? = null,
     modifier: Modifier = Modifier
 ) {
     val brush = rememberExpressiveShimmerBrush()
@@ -390,14 +391,14 @@ fun PdfAsymmetricLoadingView(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Rendering High-Res Textbook Pages...",
+            text = if (progress != null) "Downloading textbook… ${(progress * 100).toInt()}%" else "Rendering High-Res Textbook Pages...",
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "Optimizing offline cache for instant page turns",
+            text = "Cached locally for offline study & instant search",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
