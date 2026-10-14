@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "last_updated": "2026-10-08T16:24:06.990048+00:00",
+  "last_updated": "2026-10-14T03:24:06.913130+00:00",
   "base_raw_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main",
   "subjects": [
     {
@@ -867,7 +867,13 @@
             "Gauss's Law Applications"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/01_electric_charges_and_fields/ncert/ch01_electric_charges_and_fields.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch01 Electric Charges And Fields Notes",
+              "filename": "Ch01_Electric_Charges_and_Fields_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/01_electric_charges_and_fields/notes/Ch01_Electric_Charges_and_Fields_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -877,6 +883,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=9nU2YZ2HVPA",
               "duration": "4 hr 42 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_01_pw_oneshot",
+              "title": "ELECTRIC CHARGES AND FIELDS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=i_yT6CpUOTk",
+              "duration": "186 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -893,7 +906,13 @@
             "Energy Stored"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/02_electrostatic_potential_and_capacitance/ncert/ch02_electrostatic_potential_and_capacitance.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch02 Electrostatic Potential And Capacitance Notes",
+              "filename": "Ch02_Electrostatic_Potential_and_Capacitance_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/02_electrostatic_potential_and_capacitance/notes/Ch02_Electrostatic_Potential_and_Capacitance_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -903,6 +922,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=2tG-hx2JHr8",
               "duration": "4 hr 10 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_02_pw_oneshot",
+              "title": "ELECTROSTATIC POTENTIAL AND CAPACITANCE in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=5Wj95zTraZI",
+              "duration": "185 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -919,7 +945,13 @@
             "Wheatstone Bridge"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/03_current_electricity/ncert/ch03_current_electricity.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch03 Current Electricity Notes",
+              "filename": "Ch03_Current_Electricity_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/03_current_electricity/notes/Ch03_Current_Electricity_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -929,6 +961,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=vUCDSDWyX4c",
               "duration": "4 hr 2 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_03_pw_oneshot",
+              "title": "CURRENT ELECTRICITY in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=ANz7YYAZzrM",
+              "duration": "204 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -955,6 +994,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=lYqCUYI9D7Y",
               "duration": "3 hr 25 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_04_pw_oneshot",
+              "title": "MOVING CHARGES & MAGNETISM in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=LSJIX_tSdPY",
+              "duration": "167 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -971,7 +1017,13 @@
             "Para, Dia, Ferromagnetism"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/05_magnetism_and_matter/ncert/ch05_magnetism_and_matter.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch05 Magnetism And Matter Notes",
+              "filename": "Ch05_Magnetism_and_Matter_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/05_magnetism_and_matter/notes/Ch05_Magnetism_and_Matter_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -981,6 +1033,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=lWbUXCr3FOk",
               "duration": "2 hr 41 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_05_pw_oneshot",
+              "title": "MAGNETISM AND MATTER in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=JfJRMqx_YHE",
+              "duration": "132 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -997,7 +1056,13 @@
             "Motional EMF Derivation"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/06_electromagnetic_induction/ncert/ch06_electromagnetic_induction.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch06 Electromagnetic Induction Notes",
+              "filename": "Ch06_Electromagnetic_Induction_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/06_electromagnetic_induction/notes/Ch06_Electromagnetic_Induction_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1007,6 +1072,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=GaLQhuyaUNg",
               "duration": "3 hr 8 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_06_pw_oneshot",
+              "title": "ELECTROMAGNETIC INDUCTION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=-ik_b6qN5b4",
+              "duration": "180 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1023,7 +1095,13 @@
             "Transformer Working"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/07_alternating_current/ncert/ch07_alternating_current.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch07 Alternating Current Notes",
+              "filename": "Ch07_Alternating_Current_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/07_alternating_current/notes/Ch07_Alternating_Current_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1033,6 +1111,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=tMIfXYlnJ5U",
               "duration": "3 hr 47 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_07_pw_oneshot",
+              "title": "ALTERNATING CURRENT in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=jZeRVBO0ymI",
+              "duration": "209 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1049,7 +1134,13 @@
             "Electromagnetic Spectrum"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/08_electromagnetic_waves/ncert/ch08_electromagnetic_waves.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch08 Electromagnetic Waves Notes",
+              "filename": "Ch08_Electromagnetic_Waves_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/08_electromagnetic_waves/notes/Ch08_Electromagnetic_Waves_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1059,6 +1150,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=NsO6M28xPTs",
               "duration": "1 hr 37 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_08_pw_oneshot",
+              "title": "ELECTROMAGNETIC WAVES in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=alFEgW-gE9M",
+              "duration": "61 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1075,7 +1173,13 @@
             "Astronomical Telescope"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/09_ray_optics_and_optical_instruments/ncert/ch09_ray_optics_and_optical_instruments.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch09 Ray Optics And Optical Instruments Notes",
+              "filename": "Ch09_Ray_Optics_and_Optical_Instruments_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/09_ray_optics_and_optical_instruments/notes/Ch09_Ray_Optics_and_Optical_Instruments_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1085,6 +1189,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=V3JXWwBXv-4",
               "duration": "4 hr 50 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_09_pw_oneshot",
+              "title": "RAY OPTICS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=ovfNP_TqolM",
+              "duration": "322 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1101,7 +1212,13 @@
             "Diffraction"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/10_wave_optics/ncert/ch10_wave_optics.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch10 Wave Optics Notes",
+              "filename": "Ch10_Wave_Optics_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/10_wave_optics/notes/Ch10_Wave_Optics_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1111,6 +1228,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=6M_Y2FesSfA",
               "duration": "2 hr 40 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_10_pw_oneshot",
+              "title": "WAVE OPTICS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=2gumHdFXums",
+              "duration": "238 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1127,7 +1251,13 @@
             "de Broglie Wavelength"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/11_dual_nature_of_radiation_and_matter/ncert/ch11_dual_nature_of_radiation_and_matter.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch11 Dual Nature Of Radiation And Matter Notes",
+              "filename": "Ch11_Dual_Nature_of_Radiation_and_Matter_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/11_dual_nature_of_radiation_and_matter/notes/Ch11_Dual_Nature_of_Radiation_and_Matter_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1137,6 +1267,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=7naR68Z6xEs",
               "duration": "2 hr 8 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_11_pw_oneshot",
+              "title": "DUAL NATURE OF RADIATION AND MATTER in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=6GaLVcWIVzw",
+              "duration": "87 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1153,7 +1290,13 @@
             "Hydrogen Spectrum Rydberg Formula"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/12_atoms/ncert/ch12_atoms.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch12 Atoms Notes",
+              "filename": "Ch12_Atoms_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/12_atoms/notes/Ch12_Atoms_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1163,6 +1306,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=YuU3gaY34dI",
               "duration": "2 hr 21 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_12_pw_oneshot",
+              "title": "ATOMS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=uf2UvFqUoXE",
+              "duration": "91 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1179,7 +1329,13 @@
             "Nuclear Fission & Fusion"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/13_nuclei/ncert/ch13_nuclei.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch13 Nuclei Notes",
+              "filename": "Ch13_Nuclei_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/13_nuclei/notes/Ch13_Nuclei_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1189,6 +1345,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=YuU3gaY34dI",
               "duration": "2 hr 21 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_13_pw_oneshot",
+              "title": "NUCLEI in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=kHz5ZoBeSVs",
+              "duration": "34 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1204,7 +1367,13 @@
             "Full Wave Rectifier"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/14_semiconductor_electronics/ncert/ch14_semiconductor_electronics.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch14 Semiconductor Electronics Notes",
+              "filename": "Ch14_Semiconductor_Electronics_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/physics/14_semiconductor_electronics/notes/Ch14_Semiconductor_Electronics_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1214,6 +1383,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=XGc2OCsjIdk",
               "duration": "1 hr 49 min",
               "author": "Akshay Sir"
+            },
+            {
+              "id": "phy_14_pw_oneshot",
+              "title": "SEMICONDUCTORS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=03PgdzPn-XE",
+              "duration": "204 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         }
@@ -1241,7 +1417,13 @@
             "Van't Hoff Factor"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/01_solutions/ncert/ch01_solutions.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch01 Solutions Notes",
+              "filename": "Ch01_Solutions_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/01_solutions/notes/Ch01_Solutions_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1251,6 +1433,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=3VVSOY_iQX8",
               "duration": "4 hr 40 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_01_pw_oneshot",
+              "title": "SOLUTIONS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=U_dJxj895Jw",
+              "duration": "186 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1267,7 +1456,13 @@
             "Fuel Cells"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/02_electrochemistry/ncert/ch02_electrochemistry.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch02 Electrochemistry Notes",
+              "filename": "Ch02_Electrochemistry_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/02_electrochemistry/notes/Ch02_Electrochemistry_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1277,6 +1472,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=94Gq-VdBoAY",
               "duration": "6 hr 13 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_02_pw_oneshot",
+              "title": "ELECTROCHEMISTRY in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=_CVRAZ1b4qg",
+              "duration": "217 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1293,7 +1495,13 @@
             "Arrhenius Equation"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/03_chemical_kinetics/ncert/ch03_chemical_kinetics.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch03 Chemical Kinetics Notes",
+              "filename": "Ch03_Chemical_Kinetics_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/03_chemical_kinetics/notes/Ch03_Chemical_Kinetics_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1303,6 +1511,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=XI2eLUjOt5Q",
               "duration": "5 hr 36 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_03_pw_oneshot",
+              "title": "CHEMICAL KINETICS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=Xz8wjFX6S_0",
+              "duration": "172 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1319,7 +1534,13 @@
             "Lanthanoid Contraction"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/04_d_and_f_block_elements/ncert/ch04_d_and_f_block_elements.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch04 D And F Block Elements Notes",
+              "filename": "Ch04_d_and_f_Block_Elements_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/04_d_and_f_block_elements/notes/Ch04_d_and_f_Block_Elements_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1329,6 +1550,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=atz_SW4Ovg8",
               "duration": "4 hr 44 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_04_pw_oneshot",
+              "title": "D & F BLOCK In ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=Fz3YCSbrHqc",
+              "duration": "129 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1345,7 +1573,13 @@
             "Crystal Field Splitting"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/05_coordination_compounds/ncert/ch05_coordination_compounds.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch05 Coordination Compounds Notes",
+              "filename": "Ch05_Coordination_Compounds_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/05_coordination_compounds/notes/Ch05_Coordination_Compounds_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1355,6 +1589,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=RgEnbei373Q",
               "duration": "3 hr 40 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_05_pw_oneshot",
+              "title": "COORDINATION COMPOUNDS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=t38_SGflTak",
+              "duration": "191 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1371,7 +1612,13 @@
             "Swarts Reaction"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/06_haloalkanes_and_haloarenes/ncert/ch06_haloalkanes_and_haloarenes.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch06 Haloalkanes And Haloarenes Notes",
+              "filename": "Ch06_Haloalkanes_and_Haloarenes_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/06_haloalkanes_and_haloarenes/notes/Ch06_Haloalkanes_and_Haloarenes_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1381,6 +1628,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=2GT9GM7k9_k",
               "duration": "3 hr 42 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_06_pw_oneshot",
+              "title": "HALOALKANES & HALOARENES in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=cB9sbMu6R04",
+              "duration": "228 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1397,7 +1651,13 @@
             "Williamson Synthesis"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/07_alcohols_phenols_and_ethers/ncert/ch07_alcohols_phenols_and_ethers.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch07 Alcohols Phenols And Ethers Notes",
+              "filename": "Ch07_Alcohols_Phenols_and_Ethers_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/07_alcohols_phenols_and_ethers/notes/Ch07_Alcohols_Phenols_and_Ethers_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1407,6 +1667,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=p5m6oUmk2DE",
               "duration": "3 hr 13 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_07_pw_oneshot",
+              "title": "ALCOHOL, PHENOL & ETHERS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=JBGnunZzCUM",
+              "duration": "261 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1423,7 +1690,13 @@
             "Tollens & Fehling Tests"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/08_aldehydes_ketones_and_carboxylic_acids/ncert/ch08_aldehydes_ketones_and_carboxylic_acids.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch08 Aldehydes Ketones And Carboxylic Acids Notes",
+              "filename": "Ch08_Aldehydes_Ketones_and_Carboxylic_Acids_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/08_aldehydes_ketones_and_carboxylic_acids/notes/Ch08_Aldehydes_Ketones_and_Carboxylic_Acids_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1433,6 +1706,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=uxZlQlbrvmw",
               "duration": "4 hr 22 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_08_pw_oneshot",
+              "title": "ALDEHYDES, KETONES AND CARBOXYLIC ACID in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=LUhUM_Vw4Oo",
+              "duration": "257 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1449,7 +1729,13 @@
             "Carbylamine Test"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/09_amines/ncert/ch09_amines.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch09 Amines Notes",
+              "filename": "Ch09_Amines_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/09_amines/notes/Ch09_Amines_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1459,6 +1745,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=_ICiy7jCaCQ",
               "duration": "2 hr 38 min",
               "author": "Shourya Ma'am"
+            },
+            {
+              "id": "che_09_pw_oneshot",
+              "title": "AMINES in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=OBqFtHYhSYM",
+              "duration": "154 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1475,7 +1768,13 @@
             "DNA Double Helix"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/10_biomolecules/ncert/ch10_biomolecules.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch10 Biomolecules Notes",
+              "filename": "Ch10_Biomolecules_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/chemistry/10_biomolecules/notes/Ch10_Biomolecules_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -1485,6 +1784,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=neCiz1bHXGQ",
               "duration": "3 hr 21 min",
               "author": "Sunil Sir"
+            },
+            {
+              "id": "che_10_pw_oneshot",
+              "title": "BIOMOLECULES in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=ZzSHpxjH6Kg",
+              "duration": "85 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         }
@@ -1511,10 +1817,24 @@
             "Bijective Functions"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/01_relations_and_functions/ncert/ch01_relations_and_functions.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch01 Relations And Functions Notes",
+              "filename": "Ch01_Relations_and_Functions_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/01_relations_and_functions/notes/Ch01_Relations_and_Functions_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_01_pw_oneshot",
+              "title": "RELATIONS AND FUNCTIONS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=a8YasMSWFvc",
+              "duration": "120 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_02",
@@ -1527,10 +1847,24 @@
             "Principal Value Branches"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/02_inverse_trigonometric_functions/ncert/ch02_inverse_trigonometric_functions.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch02 Inverse Trigonometric Functions Notes",
+              "filename": "Ch02_Inverse_Trigonometric_Functions_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/02_inverse_trigonometric_functions/notes/Ch02_Inverse_Trigonometric_Functions_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_02_pw_oneshot",
+              "title": "INVERSE TRIGONOMETRIC FUNCTIONS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=4Aml6yd4tDY",
+              "duration": "87 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_03",
@@ -1545,10 +1879,24 @@
             "Elementary Transformations"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/03_matrices/ncert/ch03_matrices.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch03 Matrices Notes",
+              "filename": "Ch03_Matrices_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/03_matrices/notes/Ch03_Matrices_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_03_pw_oneshot",
+              "title": "MATRICES in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=2zHpum8F5RA",
+              "duration": "116 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_04",
@@ -1562,10 +1910,24 @@
             "Solving Linear Equations using Inverse"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/04_determinants/ncert/ch04_determinants.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch04 Determinants Notes",
+              "filename": "Ch04_Determinants_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/04_determinants/notes/Ch04_Determinants_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_04_pw_oneshot",
+              "title": "DETERMINANTS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=pafeee3O6u8",
+              "duration": "154 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_05",
@@ -1580,10 +1942,24 @@
             "Parametric Equations"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/05_continuity_and_differentiability/ncert/ch05_continuity_and_differentiability.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch05 Continuity And Differentiability Notes",
+              "filename": "Ch05_Continuity_and_Differentiability_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/05_continuity_and_differentiability/notes/Ch05_Continuity_and_Differentiability_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_05_pw_oneshot",
+              "title": "CONTINUITY  AND DIFFERENTIABILITY in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=cIxHoVCUN1M",
+              "duration": "145 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_06",
@@ -1597,10 +1973,24 @@
             "Maxima and Minima"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/06_application_of_derivatives/ncert/ch06_application_of_derivatives.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch06 Application Of Derivatives Notes",
+              "filename": "Ch06_Application_of_Derivatives_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/06_application_of_derivatives/notes/Ch06_Application_of_Derivatives_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_06_pw_oneshot",
+              "title": "APPLICATION OF DERIVATIVES in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=uVEOu40lYEY",
+              "duration": "145 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_07",
@@ -1615,10 +2005,24 @@
             "Definite Integral Properties"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/07_integrals/ncert/ch07_integrals.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch07 Integrals Notes",
+              "filename": "Ch07_Integrals_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/07_integrals/notes/Ch07_Integrals_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_07_pw_oneshot",
+              "title": "INTEGRALS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=dBglfhVX6kI",
+              "duration": "194 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_08",
@@ -1632,10 +2036,24 @@
             "Area Bounded by Lines, Parabolas & Circles"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/08_application_of_integrals/ncert/ch08_application_of_integrals.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch08 Application Of Integrals Notes",
+              "filename": "Ch08_Application_of_Integrals_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/08_application_of_integrals/notes/Ch08_Application_of_Integrals_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_08_pw_oneshot",
+              "title": "APPLICATION OF INTERGRATION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=-tcuZsZqXZk",
+              "duration": "91 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_09",
@@ -1650,10 +2068,24 @@
             "Homogeneous & Linear DEs"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/09_differential_equations/ncert/ch09_differential_equations.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch09 Differential Equations Notes",
+              "filename": "Ch09_Differential_Equations_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/09_differential_equations/notes/Ch09_Differential_Equations_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_09_pw_oneshot",
+              "title": "DIFFERENTIAL EQUATIONS in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=EEudvNSWzXE",
+              "duration": "108 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_10",
@@ -1668,10 +2100,24 @@
             "Scalar Triple Product"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/10_vector_algebra/ncert/ch10_vector_algebra.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch10 Vector Algebra Notes",
+              "filename": "Ch10_Vector_Algebra_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/10_vector_algebra/notes/Ch10_Vector_Algebra_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_10_pw_oneshot",
+              "title": "VECTORS in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=B5Rq-af5R14",
+              "duration": "114 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_11",
@@ -1689,7 +2135,15 @@
           "notes": [],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_11_pw_oneshot",
+              "title": "THREE DIMENSIONAL GEOMETRY in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=7ggiHx1dEok",
+              "duration": "130 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_12",
@@ -1704,10 +2158,24 @@
             "Bounded Feasible Region"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/12_linear_programming/ncert/ch12_linear_programming.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch12 Linear Programming Notes",
+              "filename": "Ch12_Linear_Programming_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/12_linear_programming/notes/Ch12_Linear_Programming_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_12_pw_oneshot",
+              "title": "LINEAR PROGRAMMING  in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=98ngGuFd9Vg",
+              "duration": "82 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         },
         {
           "id": "math_13",
@@ -1722,10 +2190,24 @@
             "Bayes' Theorem"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/13_probability/ncert/ch13_probability.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch13 Probability Notes",
+              "filename": "Ch13_Probability_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/maths/13_probability/notes/Ch13_Probability_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
-          "videos": []
+          "videos": [
+            {
+              "id": "mat_13_pw_oneshot",
+              "title": "PROBABILITY in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=_YJr2t_1NTU",
+              "duration": "143 mins",
+              "author": "12th Hackers (Physics Wallah)"
+            }
+          ]
         }
       ]
     },
@@ -1751,7 +2233,13 @@
             "Outbreeding Devices"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/ncert/ch01_sexual_reproduction_in_flowering_plants.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch01 Sexual Reproduction In Flowering Plants Notes",
+              "filename": "Ch01_Sexual_Reproduction_in_Flowering_Plants_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/01_sexual_reproduction_in_flowering_plants/notes/Ch01_Sexual_Reproduction_in_Flowering_Plants_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Dpp 01 4",
@@ -1859,6 +2347,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=lW8hbdNGhBE",
               "duration": "1 hr 55 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_01_pw_oneshot",
+              "title": "SEXUAL REPRODUCTION IN FLOWERING PLANTS in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=N84u3PcLffc",
+              "duration": "152 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1875,7 +2370,13 @@
             "Embryo Development"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/ncert/ch02_human_reproduction.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch02 Human Reproduction Notes",
+              "filename": "Ch02_Human_Reproduction_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/02_human_reproduction/notes/Ch02_Human_Reproduction_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Dpp 01 3",
@@ -1947,6 +2448,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=jsiE37y8goA",
               "duration": "2 hr 59 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_02_pw_oneshot",
+              "title": "HUMAN REPRODUCTION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=FWaOU7X6B0E",
+              "duration": "141 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -1963,7 +2471,13 @@
             "ART (IVF, ZIFT, ICSI)"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/ncert/ch03_reproductive_health.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch03 Reproductive Health Notes",
+              "filename": "Ch03_Reproductive_Health_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/03_reproductive_health/notes/Ch03_Reproductive_Health_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Dpp 01 5",
@@ -2011,6 +2525,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=48gImtbYLsQ",
               "duration": "1 hr 18 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_03_pw_oneshot",
+              "title": "REPRODUCTIVE HEALTH in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=ZbaGJT4EScs",
+              "duration": "83 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2027,7 +2548,13 @@
             "Genetic Disorders"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/ncert/ch04_principles_of_inheritance_and_variation.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch04 Principles Of Inheritance And Variation Notes",
+              "filename": "Ch04_Principles_of_Inheritance_and_Variation_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/04_principles_of_inheritance_and_variation/notes/Ch04_Principles_of_Inheritance_and_Variation_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Principles Of Inheritance And Variation Dpp 01",
@@ -2123,6 +2650,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=fuglbkNZ7ac",
               "duration": "3 hr 15 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_04_pw_oneshot",
+              "title": "PRINCIPLES OF INHERITANCE & VARIATION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=CvTstNChMww",
+              "duration": "119 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2139,7 +2673,13 @@
             "Lac Operon"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/05_molecular_basis_of_inheritance/ncert/ch05_molecular_basis_of_inheritance.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch05 Molecular Basis Of Inheritance Notes",
+              "filename": "Ch05_Molecular_Basis_of_Inheritance_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/05_molecular_basis_of_inheritance/notes/Ch05_Molecular_Basis_of_Inheritance_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2149,6 +2689,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=eEz_nv3u1JY",
               "duration": "3 hr 46 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_05_pw_oneshot",
+              "title": "MOLECULAR BASIS OF INHERITANCE in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=5qCpewUFNk0",
+              "duration": "152 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2165,7 +2712,13 @@
             "Hardy-Weinberg Principle"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/ncert/ch06_evolution.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch06 Evolution Notes",
+              "filename": "Ch06_Evolution_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/06_evolution/notes/Ch06_Evolution_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Evolution Dpp 01",
@@ -2225,6 +2778,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=V4KU17K8h5Q",
               "duration": "2 hr 2 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_06_pw_oneshot",
+              "title": "EVOLUTION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=DaNhRwRui3Q",
+              "duration": "54 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2241,7 +2801,13 @@
             "AIDS & Cancer"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/07_human_health_and_diseases/ncert/ch07_human_health_and_disease.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch07 Human Health And Diseases Notes",
+              "filename": "Ch07_Human_Health_and_Diseases_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/07_human_health_and_diseases/notes/Ch07_Human_Health_and_Diseases_Notes.pdf"
+            }
+          ],
           "dpps": [
             {
               "title": "Human Health And Diseases Dpp 01",
@@ -2265,6 +2831,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=FSN4b5MgAq8",
               "duration": "2 hr 7 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_07_pw_oneshot",
+              "title": "HUMAN HEALTH AND DISEASE in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=WJPaKue8Fws",
+              "duration": "86 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2281,7 +2854,13 @@
             "Biocontrol Agents & Biofertilizers"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/08_microbes_in_human_welfare/ncert/ch08_microbes_in_human_welfare.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch08 Microbes In Human Welfare Notes",
+              "filename": "Ch08_Microbes_in_Human_Welfare_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/08_microbes_in_human_welfare/notes/Ch08_Microbes_in_Human_Welfare_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2291,6 +2870,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=ka_rvqVnlNo",
               "duration": "59 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_08_pw_oneshot",
+              "title": "MICROBES IN HUMAN WELFARE in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=4uErIyc5XGs",
+              "duration": "38 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2307,7 +2893,13 @@
             "PCR & Gel Electrophoresis"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/09_biotechnology_principles_and_processes/ncert/ch09_biotechnology_principles_and_processes.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch09 Biotechnology Principles And Processes Notes",
+              "filename": "Ch09_Biotechnology_Principles_and_Processes_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/09_biotechnology_principles_and_processes/notes/Ch09_Biotechnology_Principles_and_Processes_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2317,6 +2909,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=pumZiybEwdE",
               "duration": "1 hr 31 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_09_pw_oneshot",
+              "title": "BIOTECHNOLOGY: PRINCIPLES AND PROCESS in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=o334PgHRINA",
+              "duration": "99 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2334,7 +2933,13 @@
             "Gene Therapy"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/10_biotechnology_and_its_applications/ncert/ch10_biotechnology_and_its_applications.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch10 Biotechnology And Its Applications Notes",
+              "filename": "Ch10_Biotechnology_and_its_Applications_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/10_biotechnology_and_its_applications/notes/Ch10_Biotechnology_and_its_Applications_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2344,6 +2949,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=530GYX9C1vU",
               "duration": "1 hr 7 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_10_pw_oneshot",
+              "title": "BIOTECHNOLOGY AND IT'S APPLICATIONS in ONE SHOT || Full Chapters || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=_HpS_SyziO4",
+              "duration": "72 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2360,7 +2972,13 @@
             "Population Interactions"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/11_organisms_and_populations/ncert/ch11_organisms_and_populations.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch11 Organisms And Populations Notes",
+              "filename": "Ch11_Organisms_and_Populations_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/11_organisms_and_populations/notes/Ch11_Organisms_and_Populations_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2370,6 +2988,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=k2XIpxQgSHo",
               "duration": "1 hr 17 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_11_pw_oneshot",
+              "title": "ORGANISMS AND POPULATION in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=mezR5ap9aPg",
+              "duration": "71 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2385,7 +3010,13 @@
             "Energy Flow & Ecological Pyramids"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/12_ecosystem/ncert/ch12_ecosystem.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch12 Ecosystem Notes",
+              "filename": "Ch12_Ecosystem_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/12_ecosystem/notes/Ch12_Ecosystem_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2395,6 +3026,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=042LD-Xnt3A",
               "duration": "48 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_12_pw_oneshot",
+              "title": "ECOSYSTEM in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=HXJFVRiT3Hc",
+              "duration": "51 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         },
@@ -2411,7 +3049,13 @@
             "In-situ & Ex-situ Conservation"
           ],
           "ncert_pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/13_biodiversity_and_conservation/ncert/ch13_biodiversity_and_conservation.pdf",
-          "notes": [],
+          "notes": [
+            {
+              "title": "Ch13 Biodiversity And Its Conservation Notes",
+              "filename": "Ch13_Biodiversity_and_its_Conservation_Notes.pdf",
+              "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/biology/13_biodiversity_and_conservation/notes/Ch13_Biodiversity_and_its_Conservation_Notes.pdf"
+            }
+          ],
           "dpps": [],
           "quizzes": [],
           "videos": [
@@ -2421,6 +3065,13 @@
               "youtube_url": "https://www.youtube.com/watch?v=XLRxoLcyhuw",
               "duration": "57 min",
               "author": "Aarushi Ma'am"
+            },
+            {
+              "id": "bio_13_pw_oneshot",
+              "title": "Biodiversity & Conservation in ONE SHOT || Full Chapter || Class 12 BOARDS || PW",
+              "youtube_url": "https://www.youtube.com/watch?v=uvzFdsyZ_xo",
+              "duration": "60 mins",
+              "author": "12th Hackers (Physics Wallah)"
             }
           ]
         }
