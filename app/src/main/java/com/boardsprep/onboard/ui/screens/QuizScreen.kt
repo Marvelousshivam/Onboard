@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.AccentAmber
 import com.boardsprep.onboard.core.theme.ErrorRed
 import com.boardsprep.onboard.core.theme.PrimaryBlue
@@ -70,9 +71,10 @@ fun QuizScreen(
                 TopAppBar(
                     title = { Text(title, maxLines = 1, fontSize = 16.sp, fontWeight = FontWeight.Bold) },
                     navigationIcon = {
-                        IconButton(onClick = onBackClick) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                        }
+                        LiquidGlassBackButton(
+                            onClick = onBackClick,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     }
                 )
             }
@@ -144,15 +146,16 @@ fun QuizScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        if (isReviewMode) {
-                            isReviewMode = false
-                        } else {
-                            onBackClick()
-                        }
-                    }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
+                    LiquidGlassBackButton(
+                        onClick = {
+                            if (isReviewMode) {
+                                isReviewMode = false
+                            } else {
+                                onBackClick()
+                            }
+                        },
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 actions = {
                     if (!isQuizCompleted) {

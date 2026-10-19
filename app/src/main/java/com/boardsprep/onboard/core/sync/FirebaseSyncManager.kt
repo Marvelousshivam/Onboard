@@ -7,6 +7,7 @@ import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.local.entities.ErrorVaultEntity
 import com.boardsprep.onboard.data.local.entities.FocusSessionEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
+import com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
 import com.boardsprep.onboard.data.local.entities.SpacedReviewEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
@@ -71,7 +72,31 @@ class FirebaseSyncManager private constructor(private val context: Context) {
     private var firestore: FirebaseFirestore? = null
     private var auth: FirebaseAuth? = null
 
-    private val _streakState = MutableStateFlow(StreakInfo())
+    private val streakPrefs = context.getSharedPreferences("onboard_streak_prefs", Context.MODE_PRIVATE)
+
+    private fun loadLocalStreak(): StreakInfo {
+        val current = streakPrefs.getInt("currentStreak", 0)
+        val longest = streakPrefs.getInt("longestStreak", current)
+        val lastDate = streakPrefs.getString("lastActiveDate", "") ?: ""
+        val today = getTodayDateStr()
+        val isActiveToday = lastDate == today
+        return StreakInfo(
+            currentStreak = current,
+            longestStreak = longest,
+            isStreakActiveToday = isActiveToday,
+            lastActiveDate = lastDate
+        )
+    }
+
+    private fun saveLocalStreak(info: StreakInfo) {
+        streakPrefs.edit()
+            .putInt("currentStreak", info.currentStreak)
+            .putInt("longestStreak", info.longestStreak)
+            .putString("lastActiveDate", info.lastActiveDate)
+            .apply()
+    }
+
+    private val _streakState = MutableStateFlow(loadLocalStreak())
     val streakState: StateFlow<StreakInfo> = _streakState.asStateFlow()
 
     private val _accountState = MutableStateFlow(UserAccountInfo())
@@ -188,18 +213,28 @@ class FirebaseSyncManager private constructor(private val context: Context) {
                 return@addSnapshotListener
             }
             if (snapshot != null && snapshot.exists()) {
-                val current = snapshot.getLong("currentStreak")?.toInt() ?: 0
-                val longest = snapshot.getLong("longestStreak")?.toInt() ?: current
-                val lastDate = snapshot.getString("lastActiveDate") ?: snapshot.getString("lastStudyDate") ?: ""
+                val remoteCurrent = snapshot.getLong("currentStreak")?.toInt() ?: 0
+                val remoteLongest = snapshot.getLong("longestStreak")?.toInt() ?: remoteCurrent
+                val remoteLastDate = snapshot.getString("lastActiveDate") ?: snapshot.getString("lastStudyDate") ?: ""
                 val today = getTodayDateStr()
-                val isActiveToday = lastDate == today
 
-                _streakState.value = StreakInfo(
-                    currentStreak = current,
-                    longestStreak = longest,
-                    isStreakActiveToday = isActiveToday,
-                    lastActiveDate = lastDate
+                val local = loadLocalStreak()
+                val finalCurrent = maxOf(local.currentStreak, remoteCurrent)
+                val finalLongest = maxOf(local.longestStreak, remoteLongest, finalCurrent)
+                val finalLastDate = if (remoteLastDate == today || local.lastActiveDate != today) {
+                    if (remoteLastDate.isNotBlank()) remoteLastDate else local.lastActiveDate
+                } else {
+                    local.lastActiveDate
+                }
+
+                val reconciled = StreakInfo(
+                    currentStreak = finalCurrent,
+                    longestStreak = finalLongest,
+                    isStreakActiveToday = finalLastDate == today,
+                    lastActiveDate = finalLastDate
                 )
+                saveLocalStreak(reconciled)
+                _streakState.value = reconciled
             }
         }
         listeners.add(streakSub)
@@ -372,6 +407,42 @@ class FirebaseSyncManager private constructor(private val context: Context) {
             }
         }
         listeners.add(evSub)
+
+        // 7. Listen to Subjective Question Bank Evaluations
+        val qeRef = fs.collection("users").document(uid).collection("question_evaluations")
+        val qeSub = qeRef.addSnapshotListener { snapshots, error ->
+            if (error != null || snapshots == null) return@addSnapshotListener
+            scope.launch {
+                for (change in snapshots.documentChanges) {
+                    val doc = change.document
+                    val qId = doc.getString("questionId") ?: doc.id
+                    val subId = doc.getString("subjectId") ?: ""
+                    val marks = doc.getLong("marks")?.toInt() ?: 2
+                    val status = doc.getString("status") ?: "retry"
+                    val updatedAt = try {
+                        doc.getTimestamp("updatedAt")?.toDate()?.time
+                            ?: doc.getLong("updatedAt")
+                            ?: System.currentTimeMillis()
+                    } catch (_: Exception) {
+                        System.currentTimeMillis()
+                    }
+
+                    val existing = db.questionEvaluationDao().getEvaluationOnce(qId)
+                    if (existing == null || existing.updatedAt < updatedAt) {
+                        db.questionEvaluationDao().saveEvaluation(
+                            QuestionEvaluationEntity(
+                                questionId = qId,
+                                subjectId = subId,
+                                marks = marks,
+                                status = status,
+                                updatedAt = updatedAt
+                            )
+                        )
+                    }
+                }
+            }
+        }
+        listeners.add(qeSub)
 
         // Initial push of any offline local data
         syncAllLocalToCloud()
@@ -582,9 +653,46 @@ class FirebaseSyncManager private constructor(private val context: Context) {
                         .set(data, SetOptions.merge())
                 }
 
+                // Upload question evaluations (subjective practice)
+                val qeList = db.questionEvaluationDao().getAllEvaluationsList()
+                for (qe in qeList) {
+                    val data = hashMapOf(
+                        "questionId" to qe.questionId,
+                        "subjectId" to qe.subjectId,
+                        "marks" to qe.marks,
+                        "status" to qe.status,
+                        "updatedAt" to FieldValue.serverTimestamp()
+                    )
+                    fs.collection("users").document(uid)
+                        .collection("question_evaluations").document(qe.questionId)
+                        .set(data, SetOptions.merge())
+                }
+
                 Log.d(TAG, "Full local sync to Firestore completed successfully")
             } catch (e: Exception) {
                 Log.w(TAG, "Full sync error: ${e.message}")
+            }
+        }
+    }
+
+    fun syncQuestionEvaluation(entity: QuestionEvaluationEntity) {
+        val uid = auth?.currentUser?.uid ?: return
+        val fs = firestore ?: return
+        scope.launch {
+            try {
+                val data = hashMapOf(
+                    "questionId" to entity.questionId,
+                    "subjectId" to entity.subjectId,
+                    "marks" to entity.marks,
+                    "status" to entity.status,
+                    "updatedAt" to FieldValue.serverTimestamp()
+                )
+                fs.collection("users").document(uid)
+                    .collection("question_evaluations").document(entity.questionId)
+                    .set(data, SetOptions.merge())
+                    .await()
+            } catch (e: Exception) {
+                Log.w(TAG, "Failed to push question evaluation: ${e.message}")
             }
         }
     }
@@ -705,52 +813,53 @@ class FirebaseSyncManager private constructor(private val context: Context) {
         }
     }
 
-    // ─── STREAK COMPUTATION (Matches Web Algorithm) ─────────────────────────
+    // ─── STREAK COMPUTATION (Matches Web Algorithm & Offline First) ────────
 
     fun updateStudyStreak(activityType: String, durationMillis: Long) {
+        val today = getTodayDateStr()
+        val yesterday = getYesterdayDateStr()
+
+        val currentLocal = loadLocalStreak()
+        var current = currentLocal.currentStreak
+        var longest = currentLocal.longestStreak
+        val lastDate = currentLocal.lastActiveDate
+
+        if (lastDate != today) {
+            if (lastDate == yesterday) {
+                current += 1
+            } else if (lastDate.isBlank()) {
+                current = 1
+            } else {
+                current = 1
+            }
+            if (current > longest) longest = current
+
+            val updatedInfo = StreakInfo(
+                currentStreak = current,
+                longestStreak = longest,
+                isStreakActiveToday = true,
+                lastActiveDate = today
+            )
+            saveLocalStreak(updatedInfo)
+            _streakState.value = updatedInfo
+        }
+
         val uid = auth?.currentUser?.uid ?: return
         val fs = firestore ?: return
 
         scope.launch {
             try {
-                val today = getTodayDateStr()
                 val streakDocRef = fs.collection("users").document(uid).collection("stats").document("streak")
-                val snap = streakDocRef.get().await()
-
-                var current = snap.getLong("currentStreak")?.toInt() ?: 0
-                var longest = snap.getLong("longestStreak")?.toInt() ?: current
-                val lastDate = snap.getString("lastActiveDate") ?: snap.getString("lastStudyDate") ?: ""
-
-                if (lastDate != today) {
-                    val yesterday = getYesterdayDateStr()
-                    if (lastDate == yesterday) {
-                        current += 1
-                    } else if (lastDate.isBlank()) {
-                        current = 1
-                    } else {
-                        // Streak broke
-                        current = 1
-                    }
-                    if (current > longest) longest = current
-
-                    val streakData = hashMapOf(
-                        "currentStreak" to current,
-                        "longestStreak" to longest,
-                        "lastActiveDate" to today,
-                        "lastStudyDate" to today,
-                        "lastUpdated" to FieldValue.serverTimestamp()
-                    )
-                    streakDocRef.set(streakData, SetOptions.merge()).await()
-
-                    _streakState.value = StreakInfo(
-                        currentStreak = current,
-                        longestStreak = longest,
-                        isStreakActiveToday = true,
-                        lastActiveDate = today
-                    )
-                }
+                val streakData = hashMapOf(
+                    "currentStreak" to _streakState.value.currentStreak,
+                    "longestStreak" to _streakState.value.longestStreak,
+                    "lastActiveDate" to today,
+                    "lastStudyDate" to today,
+                    "lastUpdated" to FieldValue.serverTimestamp()
+                )
+                streakDocRef.set(streakData, SetOptions.merge()).await()
             } catch (e: Exception) {
-                Log.w(TAG, "Streak update error: ${e.message}")
+                Log.w(TAG, "Streak cloud update error: ${e.message}")
             }
         }
     }

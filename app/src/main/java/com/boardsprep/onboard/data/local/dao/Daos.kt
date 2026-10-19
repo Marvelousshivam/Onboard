@@ -10,6 +10,7 @@ import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
 import com.boardsprep.onboard.data.local.entities.PdfAnnotationEntity
 import com.boardsprep.onboard.data.local.entities.PdfBookmarkEntity
 import com.boardsprep.onboard.data.local.entities.PdfReadingStateEntity
+import com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
 import kotlinx.coroutines.flow.Flow
@@ -217,4 +218,37 @@ interface PdfAnnotationDao {
 
     @Query("DELETE FROM pdf_annotations WHERE documentId = :documentId")
     suspend fun deleteAllForDocument(documentId: String)
+}
+
+@Dao
+interface QuestionEvaluationDao {
+    @Query("SELECT * FROM question_evaluations WHERE questionId = :questionId")
+    fun getEvaluation(questionId: String): Flow<QuestionEvaluationEntity?>
+
+    @Query("SELECT * FROM question_evaluations WHERE questionId = :questionId")
+    suspend fun getEvaluationOnce(questionId: String): QuestionEvaluationEntity?
+
+    @Query("SELECT * FROM question_evaluations WHERE subjectId = :subjectId")
+    fun getEvaluationsForSubject(subjectId: String): Flow<List<QuestionEvaluationEntity>>
+
+    @Query("SELECT * FROM question_evaluations WHERE subjectId = :subjectId")
+    suspend fun getEvaluationsForSubjectOnce(subjectId: String): List<QuestionEvaluationEntity>
+
+    @Query("SELECT * FROM question_evaluations")
+    fun getAllEvaluations(): Flow<List<QuestionEvaluationEntity>>
+
+    @Query("SELECT * FROM question_evaluations")
+    suspend fun getAllEvaluationsList(): List<QuestionEvaluationEntity>
+
+    @Query("SELECT COUNT(*) FROM question_evaluations WHERE subjectId = :subjectId AND status = :status")
+    fun getCountByStatus(subjectId: String, status: String): Flow<Int>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveEvaluation(entity: QuestionEvaluationEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun saveAllEvaluations(entities: List<QuestionEvaluationEntity>)
+
+    @Query("DELETE FROM question_evaluations WHERE questionId = :questionId")
+    suspend fun deleteEvaluation(questionId: String)
 }

@@ -23,6 +23,9 @@ import androidx.compose.ui.unit.sp
 import com.boardsprep.onboard.core.playback.DownloadState
 import com.boardsprep.onboard.core.playback.LectureDownloadManager
 import com.boardsprep.onboard.core.playback.LocalLectureScanner
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionPill
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
 import com.boardsprep.onboard.data.models.Lecture
@@ -83,16 +86,18 @@ fun DownloadsScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
+                    LiquidGlassBackButton(
+                        onClick = onNavigateBack,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 actions = {
-                    IconButton(onClick = { refreshKey++ }) {
-                        Icon(imageVector = Icons.Default.Refresh, contentDescription = "Refresh Local Files")
+                    LiquidGlassActionPill(modifier = Modifier.padding(end = 8.dp)) {
+                        LiquidGlassActionButton(
+                            icon = Icons.Default.Refresh,
+                            contentDescription = "Refresh Local Files",
+                            onClick = { refreshKey++ }
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface)

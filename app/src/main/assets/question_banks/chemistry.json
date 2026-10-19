@@ -1,0 +1,1117 @@
+{
+  "subject": "chemistry",
+  "count": 26,
+  "questions": [
+    {
+      "id": "chem_cs_I",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (I): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nIn spite of the predictions of stable noble gas compounds since at least 1902, unsuccessful \nattempts at their synthesis gave rise to the widely held opinion that noble gases are not only \nnoble but also inert. It was not until 1962 that this dogma was shattered when Bartlett in \nCanada published the first stable noble gas compound XePtF 6 . This discovery triggered a \nworldwide frenzy in this area,  and within a short time span many new xenon, radon, and \nkrypton compounds were prepared and characterized. The recent discoveries show the ability \nof xenon to act as a ligand . The discovery by Seppelt’s group that more than one xenon atom \ncan attach itsel",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "In the complex ion [AuXe4]2+  ,  Xe acts as : \na. central atom \nb. ligand \nc. chelating agent \nd. electrophile",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Hybridisation  shown by  Au in  [AuXe4]2+  is : \na. sp3 \nb. sp3d \nc. sp3d2 \nd. sp2",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Compounds of noble gases except _______  are known. \na. Krypton \nb. Radon \nc. Helium \nd. Xenon",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Xe is a ___________ ligand \na. ambidentate \nb. bidantate \nc. unidentate \nd. hexadentate \n \nANSWERS :   1a, 2 b 3 c  4 c",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_II",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (II): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \n Boiling point or freezing point of liquid solution would be affected by the dissolved solids in \nthe liquid phase. A soluble solid in solution has the effect of raising its boiling point and \ndepressing its freezing point. The addition of non-volatile substances to a solvent decreases \nthe vapor pressure and the added solute particles affect the formation of pure solvent crystals. \nAccording to many researches the decrease in freezing point directly correlated to the \nconcentration of solutes dissolved in the solvent. This phenomenon is expressed as freezing \npoint depression and it is useful for several applications such as freeze concentration of liqui",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "When  a non volatile solid is added  to pure water it will: \na. boil above 100oC and freeze above 0oC \nb. boil below 100oC and freeze above 0oC \nc. boil above 100oC and freeze below  0oC \nd. boil belo",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Colligative properties are: \na.  dependent only on the concentration of the solute and independent of  the solvent’s and  \nsolute’s identity. \nb. dependent only on the identity of the solute and the c",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assume three samples of juices A, B and C have glucose as the only sugar present in them. \nThe concentration of sample A, B and C are 0.1M, .5M and 0.2 M respectively. Freezing \npoint will be highest ",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Identify which of the following is a colligative property : \na. freezing point \nb. boiling point  \nc. osmotic pressure \nd. all of the above \nAns 1 (b) 2 (d) 3 (a) 4(c)",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_III",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (III): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nThe rate of a reaction, which may also be called its velocity or speed, can be defined with \nrelation to the concentration of any of the reacting substances, or to that of any product of the \nreaction. If the species chosen is a reactant which has a concentration c at time t the rate is - \ndc/dt, while the rate with reference to a product having a concentration x at time t is dx/dt. \nAny concentration units may be used for expressing the rate; thus, if moles per liter are \nemployed for concentration and seconds for the time, the units for the rate are moles liter -\n1sec-1. For gas reactions pressure units are sometimes used in place of concentrations, so ",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Assertion: Rate of reaction is a measure of change in concentration of reactant with \nrespect to time. \nReason: Rate of reaction is a measure of change in concentration of product with \nrespect to tim",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Assertion: For a reaction: P +2Q  Products, Rate = k [P]1/2[Q]1 so the order of \nreaction is 1.5 \nReason: Order of reaction is the sum of stoichiometric coefficients of the reactants.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assertion: The unit of k is independent of order of reaction. \nReason: The unit of k is moles L-1s-1.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Assertion: Reactions can occur at different speeds. \nReason: Rate of reaction is also called speed of reaction. \nAns: 1B  2C  3D 4B",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_IV",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (IV): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nReduction of carboxylic acids and their derivatives plays an important role in organic \nsynthesis, in both laboratory and industrial processes. Traditionally, the reduction is \nperformed using stochiometric amounts of hydride reagents, generating stochiometric \namounts of waste. A much more attractive, atom-economical approach is a catalytic reaction \nusing H2; however, hydrogenation of carboxylic acid derivatives under mild conditions is a \nvery challenging task, with amides presenting the highest challenge among all classes of \ncarbonyl compounds. Very few examples of the important hydrogenation of amides to \namines, in which the C-O bond is cleaved wit",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Assertion:  The use of catalyst 3 is an efficient method of preparation of primary \namines         \n  Reason: Use of catalyst 3 is a step down reaction.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Assertion: Use of hydride catalyst or hydrogen brings about cleavage of C-O bond in \namides. \n Reason: Hydride catalyst or hydrogen cause to reduction of amides.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assertion: N-methyl ethanamide on reaction with catalyst 3 will yield ethanol and \nmethanamine. \nReason: Use of Catalyst 3 brings about cleavage of C-N bond of amides",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Assertion:  Aniline can be prepared  from suitable amide using catalyst 3 \nReason: The use of catalyst 3 is limited to aliphatic amides only. \n \nAns: 1B 2B 3 A 4C",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_V",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (V): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nNucleophilic substitution reaction of haloalkane can be conducted according to both S N\n1 and \nSN\n2 mechanisms. However, which mechanism it is based on is related to such factors as the \nstructure of haloalkane, and properties of leaving group, nucleophilic reagent and solvent.  \nInfluences of halogen : No matter which mechanism the nucleophilic substitution reaction is \nbased on, the leaving group always leave the central carbon atom with electron pair. This is \njust the opposite of the situation that nucleophilic reagent attacks the central carbon atom \nwith electron pair. Therefore, the weaker the alkalinity of leaving group is , the more stable \nthe a",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "SN\n1 mechanism is favoured in which of the following solvents: \na. benzene \nb. carbon tetrachloride \nc.  acetic acid \nd. carbon disulphide",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Nucleophilic substitution will be fastest in case of: \na. 1-Chloro-2,2-dimethyl propane",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "SN\n1 reaction  will be fastest in which of the following solvents? \na. Acetone (dielectric constant 21)   \nb. Ethanol (dielectric constant 24)   \nc. Methanol (dielectric constant 32)   \nd. Chloroform ",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Polar solvents make the reaction faster as they: \na. destabilize transition state and decrease the activation energy \nb. destabilize transition state and increase the activation energy \nc. stabilize t",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_VI",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (VI): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nWithin the 3d series, manganese exhibits oxidation states in aqueous solution from +2 to +7, \nranging from Mn 2+(aq) to MnO − \n4 (aq). Likewise, iron forms both Fe 2+(aq) and Fe 3+(aq) as \nwell as the FeO 2− 4 ion. Cr and Mn form oxyions  CrO 2− 4 , MnO −\n 4   , owing to their \nwillingness to form multiple bonds . The pattern with the early transition metals—in the 3d \nseries up to Mn, and for the 4d, 5d metals up to Ru and Os—is that the maximum oxidation \nstate corresponds to the number of ‘‘outer shell’’ electrons. The highest oxidation states of \nthe 3d metals may depend upon complex formation (e.g., the stabilization of Co 3+ by \nammonia) or upon the",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Assertion: Highest oxidation state is exhibited by transition metal lying in the middle of the \nseries. \nReason: The highest oxidation state exhibited corresponds to number of (n-1)d electrons.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Assertion: Fe3+ is more stable than Fe2+ \nReason: Fe3+  has 3d5 configuration while Fe2+  has 3d6 configuration.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assertion: Vanadium had the ability to exhibit a wide range of oxidation states. \nReason: The standard potentials Vanadium are rather small, making a switch between \noxidation states relatively easy.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Assertion: Transition metals like Fe,  Cr and Mn form oxyions \nReason: Oxygen is highly electronegative and has a tendency to form multiple bonds.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_VII",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (VII): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions:  \nReductive alkylation is the term applied to the process of introducing alkyl groups into \nammonia or a primary or secondary amine by means of an aldehyde or ketone in the presence \nof a reducing agent. The present discussion is limited to those reductive alkylations in which \nthe reducing agent is hydrogen and a catalyst or \"nascent\" hydrogen, usually from a metal-\nacid combination; most of these reductive alkylations have been carried out with hydrogen \nand a catalyst. The principal variation excluded is that in which the reducing agent is formic \nacid or one of its derivatives; this modification is known as the Leuckart reaction. The \nprocess of reduct",
+      "subQuestions": [],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_VIII",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (VIII): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions:  \nSome colloids are stable by their nature, i.e., gels, alloys, and solid foams. Gelatin and jellies \nare two common examples of a gel. The solid and liquid phases in a gel are interdispersed \nwith both phases being continuous. In most systems, the major factor influencing the stability \nis the charge on the colloidal particles. If a particular ion is preferentially adsorbed on the \nsurface of the particles, the particles in suspension will repel each other, thereby preventing \nthe formation of aggregates that are larger than colloidal dimensions. The ion can be either \npositive or negative depending on the particular colloidal system, i.e., air bubbles ac",
+      "subQuestions": [
+        {
+          "part": "(602)",
+          "text": "doi:10.1021/ed057p602 ) \nQ1. Gelatin is a ________________ colloidal system. \nA. Solid in solid \nB. Solid in gas \nC. Liquid in solid \nD. Liquid in gas \nQ2.Colloidal solutions are stable due to: \nA. pr",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_IX",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (IX): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions:  \nIndustrially widely applied esterification reactions are commonly catalysed using mineral \nliquid acids, such as sulphuric acid and p-toluenesulphonic acid. The catalytic activity of \nhomogeneous catalysts is high. They suffer, however, from several drawbacks, such as their \ncorrosive nature, the existence of side reactions, and the fact that the catalyst cannot be easily \nseparated from the reaction mixture. The use of solid acid catalysts offers an alternative and \nhas received a lot of attention in the past years. Solid acid catalysts are not corrosive and, \ncoated onto a support, they can be easily reused. Examples of solid acid catalysts used in \nes",
+      "subQuestions": [],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_X",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (X): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nBiopolymers are polymers that are generated from renewable natural sources, are often \nbiodegradable and nontoxic. They can be produced by biological systems (i.e. \nmicroorganisms, plants and animals), or chemically synthesized from biological materials \n(e.g., sugars, starch, natural fats or oils, etc.). Two strategies are applied in converting these \nraw materials into biodegradable polymers: extraction of the native polymer from a plant or \nanimal tissue, and a chemical or biotechnological route of monomer polymerization. \nBiodegradable biopolymers (BDP) are an alternative to petroleum-based polymers \n(traditional plastics). Some BDP degrade in only a ",
+      "subQuestions": [
+        {
+          "part": "(44)",
+          "text": "doi:10.1007/bf02931273 ) \nIn the following questions, a statement of assertion followed by a statement of reason is \ngiven. Choose the correct answer out of the following choices on the basis of the a",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XI",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XI): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nIn the last 10 years much has been learned about the molecular structure of elemental sulfur. \nlt is now known that many different types of rings are sufficiently metastable to exist at room \ntemperature for several days. It is known that at high temperature, the equilibrium \ncomposition allows for a variety of rings and chains to exist in comparable concentration, and \nit is known that at the boiling point and above, the vapor as well as the liquid contains small \nspecies with three, four, and five atoms. \nThe sulfur atom has the same number of valence electrons as oxygen. Thus, sulfur atoms S 2 \nand S3 have physical and chemical properties analogous to ",
+      "subQuestions": [
+        {
+          "part": "(388)",
+          "text": "doi:10.1021/cr60301a003 ) \nIn the following questions, a statement of assertion followed by a statement of reason is \ngiven. Choose the correct answer out of the following choices on the basis of the ",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XII",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XII): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nAdenosine triphosphate (ATP) is the energy-carrying molecule found in the cells of all living \nthings. ATP captures chemical energy obtained from the breakdown of food molecules and \nreleases it to fuel other cellular processes. ATP is a nucleotide that consists of three main \nstructures: the nitrogenous base, adenine; the sugar, ribose; and a chain of \nthree phosphate groups bound to ribose. The phosphate tail of ATP is the actual power source \nwhich the cell taps. Available energy is contained in the bonds between the phosphates and is \nreleased when they are broken, which occurs through the addition of a water molecule (a \nprocess called hydrolysis). U",
+      "subQuestions": [],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XIII",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XIII): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nThe transition metals when exposed to oxygen at low and intermediate temperatures form \nthin, protective oxide films of up to some thousands of Angstroms in thickness. Transition \nmetal oxides lie between the extremes of ionic and covalent binary compounds formed by \nelements from the left or right side of the periodic table. They range from metallic to \nsemiconducting and deviate by both large and small degrees from stoichiometry. Since d-\nelectron bonding levels are involved, the cations exist in various valence states and hence \ngive rise to a large number of oxides. The crystal structures are often classified by \nconsidering a cubic or hexagonal close",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Assertion: Cations of transition elements occur in various valence states \nReason: Large number of oxides of transition elements are possible.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Assertion: Crystal structure of oxides of transition metals often show defects. \nReason: Ligand field effect cause distortions in crystal structures.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assertion : Transition metals form protective oxide films.  \nReason: Oxides of transition metals are always stoichiometric.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Assertion: CrO  crystallises in a hexagonal close-packed array of oxide ions with two out of \nevery three octahedral holes occupied by chromium ions. \n  \nReason:  Transition metal oxide may be hexagon",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XIV",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XIV): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nThe d block elements are the 40 elements contained in the four rows of ten columns (3-12) in \nthe periodic table. As all the d block elements are metallic, the term d-block metals is \nsynonymous. This set of d-block elements is also often identified as the transition metals, but \nsometimes the group 12 elements (zinc, cadmium, mercury) are excluded from the transition \nmetals as the transition elements are defined as those with partly filled d or f shells in their \ncompounds. Inclusion of the elements zinc, cadmium and mercury is necessary as some \nproperties of the group 12 elements are appropriate logically to include with a discussion of \ntransition me",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Assertion: Group 12 elements are not considered as transition metals. \nReason: Transition metals are those which have incompletely filled d shell in their \ncompounds.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Assertion: All d block elements are metallic in nature. \nReason: The d –block elements belong to Group3 -12 of the periodic table.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Assertion : Group VII elements of Mendeleev periodic table are transition elements. \nReason: Group I –VIII in Mendleev periodic table is divided into two subgroups, A and B.",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Assertion: Nickel is a transition element that belongs to group 10 and period 4 of the \nmodern periodic table. \nReason: Electronic configuration of Nickel is [Ar]183d84s2 \n(ANS: 1A, 2B, 3D,4A)",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XV",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XV): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nEVIDENCE FOR THE FIBROUS NATURE OF DNA  \nThe basic chemical formula of DNA is now well established. As shown in Figure 1 it consists \nof a very long chain, the backbone of which is made up of alternate sugar and phosphate \ngroups, joined together in regular 3' 5' phosphate di-ester linkages. To each sugar is attached \na nitrogenous base, only four different kinds of which are commonly found in DNA. Two of \nthese---adenine and guanine--- are purines, and the other two thymine and cytosine-are \npyrimidines. A fifth base, 5-methyl cytosine, occurs in smaller amounts in certain organisms, \nand a sixth, 5-hydroxy-methyl-cytosine, is found instead of cytosine i",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "Purines present in DNA are:",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "DNA molecule has ___________ internucleotide linkage and __________ sequence of the \ndifferent nucleotides \nA.  regular , regular  \nB. regular , irregular \nC. irregular , regular \nD. irregular , irreg",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "DNA has a  ___________ backbone \nA. phosphate -purine \nB. pyrimidines- sugar \nC. phosphate- sugar \nD. purine- pyrimidine",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "Out of the four different kinds of nitrogenous bases which are commonly found in DNA, \n___________ has been replaced in some organisms. \nA. adenine  \nB. guanine  \nC. cytosine  \nD.  thymine \n(ANS 1D, 2",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_cs_XVI",
+      "subjectId": "chemistry",
+      "chapterName": "Solutions & Coordination Chemistry",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Passage (XVI): Context-Integrated Chemistry Analysis",
+      "contextPassage": "and answer the following questions: \nPolysaccharides may be very large molecules. Starch, glycogen, cellulose, and chitin are \nexamples of polysaccharides. \nStarch is the stored form of sugars in plants and is made up of amylose and amylopectin (both \npolymers of glucose). Amylose is soluble in water and can be hydrolyzed into glucose units \nbreaking glycocidic bonds, by the enzymes α- amylase and β-amylase. It is straight chain \npolymer. Amylopectin is a branched chain polymer of several D-glucose molecules. 80% \nof amylopectin is present in starch. Plants are able to synthesize glucose, and the excess \nglucose is stored as starch in different plant parts, including roots and seeds. The sta",
+      "subQuestions": [
+        {
+          "part": "(1)",
+          "text": "In animals , Glycogen is stored  in :  \nA. Liver \nB. Spleen \nC. Lungs \nD. Small Intestine",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(2)",
+          "text": "Amylose is :  \nA. straight chain , water insoluble  component of starch ,which constitutes 20 % of it .  \nB. straight chain , water soluble  component of starch ,which constitutes 20 % of it. \nC. bran",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(3)",
+          "text": "Which biopolymer breaks down to release glucose , whenever glucose levels drop in \n              Our body :  \n                   A.starch   \n                   B.  cellulose  \n                   C. ch",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        },
+        {
+          "part": "(4)",
+          "text": "The linkages which join monosaccharides to form long chain polysaccharides : \nA. Peptide linkage \nB. Disulphide bonds  \nC. Hydrogen bonds \nD. Glycosidic linkage",
+          "marks": 1,
+          "modelAnswer": "Scientific reasoning based on passage and NCERT principles."
+        }
+      ],
+      "modelAnswer": "Detailed conceptual analysis referencing coordination bonding, reaction kinetics, and thermodynamic stability.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Identification of reactive species / oxidation state"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Application of chemical law / electronic configuration"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Mechanistic explanation & balanced chemical equation"
+        }
+      ],
+      "keyTerms": [
+        "Coordination number",
+        "Ligand field",
+        "Reaction rate",
+        "Stability constant"
+      ]
+    },
+    {
+      "id": "chem_pq_17",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Given below is a graph of concentration of reactant vs time for a reaction. \n \n(a) Based on the graph above draw a rate of reaction vs concentration of reactant \ngraph for the same reaction. \n(b) What will be the order of this reaction? Justify.",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_19",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "In which of the two compounds CH3CH2CH2Cl or C6H5Cl will the C-Cl bond be longer? \nWhy?",
+      "modelAnswer": "The C-Cl bond in CH3CH2CH2Cl is longer than C-Cl bond in C6H5Cl. [1 mark] \n \nReason: \n- The C-atom of C-Cl bond in CH3CH2CH2Cl is sp3 hybridised while that in C6H5Cl is \nsp2 hybridised. \nSo the C-Cl bond in CH3CH2CH2Cl is longer than in C6H5Cl.  \n \nOR \n \n- The C-Cl bond in chlorobenzene has a partial double bond character due to \nresonance. So, the C-Cl bond in chlorobenzene is shorter than in CH3CH2CH2Cl. [1 \nmark]",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_20",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Correctly match the items in the 'Reactants' column with those in the 'Product' \ncolumn. \n \nReactants Products \n(a) Cyclohexene heated in the presence of KMnO 4 and \nH2SO4 \n(i) Butanal \n(b) Propanenitrile hydrolysed after reduction in the \npresence of stannous chloride and hydrochloric acid  \n(ii) 2-Chloro-2-\nphenylacetic acid \n (iii) Adipic acid \n (iv) Propiophenone  \n \nOR \nAqueous hydrogen cyanide is allowed to react separately with propanone and ethanal. \nIn which case will the rate of reaction be faster and why?",
+      "modelAnswer": "Reactant\ns \nProducts \n(a) (iii) \n(b) (i) \n[Give 1 mark for each correct match] \nOR \nThe rate of reaction will be faster in ethanal. In propanone, the presence of the two \nmethyl groups causes steric hindrance that reduces the access of the nucleophile \ntoward the carbonyl C. This is not the case for ethanal. Hence the rate of reaction \nwill be faster with ethanal than with propanone.  \n[Give 1 mark for identifying the compound which will react faster and 1 mark for the \nreason. Students may write the answer in their own words.] \n21 (a) The -OH group present on the C5 atom in the glucose molecule forms a six- \nmembered ring with the -CHO group to form a cyclic hemiacetal structure. Thus, \nglucose does not give a positive result with the Schiff's reagent in the Schiff's test.  \n[1 mark] \n \n(b) The carbonyl group present in glucose is aldehydic.  [1 mark] \nSection C \n22  \n Compound O  Compound P  \nField strength of the ligands weak field \nligand \nstrong field \nligand \nElectronic configuration for metal M in the \ncomplex \nt2g3, eg1 t2g4, eg0 \nType of complex that will be formed (High \nspin/low spin) \nhigh spin low spin \n[Give 0.5 marks for each correct answer] \n23  \n(a) - The current carriers in setup P are free mobile electrons.  \n       - The current carriers in setup Q are ions present in the solution. \n        [Give 0.5 marks for each correct answer]",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_21",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Glucose does not give a positive result with the Schiff's reagent in the Schiff's test. \nBased on the above information \n(a) Give a reason for the observation.  \n(b) What type of carbonyl group is present in a glucose molecule?",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_22",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "A metal (M) forms two different compounds O and P with two different ligands. Ligand \npresent in compound O is Cl- and that in compound P is CN-. The metal M has 4 \nelectrons in the d orbital. Complete the table given below based on the above \ninformation: \n \n Compound \nO \nCompound \nP \nField strength of the ligands   \nElectronic configuration for metal M in the complex   \nType of complex that will be formed(High spin/low \nspin)",
+      "modelAnswer": "Compound O  Compound P  \nField strength of the ligands weak field \nligand \nstrong field \nligand \nElectronic configuration for metal M in the \ncomplex \nt2g3, eg1 t2g4, eg0 \nType of complex that will be formed (High \nspin/low spin) \nhigh spin low spin \n[Give 0.5 marks for each correct answer] \n23  \n(a) - The current carriers in setup P are free mobile electrons.  \n       - The current carriers in setup Q are ions present in the solution. \n        [Give 0.5 marks for each correct answer]",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_23",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Abhisrija arranged two setups P and Q as shown below. \n \nBoth experiments are carried out at 25°C. \n \n(a) Name the current carriers in setup P and Q. \n(b) What is the effect of an increase in temperature on the conductivity of NaCl \nsolution and Cu wire? \n(c) What happens to the chemical composition of NaCl and Cu wire when current is \npassed through both setups for a prolonged period of time?",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_27",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Three sets of pairs (i) and (ii) of SN1 reactions are given below. \nFor each set of reactions state which reaction (i) or (ii) is expected to be slower? \nJustify your answer. \n(a) (i) (CH3)3CCl + CH3CH2O-  (CH3)3COCH2CH3 +Cl- [In presence of ethanol] \n(ii) (CH3)3CCl + 2 CH3CH2O- (CH3)3COCH2CH3 +Cl- [In presence of ethanol] \n(b) (i) (CH3)3CCl + H2O  (CH3)3COH + HCl \n(ii) (CH3)3CBr + H2O  (CH3)3COH + HBr \n(c)(i) (CH3)3CCl + H2O  (CH3)3COH + HCl \n(ii) C6H5Cl + H2O  C6H5OH + HCl",
+      "modelAnswer": "1 mark for each of the following: \n \n(a) Both the reactions occur at the same rate as SN1 reactions are independent of \nthe concentration of the nucleophile. \n(b) The reaction (i) will be slower as Br- is a better leaving group than Cl-. \n(c) Reaction (ii) will not occur as the C-Cl bond has a partial double bond character \ndue to resonance. \n \n[No marks to be awarded if justification is not given.] \n28 (a) 0.5 marks each for any four correct points such as: \n- increasing the concentration of reactants \n - decreasing the concentration of products  \n - using a catalyst \n - carrying out the reaction at the optimum temperature. \n  \n[marks to be given for any other relevant point] \n(b) mol m-3s-1 [1 mark]",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_31",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Answer any five questions with respect to the series of ions given below: \nSc+3, Ti+4, V+4, V+2, Cr+2, Fe+3, Ni+2,Cu+2, Zn+2 \n \n(a) Which of these ions are isoelectronic? \n(b) Why do Sc+3, Ti+4, and Zn +2 form colourless aqueous solution? \n(c) Which ion(s) from the list is/are not transition element(s) and why? \n(d) Cr forms two types of oxides - Cr+2 and Cr +3. Which of them is expected to turn \nred litmus blue? \n(e) Arrange the following ions in the increasing order of their magnetic moments: \n Sc+3, V+2, V+4, Ni+2. \n(f) Why are alloys mostly prepared from transition metals? \n(g) Which ion can also has a +1 oxidation state?",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_32",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "The following table contains osmotic pressure data for three compounds dissolved \nin various solvents. \n \n \nCompound Concentration, C (g/L) Osmotic pressure (atm) \nCellulose 12.5 0.0021 \nProtein 28.5 0.0026 \nHaemoglobin 5 0.0018 \n \n(R = 0.083 L bar mol-1 K-1) \n \n(a) If the concentration of protein is doubled keeping all other variables constant, \nwhat will be the osmotic pressure of the new solution? \n(b) When one litre of cellulose solution was heated to 315 K, its osmotic pressure \nchanged to 0.00248 atm. What is the molecular mass of the cellulose in the solution? \n(c) A solution of 10 g of protein in a litre of solvent was found to be isotonic to the \nhaemoglobin solution given above in the table, at the same temperature. If the \nmolecular weight of the protein is 130,000 g/mol, what is the molecular weight of \nhaemoglobin. \nOR \nThe relation between the osmotic pressure of three solutions A, B, and C is: \nπB < πC \nπC > πA \nπ A> πB \nThe three solutions have the same molarity and are at the same temperature. \n(a) For which of the solutions is the value of 'i' expected to be the greatest? Give a \nreason. \n \n(b) Which of the solutions is MOST LIKELY to be glucose, potassium sulphate, and \nsodium chloride? \n \n(c) Which of the solutions is expected to give a vapour pressure -mole fraction graph \nsimilar to that of an acetone -chloroform mixture? Give reason.",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    },
+    {
+      "id": "chem_pq_33",
+      "subjectId": "chemistry",
+      "chapterName": "Class 12 Boards Curriculum",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "The compound C6H5NHCOCH3 is obtained when compound A reacts with acetic \nanhydride in presence of pyridine. This compound A does not undergo Friedel -Crafts \nreaction. \n(a) Write the reaction showing the formation of C6H5NHCOCH3 from compound A. \n(b) The pH of the aq. solution of A is less than 7. Is this statement true? Give reason.  \n(c) State what type of functional group can be introduced into compound A, that will: \n      (i) increase the pH of the aqueous solution",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core chemical principle & formula/equation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Detailed calculation / reasoning with correct IUPAC/units"
+        }
+      ],
+      "keyTerms": [
+        "Balanced equation",
+        "Standard state",
+        "Activation energy",
+        "IUPAC nomenclature"
+      ]
+    }
+  ]
+}

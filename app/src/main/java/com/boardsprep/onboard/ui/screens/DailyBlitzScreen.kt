@@ -19,11 +19,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.SpacedReviewEntity
 import com.boardsprep.onboard.data.repository.BoardsRepository
@@ -40,6 +42,7 @@ fun DailyBlitzScreen(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val haptics = LocalHapticFeedback.current
+    val context = LocalContext.current
 
     val dueCards by repository.getDueReviews(limit = 5).collectAsState(initial = emptyList())
     var currentCardIndex by remember { mutableStateOf(0) }
@@ -49,6 +52,13 @@ fun DailyBlitzScreen(
 
     LaunchedEffect(Unit) {
         repository.seedSpacedReviewsIfEmpty()
+    }
+
+    LaunchedEffect(isBlitzCompleted) {
+        if (isBlitzCompleted) {
+            com.boardsprep.onboard.core.sync.FirebaseSyncManager.getInstance(context)
+                .updateStudyStreak("daily_blitz", 300000L)
+        }
     }
 
     Scaffold(
@@ -84,12 +94,10 @@ fun DailyBlitzScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
+                    LiquidGlassBackButton(
+                        onClick = onBackClick,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background

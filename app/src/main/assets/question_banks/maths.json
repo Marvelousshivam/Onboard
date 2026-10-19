@@ -1,0 +1,1776 @@
+{
+  "subject": "maths",
+  "count": 30,
+  "questions": [
+    {
+      "id": "math_cs_1",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 1: 1: ",
+      "contextPassage": "A general election of Lok Sabha is a gigantic exercise.  About 911 million people were \neligible to vote and voter turnout was about 67%, the highest ever \n  \nLet I be the set of all citizens of India who were eligible to exercise their voting right in \ngeneral election held in 2019.  A relation ‘R’ is defined on I as follows: \nR = {(𝑉1, 𝑉2) ∶  𝑉1, 𝑉2 ∈ 𝐼 and both use their voting right in general election – 2019}",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Two neighbors X and Y∈ I. X exercised his voting right while Y did not cast her vote \nin general election – 2019.  Which of the following is true? \na. (X,Y) ∈R \nb. (Y,X) ∈R       \nc. (X,X) ∉R    \nd. (X,Y) ∉R",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Mr.’𝑋’ and his wife ‘ 𝑊’both exercised their voting right in general election -2019, \nWhich of the following is true? \na. both (X,W) and (W,X) ∈ R    \nb. (X,W) ∈ R but (W,X) ∉ R   \nc. both (X,W) and (W,X) ∉ R   \nd. (W,X) ∈ R but (X,W) ∉ R",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Three friends F1, F2 and F3 exercised their voting right in general election-2019, then \nwhich of the following is true? \na. (F1,F2 ) ∈R, (F2,F3) ∈ R  and (F1,F3) ∈ R   \nb. (F1,F2 ) ∈ R, (F2,F3) ∈ R and (F1,F3) ∉ R \nc. (F1,F2 ) ∈ R, (F2,F2) ∈R but (F3,F3) ∉ R  \nd. (F1,F2 ) ∉  R, (F2,F3) ∉  R and (F1,F3) ∉  R \nONE – NATION \nONE – ELECTION \nFESTIVAL OF \nDEMOCRACY \nGENERAL ELECTION – \n2019",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The above defined relation R is __________ \na. Symmetric and transitive but not reflexive  \nb. Universal relation \nc. Equivalence relation   \nd. Reflexive but not symmetric and transitive",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_2",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 2: 2 ",
+      "contextPassage": "Sherlin and Danju are playing Ludo at home during Covid -19.  While rolling the dice, \nSherlin’s sister Raji  observed and noted the possible outcomes of the throw every time \nbelongs to set {1,2,3,4,5,6}.  Let A be the set of players while B be the set of all possible \noutcomes. \n  \n   \n A = {S, D}, B = {1,2,3,4,5,6}  \n\n\n--- PAGE 3 ---",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Let 𝑅 ∶  𝐵 → 𝐵 be defined by R = {(𝑥, 𝑦): 𝑦 𝑖𝑠 𝑑𝑖𝑣𝑖𝑠𝑖𝑏𝑙𝑒 𝑏𝑦 𝑥 } is \na. Reflexive and transitive but not symmetric  \nb.  Reflexive and symmetric and not transitive \nc.  Not reflexive but symmetric and transitive  \nd.  Equivalence",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Raji wants to know the number of functions from A to B.  How many number of \nfunctions are possible? \na. 62         \nb. 26     \nc. 6!   \nd. 212",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Let R be a relation on B defined by R = {(1,2), (2,2), (1,3), (3,4), (3,1), (4,3), (5,5)}. \nThen R is \na. Symmetric  \nb. Reflexive   \nc. Transitive   \nd. None of these three",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Raji wants to know the number of relations possible from A to B.  How many \nnumbers of relations are possible? \na. 62         \nb. 26     \nc. 6!   \nd. 212",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_3",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 3: 3: ",
+      "contextPassage": "An organization conducted bike race under 2 different categories -boys and girls.  Totally \nthere were 250 participants.  Among all of them finally three from Category 1 and two from \nCategory 2 were selected for  the final race. Ravi forms two set s B and G with these \nparticipants for his college project. \nLet B = {b1,b2,b3}  G={g1,g2} where B represents the set of  boys selected  and G the set \nof girls who were selected for the final race.  \n \n \n \n \n \nRavi decides to explore these sets for various types of relations and functions",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Ravi wishes to form all the relations possible from B to G. How many such relations \nare possible? \na. 26         \nb. 25    \nc. 0   \nd. 23",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Let R: B→B be defined by R = {(𝑥, 𝑦): 𝑥 and y are students of same sex}, Then this \nrelation R is_______ \na. Equivalence  \nb. Reflexive only \nc. Reflexive and symmetric but not transitive \nd. Reflexive and transitive but not symmetric",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Ravi wants to know among those relations, how many functions can be formed \nfrom B to G? \na. 22        \nb. 212     \nc. 32   \nd. 23",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Let 𝑅: 𝐵 → 𝐺 be defined by R = { (b1,g1), (b2,g2),(b3,g1)}, then  R is__________",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_4",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 4: 5: ",
+      "contextPassage": "Students of Grade 9, planned to plant saplings along straight lines, parallel to each  other \nto one side of the playground ensuring that they had enough play area.  Let us assume that \nthey planted one of the rows of the saplings along the line 𝑦 = 𝑥 − 4. Let L be the set of all \nlines which are parallel on the ground and R be a relation on L. \n  \nAnswer the following using the above information.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Let relation R be defined by R = { (𝐿1, 𝐿2): 𝐿1║𝐿2 where L1,L2 € L} then R is______ \nrelation \na. Equivalence  \nb. Only reflexive",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Let R = { (𝐿1, 𝐿2) ∶  𝐿1┴𝐿2 where L1, L2 € L } which of the following is true? \na. R is Symmetric but neither reflexive nor transitive  \nb. R is Reflexive and transitive but not symmetric    \nc. R is Reflexive but neither symmetric nor transitive  \nd. R is an Equivalence relation",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The function  f: R→R  defined by 𝑓(𝑥) = 𝑥 − 4 is___________ \na. Bijective   \nb. Surjective  but not injective  \nc. Injective but not Surjective  \nd. Neither Surjective nor Injective",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Let 𝑓: 𝑅 → 𝑅 be defined by 𝑓(𝑥) = 𝑥 − 4. Then the range of 𝑓(𝑥) is ________ \na. R             \nb. Z                 \nc. W   \nd. Q",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_5",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 5: 5: ",
+      "contextPassage": "Raji visited the \nExhibition along with \nher family . The \nExhibition had a huge \nswing, which attracted \nmany children.  Raji \nfound that the swing traced the path of a Parabola as given by 𝑦 =  𝑥2.  \nAnswer the following questions using the above information.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Let 𝑓: 𝑅 → 𝑅 be defined by 𝑓(𝑥) = 𝑥2 is_________ \na. Neither Surjective nor Injective  \nb. Surjective    \nc. Injective    \nd. Bijective",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Let 𝑓: 𝑁 → 𝑁 be defined by 𝑓(𝑥) = 𝑥2 is ________ \na. Surjective but not Injective  \nb. Surjective    \nc. Injective    \nd. Bijective",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Let f: {1,2,3,….}→{1,4,9,….} be defined by 𝑓(𝑥) = 𝑥2  is _________ \na. Bijective   \nb. Surjective but not Injective  \nc. Injective but Surjective  \nd. Neither Surjective nor Injective",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Let : 𝑁 → 𝑅  be defined by   𝑓(𝑥) = 𝑥2 .  Range of the function among the following \nis _________ \na. {1, 4, 9, 16,…}   \nb. {1, 4, 8, 9, 10,…}   \nc. {1, 4, 9, 15, 16,…}   \nd. {1, 4, 8, 16,…}",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_6",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 6: 1: ",
+      "contextPassage": "Two men on either side of a temple of 30 meters high observe its top at the angles of elevation \n𝛼 and 𝛽 respectively. (as shown in the figure above). The distance between the two men is \n40√3 meters and the distance between the first person A and the temple is 30 √3 meters. \nBased on the above information answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "∠𝐶𝐴𝐵 = 𝛼 = \na. sin−1 (\n2\n√3)                                       \nb. sin−1 (\n1\n2)                                                                         \nc. sin−1(2)                                       \nd. sin−1 (√3\n2 )",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "∠𝐶𝐴𝐵  = 𝛼 = \na. cos−1 (\n1\n5)                                        \nb. cos−1 (\n2\n5)                                                   \nc. cos−1 (√3\n2 )",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "∠𝐵𝐶𝐴 =  𝛽 = \na. tan−1 (\n1\n2)                                      \nb. tan−1(2)                                                     \nc. tan−1 (\n1\n√3)                                    \nd. tan−1(√3)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "∠𝐴𝐵𝐶 =             \na. \n𝜋\n4                                                        \nb. \n𝜋\n6                                                  \nc. \n𝜋\n2                                                        \nd.  \n𝜋\n3",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_7",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 7: 2: ",
+      "contextPassage": "The Government of India is planning to fix a hoarding board at the face of a building on the \nroad of a busy market for awareness on COVID -19 protocol. Ram, Robert and Rahim are \nthe three engineers who are working on this project.  “A” is considered to be a  person \nviewing the hoarding board 20 metres away from the building, standing at the edge of a \npathway nearby. Ram, Robert and Rahim suggested to the firm to place the hoarding board \nat three different locations namely C, D and E . “C” is at the height of 10 metres from the \n\n--- PAGE 10 ---\n  \nground level. For the viewer A, the angle",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Measure of ∠𝐶𝐴𝐵 =  \na. tan−1(2)                                                  \nb. tan−1 ( \n1\n2)                                                                          \nc. tan−1( 1)                                                  \nd. tan−1( 3)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "𝑀𝑒𝑎𝑠𝑢𝑟𝑒 𝑜𝑓∠𝐷𝐴𝐵  = \na. tan−1 (\n3\n4)                                                \nb. tan−1(3)           \nc. tan−1 (\n4\n3)                                                \nd. tan−1(4)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "𝑀𝑒𝑎𝑠𝑢𝑟𝑒 𝑜𝑓 ∠𝐸𝐴𝐵 =   \na. tan−1(11)                                                 \nb. tan−1 3             \nc. tan−1 (\n2\n11)                                               \nd. tan−1 (\n11\n2 )",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "𝐴| Is another viewer standing on the same line of observation across the road. If \nthe width of the road is 5 meters, then the difference between  ∠𝐶𝐴𝐵 and  ∠𝐶𝐴′𝐵 \nIs \na. tan-1(1/2)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_8",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 8: 1: ",
+      "contextPassage": "A manufacture produces three stationery products Pencil, Eraser and Sharpener which he \nsells in two markets. Annual sales are indicated below  \n                   \n \n \n \n \n\n\n--- PAGE 12 ---\n  \nMarket Products (in numbers) \n Pencil Eraser Sharpener \nA 10,000 2000 18,000 \nB 6000 20,000 8,000 \n \nIf the unit Sale price of Pencil, Eraser and Sharpener are Rs. 2.50, Rs. 1.50 and Rs. 1.00  \nrespectively, and unit cost of the above three commodities are Rs. 2.00, Rs. 1.00 and Rs.",
+      "subQuestions": [
+        {
+          "part": "Part (0)",
+          "text": "50 respectively, then, \nBased on the above information answer the following:",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (1)",
+          "text": "Total revenue of market A \na. Rs. 64,000                \nb. Rs. 60,400 \nc. Rs. 46,000 \nd. Rs. 40600",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Total revenue of market B \na. Rs. 35,000 \nb. Rs. 53,000 \nc. Rs. 50,300 \nd. Rs. 30,500",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Cost incurred in market A \na. Rs. 13,000 \nb. Rs.30,100 \nc. Rs. 10,300 \nd. Rs. 31,000",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_9",
+      "subjectId": "maths",
+      "chapterName": "Matrices",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 9: 2: ",
+      "contextPassage": "Amit, Biraj and Chirag were given the task of creating a square matrux of order 2. \nBelow are the matrices created by them. A, B , C are the matrices created by Amit, Biraj \nand Chirag respectively.  \nA = [ 1 2\n−1 3]  B= [4 0\n1 5]  C= [2 0\n1 −2]    \nIf a = 4 and  b = −2, based on the above information answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Sum of the matrices A, B and C , A+(𝐵 + 𝐶) is \na. [1 6\n2 7] \nb. [6 1\n7 2] \nc. [7 2\n1 6] \nd. [2 1\n7 6]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "(𝐴𝑇)𝑇 is equal to \na. [ 1 2\n−1 3] \nb. [2 1\n3 −1] \nc. [1 −1\n2 3 ] \nd. [ 2 3\n−1 1]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "(𝑏𝐴)𝑇 is equal to \na. [−2 −4\n2 −6] \nb. [−2 2\n−4 −6] \nc. [−2 2\n−6 −4]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "AC−𝐵𝐶 is equal to  \na. [−4 −6\n−4 4 ] \nb. [−4 −4\n4 −6] \nc. [−4 −4\n−6 4 ] \nd. [−6 4\n−4 −4]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_10",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 10: 2: ",
+      "contextPassage": "Three schools DPS, CVC and KVS decided to organize a fair for collecting money for \nhelping the flood victims. They sold handmade fans, mats and plates from recycled material \nat a cost of Rs. 25, Rs.100 and Rs. 50 each respectively. The numbers of articles sold are \ngiven as   \n\n--- PAGE 15 ---\n  \n                       \n \nSchool /Article                                   DPS           CVC         KVS \nHandmade fans             40             25                                35 \nMats             50             40                                      50 \nPlates             20             30  ",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What is the total money (in Rupees) collected by the school DPS? \na. 700 \nb. 7,000 \nc. 6;125 \nd. 7875",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "What is the total amount of money (in Rs.) collected by schools CVC and KVS? \na. 14,000 \nb. 15,725 \nc. 21,000 \nd. 13,125",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What is the total amount of money collected by all three schools DPS, CVC and \nKVS? \na. Rs. 15,775 \nb. Rs. 14,000 \nc. Rs. 21,000 \nd. Rs. 17,125",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "If the number of handmade fans and plates are interchanged for all the schools, \nthen what is the total money collected by all schools? \na. Rs. 18,000 \nb. Rs. 6,750 \nc. Rs. 5,000 \nd. Rs. 21,250",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_11",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 11: 3: ",
+      "contextPassage": "On her birth day, Seema decided to donate some money to children of an orphanage home. \nIf there were 8 children less, everyone would have got Rs.10 more. However, if there were \n16 children more, everyone would have got Rs. 10 less.  Let the number of children be x \nand the amount distributed by Seema for one child be y (in Rs.).    \n \nBased on the information given above, answer the following questions:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The equations in terms x and y are \na. 5x-4y = 40",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Which of the following matrix equations represent the information given above?",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (1)",
+          "text": "[5 4\n5 8] [𝑥\n𝑦] = [ 40\n−80]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "[5 −4\n5 −8] [𝑥\n𝑦] = [40\n80]",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_12",
+      "subjectId": "maths",
+      "chapterName": "Matrices",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 12: 4: ",
+      "contextPassage": "Two farmers Ramakishan and Gurucharan Singh cultivate only three varieties of rice \nnamely Basmati, Permal and Naura. The sale (in rupees) of these varieties of rice by both \nthe farmers in the month of September and October are given by the following matrices A \nand B                                                               \n                                                                              \n \n  September sales (in Rupees) \n                     A= [10,000 20,000 30,000\n50,000 30,000 10,000] 𝑅𝑎𝑚𝑎𝑘𝑖𝑠ℎ𝑎𝑛\n𝐺𝑢𝑟𝑢𝑐ℎ𝑎𝑟𝑎𝑛 \nOctober sales (in Rupees) \n                     B= [ 5,000 10,00",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The total sales in September and October for each farmer in each variety can be \nrepresented as _______.. \na. A+B \nb. A-B",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "What is the value of 𝐴23? \na. 10000 \nb. 20000 \nc. 30000 \nd. 40000",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The decrease in sales from September to October is given by _______ . \na. A+B \nb. A-B \nc. A> 𝐵 \nd. A< 𝐵",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "If Ramkishan receives 2% profit on gross sales, compute his  profit  for each \nvariety sold in October. \na. Rs. 100, Rs. 200 and Rs. 120 \nb. Rs. 100, Rs. 200 and Rs. 130 \nc. Rs. 100, Rs. 220 and Rs. 120 \nd. Rs. 110, Rs. 200 and Rs. 120",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_13",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 13: 1: ",
+      "contextPassage": "Manjit wants to donate a rectangular plot of land for a school in his village. When he was \nasked to give dimensions of the plot, he told that if its length is decreased by 50 m and \nbreadth is increased by 50m, then its area will remain same, but if length is dec reased by \n10m and breadth is decreased by 20m, then its area will decrease by 5300 m2         \n \n \n \n \n \n           \nBased on the information given above, answer the following questions:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The equations in terms of X and Y are \na. x-y=50, 2x-y=550 \nb. x-y=50, 2x+y=550 \nc. x + y = 50, 2x + y=550 \nd. x +y = 50, 2x + y=550",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Which of the following matrix equation is represented by the given     information \na. \n\n\n\n\n\n\n\n\n\n\n \n550\n50\n12\n11\ny\nx  \nb. \n\n\n\n\n\n\n\n\n\n\n\n550\n50\n12\n11\ny\nx  \nc. \n\n\n\n\n\n\n\n\n\n\n\n 550\n50\n12\n11\ny\nx  \nd. \n\n\n\n\n\n\n\n\n\n\n\n\n\n550\n50\n12\n11\ny\nx",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The value of x (length of rectangular field) is \na. 150m  \nb. 400m  \nc. 200m  \ny \nx",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The value of y (breadth of rectangular field) is \na. 150m.  \nb. 200m.  \nc. 430m.  \nd. 350m",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_14",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 14: 1: ",
+      "contextPassage": "Real-world application model based on CBSE Relations & Functions curriculum.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The rate of growth of the plant with respect to sunlight is ______ . \na. 4x- \n1\n2 x2 \nb. 4 – x \nc. x – 4 \nThe Relation between the height of the plant ( y in cm) \nwith respect to exposure to sunlight is governed by the \nfollowing equation y = 4x - \n1\n2 x2 where x is the number \nof days exposed to sunlight.",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "What is the number of days it will take for the plant to grow to the maximum \nheight? \na. 4 \nb. 6 \nc. 7 \nd. 10",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What is the maximum height of the plant? \na. 12 cm \nb. 10 cm \nc. 8 cm \nd. 6 cm",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "What will be the height of the plant after 2 days? \na. 4cm \nb. 6 cm \nc. 8cm \nd. 10cm",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_15",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 15: 2: ",
+      "contextPassage": "Real-world application model based on CBSE Relations & Functions curriculum.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What will be the production when the profit is maximum? \na. 37500 \nb. 12.5 \nc. -12.5 \nd. –37500",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "What will be the maximum profit? \na. Rs 38,28,125 \nb. Rs 38281.25 \nc. Rs 39,000 \nd.  None",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "Check in which interval the profit is strictly increasing . \na. (12.5,∞ ) \nb. for all real numbers  \nc. for all positive real numbers \nd. (0, 12.5)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "When the production is 2units what will be the profit of the company? \na. 37500   \nb. 37,730 \nc. 37,770 \nd. None",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_16",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 16: 3: ",
+      "contextPassage": "Real-world application model based on CBSE Relations & Functions curriculum.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "When x > 4 What will be the height in terms of x ? \na. x – 2 \nb.  x -3 \nc. 2x -5 \nd. 5 – 2x",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Will the slope vary with x value? \na. Yes \nb. No",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What is \n𝑑𝑦\n𝑑𝑥 at x = 3 \na. 2  \nb. -2 \nc. Function is not differentiable \nd. 1",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "When the x value lies between (2,3) then the function is \na. 2x -5   \nb. 5 – 2x \nc. 1 \nA potter made a mud vessel, where the shape of the pot is \nbased on   f(x) = |x – 3| + | x-2|, where f(x) represents the \nheight of the pot.",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_17",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 17: 4: ",
+      "contextPassage": "Real-world application model based on CBSE Relations & Functions curriculum.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Which value from the following may be abscissa of critical point? \na. ±\n1\n4 \nb.  ±\n1\n2 \nc. ± 1 \nd. None",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Find the slope of the normal based on the position of the stick. \na. 360 \nb. –360 \nThe shape of a toy is given as f(x) = 6(2x 4 – x2). To make \nthe toy beautiful 2 sticks  which are perpendicular to each  \nother were placed at a point (2,3), above the toy.",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What will be the equation of the tangent at the critical point if it passes through \n(2,3)? \na. x + 360y = 1082 \nb. y = 360x – 717         \nc. x = 717y + 360       \nd. none",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Find the second order derivative of the function at x = 5. \na. 598 \nb. 1176  \nc. 3588 \nd. 3312",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_18",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 18: 5: ",
+      "contextPassage": "The bridge connects two hills 100 feet apart. The arch on the bridge is in a parabolic form. \nThe highest point on the bridge is 10 feet above the road  at the middle of the bridge as \nseen in the figure. \nBased on the information given above, answer the following questions:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The equation of the parabola designed on the bridge  is \na. 𝑥2 = 250𝑦 \nb. 𝑥2 = −250𝑦 \nc. 𝑦2 = 250𝑥 \nd. 𝑦2 = 250𝑦",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "The value of the integral ∫\n𝑥2\n250\n50\n−50 𝑑𝑥 is \na. \n3\n1000  \nb. \n3\n250  \nc. 1200 \nd.  0",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The integrand of the integral \n\n\n50\n50\n2dxx  is  _________ function. \na. Even \nb. Odd \nc. Neither odd nor even \nd. None",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The area formed by the curve \nyx 2502  , x-axis , y = 0 and y = 10 is \na. \n3\n21000",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_19",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 19: 1: ",
+      "contextPassage": "A Veterinary doctor was examining a sick cat brought by a pet lover. When it was brought \nto the hospital, it was already dead. The pet lover wanted to find its time of death. He took \nthe temperature of the cat at 11.30 pm which was 94.6 F. He took the temperature again \nafter one hour; the temperature was lower t han the first observation. It was 93.4 F. The \nroom in which the cat was put is always at 70F. The normal temperature of the cat is taken \nas 98.6F when it was alive.  The doctor estimated the time of death using Newton law of \ncooling which is governed by the differential equat",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "State the degree of the above given differential equation.",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Which method of solving a differential equation helped in calcul ation of the time of \ndeath? \na. Variable separable method  \nb. Solving Homogeneous differential equation  \nc. Solving Linear differential equation  \nd. all of the above",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "If the temperature was measured 2 hours after 11.30pm, will the time of death \nchange? (Yes/No)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The solution of the differential equation \n𝑑𝑇\n𝑑𝑡 = 𝑘(𝑇 − 70)is given by, \na. log | T – 70| = kt + C \nb. log | T – 70| = log |kt |+ C \nc.  T – 70 = kt + C \nd. T – 70 = kt C",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_20",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 20: 2: ",
+      "contextPassage": "Polio drops are delivered to 50K children in a district. The rate at which polio drops are \ngiven is directly proportional to the number of children who have not been administered the \ndrops. By the end of 2nd week half the children have been given the polio drops. How many \nwill have been given the drops by the end of 3 rd week can be estimated using the solution \nto the differential equation \n𝒅𝒚\n𝒅𝒙 = 𝐤(𝟓𝟎 − 𝐲)  where x denotes the number of weeks and y the \nnumber  of children who have been given the drops.                                                                     \n\n--- PAGE 30 ---",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "State the order of the above given differential equation.",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Which method of solving a differential equation can be used to solve \n𝒅𝒚\n𝒅𝒙 = 𝐤(𝟓𝟎 − 𝐲).? \na. Variable separable method  \n                b. Solving Homogeneous differential equation  \n    c. Solving Linear differential equation  \n    d. all of the above",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The solution of the differential equation \n𝒅𝒚\n𝒅𝒙 = 𝐤(𝟓𝟎 − 𝐲) is given by, \na. log | 50 – y| = kx + C \nb. - log | 50 – y| = kx + C \nc. log | 50 – y| = log| kx |+ C \nd.  50 – y = kx + C",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The value of c in the particular solution given that y(0)=0 and k = 0.049 is. \n     a. log 50 \n     b. log 1/50 \n      c. 50 \n      d. -50",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_21",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 21: 1: ",
+      "contextPassage": "Solar Panels have to be installed carefully so that the tilt of the roof, and the direction to the \nsun, produce the largest possible electrical power in \nthe solar panels. \nA surveyor uses his instrument to determine the \ncoordinates of the four corners of a roof where solar \npanels are to be mounted. In the picture , suppose the \npoints are labelled counter clockwise from the roof \ncorner nearest to the camera in units of meters  P1 \n(6,8,4) , P2 (21,8,4), P3 (21,16,10) and  \n                                                           P4 (6,16,10)",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What are the components to the two edge vectors defined by 𝑨⃗⃗  = PV of P2 – PV of \nP1 and  𝑩⃗⃗  = PV of P4 – PV of P1? (where PV stands for position vector)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Write the vector in standard notation with  𝑖̂, 𝑗̂ and 𝑘̂ (where 𝑖̂, 𝑗̂ and 𝑘̂ are the unit \nvectors along the three axes).",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What are the magnitudes of the vectors  𝑨⃗⃗  and  𝑩⃗⃗   and in what units?",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "What are the components to the vector  𝑵⃗⃗ , perpendicular to 𝑨⃗⃗  and  𝑩⃗⃗   and the surface \nof the roof?",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_22",
+      "subjectId": "maths",
+      "chapterName": "Vector",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 22: 2: ",
+      "contextPassage": "A class XII student appearing for a competitive examination was asked to attempt the \nfollowing  questions.  \nLet 𝑎,⃗⃗⃗  𝑏,⃗⃗⃗  and 𝑐  ⃗⃗⃗  𝑏𝑒 𝑡ℎ𝑟𝑒𝑒 non zero vectors.",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "If 𝑎  ⃗⃗⃗⃗  and 𝑏  ⃗⃗⃗⃗  are such that|𝑎 + 𝑏⃗ | = |𝑎 − 𝑏⃗ | then \na. 𝑎  ⃗⃗⃗⃗   𝑏  ⃗⃗⃗⃗   \nb. 𝑎  ⃗⃗⃗⃗   𝑏  ⃗⃗⃗⃗   \nc. 𝑎  ⃗⃗⃗⃗  = 𝑏  ⃗⃗⃗⃗   \nd. None of these",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "If  𝑎  ⃗⃗⃗⃗  = 𝑖̂ − 2𝑗̂ ,    𝑏  ⃗⃗⃗⃗ = 2𝑖̂ + 𝑗̂ + 3𝑘̂ then evaluate (2𝑎 + 𝑏⃗ ) ∙ [(𝑎 + 𝑏⃗ ) × (𝑎 − 2𝑏⃗ )]     \na. 0   \nb. 4     \nc. 3     \nd. 2",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "If   𝑎  ⃗⃗⃗⃗  and 𝑏  ⃗⃗⃗⃗  are unit vectors and  be the angle between them then |𝑎 − 𝑏⃗ | is  \na. 𝑠𝑖𝑛\n𝜃\n2  \nb. 2 𝑠𝑖𝑛\n𝜃\n2    \nc. 2 𝑐𝑜𝑠\n𝜃\n2   \nd. 𝑐𝑜𝑠\n𝜃\n2",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Let 𝑎 , 𝑏⃗  and 𝑐  be unit vectors such that 𝑎 ∙ 𝑏⃗ =𝑎 ∙ 𝑐 = 0 and angle between 𝑏⃗  and 𝑐  \nis \n𝜋\n6 then  𝑎  =  \na. 2(𝑏⃗  𝑐)⃗⃗⃗",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_23",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 23: 3: ",
+      "contextPassage": "A cricket match is organized between two Clubs A and B for which a team from each club \nis chosen. Remaining players of Club A and Club B are respectively sitting on the plane \nrepresented by the equation  𝑟 . (2 𝑖 ⃗ − 𝑗 ⃗⃗ +  𝑘⃗  ) = 3 and 𝑟 . ( 𝑖 ⃗ + 3𝑗 ⃗⃗ + 2 𝑘⃗⃗⃗  ) = 8, to cheer the \nteam of their own clubs.  \n \nBased on the above answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The Cartesian equation of the plane on which players of Club A are seated is \na. 2𝑥 − 𝑦 + 𝑧 = 3    \nb. 2𝑥 − 𝑦 + 2𝑧 = 3              \nc. 2𝑥 − 𝑦 + 𝑧 = −3",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "The magnitude of the normal to the plane on which players of club B are seated, is \na. √15     \nb. √14  \nc. √17 \nd. √20",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The intercept form of the equation of the plane on which players of Club B are \nseated is \na. \n𝑥\n8 +  \n𝑦\n8\n3\n+  \n𝑧\n2 = 1     \nb. \n𝑥\n5 +  \n𝑦\n8\n3\n+  \n𝑧\n3 = 1  \nc. \n𝑥\n8 +  \n𝑦\n8\n3\n+  \n𝑧\n4 = 1 \nd. \n𝑥\n8 +  \n𝑦\n7 +  \n𝑧\n2 = 1",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Which of the following is a player of Club B? \na. Player sitting at (1, 2, 1)   \nb. Player sitting at (0, 1, 2)         \nc. Player sitting at (1, 4, 1)  \nd. Player sitting at (1, 1, 2)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_24",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 24: 2: ",
+      "contextPassage": "The Indian coast guard, while patrolling, saw a suspicious boat with people. They were \nnowhere looking like fishermen. The coast guard were closely observing the movement of \nthe boat for an opportunity to seize the boat. They observed that the boat is moving along \na planar surface.  At an instant of time, the coordinates of the position of the coast guard \nhelicopter and the boat is (1, 3, 5) and (2, 5, 3) respectively. \n \nBased on the above answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "If the line joining the positions of the helicopter and the boat is perpendicular to the \nplane in which the boat moves, then the equation of the plane is \na. -x + 2y – 2z = 6     \nb. x + 2y + 2z = 6   \nc. x + 2y – 2z = 6 \nd. x - 2y – 2z = 6",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "If the coast guard decide to shoot the boat at that given instant of time, then what is \nthe distance (in meters) that the bullet has to travel? \na. 5m       \nb. 3m  \nc. 6m  \nd. 4m",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "If the coast guard decides to shoot the boat at that given instant of time, when the \nspeed of bullet is 36m/sec, then what is the time taken for the bullet to travel and hit \nthe boat? \na. \n1\n8 𝑠𝑒𝑐𝑜𝑛𝑑𝑠     \nb. \n1\n14 𝑠𝑒𝑐𝑜𝑛𝑑𝑠",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "At that given instant of time, the equation of line passing through the positions of the \nhelicopter and boat is \na. \n𝑥 − 1\n1 =  \n𝑦 − 3 \n2 =  \n𝑧 − 5\n−2    \nb. \n𝑥 − 1\n2 =  \n𝑦 + 3 \n1 =  \n𝑧 − 5\n−2  \nc. \n𝑥 + 1\n−2 =  \n𝑦 − 3 \n−1 =  \n𝑧 − 5\n−2  \nd. \n𝑥 − 1\n2 =  \n𝑦 + 3 \n−1 =  \n𝑧 + 5\n2",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_25",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 25: 3: ",
+      "contextPassage": "The equation of motion of a missile are x = 3t, y = -4t, z = t, where the time ‘t’ is given in \nseconds, and the distance is measured in kilometres. \n\n--- PAGE 37 ---\n  \n \n \n \n \nBased on the above answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What is the path of the missile? \na. Straight line      \nb. Parabola \nc. Circle \nd. Ellipse",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Which of the following points lie on the path of the missile? \na. (6, 8, 2)       \nb. (6, -8, -2)   \nc. (6, -8, 2) \nd. (-6, -8, 2)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "At what distance will the rocket be from the starting point (0, 0, 0) in 5 seconds? \na. √550 kms      \nb. √650 kms  \nc. √450 kms   \nd. √750 kms",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "If the position of rocket at a certain instant of time is (5, -8, 10), then what will be the \nheight of the rocket from the ground?  (The ground is considered as the xy – plane). \na. 12 km       \nb. 11 km  \nc. 20 km  \nd. 10 km",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_26",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 26: 4: ",
+      "contextPassage": "Suppose the floor of a hotel is made up of mirror polished Salvatore stone. There is a large \ncrystal chandelier attached to the ceiling of the hotel room. Consider the floor of the hotel \nroom as a plane having the equation x – y + z = 4 and the crystal chandelier is suspended \nat the point (1, 0, 1). \n \nBased on the above answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Find the direction ratios of the perpendicular from the point (1, 0, 1) to the plane \n            x – y + z = 4. \na. (-1, -1, 1)      \nb. (1, -1, -1)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Find the length of the perpendicular from the point (1, 0, 1) to the plane x – y + z =",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "a. \n2\n√3  𝑢𝑛𝑖𝑡𝑠       \nb.  \n4\n√3  𝑢𝑛𝑖𝑡𝑠  \nc. \n6\n√3  𝑢𝑛𝑖𝑡𝑠 \nd. \n8\n√3  𝑢𝑛𝑖𝑡𝑠",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The equation of the perpendicular from the point (1, 0, 1) to the plane x – y + z = 4 \nis \na. \n𝑥 − 1\n2 =  \n𝑦 + 3 \n−1 =  \n𝑧 + 5\n2    \nb. \n𝑥 − 1\n−2 =  \n𝑦 + 3 \n−1 =  \n𝑧 − 5\n2  \nc. \n𝑥 − 1\n1 =  \n𝑦 \n−1 =  \n𝑧 − 1\n1   \nd. \n𝑥 − 1\n2 =  \n𝑦 \n−2 =  \n𝑧 − 1\n1",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_27",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 27: 5: ",
+      "contextPassage": "A mobile tower stands at the top of a hill.  Consider the surface on which the tower stands \nas a plane having points A(1, 0, 2), B(3, -1, 1) and C(1, 2, 1) on it. The mobile tower is tied \nwith 3 cables from the point A, B and C such that it stands vertically on the ground. The top \nof the tower is at the point (2, 3, 1) as shown in the figure. \n \nBased on the above answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "The equation of the plane passing through the points A, B and C is \na. 3x - 2y + 4z = -11    \nb. 3x + 2y + 4z = 11  \nc. 3x - 2y - 4z = 11 \nd. -3x + 2y + 4z = -11",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "The height of the tower from the ground is  \na. \n5\n√29  𝑢𝑛𝑖𝑡𝑠      \nb. \n7\n√29  𝑢𝑛𝑖𝑡𝑠  \nc. \n6\n√29  𝑢𝑛𝑖𝑡𝑠 \nd. \n8\n√29  𝑢𝑛𝑖𝑡𝑠",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "The equation of the perpendicular line drawn from the top of the tower to the \nground is  \na. \n𝑥 − 1\n2 =  \n𝑦 + 3 \n1 =  \n𝑧 − 5\n−2     \nb. \n𝑥 − 2\n−3 =  \n𝑦 − 3 \n2 =  \n𝑧 − 1\n−4  \nc. \n𝑥 − 2\n3 =  \n𝑦 − 3 \n2 =  \n𝑧 − 1\n4   \nd. \n𝑥 + 1\n−2 =  \n𝑦 + 3 \n−1 =  \n𝑧 − 5\n2",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "The coordinates of the foot of the perpendicular drawn from the top of the tower to \nthe ground are  \na. (\n43\n29 ,\n−77\n29 ,\n−9\n29)     \nb. (\n9\n7 ,\n−1\n7 ,\n−10\n7 )   \nc. (\n−43\n29 ,\n77\n29 ,\n−9\n29) \nd. (\n43\n29 ,\n77\n29 ,\n9\n29)",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_28",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 28: 1: ",
+      "contextPassage": "A coach is training 3 players. He observes that  the player A can hit a target 4 times in 5 \nshots, player B can hit 3 times in 4 shots and the player C can hit 2 times in 3 shots                                                           \n \nFrom this situation answer the following:",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "Let the target is hit by A, B: the target is hit by B and, C: the target is hit by A and C. \nThen, the probability that A, B and, C all will hit, is \na. 4/5              \nb. 3/5   \nc. 2/5    \nd. 1/5",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Referring to (i), what is the probability that B, C will hit and A will lose? \na. 1/10   \nb. 3/10   \nc. 7/10         \nd. 4/10",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "With reference to the events mentioned in (i), what is the probability that ‘any two \nof A, B and C will hit?",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (1)",
+          "text": "1/30",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_29",
+      "subjectId": "maths",
+      "chapterName": "Relations & Functions",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 29: 2: ",
+      "contextPassage": "The reliability of a COVID PCR test is specified as follows:  \nOf people having COVID, 90% of the test detects the disease but 10% goes undetected. \nOf people free of COVID, 99% of the test is judged COVID   negative but 1% are diagnosed \nas showing COVID positive. From a large population of which only 0.1% have COVID, one \nperson is selected at random, given the COVID PCR test, and the pathologist reports \nhim/her as COVID positive. \n \nBased on the above information, answer the following \n\n\n--- PAGE 44 ---",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What is the probability of the ‘person to be tested as COVID positive’ given that ‘he \nis actually having COVID? \na. 0.001  \nb. 0.1   \nc. 0.8   \nd. 0.9",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "What is the probability of the ‘person to be tested as COVID positive’ given that ‘he \nis actually not having COVID’? \na. 0.01  \nb. 0.99  \nc. 0.1   \nd. 0.001",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "What is the probability that the ‘person is actually not having COVID? \na. 0.998  \nb. 0.999  \nc. 0.001  \nd. 0.111",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "What is the probability that the ‘person is actually having COVID given that ‘he is \ntested as COVID positive’? \na. 0.83  \nb. 0.0803  \nc. 0.083  \nd. 0.089",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    },
+    {
+      "id": "math_cs_30",
+      "subjectId": "maths",
+      "chapterName": "Probability",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Question Bank",
+      "questionText": "Case Study 30: 3: ",
+      "contextPassage": "In answering a question on a multiple choice test for class XII, a student either knows the \nanswer or guesses. Let  3/5 be the  probability that he knows the answer and 2/5 be the \nprobability that he guesses. Assume that a student who guesses at the answer will be \ncorrect with probability 1/3. Let E1, E2, E be the events that the student knows the answer, \nguesses the answer and answers correctly respectively.  \n \nBased on the above information, answer the following",
+      "subQuestions": [
+        {
+          "part": "Part (1)",
+          "text": "What is the value of P(E1)?  \na. 2/5     \nb. 1/3   \nc. 1             \nd. 3/5",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (2)",
+          "text": "Value of P(E | E1) is \na. 1/3      \nb. 1     \nc. 2/3             \nd. 415",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (3)",
+          "text": "∑  P(E|𝐸𝑘) P(𝐸𝑘) 𝑘=2\n𝑘=1  Equals \na. 11/15     \nb. 4/15   \nc. 1/5              \nd.  1",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        },
+        {
+          "part": "Part (4)",
+          "text": "Value of  ∑ P(𝐸𝑘) 𝑘=2\n𝑘=1",
+          "marks": 1,
+          "modelAnswer": "Apply mathematical definition and calculate corresponding value."
+        }
+      ],
+      "modelAnswer": "Complete step-wise solution with algebraic calculation and validation against constraints.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Sub-part (i) formulation & calculation"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Sub-part (ii) mathematical reasoning"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 2.0,
+          "criterion": "Sub-part (iii) final computation & conclusion"
+        }
+      ],
+      "keyTerms": [
+        "Domain constraint",
+        "Equivalence property",
+        "Optimal solution"
+      ]
+    }
+  ]
+}

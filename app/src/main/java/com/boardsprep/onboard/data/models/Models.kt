@@ -113,6 +113,28 @@ data class NamedReactionItem(
 )
 
 @Keep
+data class MathFormulaItem(
+    val id: String,
+    val chapterName: String,
+    val title: String,
+    val formulaLatex: String,
+    val keyProperties: String,
+    val boardWeightage: String = "High Yield",
+    val isMastered: Boolean = false
+)
+
+@Keep
+data class BiologyDiagramSummaryItem(
+    val id: String,
+    val chapterName: String,
+    val title: String,
+    val keyConcept: String,
+    val labelingChecklist: List<String>,
+    val boardTip: String = "High Yield",
+    val isMastered: Boolean = false
+)
+
+@Keep
 data class BlueprintSection(
     val sectionName: String, // Section A, B, C, D, E
     val questionType: String, // MCQ, SA-I, SA-II, Case-Based, LA
@@ -141,5 +163,33 @@ data class SamplePaper(
     val subjectId: String,
     val type: String, // "sqp" or "ms"
     val url: String
+)
+
+@Keep
+data class StepRubric(
+    val stepNumber: Int = 1,
+    val marks: Double = 0.5,
+    val criterion: String = ""
+)
+
+@Keep
+data class QuestionBankItem(
+    val id: String = "",
+    val subjectId: String = "",
+    val chapterName: String = "",
+    val type: String = "vsa", // "vsa", "sa", "case", "la"
+    val marks: Int = 2,
+    val source: String = "",
+    val questionText: String = "",
+    val modelAnswer: String = "",
+    val stepMarking: List<StepRubric> = emptyList(),
+    val keyTerms: List<String> = emptyList()
+)
+
+@Keep
+data class SubjectQuestionBank(
+    val subject: String = "",
+    val count: Int = 0,
+    val questions: List<QuestionBankItem> = emptyList()
 )
 

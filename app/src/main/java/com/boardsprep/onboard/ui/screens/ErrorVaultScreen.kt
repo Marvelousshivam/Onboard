@@ -27,6 +27,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.ErrorVaultEntity
 import com.boardsprep.onboard.data.repository.BoardsRepository
@@ -96,12 +97,10 @@ fun ErrorVaultScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
+                    LiquidGlassBackButton(
+                        onClick = onBackClick,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background

@@ -11,6 +11,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import com.boardsprep.onboard.core.glass.GlassSettings
+import com.boardsprep.onboard.core.glass.LocalAppBackdrop
+import com.boardsprep.onboard.core.glass.LocalGlassEnabled
+import com.boardsprep.onboard.core.glass.LocalGlassTheme
+import com.boardsprep.onboard.core.glass.isGlassSupported
+import com.boardsprep.onboard.core.glass.backdrop.backdrops.layerBackdrop
+import com.boardsprep.onboard.core.glass.backdrop.backdrops.rememberLayerBackdrop
 import com.boardsprep.onboard.core.playback.DownloadState
 import com.boardsprep.onboard.core.playback.LectureDownloader
 import com.boardsprep.onboard.core.pdf.PdfPairedRole
@@ -29,14 +41,42 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
+        // Initialize Liquid Glass preferences (Default: Disabled / Normal M3 UI)
+        GlassSettings.init(applicationContext)
+
         val repository = BoardsRepository(applicationContext)
         val lectureDownloader = LectureDownloader(applicationContext)
 
         setContent {
             OnboardTheme {
-                val navController = rememberNavController()
-                val coroutineScope = rememberCoroutineScope()
-                var subjects by remember { mutableStateOf(repository.getSubjects()) }
+                val windowBackground = MaterialTheme.colorScheme.background
+                val paintBackdrop: ContentDrawScope.() -> Unit = remember(windowBackground) {
+                    {
+                        drawRect(windowBackground)
+                        drawContent()
+                    }
+                }
+                val appBackdrop = rememberLayerBackdrop(onDraw = paintBackdrop)
+
+                CompositionLocalProvider(
+                    LocalGlassTheme provides GlassSettings.style,
+                    LocalGlassEnabled provides GlassSettings.isGlassEnabled,
+                    LocalAppBackdrop provides appBackdrop
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .then(
+                                if (GlassSettings.isGlassEnabled && isGlassSupported()) {
+                                    Modifier.layerBackdrop(appBackdrop)
+                                } else {
+                                    Modifier
+                                }
+                            )
+                    ) {
+                        val navController = rememberNavController()
+                        val coroutineScope = rememberCoroutineScope()
+                        var subjects by remember { mutableStateOf(repository.getSubjects()) }
 
                 // Request Notification Permission on Android 13+ (API 33+) for persistent download notifications
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -62,13 +102,27 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
+                val prefs = remember { applicationContext.getSharedPreferences("onboard_prefs", android.content.Context.MODE_PRIVATE) }
+                val isOnboardingCompleted = remember { prefs.getBoolean("onboarding_completed", false) }
+                val startDestination = if (isOnboardingCompleted) Screen.MainApp.route else Screen.OnboardingTour.route
+
                 NavHost(
                     navController = navController,
-                    startDestination = Screen.Dashboard.route
+                    startDestination = startDestination
                 ) {
-                    // Dashboard Screen
-                    composable(Screen.Dashboard.route) {
-                        DashboardScreen(
+                    // Top-Level Main App Scaffold (Floating Dock with Home, Q-Bank, Papers, Library)
+                    composable(
+                        route = Screen.MainApp.route,
+                        arguments = listOf(
+                            navArgument("tab") {
+                                type = NavType.IntType
+                                defaultValue = 0
+                            }
+                        )
+                    ) { backStackEntry ->
+                        val initialTab = backStackEntry.arguments?.getInt("tab") ?: 0
+                        MainAppScaffold(
+                            initialTab = initialTab,
                             subjects = subjects,
                             onSubjectClick = { subjectId ->
                                 navController.navigate(Screen.SubjectHub.createRoute(subjectId))
@@ -78,9 +132,6 @@ class MainActivity : ComponentActivity() {
                             },
                             onDownloadsClick = {
                                 navController.navigate(Screen.Downloads.route)
-                            },
-                            onSamplePapersClick = { subjectId ->
-                                navController.navigate(Screen.SamplePapers.createRoute(subjectId))
                             },
                             onAccountClick = {
                                 navController.navigate(Screen.OnboardingSync.route)
@@ -93,8 +144,42 @@ class MainActivity : ComponentActivity() {
                             },
                             onToolsClick = {
                                 navController.navigate(Screen.Tools.route)
+                            },
+                            onReplayTourClick = {
+                                navController.navigate(Screen.OnboardingTour.route)
+                            },
+                            onOpenPdfWithPair = { url, title, pairedUrl, pairedTitle, pairedRole ->
+                                navController.navigate(
+                                    Screen.PdfViewer.createRoute(
+                                        url = url,
+                                        title = title,
+                                        pairedUrl = pairedUrl,
+                                        pairedTitle = pairedTitle,
+                                        pairedRole = pairedRole.name
+                                    )
+                                )
+                            },
+                            onOpenPdfSimple = { url, title ->
+                                navController.navigate(Screen.PdfViewer.createRoute(url = url, title = title))
+                            },
+                            onStartExamSimulation = { paperTitle, subject, paperUrl, msUrl ->
+                                navController.navigate(
+                                    Screen.ExamSimulation.createRoute(
+                                        paperTitle = paperTitle,
+                                        subject = subject,
+                                        paperUrl = paperUrl,
+                                        msUrl = msUrl
+                                    )
+                                )
                             }
                         )
+                    }
+
+                    // Dashboard Screen (Legacy alias route)
+                    composable(Screen.Dashboard.route) {
+                        navController.navigate(Screen.MainApp.createRoute(0)) {
+                            popUpTo(Screen.Dashboard.route) { inclusive = true }
+                        }
                     }
 
 
@@ -123,6 +208,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onSamplePapersClick = { subId ->
                                 navController.navigate(Screen.SamplePapers.createRoute(subId))
+                            },
+                            onQuestionBankClick = { subId ->
+                                navController.navigate(Screen.QuestionBank.createRoute(subId))
                             }
                         )
                     }
@@ -356,6 +444,9 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
                             },
+                            onQuestionBankClick = { sId ->
+                                navController.navigate(Screen.QuestionBank.createRoute(sId))
+                            },
                             onBackClick = { navController.popBackStack() }
                         )
                     }
@@ -418,9 +509,49 @@ class MainActivity : ComponentActivity() {
                             onBackClick = { navController.popBackStack() }
                         )
                     }
+
+                    // ClearPDF-style Interactive Onboarding Tour Screen
+                    composable(Screen.OnboardingTour.route) {
+                        OnboardingTourScreen(
+                            onFinishOnboarding = {
+                                navController.navigate(Screen.MainApp.route) {
+                                    popUpTo(Screen.OnboardingTour.route) { inclusive = true }
+                                }
+                            }
+                        )
+                    }
+
+                    // Library Hub Screen alias
+                    composable(Screen.LibraryHub.route) {
+                        navController.navigate(Screen.MainApp.createRoute(3)) {
+                            popUpTo(Screen.MainApp.route) { inclusive = false }
+                        }
+                    }
+
+                    // CBSE Official Question Bank Studio Screen (Subjective 2m, 3m, 4m, 5m)
+                    composable(
+                        route = Screen.QuestionBank.route,
+                        arguments = listOf(
+                            navArgument("subjectId") {
+                                type = NavType.StringType
+                                defaultValue = ""
+                            }
+                        )
+                    ) { backStackEntry ->
+                        val subjectId = backStackEntry.arguments?.getString("subjectId") ?: ""
+                        QuestionBankScreen(
+                            initialSubjectId = subjectId,
+                            onBackClick = { navController.popBackStack() },
+                            onOpenPdf = { url, title ->
+                                navController.navigate(Screen.PdfViewer.createRoute(url = url, title = title))
+                            }
+                        )
+                    }
+                    }
                 }
             }
-
         }
     }
 }
+}
+

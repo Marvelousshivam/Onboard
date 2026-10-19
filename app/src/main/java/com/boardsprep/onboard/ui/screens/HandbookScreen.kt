@@ -7,8 +7,10 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Biotech
 import androidx.compose.material.icons.filled.Bolt
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Functions
 import androidx.compose.material.icons.filled.Science
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.outlined.CheckCircle
@@ -23,8 +25,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.*
+import com.boardsprep.onboard.data.models.BiologyDiagramSummaryItem
 import com.boardsprep.onboard.data.models.DerivationItem
+import com.boardsprep.onboard.data.models.MathFormulaItem
 import com.boardsprep.onboard.data.models.NamedReactionItem
 import com.boardsprep.onboard.data.repository.BoardsRepository
 import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
@@ -44,11 +49,22 @@ fun HandbookScreen(
     val repository = remember { BoardsRepository(context) }
     val scope = rememberCoroutineScope()
 
-    var selectedTabIndex by remember { mutableIntStateOf(if (initialSubjectId == "chemistry") 1 else 0) }
+    var selectedTabIndex by remember {
+        mutableIntStateOf(
+            when (initialSubjectId.lowercase().trim()) {
+                "chemistry" -> 1
+                "maths", "mathematics" -> 2
+                "biology" -> 3
+                else -> 0
+            }
+        )
+    }
     var searchQuery by remember { mutableStateOf("") }
 
     val derivations = remember { repository.getPhysicsDerivations() }
     val reactions = remember { repository.getChemistryNamedReactions() }
+    val formulas = remember { repository.getMathsFormulas() }
+    val diagrams = remember { repository.getBiologyDiagrams() }
 
     val masteredItemsList by repository.getAllMastered().collectAsState(initial = emptyList())
     val masteredIds = remember(masteredItemsList) { masteredItemsList.map { it.itemId }.toSet() }
@@ -71,12 +87,10 @@ fun HandbookScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
-                        )
-                    }
+                    LiquidGlassBackButton(
+                        onClick = onNavigateBack,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.surface
@@ -91,14 +105,24 @@ fun HandbookScreen(
         ) {
             val handbookTabs = listOf(
                 ExpressiveTabItem(
-                    title = "Physics Derivations",
+                    title = "Physics",
                     icon = Icons.Default.Bolt,
                     badge = "${derivations.size}"
                 ),
                 ExpressiveTabItem(
-                    title = "Chemistry Reactions",
+                    title = "Chemistry",
                     icon = Icons.Default.Science,
                     badge = "${reactions.size}"
+                ),
+                ExpressiveTabItem(
+                    title = "Maths",
+                    icon = Icons.Default.Functions,
+                    badge = "${formulas.size}"
+                ),
+                ExpressiveTabItem(
+                    title = "Biology",
+                    icon = Icons.Default.Biotech,
+                    badge = "${diagrams.size}"
                 )
             )
 
@@ -109,7 +133,13 @@ fun HandbookScreen(
                     selectedTabIndex = it
                     searchQuery = ""
                 },
-                accentColor = if (selectedTabIndex == 0) PhysicsAccent else ChemistryAccent
+                accentColor = when (selectedTabIndex) {
+                    0 -> PhysicsAccent
+                    1 -> ChemistryAccent
+                    2 -> MathsAccent
+                    3 -> BiologyAccent
+                    else -> PhysicsAccent
+                }
             )
 
             // Expressive Capsule Search Bar
@@ -121,8 +151,13 @@ fun HandbookScreen(
                     .padding(horizontal = 16.dp, vertical = 10.dp),
                 placeholder = {
                     Text(
-                        if (selectedTabIndex == 0) "Search derivations or chapters..."
-                        else "Search reactions, reagents or chapters...",
+                        when (selectedTabIndex) {
+                            0 -> "Search physics derivations or chapters..."
+                            1 -> "Search reactions, reagents or chapters..."
+                            2 -> "Search formulas, theorems or chapters..."
+                            3 -> "Search diagrams, concepts or structures..."
+                            else -> "Search handbook..."
+                        },
                         fontSize = 13.sp
                     )
                 },
@@ -137,104 +172,211 @@ fun HandbookScreen(
                 )
             )
 
-            if (selectedTabIndex == 0) {
-                // Physics Derivations View
-                val filteredDerivations = remember(searchQuery, derivations) {
-                    if (searchQuery.isBlank()) derivations
-                    else derivations.filter {
-                        it.title.contains(searchQuery, ignoreCase = true) ||
-                                it.chapterName.contains(searchQuery, ignoreCase = true)
+            when (selectedTabIndex) {
+                0 -> {
+                    // Physics Derivations View
+                    val filteredDerivations = remember(searchQuery, derivations) {
+                        if (searchQuery.isBlank()) derivations
+                        else derivations.filter {
+                            it.title.contains(searchQuery, ignoreCase = true) ||
+                                    it.chapterName.contains(searchQuery, ignoreCase = true)
+                        }
                     }
-                }
 
-                val masteredPhysicsCount = derivations.count { it.id in masteredIds }
-                val progress = if (derivations.isNotEmpty()) masteredPhysicsCount.toFloat() / derivations.size else 0f
+                    val masteredPhysicsCount = derivations.count { it.id in masteredIds }
+                    val progress = if (derivations.isNotEmpty()) masteredPhysicsCount.toFloat() / derivations.size else 0f
 
-                MasterySummaryCard(
-                    title = "Physics Derivations Mastered",
-                    count = masteredPhysicsCount,
-                    total = derivations.size,
-                    progress = progress,
-                    accentColor = PrimaryBlue
-                )
-
-                if (filteredDerivations.isEmpty()) {
-                    ExpressiveEmptyState(
-                        icon = Icons.Default.Search,
-                        title = "No Derivations Found",
-                        description = "No physics derivations match '$searchQuery'. Try searching by law name (e.g. Gauss, Coulomb) or chapter name.",
-                        tintColor = PhysicsAccent,
-                        actionText = "Clear Search",
-                        onActionClick = { searchQuery = "" }
+                    MasterySummaryCard(
+                        title = "Physics Derivations Mastered",
+                        count = masteredPhysicsCount,
+                        total = derivations.size,
+                        progress = progress,
+                        accentColor = PrimaryBlue
                     )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(14.dp)
-                    ) {
-                        items(filteredDerivations, key = { it.id }) { item ->
-                            val isMastered = item.id in masteredIds
-                            DerivationCard(
-                                item = item,
-                                isMastered = isMastered,
-                                onToggleMastered = { checked ->
-                                    scope.launch {
-                                        repository.setMastered(item.id, "derivation", checked)
+
+                    if (filteredDerivations.isEmpty()) {
+                        ExpressiveEmptyState(
+                            icon = Icons.Default.Search,
+                            title = "No Derivations Found",
+                            description = "No physics derivations match '$searchQuery'. Try searching by law name (e.g. Gauss, Coulomb) or chapter name.",
+                            tintColor = PhysicsAccent,
+                            actionText = "Clear Search",
+                            onActionClick = { searchQuery = "" }
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            items(filteredDerivations, key = { it.id }) { item ->
+                                val isMastered = item.id in masteredIds
+                                DerivationCard(
+                                    item = item,
+                                    isMastered = isMastered,
+                                    onToggleMastered = { checked ->
+                                        scope.launch {
+                                            repository.setMastered(item.id, "derivation", checked)
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            }
                         }
                     }
                 }
-            } else {
-                // Chemistry Named Reactions View
-                val filteredReactions = remember(searchQuery, reactions) {
-                    if (searchQuery.isBlank()) reactions
-                    else reactions.filter {
-                        it.reactionName.contains(searchQuery, ignoreCase = true) ||
-                                it.chapterName.contains(searchQuery, ignoreCase = true) ||
-                                it.reagents.contains(searchQuery, ignoreCase = true)
+                1 -> {
+                    // Chemistry Named Reactions View
+                    val filteredReactions = remember(searchQuery, reactions) {
+                        if (searchQuery.isBlank()) reactions
+                        else reactions.filter {
+                            it.reactionName.contains(searchQuery, ignoreCase = true) ||
+                                    it.chapterName.contains(searchQuery, ignoreCase = true) ||
+                                    it.reagents.contains(searchQuery, ignoreCase = true)
+                        }
+                    }
+
+                    val masteredChemCount = reactions.count { it.id in masteredIds }
+                    val progress = if (reactions.isNotEmpty()) masteredChemCount.toFloat() / reactions.size else 0f
+
+                    MasterySummaryCard(
+                        title = "Organic Reactions Mastered",
+                        count = masteredChemCount,
+                        total = reactions.size,
+                        progress = progress,
+                        accentColor = SuccessGreen
+                    )
+
+                    if (filteredReactions.isEmpty()) {
+                        ExpressiveEmptyState(
+                            icon = Icons.Default.Search,
+                            title = "No Reactions Found",
+                            description = "No organic named reactions match '$searchQuery'. Try searching by reaction name (e.g. Aldol, Sandmeyer) or reagent.",
+                            tintColor = ChemistryAccent,
+                            actionText = "Clear Search",
+                            onActionClick = { searchQuery = "" }
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            items(filteredReactions, key = { it.id }) { item ->
+                                val isMastered = item.id in masteredIds
+                                ReactionCard(
+                                    item = item,
+                                    isMastered = isMastered,
+                                    onToggleMastered = { checked ->
+                                        scope.launch {
+                                            repository.setMastered(item.id, "reaction", checked)
+                                        }
+                                    }
+                                )
+                            }
+                        }
                     }
                 }
+                2 -> {
+                    // Maths Formulas View
+                    val filteredFormulas = remember(searchQuery, formulas) {
+                        if (searchQuery.isBlank()) formulas
+                        else formulas.filter {
+                            it.title.contains(searchQuery, ignoreCase = true) ||
+                                    it.chapterName.contains(searchQuery, ignoreCase = true) ||
+                                    it.keyProperties.contains(searchQuery, ignoreCase = true)
+                        }
+                    }
 
-                val masteredChemCount = reactions.count { it.id in masteredIds }
-                val progress = if (reactions.isNotEmpty()) masteredChemCount.toFloat() / reactions.size else 0f
+                    val masteredMathsCount = formulas.count { it.id in masteredIds }
+                    val progress = if (formulas.isNotEmpty()) masteredMathsCount.toFloat() / formulas.size else 0f
 
-                MasterySummaryCard(
-                    title = "Organic Reactions Mastered",
-                    count = masteredChemCount,
-                    total = reactions.size,
-                    progress = progress,
-                    accentColor = SuccessGreen
-                )
-
-                if (filteredReactions.isEmpty()) {
-                    ExpressiveEmptyState(
-                        icon = Icons.Default.Search,
-                        title = "No Reactions Found",
-                        description = "No organic named reactions match '$searchQuery'. Try searching by reaction name (e.g. Aldol, Sandmeyer) or reagent.",
-                        tintColor = ChemistryAccent,
-                        actionText = "Clear Search",
-                        onActionClick = { searchQuery = "" }
+                    MasterySummaryCard(
+                        title = "Maths Formulas Mastered",
+                        count = masteredMathsCount,
+                        total = formulas.size,
+                        progress = progress,
+                        accentColor = MathsAccent
                     )
-                } else {
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(14.dp)
-                    ) {
-                        items(filteredReactions, key = { it.id }) { item ->
-                            val isMastered = item.id in masteredIds
-                            ReactionCard(
-                                item = item,
-                                isMastered = isMastered,
-                                onToggleMastered = { checked ->
-                                    scope.launch {
-                                        repository.setMastered(item.id, "reaction", checked)
+
+                    if (filteredFormulas.isEmpty()) {
+                        ExpressiveEmptyState(
+                            icon = Icons.Default.Search,
+                            title = "No Formulas Found",
+                            description = "No mathematics formulas match '$searchQuery'. Try searching by theorem name or chapter name.",
+                            tintColor = MathsAccent,
+                            actionText = "Clear Search",
+                            onActionClick = { searchQuery = "" }
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            items(filteredFormulas, key = { it.id }) { item ->
+                                val isMastered = item.id in masteredIds
+                                MathFormulaCard(
+                                    item = item,
+                                    isMastered = isMastered,
+                                    onToggleMastered = { checked ->
+                                        scope.launch {
+                                            repository.setMastered(item.id, "formula", checked)
+                                        }
                                     }
-                                }
-                            )
+                                )
+                            }
+                        }
+                    }
+                }
+                else -> {
+                    // Biology Diagrams View
+                    val filteredDiagrams = remember(searchQuery, diagrams) {
+                        if (searchQuery.isBlank()) diagrams
+                        else diagrams.filter {
+                            it.title.contains(searchQuery, ignoreCase = true) ||
+                                    it.chapterName.contains(searchQuery, ignoreCase = true) ||
+                                    it.keyConcept.contains(searchQuery, ignoreCase = true)
+                        }
+                    }
+
+                    val masteredBioCount = diagrams.count { it.id in masteredIds }
+                    val progress = if (diagrams.isNotEmpty()) masteredBioCount.toFloat() / diagrams.size else 0f
+
+                    MasterySummaryCard(
+                        title = "Biology Diagrams Mastered",
+                        count = masteredBioCount,
+                        total = diagrams.size,
+                        progress = progress,
+                        accentColor = BiologyAccent
+                    )
+
+                    if (filteredDiagrams.isEmpty()) {
+                        ExpressiveEmptyState(
+                            icon = Icons.Default.Search,
+                            title = "No Diagrams Found",
+                            description = "No biology diagrams match '$searchQuery'. Try searching by structure or chapter name.",
+                            tintColor = BiologyAccent,
+                            actionText = "Clear Search",
+                            onActionClick = { searchQuery = "" }
+                        )
+                    } else {
+                        LazyColumn(
+                            modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(14.dp)
+                        ) {
+                            items(filteredDiagrams, key = { it.id }) { item ->
+                                val isMastered = item.id in masteredIds
+                                BiologyDiagramCard(
+                                    item = item,
+                                    isMastered = isMastered,
+                                    onToggleMastered = { checked ->
+                                        scope.launch {
+                                            repository.setMastered(item.id, "diagram", checked)
+                                        }
+                                    }
+                                )
+                            }
                         }
                     }
                 }
@@ -518,6 +660,239 @@ private fun ReactionCard(
                 )
                 Text(
                     text = item.keyApplication,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun MathFormulaCard(
+    item: MathFormulaItem,
+    isMastered: Boolean,
+    onToggleMastered: (Boolean) -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = ExpressiveCardLarge,
+        colors = CardDefaults.cardColors(
+            containerColor = if (isMastered) MathsAccent.copy(alpha = 0.12f)
+            else MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Surface(
+                        color = MathsAccent.copy(alpha = 0.15f),
+                        shape = ExpressivePillSmall
+                    ) {
+                        Text(
+                            text = item.chapterName,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MathsAccent,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                IconButton(onClick = { onToggleMastered(!isMastered) }) {
+                    Icon(
+                        imageVector = if (isMastered) Icons.Default.CheckCircle else Icons.Outlined.CheckCircle,
+                        contentDescription = "Mastered",
+                        tint = if (isMastered) MathsAccent else MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Surface(
+                color = MaterialTheme.colorScheme.surface,
+                shape = ExpressiveCardMedium,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Text(
+                        text = "FORMULA / IDENTITY",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MathsAccent,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    MathFormulaView(
+                        latex = item.formulaLatex,
+                        textColor = MaterialTheme.colorScheme.onSurface,
+                        fontSizeSp = 15,
+                        height = 70.dp
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top
+            ) {
+                Text(
+                    text = "Key Properties: ",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MathsAccent
+                )
+                Text(
+                    text = item.keyProperties,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top
+            ) {
+                Text(
+                    text = "Weightage: ",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = AccentAmber
+                )
+                Text(
+                    text = item.boardWeightage,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun BiologyDiagramCard(
+    item: BiologyDiagramSummaryItem,
+    isMastered: Boolean,
+    onToggleMastered: (Boolean) -> Unit
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = ExpressiveCardLarge,
+        colors = CardDefaults.cardColors(
+            containerColor = if (isMastered) BiologyAccent.copy(alpha = 0.12f)
+            else MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
+            ) {
+                Column(modifier = Modifier.weight(1f)) {
+                    Surface(
+                        color = BiologyAccent.copy(alpha = 0.15f),
+                        shape = ExpressivePillSmall
+                    ) {
+                        Text(
+                            text = item.chapterName,
+                            style = MaterialTheme.typography.labelSmall,
+                            color = BiologyAccent,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(6.dp))
+                    Text(
+                        text = item.title,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+                IconButton(onClick = { onToggleMastered(!isMastered) }) {
+                    Icon(
+                        imageVector = if (isMastered) Icons.Default.CheckCircle else Icons.Outlined.CheckCircle,
+                        contentDescription = "Mastered",
+                        tint = if (isMastered) BiologyAccent else MaterialTheme.colorScheme.outline
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = item.keyConcept,
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Surface(
+                color = MaterialTheme.colorScheme.surface,
+                shape = ExpressiveCardMedium,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(modifier = Modifier.padding(12.dp)) {
+                    Text(
+                        text = "CBSE MUST-LABEL CHECKLIST",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = BiologyAccent,
+                        fontWeight = FontWeight.Bold
+                    )
+                    Spacer(modifier = Modifier.height(6.dp))
+                    item.labelingChecklist.forEachIndexed { _, label ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 2.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "•",
+                                color = BiologyAccent,
+                                fontWeight = FontWeight.Black,
+                                modifier = Modifier.padding(end = 6.dp)
+                            )
+                            Text(
+                                text = label,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top
+            ) {
+                Text(
+                    text = "Examiner Tip: ",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = AccentAmber
+                )
+                Text(
+                    text = item.boardTip,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

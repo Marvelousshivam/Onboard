@@ -1,0 +1,59 @@
+{
+  "totalQuestions": 357,
+  "subjects": {
+    "english": {
+      "count": 227,
+      "byType": {
+        "vsa_2m": 114,
+        "sa_3m": 0,
+        "case_study_4m": 0,
+        "la_5m": 113
+      }
+    },
+    "maths": {
+      "count": 30,
+      "byType": {
+        "vsa_2m": 0,
+        "sa_3m": 0,
+        "case_study_4m": 30,
+        "la_5m": 0
+      }
+    },
+    "chemistry": {
+      "count": 26,
+      "byType": {
+        "vsa_2m": 4,
+        "sa_3m": 3,
+        "case_study_4m": 16,
+        "la_5m": 3
+      }
+    },
+    "physics": {
+      "count": 10,
+      "byType": {
+        "vsa_2m": 3,
+        "sa_3m": 5,
+        "case_study_4m": 1,
+        "la_5m": 1
+      }
+    },
+    "biology": {
+      "count": 29,
+      "byType": {
+        "vsa_2m": 10,
+        "sa_3m": 11,
+        "case_study_4m": 4,
+        "la_5m": 4
+      }
+    },
+    "physical_education": {
+      "count": 35,
+      "byType": {
+        "vsa_2m": 0,
+        "sa_3m": 0,
+        "case_study_4m": 35,
+        "la_5m": 0
+      }
+    }
+  }
+}

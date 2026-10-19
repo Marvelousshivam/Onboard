@@ -160,7 +160,7 @@ class BoardsRepository(private val context: Context) {
                     BlueprintSection("Section E", "Long Answer Questions (Organic Mechanisms & Conversions)", 3, 5, 15)
                 )
             )
-            "maths" -> BoardBlueprint(
+            "maths", "mathematics" -> BoardBlueprint(
                 subject = "Mathematics",
                 subjectCode = "041",
                 totalMarks = 80,
@@ -588,6 +588,34 @@ class BoardsRepository(private val context: Context) {
         )
     }
 
+    fun getMathsFormulas(): List<MathFormulaItem> {
+        return listOf(
+            MathFormulaItem("m1", "Matrices & Determinants", "Inverse of a Matrix & Adjoint", "A^{-1} = \\frac{1}{|A|} \\text{adj}(A) \\quad (|A| \\neq 0)", "A \\cdot \\text{adj}(A) = |A| I. For non-singular matrix, solution to AX = B is X = A^{-1}B", "5 Marks (System of Linear Equations)"),
+            MathFormulaItem("m2", "Continuity & Differentiability", "Parametric & Logarithmic Differentiation", "\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt}, \\quad \\frac{d}{dx}[u(x)^{v(x)}] = u^v \\left[ \\frac{v}{u} u' + v' \\ln u \\right]", "Essential for taking log when variable is in exponent or complicated product/quotient functions", "3-5 Marks"),
+            MathFormulaItem("m3", "Application of Derivatives", "Strictly Increasing/Decreasing & Local Extrema", "f'(x) > 0 \\implies \\text{Increasing}, \\quad f'(c)=0 \\text{ and } f''(c)<0 \\implies \\text{Local Max}", "Check interval boundary conditions; critical points are where f'(x)=0 or f'(x) does not exist", "4 Marks (Optimization)"),
+            MathFormulaItem("m4", "Integrals", "Integration by Parts (ILATE Rule)", "\\int u \\cdot v \\, dx = u \\int v \\, dx - \\int \\left( \\frac{du}{dx} \\int v \\, dx \\right) dx", "Priority: Inverse trigonometric, Logarithmic, Algebraic, Trigonometric, Exponential", "3 Marks"),
+            MathFormulaItem("m5", "Integrals", "Special Exponential Form", "\\int e^x [f(x) + f'(x)] \\, dx = e^x f(x) + C", "Direct CBSE 1-mark & 2-mark Section A/B favourite. Split integral into two parts", "1-2 Marks"),
+            MathFormulaItem("m6", "Integrals", "Definite Integral King Property", "\\int_a^b f(x) dx = \\int_a^b f(a + b - x) dx, \\quad \\int_0^a f(x) dx = \\int_0^a f(a - x) dx", "Apply property, name the new integral (2), and add (1) + (2) to eliminate denominator", "4-5 Marks (Guaranteed)"),
+            MathFormulaItem("m7", "Differential Equations", "First Order Linear Differential Equation", "\\frac{dy}{dx} + Py = Q \\implies I.F. = e^{\\int P dx}, \\quad y \\cdot (I.F.) = \\int [Q \\cdot (I.F.)] dx + C", "Ensure coefficient of dy/dx is 1. P and Q must be functions of x only (or constants)", "3-5 Marks"),
+            MathFormulaItem("m8", "Vector Algebra", "Scalar & Vector Product of Two Vectors", "\\vec{a} \\cdot \\vec{b} = |\\vec{a}||\\vec{b}| \\cos\\theta, \\quad \\vec{a} \\times \\vec{b} = |\\vec{a}||\\vec{b}| \\sin\\theta \\, \\hat{n}", "Projection of a on b = (a . b)/|b|. Perpendicular iff a . b = 0. Collinear iff a x b = 0", "2-3 Marks"),
+            MathFormulaItem("m9", "Three Dimensional Geometry", "Shortest Distance Between Skew Lines", "d = \\left| \\frac{(\\vec{b}_1 \\times \\vec{b}_2) \\cdot (\\vec{a}_2 - \\vec{a}_1)}{|\\vec{b}_1 \\times \\vec{b}_2|} \\right|", "Lines are parallel if b1 is proportional to b2. Formula changes to |b x (a2 - a1)| / |b|", "5 Marks (Section D)"),
+            MathFormulaItem("m10", "Probability", "Bayes' Theorem & Total Probability", "P(E_i | A) = \\frac{P(E_i) P(A | E_i)}{\\sum_{j=1}^n P(E_j) P(A | E_j)}", "E1, E2, ... En form a partition of sample space S. Identify condition A that has already occurred", "4-5 Marks (Case Study)")
+        )
+    }
+
+    fun getBiologyDiagrams(): List<BiologyDiagramSummaryItem> {
+        return listOf(
+            BiologyDiagramSummaryItem("b1", "Sexual Reproduction in Flowering Plants", "Structure of Anatropous Ovule", "Typical angiosperm ovule with inverted orientation (micropyle near hilum).", listOf("Funicle & Hilum", "Integuments (Outer & Inner)", "Micropyle & Micropylar Pole", "Chalazal Pole", "Nucellus (Nutritive tissue)", "Female Gametophyte (Embryo Sac - 7 celled, 8 nucleate)"), "3-mark diagram question. Label antipodals at chalaza and egg apparatus at micropyle."),
+            BiologyDiagramSummaryItem("b2", "Human Reproduction", "Diagrammatic Section View of Seminiferous Tubule", "Spermatogenic epithelium with developing germ cells supported by nurse cells.", listOf("Spermatogonia (2n)", "Primary Spermatocytes (2n)", "Secondary Spermatocytes (n)", "Spermatids (n) & Spermatozoa (n)", "Sertoli Cells (Nurse cells)", "Interstitial / Leydig Cells (Secrete androgens)"), "3-mark question. Must show Sertoli cells providing nutrition to sperm heads."),
+            BiologyDiagramSummaryItem("b3", "Human Reproduction", "Structure of a Mature Human Sperm", "Microscopic structure composed of head, neck, middle piece, and tail enclosed by plasma membrane.", listOf("Acrosome (Enzyme-filled cap from Golgi)", "Haploid Nucleus containing chromosomal material", "Centrioles (Proximal & Distal)", "Middle Piece with Spiral Mitochondria", "Axoneme (9+2 microtubule array) in Tail"), "2-mark diagram. Mitochondria provide ATP energy for sperm motility."),
+            BiologyDiagramSummaryItem("b4", "Molecular Basis of Inheritance", "Nucleosome Core Particle Model", "Basic structural repeating unit of chromatin in eukaryotic chromosomes.", listOf("Histone Octamer Core (2x H2A, H2B, H3, H4)", "Core DNA (146-200 base pairs, 1.65 left-handed superhelical turns)", "H1 Histone (Linker histone sealing entry/exit)", "Linker DNA"), "2-mark question. Positively charged basic histones (Lys, Arg) package negatively charged DNA."),
+            BiologyDiagramSummaryItem("b5", "Molecular Basis of Inheritance", "The Lac Operon (Jacob & Monod Model)", "Polycistronic transcriptional unit regulated by an inducer (Allolactose).", listOf("Regulator gene i (Synthesizes repressor)", "Promoter (p) & Operator (o)", "Structural gene z (Beta-galactosidase)", "Structural gene y (Permease)", "Structural gene a (Transacetylase)"), "5-mark Section D question. Draw in both absence and presence of inducer."),
+            BiologyDiagramSummaryItem("b6", "Biotechnology: Principles & Processes", "E. coli Cloning Vector pBR322", "Engineered plasmid vector with selectable markers and unique restriction enzyme recognition sites.", listOf("ori (Origin of replication - controls copy number)", "rop (Codes for proteins involved in plasmid replication)", "ampR gene (with PstI, PvuI sites)", "tetR gene (with BamHI, SalI sites)", "EcoRI, ClaI, HindIII unique cleavage sites"), "3-mark guaranteed board diagram. Memorize insertion inactivation sites (BamHI in tetR)."),
+            BiologyDiagramSummaryItem("b7", "Biotechnology: Principles & Processes", "Polymerase Chain Reaction (PCR) Cycle", "In vitro enzymatic amplification of specific target DNA sequences.", listOf("1. Denaturation (94-96°C) - Strand separation", "2. Annealing (50-60°C) - Chemically synthesized oligonucleotide primers", "3. Extension (72°C) - Thermostable Taq DNA polymerase & dNTPs", "Amplification: 2^n copies after n cycles (~1 billion in 30 cycles)"), "3-mark flowchart/diagram. Mention source of Taq: Thermus aquaticus (thermophilic)."),
+            BiologyDiagramSummaryItem("b8", "Organisms & Populations", "Population Growth Curves (Exponential & Logistic)", "Mathematical models of population density change over time under varying resource constraints.", listOf("Exponential Growth: dN/dt = rN (J-shaped, unlimited resources)", "Logistic Growth: dN/dt = rN((K - N)/K) (S-shaped / Sigmoid)", "K = Carrying Capacity", "r = Intrinsic rate of natural increase"), "3-mark graphical question. Real populations always exhibit Verhulst-Pearl Logistic Growth.")
+        )
+    }
+
     // Room DB helper methods
     fun getMastery(chapterId: String): Flow<ChapterMasteryEntity?> = db.masteryDao().getMastery(chapterId)
     fun getAllMastery(): Flow<List<ChapterMasteryEntity>> = db.masteryDao().getAllMastery()
@@ -600,6 +628,7 @@ class BoardsRepository(private val context: Context) {
     }
 
     fun getVideoProgress(videoId: String): Flow<VideoProgressEntity?> = db.videoProgressDao().getProgress(videoId)
+    fun getRecentVideos(limit: Int = 1): Flow<List<VideoProgressEntity>> = db.videoProgressDao().getRecentVideos(limit)
 
     suspend fun saveVideoProgress(entity: VideoProgressEntity) = withContext(Dispatchers.IO) {
         db.videoProgressDao().saveProgress(entity)
@@ -873,6 +902,72 @@ class BoardsRepository(private val context: Context) {
             timestamp = System.currentTimeMillis()
         )
         db.focusSessionDao().recordSession(session)
+    }
+
+    // ==========================================
+    // CBSE Question Bank (Subjective Practice) Operations
+    // ==========================================
+    val questionEvaluationDao get() = db.questionEvaluationDao()
+
+    fun getEvaluationsForSubject(subjectId: String): Flow<List<com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity>> =
+        db.questionEvaluationDao().getEvaluationsForSubject(subjectId)
+
+    fun getAllQuestionEvaluations(): Flow<List<com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity>> =
+        db.questionEvaluationDao().getAllEvaluations()
+
+    suspend fun saveQuestionEvaluation(
+        questionId: String,
+        subjectId: String,
+        marks: Int,
+        status: String
+    ) = withContext(Dispatchers.IO) {
+        val entity = com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity(
+            questionId = questionId,
+            subjectId = subjectId,
+            marks = marks,
+            status = status,
+            updatedAt = System.currentTimeMillis()
+        )
+        db.questionEvaluationDao().saveEvaluation(entity)
+    }
+
+    suspend fun getQuestionBank(subjectId: String): SubjectQuestionBank? = withContext(Dispatchers.IO) {
+        val normalized = when (subjectId.trim().lowercase()) {
+            "english", "englishcore", "english core" -> "english"
+            "maths", "mathematics" -> "maths"
+            "physics" -> "physics"
+            "chemistry" -> "chemistry"
+            "biology" -> "biology"
+            "physical_education", "pe", "physicaleducation" -> "physical_education"
+            else -> subjectId.trim().lowercase()
+        }
+
+        // 1. Check local asset bundle first (instant offline availability)
+        try {
+            val assetPath = "question_banks/$normalized.json"
+            context.assets.open(assetPath).use { stream ->
+                InputStreamReader(stream, "UTF-8").use { reader ->
+                    val parsed = gson.fromJson(reader, SubjectQuestionBank::class.java)
+                    if (parsed != null && parsed.questions.isNotEmpty()) {
+                        return@withContext parsed
+                    }
+                }
+            }
+        } catch (_: Exception) {}
+
+        // 2. Check cached file in context.cacheDir
+        try {
+            val cacheFile = java.io.File(context.cacheDir, "question_banks/$normalized.json")
+            if (cacheFile.exists() && cacheFile.length() > 0) {
+                val json = cacheFile.readText(Charsets.UTF_8)
+                val parsed = gson.fromJson(json, SubjectQuestionBank::class.java)
+                if (parsed != null && parsed.questions.isNotEmpty()) {
+                    return@withContext parsed
+                }
+            }
+        } catch (_: Exception) {}
+
+        null
     }
 }
 

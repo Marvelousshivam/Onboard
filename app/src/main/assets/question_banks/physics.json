@@ -1,0 +1,331 @@
+{
+  "subject": "physics",
+  "count": 10,
+  "questions": [
+    {
+      "id": "phy_pq_set_1_17",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "The graph shows the variation in hole concentration with doping concentration \nin an extrinsic semiconductor doped with pentavalent impurities. \n \nWhy does the hole concentration reduce when pentavalent doping is \nincreased? \n2",
+      "modelAnswer": "When an intrinsic semiconductor is doped with pentavalent impurities, the \nnumber of electrons increases much more than the thermally produced \nelectrons. (0.5 marks) \n \nThis causes the thermally generated holes to recombine with the electrons \ngenerated, thereby decreasing the number of holes. (1 mark) \n2",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "(1 mark)"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_19",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Compare the focal lengths of the two lenses shown below if the radius of \ncurvature of the curved surface is the same in both lenses. \n \n2",
+      "modelAnswer": "Lens maker's formula \n (0.5 marks) \n \nFor the plano-concave lens, \n  (0.5 marks) \n \nFor the plano-convex lens, \n2",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_21",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "The image below shows a setup of a device that is used to increase the \ndiameter of a light beam from a laser. \n \n \nShow how a combination of a convex and a concave lens can also be arranged \nto increase the diameter of a light beam. Your answer should include how the \ntwo lenses should be arranged and the distance between the two lenses. (Note \nthat the rays in both the incident and emergent beam are parallel.) \n \nOR \n \nA glass beaker of height 10 cm, completely filled with water (refractive index \n= 4/3), has a curved bottom which is silvered as shown below. \n2",
+      "modelAnswer": "Concave lens should be placed before the convex lens. (1 mark) \nThe distance between the lenses should be f2-f1, where f2 is the focal length of \nthe convex lens and f1 is the focal length of the concave lens. (1 mark) \n \n(OR) \n2",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "(1 mark)"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "(1 mark)"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_22",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Identify if the two nuclear reactions mentioned below are endothermic or \nexothermic. Show your calculations. \n \n \n \nUse the information below to answer the question: \n \n \n3",
+      "modelAnswer": "For the first reaction \nmass of reactants = 1.00728 + 7.0160 = 8.12328 amu \nmass of products = 2 × 4.0026 = 8.0052 \nmass of reactants > mass of products (1 mark) \n \nHence, the reaction is exothermic. (0.5 marks) \n \nFor the second reaction \nmass of reactants = 7.0160 + 4.0026= 11.0186 amu \nmass of products = 1.0087 + 10.1294 = 11.1381 \nmass of reactants < mass of products (1 mark) \n \nHence, the reaction is endothermic. (0.5 marks)  \n3",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "mass of reactants > mass of products (1 mark)"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "mass of reactants < mass of products (1 mark)"
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_23",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "X and Y are two equipotential surfaces separated by a distance of 2 m in a \nuniform electric field of 10 V/m. Surface X has a potential of 10 V \n(a) Calculate the potential of surface Y. \n(b) What is the work done in moving a +2 C charge from surface Y to surface \nX along path 1? How will this work change when the charge is moved along \nPath 2? Give a reason for your answer. \n3",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_25",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and \n2 Ω resistors in the circuit shown below. \n \n3",
+      "modelAnswer": "Give 0.5 marks for the correct representation of current in the circuits. \n \nBy using Kirchhoff's second law for closed-loop PQS we get \n- 4I1+ 2I2 + 10 = 0 \n4I1 - 2I2 = 10 \n2I1 - I2= 5....(i)        (0.5 marks) \n \nBy using Kirchhoff's second law for closed-loop QRS we get \n- (I1 + I2)1 + 6  - 2I2 =0 \nI1 + 3I2 = 6.....(ii)      (0.5 marks) \nsolving (i) and (ii), we get \n7I1 =  21 \n∴I1= 21/7 = 3 A     (0.5 marks) \nI2= 1 A                       (0.5 marks) \nI1 + I2 = 3 + 1 = 4 A  (0.5 marks) \nTherefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and \nacross 1 Ω resistor is 4 A.     \n3 \n26 (a) For a charged particle executing a circular path, θ = 90° \n∴ F = qvB            (0.5 marks) \n \nSince the charged particle executes a circular path  \nmv2 /r = qvB \nq/m = v/rB                    (0.5 marks) \nSince, v and B are constant for both the particles, q/m ∝ 1/r \nq/m: charge-to-mass ratio \nAs rB > rA, particle A has a greater charge-to-mass ratio than B.         (1 mark) \n \n(b) A proton has a greater charge-to-mass ratio than an alpha particle. \n(0.5 marks) \nHence, particle A is likely to be a proton.             (0.5 marks) \n3 \n27 (a) Their frequencies will be different.  \n \nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since \nthey have different speeds in air, their frequencies are different.  \n \n(or) f = v/λ ; since they have different speeds in air, they will have different \nfrequencies. \n \n3",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(i)        (0.5 marks)"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(ii)      (0.5 marks)"
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "∴I1= 21/7 = 3 A     (0.5 marks)"
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "I2= 1 A                       (0.5 marks)"
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "I1 + I2 = 3 + 1 = 4 A  (0.5 marks)"
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "∴ F = qvB            (0.5 marks)"
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "q/m = v/rB                    (0.5 marks)"
+        },
+        {
+          "stepNumber": 8,
+          "marks": 1.0,
+          "criterion": "(1 mark)"
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_26",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Two charges A and B, each having a velocity of v, traverse circular paths in a \nuniform magnetic field as shown below.  \n \n3",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_28",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 \nT. The ring is rotated about its diameter at a frequency of 60 Hz.  \n(a) If the ring has 50 turns, then what is the maximum induced emf in the \nring? \n(b) State one condition under which the induced emf in the circular ring will \nbe zero? \n \nOR \n \nGiven below are a few characteristics of solenoids p and q.   \nsolenoid p solenoid q \nlength of the solenoid l (m) l (m) \nnumber of turns (N) 200 50 \ncross-sectional area of the wire A (m2) A (m2) \nrelative permeability of the core material 1 500 \nself-inductance 2 (mH) ? \n \nWhat is the self-inductance of the solenoid q? \n3 \n \nSECTION D",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_30",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "case_study",
+      "marks": 4,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "Read the following paragraph and answer the questions that follow. \nWhen light rays fall on glass, about 4% of the light gets reflected. To \neliminate this reflection, the glass display cases in museums usually have an \nanti-reflective coating. \nThis works on the principle of interference. When light falls on the coated \nglass, the light gets reflected from the top and bottom surfaces of the coating \nand these two reflected light rays can interfere. To reduce reflection, the \nthickness and refractive index of the coating are adjusted such that the light \nrays undergo destructive interference. \n4",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Formula identification & diagram / circuit"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Substitution, algebraic simplification & SI units"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "phy_pq_set_1_33",
+      "subjectId": "physics",
+      "chapterName": "Electromagnetism & Modern Physics",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (Set 1)",
+      "questionText": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt. \nThe graph below represents the variation of inductive reactance (XL) of the \ninductor with the frequency of an alternating source. \n \n(a) What is the self-inductance of the inductor? \n(b) If the ac source is replaced by a battery such that V = 100 V, then what is \nthe inductive reactance of the inductor? Give reason. \n(c) When the frequency is 50 Hz, what is the average power dissipated by the \ninductor over a complete cycle in the circuit? Justify your answer. \n(d) This inductor is connected in series with a resistance of 15 Ω and a \ncapacitor of 5 μF. The frequency of the alternating source is varied such that \nthe power dissipated in the circuit becomes maximum. Calculate the \nfrequency and the phase difference between alternating voltage and current \nwhen the power dissipated is the maximum. \nOR \nAn ideal transformer having a ferromagnetic core consists of two coils having \n500 turns (primary) and 50 turns (secondary) respectively. \n(a) What is the voltage across the secondary coil, if the rms voltage across the \nprimary coil is 240 V? \n(b) What will be the individual currents in the two coils (primary and \nsecondary), if the secondary has a resistive load of 20 ohms? \n5",
+      "modelAnswer": "Official CBSE Marking Scheme model answer.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Formula identification & diagram / circuit"
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Substitution, algebraic simplification & SI units"
+        }
+      ],
+      "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    }
+  ]
+}

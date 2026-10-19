@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "last_updated": "2026-10-14T03:24:06.913130+00:00",
+  "last_updated": "2026-10-16T03:12:10.078867+00:00",
   "base_raw_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main",
   "subjects": [
     {
@@ -3342,88 +3342,290 @@
   ],
   "sample_papers": [
     {
-      "title": "CBSE Class 12 2026-27 Biology Marking Scheme",
+      "title": "CBSE Class 12 2026-27 Biology Official Marking Scheme",
       "filename": "Biology-MS.pdf",
       "subject": "Biology",
+      "subjectId": "biology",
       "type": "ms",
+      "pair_filename": "Biology-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Biology Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 Biology Additional Practice Question Paper (Set 1)",
+      "filename": "Biology-PQ.pdf",
+      "subject": "Biology",
+      "subjectId": "biology",
+      "type": "sqp",
+      "pair_filename": "Biology-PQMS.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-PQ.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Biology Additional Practice Question Paper (Set 2)",
+      "filename": "Biology-PQ2.pdf",
+      "subject": "Biology",
+      "subjectId": "biology",
+      "type": "sqp",
+      "pair_filename": "Biology-PQMS2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-PQ2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Biology Additional Practice Marking Scheme (Set 1)",
+      "filename": "Biology-PQMS.pdf",
+      "subject": "Biology",
+      "subjectId": "biology",
+      "type": "ms",
+      "pair_filename": "Biology-PQ.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-PQMS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Biology Additional Practice Marking Scheme (Set 2)",
+      "filename": "Biology-PQMS2.pdf",
+      "subject": "Biology",
+      "subjectId": "biology",
+      "type": "ms",
+      "pair_filename": "Biology-PQ2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-PQMS2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Biology Official Sample Question Paper",
       "filename": "Biology-SQP.pdf",
       "subject": "Biology",
+      "subjectId": "biology",
       "type": "sqp",
+      "pair_filename": "Biology-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Biology-SQP.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Chemistry Marking Scheme",
+      "title": "CBSE Class 12 2026-27 Chemistry Official Marking Scheme",
       "filename": "Chemistry-MS.pdf",
       "subject": "Chemistry",
+      "subjectId": "chemistry",
       "type": "ms",
+      "pair_filename": "Chemistry-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Chemistry Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 Chemistry Additional Practice Question Paper (Set 1)",
+      "filename": "Chemistry-PQ.pdf",
+      "subject": "Chemistry",
+      "subjectId": "chemistry",
+      "type": "sqp",
+      "pair_filename": "Chemistry-PQMS.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-PQ.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Additional Practice Question Paper (Set 2)",
+      "filename": "Chemistry-PQ2.pdf",
+      "subject": "Chemistry",
+      "subjectId": "chemistry",
+      "type": "sqp",
+      "pair_filename": "Chemistry-PQMS2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-PQ2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Additional Practice Marking Scheme (Set 1)",
+      "filename": "Chemistry-PQMS.pdf",
+      "subject": "Chemistry",
+      "subjectId": "chemistry",
+      "type": "ms",
+      "pair_filename": "Chemistry-PQ.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-PQMS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Additional Practice Marking Scheme (Set 2)",
+      "filename": "Chemistry-PQMS2.pdf",
+      "subject": "Chemistry",
+      "subjectId": "chemistry",
+      "type": "ms",
+      "pair_filename": "Chemistry-PQ2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-PQMS2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Chemistry Official Sample Question Paper",
       "filename": "Chemistry-SQP.pdf",
       "subject": "Chemistry",
+      "subjectId": "chemistry",
       "type": "sqp",
+      "pair_filename": "Chemistry-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Chemistry-SQP.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 EnglishCore Marking Scheme",
+      "title": "CBSE Class 12 2026-27 EnglishCore Official Marking Scheme",
       "filename": "EnglishCore-MS.pdf",
       "subject": "EnglishCore",
+      "subjectId": "english",
       "type": "ms",
+      "pair_filename": "EnglishCore-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 EnglishCore Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 EnglishCore Additional Practice Question Paper (Set 1)",
+      "filename": "EnglishCore-PQ.pdf",
+      "subject": "EnglishCore",
+      "subjectId": "english",
+      "type": "sqp",
+      "pair_filename": "EnglishCore-PQMS.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-PQ.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Additional Practice Question Paper (Set 2)",
+      "filename": "EnglishCore-PQ2.pdf",
+      "subject": "EnglishCore",
+      "subjectId": "english",
+      "type": "sqp",
+      "pair_filename": "EnglishCore-PQMS2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-PQ2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Additional Practice Marking Scheme (Set 1)",
+      "filename": "EnglishCore-PQMS.pdf",
+      "subject": "EnglishCore",
+      "subjectId": "english",
+      "type": "ms",
+      "pair_filename": "EnglishCore-PQ.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-PQMS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Additional Practice Marking Scheme (Set 2)",
+      "filename": "EnglishCore-PQMS2.pdf",
+      "subject": "EnglishCore",
+      "subjectId": "english",
+      "type": "ms",
+      "pair_filename": "EnglishCore-PQ2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-PQMS2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 EnglishCore Official Sample Question Paper",
       "filename": "EnglishCore-SQP.pdf",
       "subject": "EnglishCore",
+      "subjectId": "english",
       "type": "sqp",
+      "pair_filename": "EnglishCore-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/EnglishCore-SQP.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Maths Marking Scheme",
+      "title": "CBSE Class 12 2026-27 Maths Official Marking Scheme",
       "filename": "Maths-MS.pdf",
       "subject": "Maths",
+      "subjectId": "maths",
       "type": "ms",
+      "pair_filename": "Maths-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Maths-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Maths Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 Maths Official Sample Question Paper",
       "filename": "Maths-SQP.pdf",
       "subject": "Maths",
+      "subjectId": "maths",
       "type": "sqp",
+      "pair_filename": "Maths-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Maths-SQP.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 PhysicalEducation Marking Scheme",
+      "title": "CBSE Class 12 2026-27 PhysicalEducation Official Marking Scheme",
       "filename": "PhysicalEducation-MS.pdf",
       "subject": "PhysicalEducation",
+      "subjectId": "physical_education",
       "type": "ms",
+      "pair_filename": "PhysicalEducation-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/PhysicalEducation-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 PhysicalEducation Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 PhysicalEducation Official Sample Question Paper",
       "filename": "PhysicalEducation-SQP.pdf",
       "subject": "PhysicalEducation",
+      "subjectId": "physical_education",
       "type": "sqp",
+      "pair_filename": "PhysicalEducation-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/PhysicalEducation-SQP.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Physics Marking Scheme",
+      "title": "CBSE Class 12 2026-27 Physics Official Marking Scheme",
       "filename": "Physics-MS.pdf",
       "subject": "Physics",
+      "subjectId": "physics",
       "type": "ms",
+      "pair_filename": "Physics-SQP.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-MS.pdf"
     },
     {
-      "title": "CBSE Class 12 2026-27 Physics Sample Question Paper",
+      "title": "CBSE Class 12 2026-27 Physics Additional Practice Question Paper (Set 1)",
+      "filename": "Physics-PQ.pdf",
+      "subject": "Physics",
+      "subjectId": "physics",
+      "type": "sqp",
+      "pair_filename": "Physics-PQMS.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-PQ.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Additional Practice Question Paper (Set 2)",
+      "filename": "Physics-PQ2.pdf",
+      "subject": "Physics",
+      "subjectId": "physics",
+      "type": "sqp",
+      "pair_filename": "Physics-PQMS2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-PQ2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Additional Practice Marking Scheme (Set 1)",
+      "filename": "Physics-PQMS.pdf",
+      "subject": "Physics",
+      "subjectId": "physics",
+      "type": "ms",
+      "pair_filename": "Physics-PQ.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-PQMS.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Additional Practice Marking Scheme (Set 2)",
+      "filename": "Physics-PQMS2.pdf",
+      "subject": "Physics",
+      "subjectId": "physics",
+      "type": "ms",
+      "pair_filename": "Physics-PQ2.pdf",
+      "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-PQMS2.pdf"
+    },
+    {
+      "title": "CBSE Class 12 2026-27 Physics Official Sample Question Paper",
       "filename": "Physics-SQP.pdf",
       "subject": "Physics",
+      "subjectId": "physics",
       "type": "sqp",
+      "pair_filename": "Physics-MS.pdf",
       "url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/sample_papers/2027/Physics-SQP.pdf"
+    }
+  ],
+  "question_banks": [
+    {
+      "title": "Class 12 English Core CBSE Official Question Bank",
+      "filename": "EnglishCoreXII.pdf",
+      "subject": "English Core",
+      "subjectId": "english",
+      "pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/EnglishCoreXII.pdf",
+      "json_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/english.json"
+    },
+    {
+      "title": "Class 12 Mathematics CBSE Official Question Bank",
+      "filename": "MathematicsXII.pdf",
+      "subject": "Mathematics",
+      "subjectId": "maths",
+      "pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/MathematicsXII.pdf",
+      "json_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/maths.json"
+    },
+    {
+      "title": "Class 12 Chemistry CBSE Official Question Bank",
+      "filename": "ChemistryXII.pdf",
+      "subject": "Chemistry",
+      "subjectId": "chemistry",
+      "pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/ChemistryXII.pdf",
+      "json_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/chemistry.json"
+    },
+    {
+      "title": "Class 12 Physical Education CBSE Official Question Bank",
+      "filename": "PhysicalEducationXII.pdf",
+      "subject": "Physical Education",
+      "subjectId": "physical_education",
+      "pdf_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/PhysicalEducationXII.pdf",
+      "json_url": "https://raw.githubusercontent.com/Marvelousshivam/OnBoard-files/main/question_banks/physical_education.json"
     }
   ]
 }

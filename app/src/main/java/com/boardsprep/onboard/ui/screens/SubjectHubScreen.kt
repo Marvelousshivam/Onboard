@@ -33,6 +33,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.LocalGlassEnabled
+import com.boardsprep.onboard.core.glass.isGlassSupported
+import com.boardsprep.onboard.core.glass.lightweightLiquidGlass
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionPill
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassChip
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.models.Chapter
@@ -60,7 +67,8 @@ fun SubjectHubScreen(
     onHandbookClick: () -> Unit,
     onPlayLecture: (lectureId: String, url: String, title: String) -> Unit = { _, _, _ -> },
     onOpenPdf: (url: String, title: String) -> Unit = { _, _ -> },
-    onSamplePapersClick: (String) -> Unit = {}
+    onSamplePapersClick: (String) -> Unit = {},
+    onQuestionBankClick: (String) -> Unit = {}
 ) {
     var showBlueprintDialog by remember { mutableStateOf(false) }
     var showSubjectPlaylistDialog by remember { mutableStateOf(false) }
@@ -77,6 +85,7 @@ fun SubjectHubScreen(
     val masteryMap = remember(allMastery) { allMastery.associateBy { it.chapterId } }
 
     val isDark = isSystemInDarkTheme()
+    val isGlass = LocalGlassEnabled.current && isGlassSupported()
     val subjectTokens = remember(subject.id, isDark) { getAdaptiveSubjectTokens(subject.id, isDark) }
     val cardBg = subjectTokens.containerColor
     val onCardColor = subjectTokens.onContainerColor
@@ -148,9 +157,9 @@ fun SubjectHubScreen(
                                 Icon(
                                     imageVector = when (subject.id.lowercase()) {
                                         "english" -> Icons.AutoMirrored.Filled.MenuBook
-                                        "physics" -> Icons.Default.Bolt
+                                        "physics" -> Icons.Default.Hub
                                         "chemistry" -> Icons.Default.Science
-                                        "maths" -> Icons.Default.Calculate
+                                        "maths" -> Icons.Default.Functions
                                         "biology" -> Icons.Default.Biotech
                                         else -> Icons.Default.School
                                     },
@@ -176,19 +185,12 @@ fun SubjectHubScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
-                    }
+                    LiquidGlassBackButton(
+                        onClick = onBackClick,
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
-                actions = {
-                    IconButton(onClick = { showBlueprintDialog = true }) {
-                        Icon(
-                            imageVector = Icons.Default.Analytics,
-                            contentDescription = "CBSE Blueprint",
-                            tint = accentColor
-                        )
-                    }
-                },
+                actions = {},
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 )
@@ -200,49 +202,45 @@ fun SubjectHubScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            verticalArrangement = Arrangement.spacedBy(14.dp),
+            contentPadding = PaddingValues(top = 8.dp, bottom = 140.dp)
         ) {
             // Tier 1: Dynamic Subject Bento Hero Deck
             item {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(1.dp, accentColor.copy(alpha = 0.25f), M3EBentoHeroShape),
+                        .then(
+                            if (isGlass) Modifier.lightweightLiquidGlass(
+                                shape = M3EBentoHeroShape,
+                                fallbackColor = cardBg
+                            ) else Modifier.border(1.dp, accentColor.copy(alpha = 0.25f), M3EBentoHeroShape)
+                        ),
                     shape = M3EBentoHeroShape,
-                    colors = CardDefaults.cardColors(containerColor = cardBg),
+                    colors = CardDefaults.cardColors(containerColor = if (isGlass) Color.Transparent else cardBg),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
-                        // Top Meta Badges
+                        // Top Meta Micro-Typography (Clean, zero pill containers)
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.SpaceBetween,
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Surface(
-                                shape = ExpressivePillSmall,
-                                color = accentColor.copy(alpha = 0.15f)
-                            ) {
-                                Text(
-                                    text = "${subject.stream} Stream • Code ${subject.code}",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = onCardColor,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
-                            }
-                            Surface(
-                                shape = ExpressivePillSmall,
+                            Text(
+                                text = "${subject.stream.uppercase()} STREAM • CBSE 2026-27",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.SemiBold,
+                                letterSpacing = 1.sp,
+                                color = onCardColor.copy(alpha = 0.7f)
+                            )
+                            Text(
+                                text = "${subject.totalTheoryMarks}M THEORY",
+                                style = MaterialTheme.typography.labelSmall,
+                                fontWeight = FontWeight.Bold,
+                                letterSpacing = 0.5.sp,
                                 color = accentColor
-                            ) {
-                                Text(
-                                    text = "${subject.totalTheoryMarks} Marks Theory",
-                                    fontSize = 11.sp,
-                                    fontWeight = FontWeight.Black,
-                                    color = Color.White,
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                                )
-                            }
+                            )
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
@@ -268,230 +266,174 @@ fun SubjectHubScreen(
                                     color = onCardColor.copy(alpha = 0.8f)
                                 )
                             }
-                            Surface(
-                                shape = ExpressivePillSmall,
-                                color = if (progressFloat >= 0.8f) SuccessGreen.copy(alpha = 0.2f) else accentColor.copy(alpha = 0.15f)
-                            ) {
-                                Text(
-                                    text = if (masteredChaptersCount == totalChapters) "All Mastered!" else "$inProgressChaptersCount In Progress",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = if (progressFloat >= 0.8f) SuccessGreen else onCardColor,
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                                )
-                            }
+                            Text(
+                                text = if (masteredChaptersCount == totalChapters) "All Mastered!" else if (inProgressChaptersCount > 0) "$inProgressChaptersCount In Progress" else "Ready to Begin",
+                                style = MaterialTheme.typography.labelMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = if (masteredChaptersCount == totalChapters) SuccessGreen else accentColor
+                            )
                         }
 
                         Spacer(modifier = Modifier.height(10.dp))
 
-                        // Animated High-Contrast Progress Indicator
-                        LinearProgressIndicator(
-                            progress = { animatedProgress },
+                        // Animated High-Contrast Progress Indicator (Clean track, zero rogue stop dots)
+                        Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(8.dp)
-                                .clip(RoundedCornerShape(4.dp)),
-                            color = accentColor,
-                            trackColor = accentColor.copy(alpha = 0.15f)
-                        )
+                                .height(6.dp)
+                                .clip(RoundedCornerShape(3.dp))
+                                .background(accentColor.copy(alpha = 0.15f))
+                        ) {
+                            if (animatedProgress > 0f) {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth(fraction = animatedProgress.coerceIn(0.02f, 1f))
+                                        .fillMaxHeight()
+                                        .background(accentColor)
+                                )
+                            }
+                        }
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-                        // Expressive Action Capsules Row
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .height(44.dp)
-                                    .border(1.dp, accentColor.copy(alpha = 0.2f), RoundedCornerShape(12.dp))
-                                    .hubSpringBounce { showBlueprintDialog = true }
-                            ) {
-                                Row(
-                                    modifier = Modifier.fillMaxSize(),
-                                    horizontalArrangement = Arrangement.Center,
-                                    verticalAlignment = Alignment.CenterVertically
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Analytics,
-                                        contentDescription = null,
-                                        tint = accentColor,
-                                        modifier = Modifier.size(16.dp)
-                                    )
-                                    Spacer(modifier = Modifier.width(6.dp))
-                                    Text(
-                                        text = "Blueprint",
-                                        fontSize = 12.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        color = onCardColor
-                                    )
-                                }
-                            }
+                        // Quick Action 2x2 Grid (Spacious, no text wrapping mid-word, zero 1px borders)
+                        val quickButtonShape = RoundedCornerShape(14.dp)
+                        val quickButtonBg = if (isDark) Color(0xFF1E202E) else MaterialTheme.colorScheme.surface.copy(alpha = 0.85f)
 
-                            if (subject.id == "physics" || subject.id == "chemistry") {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            verticalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            // Row 1: Blueprint + Handbook/Formulas
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
                                 Surface(
-                                    shape = RoundedCornerShape(12.dp),
-                                    color = accentColor,
+                                    shape = quickButtonShape,
+                                    color = quickButtonBg,
                                     modifier = Modifier
                                         .weight(1f)
-                                        .height(44.dp)
+                                        .height(46.dp)
+                                        .hubSpringBounce { showBlueprintDialog = true }
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Icon(
+                                            imageVector = Icons.Default.Analytics,
+                                            contentDescription = null,
+                                            tint = accentColor,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = "Blueprint",
+                                            fontSize = 12.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = onCardColor,
+                                            maxLines = 1
+                                        )
+                                    }
+                                }
+
+                                val hasHandbook = subject.id == "physics" || subject.id == "chemistry"
+                                val handbookTitle = if (subject.id == "physics") "Formulas" else if (subject.id == "chemistry") "Reactions" else "Handbooks"
+                                Surface(
+                                    shape = quickButtonShape,
+                                    color = quickButtonBg,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(46.dp)
                                         .hubSpringBounce(onClick = onHandbookClick)
                                 ) {
                                     Row(
-                                        modifier = Modifier.fillMaxSize(),
+                                        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
                                         horizontalArrangement = Arrangement.Center,
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Icon(
                                             imageVector = Icons.AutoMirrored.Filled.MenuBook,
                                             contentDescription = null,
-                                            tint = Color.White,
-                                            modifier = Modifier.size(16.dp)
+                                            tint = accentColor,
+                                            modifier = Modifier.size(18.dp)
                                         )
-                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Spacer(modifier = Modifier.width(8.dp))
                                         Text(
-                                            text = if (subject.id == "physics") "Derivations" else "Reactions",
-                                            fontSize = 12.sp,
+                                            text = handbookTitle,
+                                            fontSize = 12.5.sp,
                                             fontWeight = FontWeight.Bold,
-                                            color = Color.White
+                                            color = onCardColor,
+                                            maxLines = 1
                                         )
                                     }
                                 }
                             }
 
-                            if (subjectVideos.isNotEmpty()) {
-                                Surface(
-                                    shape = RoundedCornerShape(12.dp),
-                                    color = if (subject.id != "physics" && subject.id != "chemistry") accentColor else MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
-                                    modifier = Modifier
-                                        .weight(1.1f)
-                                        .height(44.dp)
-                                        .border(1.dp, accentColor.copy(alpha = 0.25f), RoundedCornerShape(12.dp))
-                                        .hubSpringBounce { showSubjectPlaylistDialog = true }
-                                ) {
-                                    Row(
-                                        modifier = Modifier.fillMaxSize(),
-                                        horizontalArrangement = Arrangement.Center,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        val isFilled = subject.id != "physics" && subject.id != "chemistry"
-                                        Icon(
-                                            imageVector = Icons.Default.PlayCircle,
-                                            contentDescription = null,
-                                            tint = if (isFilled) Color.White else accentColor,
-                                            modifier = Modifier.size(16.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(6.dp))
-                                        Text(
-                                            text = "One-Shots (${subjectVideos.size})",
-                                            fontSize = 12.sp,
-                                            fontWeight = FontWeight.Bold,
-                                            color = if (isFilled) Color.White else onCardColor
-                                        )
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Tier 2: Official 2027 CBSE Sample Papers & Marking Scheme Bento Capsule
-            if (subjectSamplePapers.isNotEmpty()) {
-                item {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .border(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f), M3EBentoTileShape),
-                        shape = M3EBentoTileShape,
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
-                    ) {
-                        Column(modifier = Modifier.padding(16.dp)) {
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceBetween,
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Surface(
-                                        shape = M3ESquircleBadgeShape,
-                                        color = MaterialTheme.colorScheme.primaryContainer,
-                                        modifier = Modifier.size(36.dp)
-                                    ) {
-                                        Box(contentAlignment = Alignment.Center) {
-                                            Icon(
-                                                imageVector = Icons.Default.Description,
-                                                contentDescription = null,
-                                                tint = MaterialTheme.colorScheme.onPrimaryContainer,
-                                                modifier = Modifier.size(18.dp)
-                                            )
-                                        }
-                                    }
-                                    Spacer(modifier = Modifier.width(12.dp))
-                                    Column {
-                                        Text(
-                                            text = "Official 2027 Sample Papers",
-                                            fontWeight = FontWeight.Bold,
-                                            fontSize = 14.sp,
-                                            color = MaterialTheme.colorScheme.onSurface
-                                        )
-                                        Text(
-                                            text = "CBSE Pattern • 3-Hour Simulation",
-                                            fontSize = 11.sp,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                    }
-                                }
-                                TextButton(
-                                    onClick = { onSamplePapersClick(subject.id) },
-                                    contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp)
-                                ) {
-                                    Text("View All", fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                                }
-                            }
-
-                            Spacer(modifier = Modifier.height(12.dp))
-
+                            // Row 2: One-Shots + SQP 2027
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                val sqp = subjectSamplePapers.find { it.type.equals("sqp", ignoreCase = true) }
-                                val ms = subjectSamplePapers.find { it.type.equals("ms", ignoreCase = true) }
-
-                                if (sqp != null) {
-                                    Button(
-                                        onClick = { onOpenPdf(sqp.url, sqp.title) },
-                                        shape = ExpressivePillSmall,
-                                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(44.dp)
+                                Surface(
+                                    shape = quickButtonShape,
+                                    color = quickButtonBg,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(46.dp)
+                                        .hubSpringBounce { showSubjectPlaylistDialog = true }
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        Icon(Icons.Default.EditNote, contentDescription = null, modifier = Modifier.size(16.dp))
-                                        Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Solve SQP", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        Icon(
+                                            imageVector = Icons.Default.PlayCircle,
+                                            contentDescription = null,
+                                            tint = accentColor,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = if (subjectVideos.isNotEmpty()) "One-Shots (${subjectVideos.size})" else "One-Shots",
+                                            fontSize = 12.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = onCardColor,
+                                            maxLines = 1
+                                        )
                                     }
                                 }
 
-                                if (ms != null) {
-                                    OutlinedButton(
-                                        onClick = { onOpenPdf(ms.url, ms.title) },
-                                        shape = ExpressivePillSmall,
-                                        modifier = Modifier
-                                            .weight(1f)
-                                            .height(44.dp)
+                                Surface(
+                                    shape = quickButtonShape,
+                                    color = quickButtonBg,
+                                    modifier = Modifier
+                                        .weight(1f)
+                                        .height(46.dp)
+                                        .hubSpringBounce { onSamplePapersClick(subject.id) }
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxSize().padding(horizontal = 12.dp),
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically
                                     ) {
-                                        Icon(Icons.Default.CheckCircle, contentDescription = null, modifier = Modifier.size(16.dp))
-                                        Spacer(modifier = Modifier.width(6.dp))
-                                        Text("Marking Scheme", fontSize = 12.sp, fontWeight = FontWeight.Bold)
+                                        Icon(
+                                            imageVector = Icons.Default.Description,
+                                            contentDescription = null,
+                                            tint = accentColor,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(8.dp))
+                                        Text(
+                                            text = "SQP 2027",
+                                            fontSize = 12.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = onCardColor,
+                                            maxLines = 1
+                                        )
                                     }
                                 }
                             }
@@ -500,7 +442,7 @@ fun SubjectHubScreen(
                 }
             }
 
-            // Tier 3: M3 Expressive Filter Bar
+            // Tier 2: M3 Expressive Filter Bar & Curriculum Chapters
             item {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(
@@ -805,70 +747,31 @@ fun ExpressiveChapterHubCard(
     val isFullyMastered = mastery != null &&
             mastery.theoryCompleted && mastery.ncertCompleted && mastery.exemplarCompleted && mastery.pyqCompleted
     val isHighYield = chapter.weightageMarks >= 7
+    val isDark = isSystemInDarkTheme()
+    val cardBackground = if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surface
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .hubSpringBounce(onClick = onClick)
-            .border(
-                width = 1.dp,
-                color = if (isFullyMastered) SuccessGreen.copy(alpha = 0.4f) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f),
-                shape = M3EBentoTileShape
-            ),
+            .hubSpringBounce(onClick = onClick),
         shape = M3EBentoTileShape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        colors = CardDefaults.cardColors(containerColor = cardBackground),
+        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
-            // Top Badges
+            // Clean Top Row: Muted Chapter Number & Weightage (No pill capsules) + Priority Tag
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
-                    Surface(
-                        shape = ExpressivePillSmall,
-                        color = subjectBg
-                    ) {
-                        Text(
-                            text = "Ch. ${chapter.number}",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = onCardColor,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                        )
-                    }
-
-                    if (isHighYield) {
-                        Surface(
-                            shape = ExpressivePillSmall,
-                            color = AccentAmber.copy(alpha = 0.2f)
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Bolt,
-                                    contentDescription = null,
-                                    tint = AccentAmberOnBg,
-                                    modifier = Modifier.size(12.dp)
-                                )
-                                Spacer(modifier = Modifier.width(3.dp))
-                                Text(
-                                    text = "High Yield",
-                                    fontSize = 10.sp,
-                                    fontWeight = FontWeight.Bold,
-                                    color = AccentAmberOnBg
-                                )
-                            }
-                        }
-                    }
-                }
+                Text(
+                    text = "CHAPTER ${chapter.number}  •  ${chapter.weightageMarks} MARKS",
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 0.8.sp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f)
+                )
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -876,7 +779,7 @@ fun ExpressiveChapterHubCard(
                 ) {
                     if (isFullyMastered) {
                         Surface(
-                            shape = ExpressivePillSmall,
+                            shape = RoundedCornerShape(100.dp),
                             color = SuccessGreen.copy(alpha = 0.15f)
                         ) {
                             Row(
@@ -887,30 +790,41 @@ fun ExpressiveChapterHubCard(
                                     imageVector = Icons.Default.CheckCircle,
                                     contentDescription = null,
                                     tint = SuccessGreen,
-                                    modifier = Modifier.size(13.dp)
+                                    modifier = Modifier.size(12.dp)
                                 )
                                 Spacer(modifier = Modifier.width(3.dp))
                                 Text(
-                                    text = "100% Mastered",
+                                    text = "Mastered",
                                     fontSize = 10.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = SuccessGreen
                                 )
                             }
                         }
-                    }
-
-                    Surface(
-                        shape = ExpressivePillSmall,
-                        color = MaterialTheme.colorScheme.surfaceVariant
-                    ) {
-                        Text(
-                            text = "${chapter.weightageMarks} Marks",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                        )
+                    } else if (isHighYield) {
+                        Surface(
+                            shape = RoundedCornerShape(100.dp),
+                            color = Color(0xFFF59E0B).copy(alpha = 0.14f)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Bolt,
+                                    contentDescription = null,
+                                    tint = Color(0xFFFBBF24),
+                                    modifier = Modifier.size(12.dp)
+                                )
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Text(
+                                    text = "High Yield",
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = Color(0xFFFBBF24)
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -938,7 +852,8 @@ fun ExpressiveChapterHubCard(
                             text = chapter.keyTopics.joinToString(" • "),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            maxLines = 1
+                            maxLines = 1,
+                            overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
                         )
                     }
                 }
@@ -1008,13 +923,21 @@ fun InteractiveMasteryPill(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                imageVector = if (isCompleted) Icons.Default.Check else Icons.Default.RadioButtonUnchecked,
-                contentDescription = null,
-                tint = if (isCompleted) SuccessGreen else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                modifier = Modifier.size(11.dp)
-            )
-            Spacer(modifier = Modifier.width(3.dp))
+            if (isCompleted) {
+                Icon(
+                    imageVector = Icons.Default.Check,
+                    contentDescription = null,
+                    tint = SuccessGreen,
+                    modifier = Modifier.size(11.dp)
+                )
+            } else {
+                Box(
+                    modifier = Modifier
+                        .size(6.dp)
+                        .border(1.dp, MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f), CircleShape)
+                )
+            }
+            Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = title,
                 fontSize = 10.sp,

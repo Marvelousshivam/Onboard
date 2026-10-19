@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.*
 import kotlinx.coroutines.delay
 
@@ -131,18 +132,17 @@ fun ExamSimulationScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        if (isExamRunning) {
-                            showSubmitConfirmDialog = true
-                        } else {
-                            onBackClick()
-                        }
-                    }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Exit Simulation"
-                        )
-                    }
+                    LiquidGlassBackButton(
+                        onClick = {
+                            if (isExamRunning) {
+                                showSubmitConfirmDialog = true
+                            } else {
+                                onBackClick()
+                            }
+                        },
+                        contentDescription = "Exit Simulation",
+                        modifier = Modifier.padding(start = 8.dp)
+                    )
                 },
                 actions = {
                     // Clock Pill

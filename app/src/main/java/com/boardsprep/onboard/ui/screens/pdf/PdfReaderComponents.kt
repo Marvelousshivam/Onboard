@@ -36,6 +36,10 @@ import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.ui.draw.clip
+import com.boardsprep.onboard.core.glass.LocalGlassEnabled
+import com.boardsprep.onboard.core.glass.isGlassSupported
+import com.boardsprep.onboard.core.glass.lightweightLiquidGlass
+import com.boardsprep.onboard.core.glass.glassContentColor
 import androidx.compose.material.icons.filled.ErrorOutline
 import androidx.compose.material.icons.filled.Fullscreen
 import androidx.compose.material.icons.filled.FullscreenExit
@@ -851,15 +855,21 @@ fun PdfBottomDock(
     val zoomEnabled = readingMode == PdfReadingMode.SINGLE_PAGE
     // Show undo/redo only when there's something to undo/redo.
     val showUndoRedo = canUndo || canRedo
+    val isGlass = LocalGlassEnabled.current && isGlassSupported()
 
     Surface(
         modifier = modifier
             .padding(horizontal = 12.dp)
             .padding(bottom = 12.dp)
-            .shadow(12.dp, ExpressiveDockShape),
+            .then(
+                if (isGlass) Modifier.lightweightLiquidGlass(
+                    shape = ExpressiveDockShape,
+                    fallbackColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.96f)
+                ) else Modifier.shadow(12.dp, ExpressiveDockShape)
+            ),
         shape = ExpressiveDockShape,
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.96f),
-        tonalElevation = 6.dp
+        color = if (isGlass) Color.Transparent else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.96f),
+        tonalElevation = if (isGlass) 0.dp else 6.dp
     ) {
         Row(
             modifier = Modifier.padding(horizontal = 6.dp, vertical = 6.dp),

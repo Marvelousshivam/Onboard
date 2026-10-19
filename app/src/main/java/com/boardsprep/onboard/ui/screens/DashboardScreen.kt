@@ -34,11 +34,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.boardsprep.onboard.core.glass.LocalGlassEnabled
+import com.boardsprep.onboard.core.glass.isGlassSupported
+import com.boardsprep.onboard.core.glass.lightweightLiquidGlass
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionPill
 import com.boardsprep.onboard.core.theme.*
+import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.models.Chapter
 import com.boardsprep.onboard.data.models.Subject
 import com.boardsprep.onboard.data.repository.BoardsRepository
-import com.boardsprep.onboard.ui.components.expressiveBounce
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import com.boardsprep.onboard.core.glass.GLASS_EDGE_WIDTH
+import com.boardsprep.onboard.core.glass.GLASS_EDGE_COLOR
 import java.util.Calendar
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
@@ -47,7 +56,17 @@ import java.util.concurrent.TimeUnit
 fun Modifier.springBounceClick(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onClick: () -> Unit
-): Modifier = this.expressiveBounce(scaleOnPress = 0.95f, onClick = onClick)
+): Modifier {
+    val haptic = LocalHapticFeedback.current
+    return this.clickable(
+        interactionSource = interactionSource,
+        indication = ripple(bounded = true),
+        onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            onClick()
+        }
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +79,9 @@ fun DashboardScreen(
     onAccountClick: () -> Unit = {},
     onErrorVaultClick: () -> Unit = {},
     onDailyBlitzClick: () -> Unit = {},
-    onToolsClick: () -> Unit = {}
+    onToolsClick: () -> Unit = {},
+    onQuestionBankClick: (String) -> Unit = {},
+    onReplayTourClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val repository = remember { BoardsRepository(context) }
@@ -68,12 +89,57 @@ fun DashboardScreen(
     val streakInfo by syncManager.streakState.collectAsState()
     val accountInfo by syncManager.accountState.collectAsState()
     val unresolvedErrorCount by repository.getUnresolvedErrorCount().collectAsState(initial = 0)
+    val allMastery by repository.getAllMastery().collectAsState(initial = emptyList())
+    val recentVideos by repository.getRecentVideos(1).collectAsState(initial = emptyList())
     var showStreakDialog by remember { mutableStateOf(false) }
     var showSearchDialog by remember { mutableStateOf(false) }
 
+    // Contextual Study Resume Engine (Resolves last studied chapter or default high-yield starting point)
+    val resumeData = remember(recentVideos, allMastery, subjects) {
+        val lastVideo = recentVideos.firstOrNull()
+        val chapterId = lastVideo?.chapterId
+        var foundSub: Subject? = null
+        var foundCh: Chapter? = null
+
+        if (!chapterId.isNullOrBlank()) {
+            for (s in subjects) {
+                val ch = s.chapters.firstOrNull { it.id == chapterId }
+                if (ch != null) {
+                    foundSub = s
+                    foundCh = ch
+                    break
+                }
+            }
+        }
+
+        if (foundSub == null || foundCh == null) {
+            val firstSub = subjects.firstOrNull { it.id == "physics" } ?: subjects.firstOrNull()
+            val firstCh = firstSub?.chapters?.firstOrNull()
+            foundSub = firstSub
+            foundCh = firstCh
+        }
+
+        val masteryEntity = allMastery.firstOrNull { it.chapterId == foundCh?.id }
+        val progressPercent = if (lastVideo != null && lastVideo.durationMillis > 0L) {
+            ((lastVideo.positionMillis.toFloat() / lastVideo.durationMillis) * 100).toInt().coerceIn(5, 95)
+        } else if (masteryEntity != null) {
+            var count = 0
+            if (masteryEntity.theoryCompleted) count++
+            if (masteryEntity.ncertCompleted) count++
+            if (masteryEntity.exemplarCompleted) count++
+            if (masteryEntity.pyqCompleted) count++
+            count * 25
+        } else {
+            0 // Truthful initial progress state
+        }
+
+        Triple(foundSub, foundCh, progressPercent)
+    }
+    val (resumeSubject, resumeChapter, resumeProgress) = resumeData
 
     // Live countdown to CBSE Board Exams 2027 (Feb 15, 2027)
     val isDark = isSystemInDarkTheme()
+    val isGlass = LocalGlassEnabled.current && isGlassSupported()
     val physicsTokens = remember(isDark) { getAdaptiveSubjectTokens("physics", isDark) }
     val chemistryTokens = remember(isDark) { getAdaptiveSubjectTokens("chemistry", isDark) }
 
@@ -95,10 +161,9 @@ fun DashboardScreen(
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
                         Surface(
-                            shape = M3EIconContainerShape,
-                            color = MaterialTheme.colorScheme.surface,
-                            modifier = Modifier.size(40.dp),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f))
+                            shape = RoundedCornerShape(14.dp),
+                            color = if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surfaceVariant,
+                            modifier = Modifier.size(40.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
                                 Image(
@@ -124,68 +189,52 @@ fun DashboardScreen(
                     }
                 },
                 actions = {
-                    // Global Search & Command Quick Jump Trigger
-                    IconButton(
-                        onClick = { showSearchDialog = true },
-                        modifier = Modifier.padding(end = 4.dp).size(36.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Search,
+                    LiquidGlassActionPill(modifier = Modifier.padding(end = 8.dp)) {
+                        // Global Search Button
+                        LiquidGlassActionButton(
+                            icon = Icons.Default.Search,
                             contentDescription = "Search & Quick Jump",
-                            tint = MaterialTheme.colorScheme.onBackground
+                            onClick = { showSearchDialog = true }
                         )
-                    }
 
-                    // WCAG AA Compliant High-Contrast Compact Streak Pill (Fire + Count)
-                    val streakDays = streakInfo.currentStreak
-                    val streakText = streakDays.toString()
-                    val isToday = streakInfo.isStreakActiveToday
-                    val pillBg = if (isToday) AccentAmber else AccentAmberLight
-                    val pillContent = if (isToday) Color.White else AccentAmberOnBg
+                        // WCAG AA Compliant High-Contrast Compact Streak Pill (Fire + Count)
+                        val streakDays = streakInfo.currentStreak
+                        val streakText = streakDays.toString()
+                        val isToday = streakInfo.isStreakActiveToday
+                        val pillBg = if (isToday) (if (isDark) Color(0xFF2C2012) else AccentAmberLight) else (if (isDark) Color(0xFF1A1A1E) else MaterialTheme.colorScheme.surfaceVariant)
+                        val pillContent = if (isToday) (if (isDark) AccentAmberDark else AccentAmberOnBg) else MaterialTheme.colorScheme.onSurfaceVariant
 
-                    Surface(
-                        onClick = { showStreakDialog = true },
-                        shape = ExpressivePillSmall,
-                        color = pillBg,
-                        border = androidx.compose.foundation.BorderStroke(1.dp, AccentAmber.copy(alpha = 0.5f)),
-                        modifier = Modifier.padding(end = 6.dp)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 5.dp)
+                        Surface(
+                            onClick = { showStreakDialog = true },
+                            shape = RoundedCornerShape(16.dp),
+                            color = pillBg
                         ) {
-                            Icon(
-                                imageVector = Icons.Default.LocalFireDepartment,
-                                contentDescription = "Study Streak",
-                                tint = pillContent,
-                                modifier = Modifier.size(16.dp)
-                            )
-                            Spacer(modifier = Modifier.width(3.dp))
-                            Text(
-                                text = streakText,
-                                style = MaterialTheme.typography.labelMedium,
-                                fontWeight = FontWeight.ExtraBold,
-                                color = pillContent
-                            )
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.padding(horizontal = 9.dp, vertical = 6.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.LocalFireDepartment,
+                                    contentDescription = "Study Streak",
+                                    tint = if (isToday) AccentAmberDark else pillContent,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                                Spacer(modifier = Modifier.width(3.dp))
+                                Text(
+                                    text = streakText,
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.ExtraBold,
+                                    color = pillContent
+                                )
+                            }
                         }
-                    }
 
-                    // Account & Cloud Sync Profile Button
-                    Surface(
-                        onClick = onAccountClick,
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.6f),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f)),
-                        modifier = Modifier.padding(end = 12.dp).size(34.dp)
-                    ) {
-                        Box(contentAlignment = Alignment.Center) {
-                            Icon(
-                                imageVector = if (accountInfo.isAnonymous) Icons.Default.CloudSync else Icons.Default.AccountCircle,
-                                contentDescription = "Account & Cloud Sync",
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(18.dp)
-                            )
-                        }
+                        // Account & Cloud Sync Profile Button
+                        LiquidGlassActionButton(
+                            icon = if (accountInfo.isAnonymous) Icons.Default.CloudSync else Icons.Default.AccountCircle,
+                            contentDescription = "Account & Cloud Sync",
+                            onClick = onAccountClick
+                        )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -200,47 +249,57 @@ fun DashboardScreen(
                     .fillMaxSize()
                     .padding(innerPadding)
                     .padding(horizontal = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(18.dp),
-                // 130dp bottom padding ensures the last card is 100% visible ABOVE the floating dock
-                contentPadding = PaddingValues(top = 8.dp, bottom = 130.dp)
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                // 140dp bottom padding ensures the last card is 100% visible ABOVE the floating dock
+                contentPadding = PaddingValues(top = 8.dp, bottom = 140.dp)
             ) {
-                // ── Tier 1: Google Pixel At-A-Glance Hero Widget ────────────────
+                // ── Tier 1: Asymmetric Bento Hero Countdown & Contextual Study Widget ────────────────
                 item {
+                    val heroShape = RoundedCornerShape(28.dp)
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .border(
-                                width = 1.dp,
-                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
-                                shape = RoundedCornerShape(28.dp)
+                            .then(
+                                if (isGlass) Modifier.lightweightLiquidGlass(
+                                    shape = heroShape,
+                                    fallbackColor = if (isDark) Color(0xFF1D1C28) else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                ) else Modifier
                             ),
-                        shape = RoundedCornerShape(28.dp),
+                        shape = heroShape,
                         colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.4f)
+                            containerColor = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF1E1D2A) else Color(0xFFF3EDFC))
                         ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+                        elevation = CardDefaults.cardElevation(defaultElevation = if (isGlass) 0.dp else 2.dp)
                     ) {
                         Column(modifier = Modifier.padding(20.dp)) {
+                            // Top Row: Micro-Eyebrow + Oversized Display Countdown
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
+                                // Left Column: Exam info & micro-eyebrow
                                 Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
-                                    Surface(
-                                        shape = ExpressivePillSmall,
-                                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f)
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
                                     ) {
+                                        Box(
+                                            modifier = Modifier
+                                                .size(7.dp)
+                                                .background(if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary, CircleShape)
+                                        )
                                         Text(
-                                            text = "CBSE Class 12 • 2027",
+                                            text = "CBSE CLASS 12 • TARGET 95%+",
                                             style = MaterialTheme.typography.labelSmall,
-                                            fontWeight = FontWeight.Bold,
-                                            color = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                            fontWeight = FontWeight.Black,
+                                            letterSpacing = 1.2.sp,
+                                            fontSize = 10.sp,
+                                            color = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary
                                         )
                                     }
 
-                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Spacer(modifier = Modifier.height(6.dp))
 
                                     Text(
                                         text = "Board Examination",
@@ -249,168 +308,259 @@ fun DashboardScreen(
                                         color = MaterialTheme.colorScheme.onSurface
                                     )
                                     Text(
-                                        text = "Target: 95%+ Aggregate • 15 Feb 2027",
+                                        text = "Starts 15 Feb 2027 • Final Sprint",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                 }
 
-                                // Google Clock-Style Countdown Pill
-                                Surface(
-                                    shape = RoundedCornerShape(22.dp),
-                                    color = MaterialTheme.colorScheme.primary,
-                                    tonalElevation = 4.dp
+                                // Right Column: Oversized Expressive Typography Countdown
+                                Column(
+                                    horizontalAlignment = Alignment.End,
+                                    verticalArrangement = Arrangement.Center
                                 ) {
-                                    Column(
-                                        modifier = Modifier.padding(horizontal = 18.dp, vertical = 14.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center
-                                    ) {
-                                        Text(
-                                            text = "$daysRemaining",
-                                            style = MaterialTheme.typography.headlineMedium,
+                                    Text(
+                                        text = "$daysRemaining",
+                                        style = MaterialTheme.typography.displayMedium.copy(
+                                            fontSize = 44.sp,
                                             fontWeight = FontWeight.Black,
-                                            color = MaterialTheme.colorScheme.onPrimary
-                                        )
-                                        Text(
-                                            text = "DAYS LEFT",
-                                            style = MaterialTheme.typography.labelSmall,
-                                            fontWeight = FontWeight.ExtraBold,
-                                            color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.9f),
-                                            letterSpacing = 1.sp
-                                        )
-                                    }
+                                            lineHeight = 44.sp
+                                        ),
+                                        color = if (isDark) Color.White else MaterialTheme.colorScheme.primary
+                                    )
+                                    Text(
+                                        text = "DAYS LEFT",
+                                        style = MaterialTheme.typography.labelSmall.copy(
+                                            fontWeight = FontWeight.Black,
+                                            letterSpacing = 1.4.sp,
+                                            fontSize = 9.5.sp
+                                        ),
+                                        color = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary
+                                    )
                                 }
                             }
 
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(18.dp))
 
-                            // One prominent, confident Google CTA
-                            Button(
+                            // Contextual Resume Study Action Card with Circular Progress Ring
+                            Surface(
                                 onClick = {
-                                    if (subjects.isNotEmpty()) {
+                                    if (resumeSubject != null) {
+                                        onSubjectClick(resumeSubject.id)
+                                    } else if (subjects.isNotEmpty()) {
                                         onSubjectClick(subjects.first().id)
                                     }
                                 },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = ExpressivePillSmall,
-                                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-                                contentPadding = PaddingValues(vertical = 12.dp)
+                                shape = RoundedCornerShape(20.dp),
+                                color = if (isGlass) Color.White.copy(alpha = 0.08f) else (if (isDark) Color(0xFF28253A) else Color.White),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .springBounceClick {
+                                        if (resumeSubject != null) {
+                                            onSubjectClick(resumeSubject.id)
+                                        } else if (subjects.isNotEmpty()) {
+                                            onSubjectClick(subjects.first().id)
+                                        }
+                                    }
                             ) {
-                                Icon(
-                                    imageVector = Icons.Default.PlayArrow,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(
-                                    text = "Resume Today's Study",
-                                    style = MaterialTheme.typography.labelLarge,
-                                    fontWeight = FontWeight.Bold
-                                )
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 14.dp, vertical = 10.dp),
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                                ) {
+                                    // Circular progress ring with play button
+                                    Box(
+                                        contentAlignment = Alignment.Center,
+                                        modifier = Modifier.size(42.dp)
+                                    ) {
+                                        CircularProgressIndicator(
+                                            progress = { resumeProgress / 100f },
+                                            modifier = Modifier.size(42.dp),
+                                            color = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary,
+                                            trackColor = (if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary).copy(alpha = 0.18f),
+                                            strokeWidth = 3.5.dp
+                                        )
+                                        Icon(
+                                            imageVector = Icons.Default.PlayArrow,
+                                            contentDescription = "Resume Study",
+                                            tint = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+
+                                    Column(modifier = Modifier.weight(1f)) {
+                                        Text(
+                                            text = "CONTINUE TODAY'S STUDY",
+                                            style = MaterialTheme.typography.labelSmall,
+                                            fontWeight = FontWeight.ExtraBold,
+                                            fontSize = 9.5.sp,
+                                            letterSpacing = 0.8.sp,
+                                            color = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary
+                                        )
+                                        Text(
+                                            text = resumeChapter?.name ?: "Electric Charges & Fields",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            maxLines = 1,
+                                            color = MaterialTheme.colorScheme.onSurface
+                                        )
+                                        Text(
+                                            text = if (resumeProgress > 0) "${resumeSubject?.name ?: "Physics"} • Ch ${resumeChapter?.number ?: 1} • $resumeProgress% Mastered"
+                                            else "${resumeSubject?.name ?: "Physics"} • Ch ${resumeChapter?.number ?: 1} • Ready to Begin",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            fontSize = 11.sp,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        modifier = Modifier.size(18.dp)
+                                    )
+                                }
                             }
                         }
                     }
                 }
 
-                // ── Tier 2: Board Prep Hub (Google M3 Expressive 2x2 Bento) ─────
+                // ── Tier 2: Gamified High-Agency Quick Action Strip ──
                 item {
-                    Column(modifier = Modifier.fillMaxWidth()) {
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                text = "Board Prep Hub",
-                                style = MaterialTheme.typography.titleMedium,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
-                            Surface(
-                                shape = ExpressivePillSmall,
-                                color = MaterialTheme.colorScheme.surfaceVariant
-                            ) {
-                                Text(
-                                    text = "High-Agency",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                    fontWeight = FontWeight.Bold,
-                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp)
-                                )
-                            }
-                        }
+                    val quickCardShape = RoundedCornerShape(18.dp)
 
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        // Row 1 of 2x2 Bento: 3h Exam Sim + Daily Recall Blitz
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            M3ExpressiveDeckCard(
-                                title = "3h Exam Sim",
-                                subtitle = "Official SQP & Timing",
-                                badge = "Sim",
-                                icon = Icons.Default.Bolt,
-                                containerColor = if (isDark) MdSurfaceVariantDark else AccentAmberLight,
-                                onContainerColor = if (isDark) AccentAmber else AccentAmberOnBg,
-                                accentColor = AccentAmber,
-                                modifier = Modifier.weight(1f),
-                                onClick = { onSamplePapersClick("") }
-                            )
-
-                            M3ExpressiveDeckCard(
-                                title = "Recall Blitz",
-                                subtitle = "5-Min Memory Drill",
-                                badge = "Daily",
-                                icon = Icons.Default.Timer,
-                                containerColor = if (isDark) MdSurfaceVariantDark else PhysicsLightBg,
-                                onContainerColor = if (isDark) PhysicsLavender else PhysicsLightOnBg,
-                                accentColor = PhysicsAccent,
-                                modifier = Modifier.weight(1f),
-                                onClick = onDailyBlitzClick
-                            )
-                        }
-
-                        Spacer(modifier = Modifier.height(12.dp))
-
-                        // Row 2 of 2x2 Bento: Mistake Vault + Board Tools
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.spacedBy(12.dp)
-                        ) {
-                            M3ExpressiveDeckCard(
-                                title = "Mistake Vault",
-                                subtitle = if (unresolvedErrorCount > 0) "$unresolvedErrorCount to Review" else "All Clean",
-                                badge = if (unresolvedErrorCount > 0) "$unresolvedErrorCount Open" else "Clean",
-                                icon = Icons.Default.AutoFixHigh,
-                                containerColor = if (isDark) MdSurfaceVariantDark else EnglishLightBg,
-                                onContainerColor = if (isDark) EnglishRose else EnglishLightOnBg,
-                                accentColor = EnglishAccent,
-                                modifier = Modifier.weight(1f),
-                                onClick = onErrorVaultClick
-                            )
-
-                            M3ExpressiveDeckCard(
-                                title = "Board Tools",
-                                subtitle = "Rule 40.1 & Best 5",
-                                badge = "Calc",
-                                icon = Icons.Default.Calculate,
-                                containerColor = if (isDark) MdSurfaceVariantDark else ChemistryLightBg,
-                                onContainerColor = if (isDark) ChemistryMint else ChemistryLightOnBg,
-                                accentColor = ChemistryAccent,
-                                modifier = Modifier.weight(1f),
-                                onClick = onToolsClick
-                            )
-                        }
-                    }
-                }
-
-                // Tier 2: Academic Subjects Header (Option A: 2-Column M3 Expressive Grid)
-                item {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        // 1. Recall Blitz (5-Min Daily Spaced Retrieval)
+                        Surface(
+                            onClick = { onDailyBlitzClick() },
+                            shape = quickCardShape,
+                            color = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF1B182B) else PhysicsLightBg),
+                            border = null, // Zero 1px wireframe border!
+                            tonalElevation = if (isGlass) 0.dp else 2.dp,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(64.dp)
+                                .then(
+                                    if (isGlass) Modifier.lightweightLiquidGlass(shape = quickCardShape)
+                                    else Modifier
+                                )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = PhysicsAccent.copy(alpha = if (isDark) 0.25f else 0.15f),
+                                    modifier = Modifier.size(36.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.Bolt,
+                                            contentDescription = null,
+                                            tint = PhysicsLavender,
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+                                }
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = "Recall Blitz",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isDark) PhysicsLavender else PhysicsLightOnBg,
+                                        fontSize = 13.5.sp
+                                    )
+                                    Text(
+                                        text = "⚡ 5-MIN DRILL",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        fontSize = 9.5.sp,
+                                        letterSpacing = 0.8.sp,
+                                        color = if (isDark) PhysicsLavender.copy(alpha = 0.75f) else PhysicsLightOnBg.copy(alpha = 0.75f)
+                                    )
+                                }
+                            }
+                        }
+
+                        // 2. Mistake Vault (Anti-Forgetting Recovery)
+                        Surface(
+                            onClick = { onErrorVaultClick() },
+                            shape = quickCardShape,
+                            color = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF261522) else EnglishLightBg),
+                            border = null, // Zero 1px wireframe border!
+                            tonalElevation = if (isGlass) 0.dp else 2.dp,
+                            modifier = Modifier
+                                .weight(1f)
+                                .height(64.dp)
+                                .then(
+                                    if (isGlass) Modifier.lightweightLiquidGlass(shape = quickCardShape)
+                                    else Modifier
+                                )
+                        ) {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = RoundedCornerShape(12.dp),
+                                    color = EnglishAccent.copy(alpha = if (isDark) 0.25f else 0.15f),
+                                    modifier = Modifier.size(36.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.AutoFixHigh,
+                                            contentDescription = null,
+                                            tint = EnglishRose,
+                                            modifier = Modifier.size(20.dp)
+                                        )
+                                    }
+                                }
+                                Column(
+                                    modifier = Modifier.weight(1f),
+                                    verticalArrangement = Arrangement.Center
+                                ) {
+                                    Text(
+                                        text = "Mistake Vault",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        color = if (isDark) EnglishRose else EnglishLightOnBg,
+                                        fontSize = 13.5.sp
+                                    )
+                                    Text(
+                                        text = if (unresolvedErrorCount > 0) "🚨 $unresolvedErrorCount to Review" else "✓ Zero Flaws",
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        fontSize = 9.5.sp,
+                                        letterSpacing = 0.5.sp,
+                                        color = if (unresolvedErrorCount > 0) MaterialTheme.colorScheme.error else (if (isDark) EnglishRose.copy(alpha = 0.75f) else EnglishLightOnBg.copy(alpha = 0.75f))
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // ── Tier 3: Academic Subjects Section (Clean Typographic Header) ──
+                item {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 4.dp, bottom = 2.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -420,18 +570,12 @@ fun DashboardScreen(
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onBackground
                         )
-                        Surface(
-                            shape = ExpressivePillSmall,
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        ) {
-                            Text(
-                                text = "${subjects.size} Curricula",
-                                style = MaterialTheme.typography.labelSmall,
-                                fontWeight = FontWeight.SemiBold,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
-                            )
-                        }
+                        Text(
+                            text = "CBSE Syllabus 2026-27",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
                     }
                 }
 
@@ -446,6 +590,7 @@ fun DashboardScreen(
                             Box(modifier = Modifier.weight(1f)) {
                                 M3ExpressiveSubjectGridTile(
                                     subject = subject,
+                                    allMastery = allMastery,
                                     onClick = { onSubjectClick(subject.id) }
                                 )
                             }
@@ -453,82 +598,6 @@ fun DashboardScreen(
                         if (pair.size == 1) {
                             Spacer(modifier = Modifier.weight(1f))
                         }
-                    }
-                }
-            }
-
-            // Adaptive Bottom Gradient Scrim (Content softly fades behind the dock)
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .height(110.dp)
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(
-                                Color.Transparent,
-                                MaterialTheme.colorScheme.background.copy(alpha = 0.8f),
-                                MaterialTheme.colorScheme.background
-                            )
-                        )
-                    )
-            )
-
-            // Google M3 Expressive Floating Navigation Dock
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .navigationBarsPadding()
-                    .padding(bottom = 12.dp)
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
-                Surface(
-                    shape = M3EFloatingDockShape,
-                    color = MaterialTheme.colorScheme.surface,
-                    border = androidx.compose.foundation.BorderStroke(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.45f)
-                    ),
-                    tonalElevation = 8.dp,
-                    shadowElevation = 10.dp
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                        horizontalArrangement = Arrangement.spacedBy(4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        // 1. Home (Active Tab)
-                        DockNavigationItem(
-                            icon = Icons.Default.Home,
-                            label = "Home",
-                            isSelected = true,
-                            onClick = { /* Already on Home */ }
-                        )
-
-                        // 2. CBSE Sample Papers & 3h Exam Sim
-                        DockNavigationItem(
-                            icon = Icons.Default.Description,
-                            label = "Papers",
-                            isSelected = false,
-                            onClick = { onSamplePapersClick("") }
-                        )
-
-                        // 3. High-Yield Handbooks
-                        DockNavigationItem(
-                            icon = Icons.Default.Bookmarks,
-                            label = "Handbook",
-                            isSelected = false,
-                            onClick = { onHandbookClick("physics") }
-                        )
-
-                        // 4. Offline Library & Downloads
-                        DockNavigationItem(
-                            icon = Icons.Default.CloudDownload,
-                            label = "Offline",
-                            isSelected = false,
-                            onClick = onDownloadsClick
-                        )
                     }
                 }
             }
@@ -601,9 +670,7 @@ fun M3ExpressiveDeckCard(
     onClick: () -> Unit
 ) {
     Card(
-        modifier = modifier
-            .springBounceClick(onClick = onClick)
-            .border(1.dp, accentColor.copy(alpha = 0.25f), M3EBentoTileShape),
+        modifier = modifier.springBounceClick(onClick = onClick),
         shape = M3EBentoTileShape,
         colors = CardDefaults.cardColors(containerColor = containerColor),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
@@ -630,7 +697,7 @@ fun M3ExpressiveDeckCard(
                 }
 
                 Surface(
-                    shape = ExpressivePillSmall,
+                    shape = RoundedCornerShape(12.dp),
                     color = accentColor.copy(alpha = 0.15f)
                 ) {
                     Text(
@@ -664,53 +731,101 @@ fun M3ExpressiveDeckCard(
 @Composable
 fun M3ExpressiveSubjectGridTile(
     subject: Subject,
+    allMastery: List<ChapterMasteryEntity> = emptyList(),
     onClick: () -> Unit
 ) {
     val isDark = isSystemInDarkTheme()
+    val isGlass = LocalGlassEnabled.current && isGlassSupported()
     val tokens = getAdaptiveSubjectTokens(subject.id, isDark)
     val cardBg = tokens.containerColor
     val onCardColor = tokens.onContainerColor
     val accentColor = tokens.accentColor
+    val haptic = LocalHapticFeedback.current
 
-    Card(
+    // Distinct organic M3 shape morphing per subject
+    val iconShape = remember(subject.id) {
+        when (subject.id.lowercase()) {
+            "physics" -> RoundedCornerShape(topStart = 16.dp, topEnd = 6.dp, bottomStart = 6.dp, bottomEnd = 16.dp)
+            "chemistry" -> RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp, bottomStart = 6.dp, bottomEnd = 16.dp)
+            "maths" -> RoundedCornerShape(12.dp)
+            "biology" -> RoundedCornerShape(topStart = 14.dp, topEnd = 8.dp, bottomStart = 8.dp, bottomEnd = 14.dp)
+            "english" -> RoundedCornerShape(topStart = 6.dp, topEnd = 16.dp, bottomStart = 16.dp, bottomEnd = 6.dp)
+            else -> RoundedCornerShape(topStart = 14.dp, topEnd = 14.dp, bottomStart = 20.dp, bottomEnd = 20.dp)
+        }
+    }
+
+    // Dynamic mastery calculation strictly aligned with SubjectHubScreen (Requires all 4 pillars for 100% chapter mastery)
+    val totalChapters = subject.chapters.size
+    val masteredChaptersCount = remember(subject.chapters, allMastery) {
+        subject.chapters.count { ch ->
+            val m = allMastery.firstOrNull { it.chapterId == ch.id }
+            m != null && m.theoryCompleted && m.ncertCompleted && m.exemplarCompleted && m.pyqCompleted
+        }
+    }
+    val inProgressChaptersCount = remember(subject.chapters, allMastery) {
+        subject.chapters.count { ch ->
+            val m = allMastery.firstOrNull { it.chapterId == ch.id }
+            if (m == null) false
+            else {
+                val hasAny = m.theoryCompleted || m.ncertCompleted || m.exemplarCompleted || m.pyqCompleted
+                val hasAll = m.theoryCompleted && m.ncertCompleted && m.exemplarCompleted && m.pyqCompleted
+                hasAny && !hasAll
+            }
+        }
+    }
+    val masteryPercent = remember(masteredChaptersCount, totalChapters) {
+        if (totalChapters > 0) ((masteredChaptersCount.toFloat() / totalChapters) * 100).toInt() else 0
+    }
+
+    val tileShape = RoundedCornerShape(22.dp)
+
+    Surface(
+        onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            onClick()
+        },
+        shape = tileShape,
+        color = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surface),
+        border = null, // Zero 1px wireframe border!
+        tonalElevation = if (isGlass) 0.dp else 2.dp,
         modifier = Modifier
             .fillMaxWidth()
-            .springBounceClick(onClick = onClick)
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f),
-                shape = M3EBentoTileShape
-            ),
-        shape = M3EBentoTileShape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+            .then(
+                if (isGlass) Modifier.lightweightLiquidGlass(shape = tileShape)
+                else Modifier
+            )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(14.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .padding(horizontal = 14.dp, vertical = 12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
+            // Top Row: Organic Icon (Uniform 1:1 Aspect Ratio) + Theory Marks Weightage
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Saturated Squircle Icon Container
                 Surface(
-                    shape = M3EIconContainerShape,
+                    shape = iconShape,
                     color = cardBg,
-                    modifier = Modifier.size(42.dp)
+                    modifier = Modifier
+                        .size(40.dp)
+                        .aspectRatio(1f)
                 ) {
-                    Box(contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier.fillMaxSize(),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Icon(
-                            imageVector = when (subject.id) {
+                            imageVector = when (subject.id.lowercase()) {
                                 "english" -> Icons.AutoMirrored.Filled.MenuBook
-                                "physics" -> Icons.Default.Bolt
+                                "physics" -> Icons.Default.Hub
                                 "chemistry" -> Icons.Default.Science
-                                "maths" -> Icons.Default.Calculate
+                                "maths" -> Icons.Default.Functions
                                 "biology" -> Icons.Default.Biotech
-                                else -> Icons.Default.School
+                                else -> Icons.Default.SportsBasketball
                             },
                             contentDescription = null,
                             tint = accentColor,
@@ -719,59 +834,78 @@ fun M3ExpressiveSubjectGridTile(
                     }
                 }
 
-                Surface(
-                    shape = ExpressivePillSmall,
-                    color = MaterialTheme.colorScheme.surfaceVariant
-                ) {
-                    Text(
-                        text = "Code ${subject.code}",
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                    )
-                }
+                Text(
+                    text = "${subject.totalTheoryMarks}M Theory",
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.SemiBold,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f),
+                    fontSize = 11.sp
+                )
             }
 
-            Column {
-                Text(
-                    text = subject.name,
-                    style = MaterialTheme.typography.titleMedium,
+            // Subject Title
+            Text(
+                text = subject.name,
+                style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 1
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-                Text(
-                    text = "${subject.chapters.size} Ch • ${subject.totalTheoryMarks}M Th",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    maxLines = 1
-                )
-            }
+                    fontSize = 15.sp
+                ),
+                color = MaterialTheme.colorScheme.onSurface,
+                maxLines = 1
+            )
 
-            // Quick Status Pill
-            Surface(
-                shape = ExpressivePillSmall,
-                color = cardBg
+            // Dynamic Progress Track & Chapter Mastery (Replaces static 4 Pillars pill)
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
             ) {
                 Row(
-                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .size(6.dp)
-                            .background(accentColor, CircleShape)
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "4 Pillars Ready",
+                        text = "${subject.chapters.size} Chapters",
+                        style = MaterialTheme.typography.labelSmall,
+                        fontSize = 10.5.sp,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Text(
+                        text = when {
+                            masteredChaptersCount > 0 -> "$masteryPercent% Mastered"
+                            inProgressChaptersCount > 0 -> "$inProgressChaptersCount In Progress"
+                            else -> "Core Track"
+                        },
                         style = MaterialTheme.typography.labelSmall,
                         fontWeight = FontWeight.Bold,
-                        color = onCardColor,
-                        fontSize = 10.sp
+                        fontSize = 10.5.sp,
+                        color = when {
+                            masteredChaptersCount > 0 -> accentColor
+                            inProgressChaptersCount > 0 -> accentColor
+                            else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
+                        }
                     )
+                }
+
+                // Sleek thin color-coded progress bar (Zero fake sliver when unstarted or 0 fully mastered)
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(3.5.dp)
+                        .clip(RoundedCornerShape(2.dp))
+                        .background(accentColor.copy(alpha = 0.15f))
+                ) {
+                    val progressFraction = if (totalChapters > 0 && masteredChaptersCount > 0) {
+                        (masteredChaptersCount.toFloat() / totalChapters).coerceIn(0.06f, 1f)
+                    } else 0f
+                    if (progressFraction > 0f) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(fraction = progressFraction)
+                                .fillMaxHeight()
+                                .background(accentColor)
+                        )
+                    }
                 }
             }
         }
@@ -792,15 +926,10 @@ fun M3ExpressiveSubjectCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .springBounceClick(onClick = onClick)
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f),
-                shape = M3ESubjectCardShape
-            ),
+            .springBounceClick(onClick = onClick),
         shape = M3ESubjectCardShape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+        colors = CardDefaults.cardColors(containerColor = if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surface),
+        elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
             modifier = Modifier

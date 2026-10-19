@@ -180,3 +180,19 @@ data class PdfAnnotationEntity(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
+/**
+ * Subjective Question Bank Self-Evaluations (CBSE 2m VSA, 3m SA, 4m Case Study, 5m Long Answer).
+ * Supports offline-first Room persistence and cross-platform synchronization with Web app & Firestore.
+ */
+@Entity(
+    tableName = "question_evaluations",
+    indices = [Index("subjectId"), Index("status")]
+)
+data class QuestionEvaluationEntity(
+    @PrimaryKey val questionId: String,
+    val subjectId: String,
+    val marks: Int,
+    val status: String, // "full", "half", "retry"
+    val updatedAt: Long = System.currentTimeMillis()
+)
+

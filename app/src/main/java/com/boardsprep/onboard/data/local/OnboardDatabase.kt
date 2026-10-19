@@ -17,12 +17,14 @@ import com.boardsprep.onboard.data.local.dao.VideoProgressDao
 import com.boardsprep.onboard.data.local.dao.ErrorVaultDao
 import com.boardsprep.onboard.data.local.dao.SpacedReviewDao
 import com.boardsprep.onboard.data.local.dao.FocusSessionDao
+import com.boardsprep.onboard.data.local.dao.QuestionEvaluationDao
 import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
 import com.boardsprep.onboard.data.local.entities.PdfAnnotationEntity
 import com.boardsprep.onboard.data.local.entities.PdfBookmarkEntity
 import com.boardsprep.onboard.data.local.entities.PdfReadingStateEntity
+import com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity
 import com.boardsprep.onboard.data.local.entities.QuizAttemptEntity
 import com.boardsprep.onboard.data.local.entities.VideoProgressEntity
 import com.boardsprep.onboard.data.local.entities.ErrorVaultEntity
@@ -42,9 +44,11 @@ import com.boardsprep.onboard.data.local.entities.FocusSessionEntity
         // OnBOARD Reader tables
         PdfReadingStateEntity::class,
         PdfBookmarkEntity::class,
-        PdfAnnotationEntity::class
+        PdfAnnotationEntity::class,
+        // Subjective Question Bank evaluations
+        QuestionEvaluationEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 abstract class OnboardDatabase : RoomDatabase() {
@@ -57,6 +61,7 @@ abstract class OnboardDatabase : RoomDatabase() {
     abstract fun errorVaultDao(): ErrorVaultDao
     abstract fun spacedReviewDao(): SpacedReviewDao
     abstract fun focusSessionDao(): FocusSessionDao
+    abstract fun questionEvaluationDao(): QuestionEvaluationDao
 
     // OnBOARD Reader DAOs
     abstract fun pdfReadingStateDao(): PdfReadingStateDao
@@ -184,6 +189,22 @@ abstract class OnboardDatabase : RoomDatabase() {
             )
         }
 
+        private fun createQuestionEvaluationTable(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS question_evaluations (
+                    questionId TEXT NOT NULL PRIMARY KEY,
+                    subjectId TEXT NOT NULL,
+                    marks INTEGER NOT NULL,
+                    status TEXT NOT NULL,
+                    updatedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_question_evaluations_subjectId ON question_evaluations(subjectId)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_question_evaluations_status ON question_evaluations(status)")
+        }
+
         /**
          * Version 1 -> 2 migration: adds the three OnBOARD Reader tables.
          */
@@ -213,6 +234,23 @@ abstract class OnboardDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * Version 3 -> 4 migration: adds question_evaluations table for Subjective Question Bank.
+         */
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createQuestionEvaluationTable(db)
+            }
+        }
+
+        val MIGRATION_1_4 = object : Migration(1, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createReaderTables(db)
+                createStudySprintTables(db)
+                createQuestionEvaluationTable(db)
+            }
+        }
+
         fun getInstance(context: Context): OnboardDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -220,7 +258,7 @@ abstract class OnboardDatabase : RoomDatabase() {
                     OnboardDatabase::class.java,
                     "onboard_app.db"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3, MIGRATION_3_4, MIGRATION_1_4)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

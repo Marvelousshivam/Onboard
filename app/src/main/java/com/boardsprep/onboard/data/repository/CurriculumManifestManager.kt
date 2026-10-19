@@ -26,6 +26,7 @@ data class CurriculumManifest(
     @SerializedName(value = "base_raw_url", alternate = ["baseRawUrl"]) val baseRawUrl: String = "",
     @SerializedName(value = "subjects") val subjects: List<RemoteSubject> = emptyList(),
     @SerializedName(value = "sample_papers", alternate = ["samplePapers"]) val samplePapers: List<RemoteSamplePaper> = emptyList(),
+    @SerializedName(value = "question_banks", alternate = ["questionBanks"]) val questionBanks: List<RemoteQuestionBank> = emptyList(),
     @SerializedName(value = "derivations") val derivations: List<RemoteDerivation> = emptyList(),
     @SerializedName(value = "named_reactions", alternate = ["namedReactions"]) val namedReactions: List<RemoteReaction> = emptyList(),
     @SerializedName(value = "formulas") val formulas: List<RemoteFormula> = emptyList()
@@ -134,6 +135,16 @@ data class RemoteSamplePaper(
     @SerializedName("subject") val subject: String = "",
     @SerializedName("type") val type: String = "",
     @SerializedName("url") val url: String = ""
+)
+
+@Keep
+data class RemoteQuestionBank(
+    @SerializedName("title") val title: String = "",
+    @SerializedName("filename") val filename: String = "",
+    @SerializedName("subject") val subject: String = "",
+    @SerializedName(value = "subject_id", alternate = ["subjectId"]) val subjectId: String = "",
+    @SerializedName(value = "pdf_url", alternate = ["pdfUrl"]) val pdfUrl: String = "",
+    @SerializedName(value = "json_url", alternate = ["jsonUrl"]) val jsonUrl: String = ""
 )
 
 class CurriculumManifestManager(private val context: Context) {

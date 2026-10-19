@@ -61,5 +61,13 @@ sealed class Screen(val route: String) {
     object OnboardingSync : Screen("onboarding_sync")
     object ErrorVault : Screen("error_vault")
     object DailyBlitz : Screen("daily_blitz")
+    object OnboardingTour : Screen("onboarding_tour")
+    object QuestionBank : Screen("question_bank?subjectId={subjectId}") {
+        fun createRoute(subjectId: String = "") = if (subjectId.isBlank()) "question_bank" else "question_bank?subjectId=$subjectId"
+    }
+    object MainApp : Screen("main_app?tab={tab}") {
+        fun createRoute(tab: Int = 0) = "main_app?tab=$tab"
+    }
+    object LibraryHub : Screen("library_hub")
 }
 

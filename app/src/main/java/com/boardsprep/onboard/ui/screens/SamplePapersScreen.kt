@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -23,6 +24,16 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.glass.LocalGlassEnabled
+import com.boardsprep.onboard.core.glass.isGlassSupported
+import com.boardsprep.onboard.core.glass.lightweightLiquidGlass
+import com.boardsprep.onboard.core.glass.glassContentColor
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassActionPill
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
+import com.boardsprep.onboard.core.glass.components.LiquidGlassChip
+import com.boardsprep.onboard.core.glass.components.LiquidGlassSegmentItem
+import com.boardsprep.onboard.core.glass.components.LiquidGlassSegmentedRow
 import com.boardsprep.onboard.core.pdf.LocalDocumentScanner
 import com.boardsprep.onboard.core.pdf.PdfPairedRole
 import com.boardsprep.onboard.core.theme.*
@@ -49,16 +60,27 @@ typealias OnOpenPdfWithPair = (
 @Composable
 fun SamplePapersScreen(
     initialSubjectId: String = "",
+    showBackButton: Boolean = false,
     onOpenPdf: OnOpenPdfWithPair,
     onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit = { _, _, _, _ -> },
-    onBackClick: () -> Unit
+    onQuestionBankClick: (String) -> Unit = {},
+    onBackClick: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val repository = remember { BoardsRepository(context) }
 
-    var selectedSubjectId by remember { mutableStateOf(initialSubjectId) }
+    val normalizedInitialId = remember(initialSubjectId) {
+        when (initialSubjectId.lowercase().trim()) {
+            "mathematics", "math" -> "maths"
+            "pe", "ped", "physical education" -> "physical_education"
+            else -> initialSubjectId.lowercase().trim()
+        }
+    }
+
+    var selectedSubjectId by remember(normalizedInitialId) { mutableStateOf(normalizedInitialId) }
     var selectedTypeFilter by remember { mutableStateOf("all") } // "all", "sqp", "ms"
     var searchQuery by remember { mutableStateOf("") }
+    var isPatternExpanded by remember { mutableStateOf(false) }
 
     val allPapers = remember { repository.getSamplePapers() }
 
@@ -101,10 +123,10 @@ fun SamplePapersScreen(
                     }
                 },
                 navigationIcon = {
-                    IconButton(onClick = onBackClick) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                    if (showBackButton) {
+                        LiquidGlassBackButton(
+                            onClick = onBackClick,
+                            modifier = Modifier.padding(start = 8.dp)
                         )
                     }
                 },
@@ -136,18 +158,18 @@ fun SamplePapersScreen(
                     }
                 },
                 singleLine = true,
-                shape = ExpressiveCardMedium,
+                shape = RoundedCornerShape(100.dp),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
                     unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
                 )
             )
 
-            // Paper Type Segmented Tabs (All, SQP, MS)
+            // Paper Type Segmented Tabs (All, SQP, MS) - Compact to eliminate clipping
             val typeTabs = listOf(
-                ExpressiveTabItem("All Papers", badge = "${allPapers.size}"),
-                ExpressiveTabItem("Question Papers (SQP)", icon = Icons.Default.Description),
-                ExpressiveTabItem("Marking Schemes (MS)", icon = Icons.Default.CheckCircle)
+                ExpressiveTabItem("All", badge = "${allPapers.size}"),
+                ExpressiveTabItem("SQPs", icon = Icons.Default.Description),
+                ExpressiveTabItem("Marking", icon = Icons.Default.CheckCircle)
             )
             val selectedTypeIndex = when (selectedTypeFilter) {
                 "sqp" -> 1
@@ -169,43 +191,29 @@ fun SamplePapersScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
             )
 
-            // Subject Filter Horizontal Scroll
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-                    .padding(horizontal = 16.dp, vertical = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                subjects.forEach { (id, label) ->
-                    val isSelected = selectedSubjectId == id
-                    val subjectColor = when (id) {
-                        "physics" -> PhysicsLavender
-                        "chemistry" -> ChemistryMint
-                        "maths" -> MathsPeach
-                        "biology" -> BiologySky
-                        "english" -> EnglishRose
-                        "physical_education" -> AccentAmber
-                        else -> MaterialTheme.colorScheme.primary
-                    }
-
-                    FilterChip(
-                        selected = isSelected,
-                        onClick = { selectedSubjectId = id },
-                        label = { Text(label, fontSize = 12.sp, fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal, maxLines = 1, softWrap = false) },
-                        leadingIcon = {
-                            if (isSelected) {
-                                Icon(Icons.Default.Check, contentDescription = null, modifier = Modifier.size(14.dp))
-                            }
-                        },
-                        colors = FilterChipDefaults.filterChipColors(
-                            selectedContainerColor = subjectColor.copy(alpha = 0.25f),
-                            selectedLabelColor = MaterialTheme.colorScheme.onSurface
-                        ),
-                        shape = ExpressivePillSmall
-                    )
+            // Subject Filter Segmented Row
+            val subjectItems = remember(subjects) {
+                subjects.map { (id, label) ->
+                    LiquidGlassSegmentItem(id, label)
                 }
             }
+            val activeSubjectColor = when (selectedSubjectId) {
+                "physics" -> PhysicsLavender
+                "chemistry" -> ChemistryMint
+                "maths" -> MathsPeach
+                "biology" -> BiologySky
+                "english" -> EnglishRose
+                "physical_education" -> AccentAmber
+                else -> MaterialTheme.colorScheme.primary
+            }
+            LiquidGlassSegmentedRow(
+                items = subjectItems,
+                selectedKey = selectedSubjectId,
+                onSelect = { selectedSubjectId = it },
+                accentColor = activeSubjectColor,
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                modifier = Modifier.fillMaxWidth()
+            )
 
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -215,88 +223,120 @@ fun SamplePapersScreen(
                     .fillMaxSize()
                     .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(14.dp),
-                contentPadding = PaddingValues(top = 8.dp, bottom = 32.dp)
+                contentPadding = PaddingValues(top = 8.dp, bottom = 140.dp)
             ) {
-                // Official CBSE Pattern Guidance Card
+                // Official CBSE Pattern Guidance (Collapsible M3 Expressive Banner)
                 item {
-                    Card(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = AsymmetricLeafHero,
-                        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+                    val isGlass = LocalGlassEnabled.current && isGlassSupported()
+                    val bannerShape = RoundedCornerShape(18.dp)
+                    Surface(
+                        onClick = { isPatternExpanded = !isPatternExpanded },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .then(
+                                if (isGlass) Modifier.lightweightLiquidGlass(shape = bannerShape)
+                                else Modifier
+                            ),
+                        shape = bannerShape,
+                        color = if (isGlass) Color.Transparent else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.55f),
+                        border = if (isGlass) null
+                        else androidx.compose.foundation.BorderStroke(
+                            1.dp,
+                            MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)
+                        )
                     ) {
-                        Column(modifier = Modifier.padding(18.dp)) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Surface(
-                                    shape = CircleShape,
-                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
-                                    modifier = Modifier.size(36.dp)
+                        Column(modifier = Modifier.padding(14.dp)) {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.weight(1f)
                                 ) {
-                                    Box(contentAlignment = Alignment.Center) {
-                                        Icon(
-                                            imageVector = Icons.Default.School,
-                                            contentDescription = null,
-                                            tint = MaterialTheme.colorScheme.primary,
-                                            modifier = Modifier.size(20.dp)
+                                    Surface(
+                                        shape = CircleShape,
+                                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                                        modifier = Modifier.size(32.dp)
+                                    ) {
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = Icons.Default.School,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.primary,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                        }
+                                    }
+                                    Spacer(modifier = Modifier.width(10.dp))
+                                    Column {
+                                        Text(
+                                            text = "CBSE 2026-27 Pattern Breakdown",
+                                            style = MaterialTheme.typography.titleSmall,
+                                            fontWeight = FontWeight.Bold,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                                        )
+                                        Text(
+                                            text = "50% Competency • 20% MCQ • 30% Theory",
+                                            style = MaterialTheme.typography.bodySmall,
+                                            fontSize = 11.sp,
+                                            color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
                                         )
                                     }
                                 }
-                                Spacer(modifier = Modifier.width(12.dp))
-                                Column {
-                                    Text(
-                                        text = "Official CBSE 2026-27 Assessment Pattern",
-                                        style = MaterialTheme.typography.titleSmall,
-                                        fontWeight = FontWeight.Bold,
-                                        color = MaterialTheme.colorScheme.onPrimaryContainer
-                                    )
-                                    Text(
-                                        text = "Class 12 Board Examination SQP & Solutions",
-                                        style = MaterialTheme.typography.bodySmall,
-                                        color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f)
-                                    )
-                                }
+                                Icon(
+                                    imageVector = if (isPatternExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                                    contentDescription = if (isPatternExpanded) "Collapse" else "Expand",
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(20.dp)
+                                )
                             }
-                            Spacer(modifier = Modifier.height(12.dp))
-                            Row(
-                                modifier = Modifier.fillMaxWidth(),
-                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                            ) {
-                                Surface(
-                                    shape = ExpressivePillSmall,
-                                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
-                                    modifier = Modifier.weight(1f)
+
+                            if (isPatternExpanded) {
+                                Spacer(modifier = Modifier.height(12.dp))
+                                Row(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
-                                    Column(
-                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    Surface(
+                                        shape = ExpressivePillSmall,
+                                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                                        modifier = Modifier.weight(1f)
                                     ) {
-                                        Text("50%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
-                                        Text("Competency", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Column(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text("50%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = MaterialTheme.colorScheme.primary)
+                                            Text("Competency", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
                                     }
-                                }
-                                Surface(
-                                    shape = ExpressivePillSmall,
-                                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Column(
-                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    Surface(
+                                        shape = ExpressivePillSmall,
+                                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                                        modifier = Modifier.weight(1f)
                                     ) {
-                                        Text("20%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = AccentAmber)
-                                        Text("MCQ / Objective", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Column(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text("20%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = AccentAmber)
+                                            Text("MCQ / Obj", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
                                     }
-                                }
-                                Surface(
-                                    shape = ExpressivePillSmall,
-                                    color = MaterialTheme.colorScheme.surface.copy(alpha = 0.7f),
-                                    modifier = Modifier.weight(1f)
-                                ) {
-                                    Column(
-                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
-                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    Surface(
+                                        shape = ExpressivePillSmall,
+                                        color = MaterialTheme.colorScheme.surface.copy(alpha = 0.85f),
+                                        modifier = Modifier.weight(1f)
                                     ) {
-                                        Text("30%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = SuccessGreen)
-                                        Text("Short & Long", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        Column(
+                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
+                                        ) {
+                                            Text("30%", fontWeight = FontWeight.Black, fontSize = 13.sp, color = SuccessGreen)
+                                            Text("Short & Long", fontSize = 10.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                        }
                                     }
                                 }
                             }
@@ -405,17 +445,22 @@ private fun SamplePaperCard(
         return Triple(pUrl, pTitle, role)
     }
 
-    Card(
+    val isGlass = LocalGlassEnabled.current && isGlassSupported()
+    Surface(
+        onClick = {
+            val openUrl = localCached?.absolutePath ?: paper.url
+            val (pairUrl, pairTitle, pairRole) = pairedInfo()
+            onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
+        },
         modifier = Modifier
             .fillMaxWidth()
-            .clip(ExpressiveCardLarge)
-            .clickable {
-                val openUrl = localCached?.absolutePath ?: paper.url
-                val (pairUrl, pairTitle, pairRole) = pairedInfo()
-                onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
-            },
+            .then(
+                if (isGlass) Modifier.lightweightLiquidGlass(shape = ExpressiveCardLarge)
+                else Modifier
+            ),
         shape = ExpressiveCardLarge,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+        color = if (isGlass) Color.Transparent else MaterialTheme.colorScheme.surfaceVariant,
+        border = null
     ) {
         Column(modifier = Modifier.padding(18.dp)) {
             // Top Row: Subject pill + Paper Type badge
@@ -450,15 +495,17 @@ private fun SamplePaperCard(
                     }
                 }
 
+                val badgeBg = if (isSqp) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f) else SuccessGreenLight
+                val badgeText = if (isSqp) MaterialTheme.colorScheme.onPrimaryContainer else Color(0xFF166534)
                 Surface(
                     shape = ExpressivePillSmall,
-                    color = if (isSqp) PrimaryBlue.copy(alpha = 0.2f) else SuccessGreen.copy(alpha = 0.2f)
+                    color = badgeBg
                 ) {
                     Text(
                         text = if (isSqp) "Sample Question Paper (SQP)" else "Marking Scheme (MS)",
                         fontSize = 10.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = if (isSqp) PrimaryBlue else SuccessGreen,
+                        fontWeight = FontWeight.ExtraBold,
+                        color = badgeText,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
                 }
@@ -528,7 +575,7 @@ private fun SamplePaperCard(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "⚡ Start 3-Hour Exam Simulation",
+                        text = "Start 3-Hour Exam Simulation",
                         fontSize = 13.sp,
                         fontWeight = FontWeight.Bold,
                         color = AccentAmberOnBg

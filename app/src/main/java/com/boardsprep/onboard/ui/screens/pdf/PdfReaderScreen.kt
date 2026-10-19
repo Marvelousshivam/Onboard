@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
 import androidx.compose.material.icons.filled.Bookmark
@@ -196,9 +197,10 @@ fun PdfReaderScreen(
                         }
                     },
                     navigationIcon = {
-                        IconButton(onClick = onBackClick) {
-                            Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
-                        }
+                        LiquidGlassBackButton(
+                            onClick = onBackClick,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     },
                     actions = {
                         // 1. Paired Document Switcher Pill (Question Paper ↔ Marking Scheme)
