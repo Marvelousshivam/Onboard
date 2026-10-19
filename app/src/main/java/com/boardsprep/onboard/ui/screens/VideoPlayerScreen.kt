@@ -16,6 +16,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -128,6 +129,7 @@ fun VideoPlayerScreen(
     val coroutineScope = rememberCoroutineScope()
     val lifecycleOwner = LocalLifecycleOwner.current
     val haptic = LocalHapticFeedback.current
+    val isDark = isSystemInDarkTheme()
 
     // Resolve Chapter Context for Next Chapter, DPP Quiz, NCERT PDF
     val lectureContext = remember(lectureId, title) {
@@ -193,6 +195,11 @@ fun VideoPlayerScreen(
     var selectedQualityLabel by remember { mutableStateOf("720p HD") }
     var isScreenLocked by remember { mutableStateOf(false) }
     var isLooping by remember { mutableStateOf(false) }
+    var showMoreSettingsSheet by remember { mutableStateOf(false) }
+    var isBackgroundAudio by remember { mutableStateOf(false) }
+    var subtitlesEnabled by remember { mutableStateOf(false) }
+    var currentAspectRatioLabel by remember { mutableStateOf("16:9 Original") }
+    var abLoopActive by remember { mutableStateOf(false) }
 
     // Double-tap Seek Animation States
     var seekRewindPulse by remember { mutableStateOf(false) }
@@ -562,6 +569,132 @@ fun VideoPlayerScreen(
                         }
                     }
                 }
+            }
+        }
+    }
+
+    // Unified More Settings Bottom Sheet
+    if (showMoreSettingsSheet) {
+        ModalBottomSheet(
+            onDismissRequest = { showMoreSettingsSheet = false },
+            shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+            containerColor = Color(0xFF14131A)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(20.dp)
+                    .padding(bottom = 32.dp)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = null,
+                            tint = Color(0xFFE5B6F8),
+                            modifier = Modifier.size(22.dp)
+                        )
+                        Spacer(modifier = Modifier.width(10.dp))
+                        Text(
+                            text = "Playback & Studio Settings",
+                            style = MaterialTheme.typography.titleMedium,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                // 1. Quality
+                SettingsSheetItem(
+                    icon = Icons.Default.HighQuality,
+                    title = "Video Quality",
+                    value = selectedQualityLabel,
+                    onClick = {
+                        showMoreSettingsSheet = false
+                        showQualityDialog = true
+                    }
+                )
+
+                // 2. Playback Speed
+                SettingsSheetItem(
+                    icon = Icons.Default.Speed,
+                    title = "Playback Speed",
+                    value = if (currentSpeed == 1.0f) "1.0x (Normal)" else "${currentSpeed}x",
+                    onClick = {
+                        showMoreSettingsSheet = false
+                        showSpeedSheet = true
+                    }
+                )
+
+                // 3. Loop Video Toggle
+                SettingsSheetToggle(
+                    icon = Icons.Default.Repeat,
+                    title = "Loop Video",
+                    subtitle = "Automatically replay when video reaches the end",
+                    checked = isLooping,
+                    onCheckedChange = {
+                        isLooping = it
+                        Toast.makeText(context, if (it) "Video repeat enabled" else "Video repeat disabled", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
+                // 4. Background Audio Mode
+                SettingsSheetToggle(
+                    icon = Icons.Default.Headphones,
+                    title = "Background Audio Mode",
+                    subtitle = "Continue playing audio when screen is locked",
+                    checked = isBackgroundAudio,
+                    onCheckedChange = {
+                        isBackgroundAudio = it
+                        Toast.makeText(context, if (it) "Background audio mode on" else "Background audio mode off", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
+                // 5. Aspect Ratio
+                SettingsSheetItem(
+                    icon = Icons.Default.AspectRatio,
+                    title = "Aspect Ratio",
+                    value = currentAspectRatioLabel,
+                    onClick = {
+                        currentAspectRatioLabel = when (currentAspectRatioLabel) {
+                            "16:9 Original" -> "Fill Screen"
+                            "Fill Screen" -> "Fit to Screen"
+                            else -> "16:9 Original"
+                        }
+                        Toast.makeText(context, "Aspect Ratio: $currentAspectRatioLabel", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
+                // 6. A-B Loop Derivation Practice
+                SettingsSheetToggle(
+                    icon = Icons.Default.BookmarkBorder,
+                    title = "A-B Repeat Marker",
+                    subtitle = "Loop a tough derivation or question segment repeatedly",
+                    checked = abLoopActive,
+                    onCheckedChange = {
+                        abLoopActive = it
+                        Toast.makeText(context, if (it) "A-B marker set at ${formatSeconds(currentPositionSec)}" else "A-B marker cleared", Toast.LENGTH_SHORT).show()
+                    }
+                )
+
+                // 7. Subtitles / Closed Captions
+                SettingsSheetToggle(
+                    icon = Icons.Default.Subtitles,
+                    title = "Captions (English)",
+                    subtitle = "Display auto-generated English captions",
+                    checked = subtitlesEnabled,
+                    onCheckedChange = {
+                        subtitlesEnabled = it
+                        Toast.makeText(context, if (it) "Captions enabled" else "Captions disabled", Toast.LENGTH_SHORT).show()
+                    }
+                )
             }
         }
     }
@@ -952,17 +1085,17 @@ fun VideoPlayerScreen(
 
                                     Spacer(modifier = Modifier.width(8.dp))
 
-                                    // Right: Quality Pill + Audio + Subtitles + Overflow
+                                    // Right: Quality Pill + Settings Gear
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                                     ) {
                                         Surface(
                                             onClick = { showQualityDialog = true },
                                             shape = CircleShape,
                                             color = Color.Black.copy(alpha = 0.50f),
                                             border = BorderStroke(1.dp, Color.White.copy(alpha = 0.12f)),
-                                            modifier = Modifier.height(38.dp)
+                                            modifier = Modifier.height(36.dp)
                                         ) {
                                             Box(
                                                 contentAlignment = Alignment.Center,
@@ -980,31 +1113,11 @@ fun VideoPlayerScreen(
                                         }
 
                                         ProPlayerCircleButton(
-                                            icon = Icons.Default.MusicNote,
-                                            contentDescription = "Audio Track",
-                                            size = 38.dp,
+                                            icon = Icons.Default.Settings,
+                                            contentDescription = "Playback Settings",
+                                            size = 36.dp,
                                             iconSize = 18.dp,
-                                            onClick = {
-                                                Toast.makeText(context, "Audio Track: Stereo 48kHz", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.Subtitles,
-                                            contentDescription = "Subtitles",
-                                            size = 38.dp,
-                                            iconSize = 18.dp,
-                                            onClick = {
-                                                Toast.makeText(context, "English Subtitles Active", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.MoreVert,
-                                            contentDescription = "More Options",
-                                            size = 38.dp,
-                                            iconSize = 18.dp,
-                                            onClick = { showSpeedSheet = true }
+                                            onClick = { showMoreSettingsSheet = true }
                                         )
                                     }
                                 }
@@ -1061,131 +1174,83 @@ fun VideoPlayerScreen(
                                     )
                                 }
 
-                                // Floating Quick-Action Tool Islands (Above Scrubber)
+                                // Floating Quick-Action Tool Row (Above Scrubber)
                                 Row(
                                     modifier = Modifier
                                         .align(Alignment.BottomCenter)
                                         .fillMaxWidth()
-                                        .padding(bottom = 52.dp, start = 14.dp, end = 14.dp),
+                                        .padding(bottom = 52.dp, start = 16.dp, end = 16.dp),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.SpaceBetween
                                 ) {
-                                    // Left Island (7 buttons)
+                                    // Left: 🔒 Lock, ⚡ Speed, 📸 Screenshot
                                     Row(
                                         verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
                                     ) {
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.Headphones,
-                                            contentDescription = "Background Audio",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            onClick = {
-                                                Toast.makeText(context, "Background Audio Mode Enabled", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
                                         ProPlayerCircleButton(
                                             icon = Icons.Default.LockOpen,
                                             contentDescription = "Lock Screen",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
+                                            size = 38.dp,
+                                            iconSize = 18.dp,
                                             onClick = {
                                                 isScreenLocked = true
                                                 Toast.makeText(context, "Screen Locked. Tap lock icon to unlock.", Toast.LENGTH_SHORT).show()
                                             }
                                         )
 
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.ScreenRotation,
-                                            contentDescription = "Orientation",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            onClick = { isFullscreen = !isFullscreen }
-                                        )
-
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.Speed,
-                                            contentDescription = "Playback Speed",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            contentColor = if (currentSpeed != 1.0f) Color(0xFFE5B6F8) else Color.White,
-                                            onClick = { showSpeedSheet = true }
-                                        )
-
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.Repeat,
-                                            contentDescription = "Loop Video",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            contentColor = if (isLooping) Color(0xFFE5B6F8) else Color.White,
-                                            onClick = {
-                                                isLooping = !isLooping
-                                                Toast.makeText(context, if (isLooping) "Repeat On" else "Repeat Off", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.AspectRatio,
-                                            contentDescription = "Aspect Ratio",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            onClick = {
-                                                Toast.makeText(context, "Aspect Ratio: 16:9 Original", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
                                         Surface(
-                                            onClick = {
-                                                Toast.makeText(context, "Bookmarked at ${formatSeconds(currentPositionSec)}", Toast.LENGTH_SHORT).show()
-                                            },
+                                            onClick = { showSpeedSheet = true },
                                             shape = CircleShape,
-                                            color = Color.Black.copy(alpha = 0.50f),
+                                            color = Color.Black.copy(alpha = 0.60f),
                                             border = BorderStroke(1.dp, Color.White.copy(alpha = 0.12f)),
-                                            modifier = Modifier.size(34.dp)
+                                            modifier = Modifier.height(38.dp)
                                         ) {
-                                            Box(contentAlignment = Alignment.Center) {
+                                            Row(
+                                                modifier = Modifier.padding(horizontal = 10.dp),
+                                                verticalAlignment = Alignment.CenterVertically
+                                            ) {
+                                                Icon(
+                                                    imageVector = Icons.Default.Speed,
+                                                    contentDescription = "Speed",
+                                                    tint = if (currentSpeed != 1.0f) Color(0xFFE5B6F8) else Color.White,
+                                                    modifier = Modifier.size(16.dp)
+                                                )
+                                                Spacer(modifier = Modifier.width(4.dp))
                                                 Text(
-                                                    text = "AB",
-                                                    color = Color.White,
-                                                    fontSize = 10.sp,
-                                                    fontWeight = FontWeight.Bold
+                                                    text = if (currentSpeed == 1.0f) "1.0x" else "${currentSpeed}x",
+                                                    color = if (currentSpeed != 1.0f) Color(0xFFE5B6F8) else Color.White,
+                                                    fontSize = 11.sp,
+                                                    fontWeight = FontWeight.Bold,
+                                                    fontFamily = FontFamily.Monospace,
+                                                    style = TextStyle(fontFeatureSettings = "\"tnum\"")
                                                 )
                                             }
                                         }
-                                    }
 
-                                    // Right Island (4 buttons)
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.spacedBy(6.dp)
-                                    ) {
                                         ProPlayerCircleButton(
                                             icon = Icons.Default.CameraAlt,
-                                            contentDescription = "Capture Note",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
+                                            contentDescription = "Capture Slide Note",
+                                            size = 38.dp,
+                                            iconSize = 18.dp,
                                             onClick = {
-                                                Toast.makeText(context, "Frame saved to Quick Notes", Toast.LENGTH_SHORT).show()
+                                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                                Toast.makeText(context, "📸 Board slide note captured to Quick Notes", Toast.LENGTH_SHORT).show()
                                             }
                                         )
+                                    }
 
-                                        ProPlayerCircleButton(
-                                            icon = Icons.Default.ZoomIn,
-                                            contentDescription = "Zoom",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
-                                            onClick = {
-                                                Toast.makeText(context, "Zoom: 100% Fit", Toast.LENGTH_SHORT).show()
-                                            }
-                                        )
-
+                                    // Right: ⧉ PiP, ⛶ Exit Fullscreen
+                                    Row(
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                                    ) {
                                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                             ProPlayerCircleButton(
                                                 icon = Icons.Default.PictureInPicture,
-                                                contentDescription = "PiP",
-                                                size = 34.dp,
-                                                iconSize = 17.dp,
+                                                contentDescription = "Picture in Picture",
+                                                size = 38.dp,
+                                                iconSize = 18.dp,
                                                 onClick = {
                                                     val params = PictureInPictureParams.Builder()
                                                         .setAspectRatio(Rational(16, 9))
@@ -1198,8 +1263,8 @@ fun VideoPlayerScreen(
                                         ProPlayerCircleButton(
                                             icon = Icons.Default.FullscreenExit,
                                             contentDescription = "Exit Fullscreen",
-                                            size = 34.dp,
-                                            iconSize = 17.dp,
+                                            size = 38.dp,
+                                            iconSize = 18.dp,
                                             onClick = { isFullscreen = false }
                                         )
                                     }
@@ -1317,7 +1382,7 @@ fun VideoPlayerScreen(
                                             contentDescription = "Settings",
                                             size = 34.dp,
                                             iconSize = 18.dp,
-                                            onClick = { showSpeedSheet = true }
+                                            onClick = { showMoreSettingsSheet = true }
                                         )
                                     }
                                 }
@@ -1509,8 +1574,11 @@ fun VideoPlayerScreen(
                         ) {
                             Surface(
                                 shape = ExpressivePillSmall,
-                                color = Color(0xFF1E1D24),
-                                border = BorderStroke(1.dp, Color.White.copy(alpha = 0.08f))
+                                color = if (isDark) Color(0xFF1E1D24) else Color(0xFFF3E8FF),
+                                border = BorderStroke(
+                                    1.dp,
+                                    if (isDark) Color.White.copy(alpha = 0.08f) else Color(0xFF9333EA).copy(alpha = 0.18f)
+                                )
                             ) {
                                 Row(
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
@@ -1519,7 +1587,7 @@ fun VideoPlayerScreen(
                                     Icon(
                                         imageVector = Icons.AutoMirrored.Filled.MenuBook,
                                         contentDescription = null,
-                                        tint = Color(0xFFE5B6F8),
+                                        tint = if (isDark) Color(0xFFE5B6F8) else Color(0xFF6B21A8),
                                         modifier = Modifier.size(13.dp)
                                     )
                                     Spacer(modifier = Modifier.width(5.dp))
@@ -1533,7 +1601,7 @@ fun VideoPlayerScreen(
                                         text = breadcrumb,
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.SemiBold,
-                                        color = Color(0xFFE5B6F8)
+                                        color = if (isDark) Color(0xFFE5B6F8) else Color(0xFF6B21A8)
                                     )
                                 }
                             }
@@ -1542,14 +1610,17 @@ fun VideoPlayerScreen(
                             if (weightage > 0) {
                                 Surface(
                                     shape = ExpressivePillSmall,
-                                    color = Color(0xFF231B38),
-                                    border = BorderStroke(1.dp, Color(0xFFD0BCFF).copy(alpha = 0.2f))
+                                    color = if (isDark) Color(0xFF231B38) else Color(0xFFEDE9FE),
+                                    border = BorderStroke(
+                                        1.dp,
+                                        if (isDark) Color(0xFFD0BCFF).copy(alpha = 0.2f) else Color(0xFF7C3AED).copy(alpha = 0.18f)
+                                    )
                                 ) {
                                     Text(
                                         text = "$weightage Marks Weightage",
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Color(0xFFD0BCFF),
+                                        color = if (isDark) Color(0xFFD0BCFF) else Color(0xFF5B21B6),
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                     )
                                 }
@@ -1566,8 +1637,8 @@ fun VideoPlayerScreen(
                         StudyRibbonAction(
                             icon = Icons.Default.Quiz,
                             label = "DPP Quiz",
-                            containerColor = Color(0xFF231B38),
-                            contentColor = Color(0xFFD0BCFF),
+                            containerColor = if (isDark) Color(0xFF231B38) else Color(0xFFF3E8FF),
+                            contentColor = if (isDark) Color(0xFFD0BCFF) else Color(0xFF6B21A8),
                             modifier = Modifier.weight(1f),
                             onClick = {
                                 val quiz = currentChapter?.quizzesList?.firstOrNull()
@@ -1583,8 +1654,8 @@ fun VideoPlayerScreen(
                         StudyRibbonAction(
                             icon = Icons.AutoMirrored.Filled.MenuBook,
                             label = "NCERT PDF",
-                            containerColor = Color(0xFF112822),
-                            contentColor = Color(0xFF6EE7B7),
+                            containerColor = if (isDark) Color(0xFF112822) else Color(0xFFE6F4EA),
+                            contentColor = if (isDark) Color(0xFF6EE7B7) else Color(0xFF065F46),
                             modifier = Modifier.weight(1f),
                             onClick = {
                                 val pdfUrl = currentChapter?.ncertPdfUrl ?: ""
@@ -1602,20 +1673,20 @@ fun VideoPlayerScreen(
                             is DownloadState.Progress -> ActionTileStyle(
                                 icon = Icons.Default.CloudDownload,
                                 label = "${dlState.percentage}%",
-                                container = Color(0xFF2B2111),
-                                content = Color(0xFFFBBF24)
+                                container = if (isDark) Color(0xFF2B2111) else Color(0xFFFEF3C7),
+                                content = if (isDark) Color(0xFFFBBF24) else Color(0xFFB45309)
                             )
                             is DownloadState.Success -> ActionTileStyle(
-                                icon = Icons.Default.CheckCircle,
+                                icon = Icons.Default.CloudDone,
                                 label = "Saved",
-                                container = Color(0xFF14261C),
-                                content = Color(0xFF4ADE80)
+                                container = if (isDark) Color(0xFF14261C) else Color(0xFFDCFCE7),
+                                content = if (isDark) Color(0xFF4ADE80) else Color(0xFF15803D)
                             )
                             else -> ActionTileStyle(
                                 icon = Icons.Default.CloudDownload,
                                 label = "Download",
-                                container = Color(0xFF1E1D24),
-                                content = Color(0xFFE5B6F8)
+                                container = if (isDark) Color(0xFF1E1D24) else Color(0xFFEFF6FF),
+                                content = if (isDark) Color(0xFFE5B6F8) else Color(0xFF1D4ED8)
                             )
                         }
 
@@ -1629,17 +1700,25 @@ fun VideoPlayerScreen(
                                 if (isYouTube) {
                                     showQualityDialog = true
                                 } else {
-                                    Toast.makeText(context, "Already saved locally!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "Already saved locally for offline study!", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         )
 
-                        // 4. Mark Mastered Toggle
+                        // 4. Mark Mastered Toggle (Distinct Trophy/Star Icon and Amber/Gold styling)
                         StudyRibbonAction(
-                            icon = if (isMastered) Icons.Default.CheckCircle else Icons.Default.RadioButtonUnchecked,
+                            icon = if (isMastered) Icons.Default.WorkspacePremium else Icons.Default.RadioButtonUnchecked,
                             label = if (isMastered) "Mastered" else "Mark Done",
-                            containerColor = if (isMastered) Color(0xFF14261C) else Color(0xFF1E1D24),
-                            contentColor = if (isMastered) Color(0xFF4ADE80) else Color(0xFFCAC4D0),
+                            containerColor = if (isMastered) {
+                                if (isDark) Color(0xFF332309) else Color(0xFFFEF3C7)
+                            } else {
+                                if (isDark) Color(0xFF1E1D24) else Color(0xFFF3F4F6)
+                            },
+                            contentColor = if (isMastered) {
+                                if (isDark) Color(0xFFFCD34D) else Color(0xFFB45309)
+                            } else {
+                                if (isDark) Color(0xFFCAC4D0) else Color(0xFF4B5563)
+                            },
                             modifier = Modifier.weight(1f),
                             onClick = {
                                 if (currentChapter != null) {
@@ -1657,7 +1736,7 @@ fun VideoPlayerScreen(
                                         )
                                         Toast.makeText(
                                             context,
-                                            if (newStatus) "Marked as Mastered! Keep the momentum." else "Mastery unmarked.",
+                                            if (newStatus) "🏆 Marked as Mastered! Keep the momentum." else "Mastery unmarked.",
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
@@ -1876,33 +1955,6 @@ fun VideoPlayerScreen(
                                             contentPadding = PaddingValues(horizontal = 8.dp, vertical = 2.dp)
                                         ) {
                                             Text("Cancel", fontSize = 11.sp, color = MaterialTheme.colorScheme.error, fontWeight = FontWeight.Bold)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        is DownloadState.Success -> {
-                            Surface(
-                                shape = M3EBentoTileShape,
-                                color = SuccessGreen.copy(alpha = 0.15f),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(14.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(Icons.Default.CheckCircle, contentDescription = null, tint = SuccessGreen, modifier = Modifier.size(22.dp))
-                                        Spacer(modifier = Modifier.width(10.dp))
-                                        Column {
-                                            Text("Downloaded for Offline Study", color = SuccessGreen, fontWeight = FontWeight.Bold, fontSize = 13.sp)
-                                            val sizeMb = state.localFile.length() / (1024.0 * 1024.0)
-                                            Text(
-                                                String.format(java.util.Locale.US, "Ready in offline library • %.1f MB", sizeMb),
-                                                color = SuccessGreen.copy(alpha = 0.85f),
-                                                fontSize = 11.sp
-                                            )
                                         }
                                     }
                                 }
@@ -2400,5 +2452,79 @@ fun ExpressiveVideoSlider(
                 cornerRadius = CornerRadius(thumbRadiusPx, thumbRadiusPx)
             )
         }
+    }
+}
+
+@Composable
+private fun SettingsSheetItem(
+    icon: ImageVector,
+    title: String,
+    value: String,
+    onClick: () -> Unit
+) {
+    Surface(
+        onClick = onClick,
+        shape = RoundedCornerShape(12.dp),
+        color = Color.Transparent,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 12.dp, horizontal = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(imageVector = icon, contentDescription = null, tint = Color(0xFFE5B6F8), modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.width(12.dp))
+                Text(text = title, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+            }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(text = value, color = Color(0xFFCAC4D0), fontSize = 13.sp, fontWeight = FontWeight.Normal)
+                Spacer(modifier = Modifier.width(4.dp))
+                Icon(imageVector = Icons.Default.ChevronRight, contentDescription = null, tint = Color(0xFF938F99), modifier = Modifier.size(18.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun SettingsSheetToggle(
+    icon: ImageVector,
+    title: String,
+    subtitle: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp, horizontal = 8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.weight(1f)
+        ) {
+            Icon(imageVector = icon, contentDescription = null, tint = Color(0xFFE5B6F8), modifier = Modifier.size(20.dp))
+            Spacer(modifier = Modifier.width(12.dp))
+            Column {
+                Text(text = title, color = Color.White, fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                Text(text = subtitle, color = Color(0xFF938F99), fontSize = 11.sp)
+            }
+        }
+        Spacer(modifier = Modifier.width(10.dp))
+        Switch(
+            checked = checked,
+            onCheckedChange = onCheckedChange,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = Color(0xFF14131A),
+                checkedTrackColor = Color(0xFFE5B6F8),
+                uncheckedThumbColor = Color(0xFF938F99),
+                uncheckedTrackColor = Color(0xFF2B2930)
+            )
+        )
     }
 }
