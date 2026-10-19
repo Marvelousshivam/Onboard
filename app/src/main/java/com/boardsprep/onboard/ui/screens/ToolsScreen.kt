@@ -28,14 +28,16 @@ import kotlin.math.roundToInt
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ToolsScreen(
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit = { _, _, _, _ -> }
 ) {
     var selectedToolIndex by remember { mutableIntStateOf(0) }
 
     val toolTabs = listOf(
         ExpressiveTabItem("Best-of-5", icon = Icons.Default.Calculate),
         ExpressiveTabItem("70/30 Passing", icon = Icons.Default.Verified),
-        ExpressiveTabItem("Target Sprint", icon = Icons.Default.TrackChanges)
+        ExpressiveTabItem("Target Sprint", icon = Icons.Default.TrackChanges),
+        ExpressiveTabItem("3h Sim", icon = Icons.Default.Timer)
     )
 
     Scaffold(
@@ -90,6 +92,7 @@ fun ToolsScreen(
                     0 -> BestOfFiveTool()
                     1 -> PassingCheckerTool()
                     2 -> TargetSprintTool()
+                    3 -> ExamSimulationLauncherTool(onStartExamSimulation = onStartExamSimulation)
                 }
             }
         }
@@ -484,6 +487,134 @@ private fun TargetSprintTool() {
                         modifier = Modifier.width(76.dp),
                         shape = ExpressiveCardMedium
                     )
+                }
+            }
+        }
+    }
+}
+
+// ─── 4. CBSE 3-Hour Exam Simulation Launcher Tool ─────────────────────────────
+@Composable
+private fun ExamSimulationLauncherTool(
+    onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit
+) {
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val repository = remember { com.boardsprep.onboard.data.repository.BoardsRepository(context) }
+    val allPapers = remember { repository.getSamplePapers().filter { it.type.equals("sqp", ignoreCase = true) } }
+    val allAttempts by repository.getAllExamAttempts().collectAsState(initial = emptyList())
+
+    Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        Card(
+            shape = ExpressiveCardMedium,
+            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+        ) {
+            Column(modifier = Modifier.padding(16.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Timer,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.size(22.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(
+                        text = "CBSE 3-Hour Exam Simulation Studio",
+                        style = MaterialTheme.typography.titleSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = "Practice under authentic board exam conditions: 15-minute question paper reading window, 180-minute writing countdown, interactive section pacing A–E, rough scratchpad, and official CBSE marking scheme unlocking.",
+                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.85f),
+                    lineHeight = 17.sp
+                )
+            }
+        }
+
+        Text(
+            text = "Official Class 12 Sample Papers",
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold
+        )
+
+        allPapers.forEach { paper ->
+            val localCached = com.boardsprep.onboard.core.pdf.LocalDocumentScanner.findSamplePaper(context, paper.filename)
+            val openUrl = localCached?.absolutePath ?: paper.url
+            val pairedMs = repository.getSamplePapers().find { it.subjectId == paper.subjectId && it.type.equals("ms", ignoreCase = true) }
+            val msUrl = pairedMs?.let { p ->
+                val local = com.boardsprep.onboard.core.pdf.LocalDocumentScanner.findSamplePaper(context, p.filename)
+                local?.absolutePath ?: p.url
+            } ?: ""
+
+            val latestAttempt = remember(allAttempts, paper.title) {
+                allAttempts.firstOrNull { it.paperTitle.equals(paper.title, ignoreCase = true) }
+            }
+
+            Card(
+                shape = ExpressiveCardMedium,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
+            ) {
+                Column(modifier = Modifier.padding(16.dp)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = paper.title,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 14.sp
+                            )
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(
+                                text = "${paper.subject} • 3 Hours • 70/80 Marks",
+                                fontSize = 11.sp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
+                        if (latestAttempt != null && latestAttempt.selfScore >= 0) {
+                            Surface(
+                                shape = ExpressivePillSmall,
+                                color = AccentAmberLight
+                            ) {
+                                Text(
+                                    text = "${latestAttempt.selfScore}/${latestAttempt.maxMarks}",
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = AccentAmberOnBg,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    Button(
+                        onClick = { onStartExamSimulation(paper.title, paper.subject, openUrl, msUrl) },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = ExpressivePillSmall,
+                        colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
+                    ) {
+                        Icon(
+                            imageVector = if (latestAttempt != null) Icons.Default.Replay else Icons.Default.Bolt,
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = AccentAmberOnBg
+                        )
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text(
+                            text = if (latestAttempt != null) "Retake 3-Hour Simulation" else "Start 3-Hour Simulation",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = AccentAmberOnBg
+                        )
+                    }
                 }
             }
         }

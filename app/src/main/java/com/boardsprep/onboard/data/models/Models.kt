@@ -162,34 +162,37 @@ data class SamplePaper(
     val subject: String,
     val subjectId: String,
     val type: String, // "sqp" or "ms"
-    val url: String
+    val url: String,
+    val setId: String = "",
+    val paperCategory: String = "Official SQP",
+    val pairFilename: String = ""
 )
 
 @Keep
 data class StepRubric(
-    val stepNumber: Int = 1,
-    val marks: Double = 0.5,
-    val criterion: String = ""
+    @SerializedName(value = "stepNumber", alternate = ["step_number"]) val stepNumber: Int = 1,
+    @SerializedName(value = "marks") val marks: Double = 0.5,
+    @SerializedName(value = "criterion") val criterion: String = ""
 )
 
 @Keep
 data class QuestionBankItem(
-    val id: String = "",
-    val subjectId: String = "",
-    val chapterName: String = "",
-    val type: String = "vsa", // "vsa", "sa", "case", "la"
-    val marks: Int = 2,
-    val source: String = "",
-    val questionText: String = "",
-    val modelAnswer: String = "",
-    val stepMarking: List<StepRubric> = emptyList(),
-    val keyTerms: List<String> = emptyList()
+    @SerializedName(value = "id") val id: String = "",
+    @SerializedName(value = "subjectId", alternate = ["subject_id"]) val subjectId: String = "",
+    @SerializedName(value = "chapterName", alternate = ["chapter_name"]) val chapterName: String = "",
+    @SerializedName(value = "type") val type: String = "vsa", // "vsa", "sa", "case", "la"
+    @SerializedName(value = "marks") val marks: Int = 2,
+    @SerializedName(value = "source") val source: String = "",
+    @SerializedName(value = "questionText", alternate = ["question_text"]) val questionText: String = "",
+    @SerializedName(value = "modelAnswer", alternate = ["model_answer"]) val modelAnswer: String = "",
+    @SerializedName(value = "stepMarking", alternate = ["step_marking"]) val stepMarking: List<StepRubric> = emptyList(),
+    @SerializedName(value = "keyTerms", alternate = ["key_terms"]) val keyTerms: List<String> = emptyList()
 )
 
 @Keep
 data class SubjectQuestionBank(
-    val subject: String = "",
-    val count: Int = 0,
-    val questions: List<QuestionBankItem> = emptyList()
+    @SerializedName(value = "subject") val subject: String = "",
+    @SerializedName(value = "count") val count: Int = 0,
+    @SerializedName(value = "questions") val questions: List<QuestionBankItem> = emptyList()
 )
 

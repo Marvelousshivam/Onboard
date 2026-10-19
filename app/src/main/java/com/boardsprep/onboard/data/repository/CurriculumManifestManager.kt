@@ -133,7 +133,11 @@ data class RemoteSamplePaper(
     @SerializedName("title") val title: String = "",
     @SerializedName("filename") val filename: String = "",
     @SerializedName("subject") val subject: String = "",
+    @SerializedName(value = "subject_id", alternate = ["subjectId"]) val subjectId: String = "",
+    @SerializedName(value = "set_id", alternate = ["setId"]) val setId: String = "",
+    @SerializedName(value = "paper_category", alternate = ["paperCategory"]) val paperCategory: String = "",
     @SerializedName("type") val type: String = "",
+    @SerializedName(value = "pair_filename", alternate = ["pairFilename"]) val pairFilename: String = "",
     @SerializedName("url") val url: String = ""
 )
 

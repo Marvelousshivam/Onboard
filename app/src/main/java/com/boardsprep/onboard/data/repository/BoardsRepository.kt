@@ -22,6 +22,7 @@ class BoardsRepository(private val context: Context) {
     }
 
     private val db = OnboardDatabase.getInstance(context)
+    val database: OnboardDatabase get() = db
     private val gson: Gson = GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create()
@@ -97,15 +98,41 @@ class BoardsRepository(private val context: Context) {
                 val typeName = if (remote.type.equals("sqp", ignoreCase = true)) "Sample Question Paper" else "Marking Scheme"
                 "CBSE Class 12 2026-27 ${remote.subject} $typeName"
             }
+            val setId = remote.setId.ifBlank {
+                "${mappedSubjectId}_${remote.type.lowercase()}"
+            }
+            val paperCategory = remote.paperCategory.ifBlank {
+                if (remote.filename.contains("PQ2", ignoreCase = true)) "Practice Paper Set 2"
+                else if (remote.filename.contains("PQ", ignoreCase = true)) "Practice Paper Set 1"
+                else "Official SQP 2027"
+            }
             SamplePaper(
                 title = cleanTitle,
                 filename = remote.filename,
                 subject = remote.subject,
                 subjectId = mappedSubjectId,
                 type = remote.type.lowercase(),
-                url = remote.url
+                url = remote.url,
+                setId = setId,
+                paperCategory = paperCategory,
+                pairFilename = remote.pairFilename
             )
         }
+    }
+
+    fun getQuestionBankPdf(subjectId: String): RemoteQuestionBank? {
+        val manifest = manifestManager.getManifest()
+        val qbs = manifest?.questionBanks ?: emptyList()
+        val normalized = when (subjectId.trim().lowercase()) {
+            "english", "englishcore", "english core" -> "english"
+            "maths", "mathematics" -> "maths"
+            "physics" -> "physics"
+            "chemistry" -> "chemistry"
+            "biology" -> "biology"
+            "physical_education", "pe", "physicaleducation" -> "physical_education"
+            else -> subjectId.trim().lowercase()
+        }
+        return qbs.firstOrNull { it.subjectId.equals(normalized, ignoreCase = true) }
     }
 
     fun getSamplePapersForSubject(subjectId: String): List<SamplePaper> {
@@ -942,12 +969,14 @@ class BoardsRepository(private val context: Context) {
             else -> subjectId.trim().lowercase()
         }
 
+        val qbGson = GsonBuilder().create()
+
         // 1. Check local asset bundle first (instant offline availability)
         try {
             val assetPath = "question_banks/$normalized.json"
             context.assets.open(assetPath).use { stream ->
                 InputStreamReader(stream, "UTF-8").use { reader ->
-                    val parsed = gson.fromJson(reader, SubjectQuestionBank::class.java)
+                    val parsed = qbGson.fromJson(reader, SubjectQuestionBank::class.java)
                     if (parsed != null && parsed.questions.isNotEmpty()) {
                         return@withContext parsed
                     }
@@ -960,7 +989,7 @@ class BoardsRepository(private val context: Context) {
             val cacheFile = java.io.File(context.cacheDir, "question_banks/$normalized.json")
             if (cacheFile.exists() && cacheFile.length() > 0) {
                 val json = cacheFile.readText(Charsets.UTF_8)
-                val parsed = gson.fromJson(json, SubjectQuestionBank::class.java)
+                val parsed = qbGson.fromJson(json, SubjectQuestionBank::class.java)
                 if (parsed != null && parsed.questions.isNotEmpty()) {
                     return@withContext parsed
                 }
@@ -968,6 +997,29 @@ class BoardsRepository(private val context: Context) {
         } catch (_: Exception) {}
 
         null
+    }
+
+    // CBSE 3-Hour Exam Simulation attempt tracking
+    val examAttemptDao = db.examAttemptDao()
+
+    suspend fun saveExamAttempt(attempt: com.boardsprep.onboard.data.local.entities.ExamAttemptEntity): Long {
+        return examAttemptDao.insertAttempt(attempt)
+    }
+
+    fun getAllExamAttempts(): kotlinx.coroutines.flow.Flow<List<com.boardsprep.onboard.data.local.entities.ExamAttemptEntity>> {
+        return examAttemptDao.getAllAttempts()
+    }
+
+    fun getExamAttemptsForSubject(subjectId: String): kotlinx.coroutines.flow.Flow<List<com.boardsprep.onboard.data.local.entities.ExamAttemptEntity>> {
+        return examAttemptDao.getAttemptsForSubject(subjectId)
+    }
+
+    suspend fun getLatestAttemptForPaper(paperTitle: String): com.boardsprep.onboard.data.local.entities.ExamAttemptEntity? {
+        return examAttemptDao.getLatestAttemptForPaper(paperTitle)
+    }
+
+    suspend fun updateExamSelfScore(id: Long, score: Int) {
+        examAttemptDao.updateSelfScore(id, score)
     }
 }
 

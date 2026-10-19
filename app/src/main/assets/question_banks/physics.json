@@ -1,6 +1,6 @@
 {
   "subject": "physics",
-  "count": 10,
+  "count": 44,
   "questions": [
     {
       "id": "phy_pq_set_1_17",
@@ -9,21 +9,47 @@
       "type": "vsa",
       "marks": 2,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "The graph shows the variation in hole concentration with doping concentration \nin an extrinsic semiconductor doped with pentavalent impurities. \n \nWhy does the hole concentration reduce when pentavalent doping is \nincreased? \n2",
-      "modelAnswer": "When an intrinsic semiconductor is doped with pentavalent impurities, the \nnumber of electrons increases much more than the thermally produced \nelectrons. (0.5 marks) \n \nThis causes the thermally generated holes to recombine with the electrons \ngenerated, thereby decreasing the number of holes. (1 mark) \n2",
+      "questionText": "The graph shows the variation in hole concentration with doping concentration in an extrinsic semiconductor doped with pentavalent impurities.\n\nWhy does the hole concentration reduce when pentavalent doping is increased?",
+      "modelAnswer": "When an intrinsic semiconductor is doped with pentavalent impurities, the number of electrons increases much more than the thermally produced electrons. (0.5 marks)\n\nThis causes the thermally generated holes to recombine with the electrons generated, thereby decreasing the number of holes. (1 mark)",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 1.0,
-          "criterion": "(1 mark)"
+          "criterion": "(1 mark)",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "The graph shows the variation in hole concentration with doping concentration in an extrinsic semiconductor doped with pentavalent impurities.\n\nWhy does the hole concentration reduce when pentavalent doping is increased?",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "When an intrinsic semiconductor is doped with pentavalent impurities, the number of electrons increases much more than the thermally produced electrons. (0.5 marks)\n\nThis causes the thermally generated holes to recombine with the electrons generated, thereby decreasing the number of holes. (1 mark)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "(1 mark)",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -37,21 +63,47 @@
       "type": "vsa",
       "marks": 2,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "Compare the focal lengths of the two lenses shown below if the radius of \ncurvature of the curved surface is the same in both lenses. \n \n2",
-      "modelAnswer": "Lens maker's formula \n (0.5 marks) \n \nFor the plano-concave lens, \n  (0.5 marks) \n \nFor the plano-convex lens, \n2",
+      "questionText": "Compare the focal lengths of the two lenses shown below if the radius of curvature of the curved surface is the same in both lenses.",
+      "modelAnswer": "Lens maker's formula (0.5 marks)\n\nFor the plano-concave lens, (0.5 marks)\n\nFor the plano-convex lens,",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "Compare the focal lengths of the two lenses shown below if the radius of curvature of the curved surface is the same in both lenses.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Lens maker's formula (0.5 marks)\n\nFor the plano-concave lens, (0.5 marks)\n\nFor the plano-convex lens,",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -65,21 +117,47 @@
       "type": "vsa",
       "marks": 2,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "The image below shows a setup of a device that is used to increase the \ndiameter of a light beam from a laser. \n \n \nShow how a combination of a convex and a concave lens can also be arranged \nto increase the diameter of a light beam. Your answer should include how the \ntwo lenses should be arranged and the distance between the two lenses. (Note \nthat the rays in both the incident and emergent beam are parallel.) \n \nOR \n \nA glass beaker of height 10 cm, completely filled with water (refractive index \n= 4/3), has a curved bottom which is silvered as shown below. \n2",
-      "modelAnswer": "Concave lens should be placed before the convex lens. (1 mark) \nThe distance between the lenses should be f2-f1, where f2 is the focal length of \nthe convex lens and f1 is the focal length of the concave lens. (1 mark) \n \n(OR) \n2",
+      "questionText": "The image below shows a setup of a device that is used to increase the diameter of a light beam from a laser.\n\nShow how a combination of a convex and a concave lens can also be arranged to increase the diameter of a light beam. Your answer should include how the two lenses should be arranged and the distance between the two lenses. (Note that the rays in both the incident and emergent beam are parallel.)\n\nOR\n\nA glass beaker of height 10 cm, completely filled with water (refractive index = 4/3), has a curved bottom which is silvered as shown below.",
+      "modelAnswer": "Concave lens should be placed before the convex lens. (1 mark) The distance between the lenses should be f2-f1, where f2 is the focal length of the convex lens and f1 is the focal length of the concave lens. (1 mark)\n\n(OR)",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 1.0,
-          "criterion": "(1 mark)"
+          "criterion": "(1 mark)",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 1.0,
-          "criterion": "(1 mark)"
+          "criterion": "(1 mark)",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "The image below shows a setup of a device that is used to increase the diameter of a light beam from a laser.\n\nShow how a combination of a convex and a concave lens can also be arranged to increase the diameter of a light beam. Your answer should include how the two lenses should be arranged and the distance between the two lenses. (Note that the rays in both the incident and emergent beam are parallel.)\n\nOR\n\nA glass beaker of height 10 cm, completely filled with water (refractive index = 4/3), has a curved bottom which is silvered as shown below.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Concave lens should be placed before the convex lens. (1 mark) The distance between the lenses should be f2-f1, where f2 is the focal length of the convex lens and f1 is the focal length of the concave lens. (1 mark)\n\n(OR)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "(1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "(1 mark)",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -93,31 +171,71 @@
       "type": "sa",
       "marks": 3,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "Identify if the two nuclear reactions mentioned below are endothermic or \nexothermic. Show your calculations. \n \n \n \nUse the information below to answer the question: \n \n \n3",
-      "modelAnswer": "For the first reaction \nmass of reactants = 1.00728 + 7.0160 = 8.12328 amu \nmass of products = 2 × 4.0026 = 8.0052 \nmass of reactants > mass of products (1 mark) \n \nHence, the reaction is exothermic. (0.5 marks) \n \nFor the second reaction \nmass of reactants = 7.0160 + 4.0026= 11.0186 amu \nmass of products = 1.0087 + 10.1294 = 11.1381 \nmass of reactants < mass of products (1 mark) \n \nHence, the reaction is endothermic. (0.5 marks)  \n3",
+      "questionText": "Identify if the two nuclear reactions mentioned below are endothermic or exothermic. Show your calculations.\n\nUse the information below to answer the question:",
+      "modelAnswer": "For the first reaction mass of reactants = 1.00728 + 7.0160 = 8.12328 amu mass of products = 2 × 4.0026 = 8.0052 mass of reactants > mass of products (1 mark)\n\nHence, the reaction is exothermic. (0.5 marks)\n\nFor the second reaction mass of reactants = 7.0160 + 4.0026= 11.0186 amu mass of products = 1.0087 + 10.1294 = 11.1381 mass of reactants < mass of products (1 mark)\n\nHence, the reaction is endothermic. (0.5 marks)",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 1.0,
-          "criterion": "mass of reactants > mass of products (1 mark)"
+          "criterion": "mass of reactants > mass of products (1 mark)",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 2
         },
         {
           "stepNumber": 3,
           "marks": 1.0,
-          "criterion": "mass of reactants < mass of products (1 mark)"
+          "criterion": "mass of reactants < mass of products (1 mark)",
+          "step_number": 3
         },
         {
           "stepNumber": 4,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 4
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "Identify if the two nuclear reactions mentioned below are endothermic or exothermic. Show your calculations.\n\nUse the information below to answer the question:",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "For the first reaction mass of reactants = 1.00728 + 7.0160 = 8.12328 amu mass of products = 2 × 4.0026 = 8.0052 mass of reactants > mass of products (1 mark)\n\nHence, the reaction is exothermic. (0.5 marks)\n\nFor the second reaction mass of reactants = 7.0160 + 4.0026= 11.0186 amu mass of products = 1.0087 + 10.1294 = 11.1381 mass of reactants < mass of products (1 mark)\n\nHence, the reaction is endothermic. (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "mass of reactants > mass of products (1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "mass of reactants < mass of products (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -131,21 +249,47 @@
       "type": "sa",
       "marks": 3,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "X and Y are two equipotential surfaces separated by a distance of 2 m in a \nuniform electric field of 10 V/m. Surface X has a potential of 10 V \n(a) Calculate the potential of surface Y. \n(b) What is the work done in moving a +2 C charge from surface Y to surface \nX along path 1? How will this work change when the charge is moved along \nPath 2? Give a reason for your answer. \n3",
+      "questionText": "X and Y are two equipotential surfaces separated by a distance of 2 m in a uniform electric field of 10 V/m. Surface X has a potential of 10 V\n(a) Calculate the potential of surface Y.\n(b) What is the work done in moving a +2 C charge from surface Y to surface X along path 1? How will this work change when the charge is moved along Path 2? Give a reason for your answer.",
       "modelAnswer": "Official CBSE Marking Scheme model answer.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 1.5,
-          "criterion": "Formula identification & diagram / circuit"
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 1.5,
-          "criterion": "Substitution, algebraic simplification & SI units"
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "X and Y are two equipotential surfaces separated by a distance of 2 m in a uniform electric field of 10 V/m. Surface X has a potential of 10 V\n(a) Calculate the potential of surface Y.\n(b) What is the work done in moving a +2 C charge from surface Y to surface X along path 1? How will this work change when the charge is moved along Path 2? Give a reason for your answer.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Official CBSE Marking Scheme model answer.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -159,56 +303,131 @@
       "type": "sa",
       "marks": 3,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and \n2 Ω resistors in the circuit shown below. \n \n3",
-      "modelAnswer": "Give 0.5 marks for the correct representation of current in the circuits. \n \nBy using Kirchhoff's second law for closed-loop PQS we get \n- 4I1+ 2I2 + 10 = 0 \n4I1 - 2I2 = 10 \n2I1 - I2= 5....(i)        (0.5 marks) \n \nBy using Kirchhoff's second law for closed-loop QRS we get \n- (I1 + I2)1 + 6  - 2I2 =0 \nI1 + 3I2 = 6.....(ii)      (0.5 marks) \nsolving (i) and (ii), we get \n7I1 =  21 \n∴I1= 21/7 = 3 A     (0.5 marks) \nI2= 1 A                       (0.5 marks) \nI1 + I2 = 3 + 1 = 4 A  (0.5 marks) \nTherefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and \nacross 1 Ω resistor is 4 A.     \n3 \n26 (a) For a charged particle executing a circular path, θ = 90° \n∴ F = qvB            (0.5 marks) \n \nSince the charged particle executes a circular path  \nmv2 /r = qvB \nq/m = v/rB                    (0.5 marks) \nSince, v and B are constant for both the particles, q/m ∝ 1/r \nq/m: charge-to-mass ratio \nAs rB > rA, particle A has a greater charge-to-mass ratio than B.         (1 mark) \n \n(b) A proton has a greater charge-to-mass ratio than an alpha particle. \n(0.5 marks) \nHence, particle A is likely to be a proton.             (0.5 marks) \n3 \n27 (a) Their frequencies will be different.  \n \nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since \nthey have different speeds in air, their frequencies are different.  \n \n(or) f = v/λ ; since they have different speeds in air, they will have different \nfrequencies. \n \n3",
+      "questionText": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and 2 Ω resistors in the circuit shown below.",
+      "modelAnswer": "Give 0.5 marks for the correct representation of current in the circuits.\n\nBy using Kirchhoff's second law for closed-loop PQS we get\n- 4I1+ 2I2 + 10 = 0 4I1 - 2I2 = 10 2I1 - I2= 5....(i) (0.5 marks)\n\nBy using Kirchhoff's second law for closed-loop QRS we get\n- (I1 + I2)1 + 6 - 2I2 =0 I1 + 3I2 = 6.....(ii) (0.5 marks) solving (i) and (ii), we get 7I1 = 21 ∴I1= 21/7 = 3 A (0.5 marks) I2= 1 A (0.5 marks) I1 + I2 = 3 + 1 = 4 A (0.5 marks) Therefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and across 1 Ω resistor is 4 A.\n3 26 (a) For a charged particle executing a circular path, θ = 90° ∴ F = qvB (0.5 marks)\n\nSince the charged particle executes a circular path mv2 /r = qvB q/m = v/rB (0.5 marks) Since, v and B are constant for both the particles, q/m ∝ 1/r q/m: charge-to-mass ratio As rB > rA, particle A has a greater charge-to-mass ratio than B. (1 mark)\n\n(b) A proton has a greater charge-to-mass ratio than an alpha particle.\n(0.5 marks) Hence, particle A is likely to be a proton. (0.5 marks) 3 27 (a) Their frequencies will be different.\n\nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since they have different speeds in air, their frequencies are different.\n\n(or) f = v/λ ; since they have different speeds in air, they will have different frequencies.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 0.5,
-          "criterion": "(i)        (0.5 marks)"
+          "criterion": "(i) (0.5 marks)",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 0.5,
-          "criterion": "(ii)      (0.5 marks)"
+          "criterion": "(ii) (0.5 marks)",
+          "step_number": 2
         },
         {
           "stepNumber": 3,
           "marks": 0.5,
-          "criterion": "∴I1= 21/7 = 3 A     (0.5 marks)"
+          "criterion": "∴I1= 21/7 = 3 A (0.5 marks)",
+          "step_number": 3
         },
         {
           "stepNumber": 4,
           "marks": 0.5,
-          "criterion": "I2= 1 A                       (0.5 marks)"
+          "criterion": "I2= 1 A (0.5 marks)",
+          "step_number": 4
         },
         {
           "stepNumber": 5,
           "marks": 0.5,
-          "criterion": "I1 + I2 = 3 + 1 = 4 A  (0.5 marks)"
+          "criterion": "I1 + I2 = 3 + 1 = 4 A (0.5 marks)",
+          "step_number": 5
         },
         {
           "stepNumber": 6,
           "marks": 0.5,
-          "criterion": "∴ F = qvB            (0.5 marks)"
+          "criterion": "∴ F = qvB (0.5 marks)",
+          "step_number": 6
         },
         {
           "stepNumber": 7,
           "marks": 0.5,
-          "criterion": "q/m = v/rB                    (0.5 marks)"
+          "criterion": "q/m = v/rB (0.5 marks)",
+          "step_number": 7
         },
         {
           "stepNumber": 8,
           "marks": 1.0,
-          "criterion": "(1 mark)"
+          "criterion": "(1 mark)",
+          "step_number": 8
         },
         {
           "stepNumber": 9,
           "marks": 0.5,
-          "criterion": "(0.5 marks)"
+          "criterion": "(0.5 marks)",
+          "step_number": 9
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and 2 Ω resistors in the circuit shown below.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Give 0.5 marks for the correct representation of current in the circuits.\n\nBy using Kirchhoff's second law for closed-loop PQS we get\n- 4I1+ 2I2 + 10 = 0 4I1 - 2I2 = 10 2I1 - I2= 5....(i) (0.5 marks)\n\nBy using Kirchhoff's second law for closed-loop QRS we get\n- (I1 + I2)1 + 6 - 2I2 =0 I1 + 3I2 = 6.....(ii) (0.5 marks) solving (i) and (ii), we get 7I1 = 21 ∴I1= 21/7 = 3 A (0.5 marks) I2= 1 A (0.5 marks) I1 + I2 = 3 + 1 = 4 A (0.5 marks) Therefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and across 1 Ω resistor is 4 A.\n3 26 (a) For a charged particle executing a circular path, θ = 90° ∴ F = qvB (0.5 marks)\n\nSince the charged particle executes a circular path mv2 /r = qvB q/m = v/rB (0.5 marks) Since, v and B are constant for both the particles, q/m ∝ 1/r q/m: charge-to-mass ratio As rB > rA, particle A has a greater charge-to-mass ratio than B. (1 mark)\n\n(b) A proton has a greater charge-to-mass ratio than an alpha particle.\n(0.5 marks) Hence, particle A is likely to be a proton. (0.5 marks) 3 27 (a) Their frequencies will be different.\n\nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since they have different speeds in air, their frequencies are different.\n\n(or) f = v/λ ; since they have different speeds in air, they will have different frequencies.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "(i) (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "(ii) (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "∴I1= 21/7 = 3 A (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "I2= 1 A (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "I1 + I2 = 3 + 1 = 4 A (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "∴ F = qvB (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "q/m = v/rB (0.5 marks)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 1.0,
+          "criterion": "(1 mark)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "(0.5 marks)",
+          "step_number": 9
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -222,21 +441,47 @@
       "type": "sa",
       "marks": 3,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "Two charges A and B, each having a velocity of v, traverse circular paths in a \nuniform magnetic field as shown below.  \n \n3",
+      "questionText": "Two charges A and B, each having a velocity of v, traverse circular paths in a uniform magnetic field as shown below.",
       "modelAnswer": "Official CBSE Marking Scheme model answer.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 1.5,
-          "criterion": "Formula identification & diagram / circuit"
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 1.5,
-          "criterion": "Substitution, algebraic simplification & SI units"
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "Two charges A and B, each having a velocity of v, traverse circular paths in a uniform magnetic field as shown below.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Official CBSE Marking Scheme model answer.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -250,21 +495,47 @@
       "type": "sa",
       "marks": 3,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 \nT. The ring is rotated about its diameter at a frequency of 60 Hz.  \n(a) If the ring has 50 turns, then what is the maximum induced emf in the \nring? \n(b) State one condition under which the induced emf in the circular ring will \nbe zero? \n \nOR \n \nGiven below are a few characteristics of solenoids p and q.   \nsolenoid p solenoid q \nlength of the solenoid l (m) l (m) \nnumber of turns (N) 200 50 \ncross-sectional area of the wire A (m2) A (m2) \nrelative permeability of the core material 1 500 \nself-inductance 2 (mH) ? \n \nWhat is the self-inductance of the solenoid q? \n3 \n \nSECTION D",
+      "questionText": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 T. The ring is rotated about its diameter at a frequency of 60 Hz.\n(a) If the ring has 50 turns, then what is the maximum induced emf in the ring?\n(b) State one condition under which the induced emf in the circular ring will be zero?\n\nOR\n\nGiven below are a few characteristics of solenoids p and q.\nsolenoid p solenoid q length of the solenoid l (m) l (m) number of turns (N) 200 50 cross-sectional area of the wire A (m2) A (m2) relative permeability of the core material 1 500 self-inductance 2 (mH) ?\n\nWhat is the self-inductance of the solenoid q?\n3\n\nSECTION D",
       "modelAnswer": "Official CBSE Marking Scheme model answer.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 1.5,
-          "criterion": "Formula identification & diagram / circuit"
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 1.5,
-          "criterion": "Substitution, algebraic simplification & SI units"
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 T. The ring is rotated about its diameter at a frequency of 60 Hz.\n(a) If the ring has 50 turns, then what is the maximum induced emf in the ring?\n(b) State one condition under which the induced emf in the circular ring will be zero?\n\nOR\n\nGiven below are a few characteristics of solenoids p and q.\nsolenoid p solenoid q length of the solenoid l (m) l (m) number of turns (N) 200 50 cross-sectional area of the wire A (m2) A (m2) relative permeability of the core material 1 500 self-inductance 2 (mH) ?\n\nWhat is the self-inductance of the solenoid q?\n3\n\nSECTION D",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Official CBSE Marking Scheme model answer.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -278,21 +549,47 @@
       "type": "case_study",
       "marks": 4,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "Read the following paragraph and answer the questions that follow. \nWhen light rays fall on glass, about 4% of the light gets reflected. To \neliminate this reflection, the glass display cases in museums usually have an \nanti-reflective coating. \nThis works on the principle of interference. When light falls on the coated \nglass, the light gets reflected from the top and bottom surfaces of the coating \nand these two reflected light rays can interfere. To reduce reflection, the \nthickness and refractive index of the coating are adjusted such that the light \nrays undergo destructive interference. \n4",
+      "questionText": "Read the following paragraph and answer the questions that follow.\nWhen light rays fall on glass, about 4% of the light gets reflected. To eliminate this reflection, the glass display cases in museums usually have an anti-reflective coating.\nThis works on the principle of interference. When light falls on the coated glass, the light gets reflected from the top and bottom surfaces of the coating and these two reflected light rays can interfere. To reduce reflection, the thickness and refractive index of the coating are adjusted such that the light rays undergo destructive interference.",
       "modelAnswer": "Official CBSE Marking Scheme model answer.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 2.0,
-          "criterion": "Formula identification & diagram / circuit"
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 2.0,
-          "criterion": "Substitution, algebraic simplification & SI units"
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
         }
       ],
       "keyTerms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ],
+      "question_text": "Read the following paragraph and answer the questions that follow.\nWhen light rays fall on glass, about 4% of the light gets reflected. To eliminate this reflection, the glass display cases in museums usually have an anti-reflective coating.\nThis works on the principle of interference. When light falls on the coated glass, the light gets reflected from the top and bottom surfaces of the coating and these two reflected light rays can interfere. To reduce reflection, the thickness and refractive index of the coating are adjusted such that the light rays undergo destructive interference.",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Official CBSE Marking Scheme model answer.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
         "SI units",
         "Direction vector",
         "Conservation law",
@@ -306,18 +603,20 @@
       "type": "la",
       "marks": 5,
       "source": "CBSE Official Practice Questions (Set 1)",
-      "questionText": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt. \nThe graph below represents the variation of inductive reactance (XL) of the \ninductor with the frequency of an alternating source. \n \n(a) What is the self-inductance of the inductor? \n(b) If the ac source is replaced by a battery such that V = 100 V, then what is \nthe inductive reactance of the inductor? Give reason. \n(c) When the frequency is 50 Hz, what is the average power dissipated by the \ninductor over a complete cycle in the circuit? Justify your answer. \n(d) This inductor is connected in series with a resistance of 15 Ω and a \ncapacitor of 5 μF. The frequency of the alternating source is varied such that \nthe power dissipated in the circuit becomes maximum. Calculate the \nfrequency and the phase difference between alternating voltage and current \nwhen the power dissipated is the maximum. \nOR \nAn ideal transformer having a ferromagnetic core consists of two coils having \n500 turns (primary) and 50 turns (secondary) respectively. \n(a) What is the voltage across the secondary coil, if the rms voltage across the \nprimary coil is 240 V? \n(b) What will be the individual currents in the two coils (primary and \nsecondary), if the secondary has a resistive load of 20 ohms? \n5",
+      "questionText": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt.\nThe graph below represents the variation of inductive reactance (XL) of the inductor with the frequency of an alternating source.\n\n(a) What is the self-inductance of the inductor?\n(b) If the ac source is replaced by a battery such that V = 100 V, then what is the inductive reactance of the inductor? Give reason.\n(c) When the frequency is 50 Hz, what is the average power dissipated by the inductor over a complete cycle in the circuit? Justify your answer.\n(d) This inductor is connected in series with a resistance of 15 Ω and a capacitor of 5 μF. The frequency of the alternating source is varied such that the power dissipated in the circuit becomes maximum. Calculate the frequency and the phase difference between alternating voltage and current when the power dissipated is the maximum.\nOR An ideal transformer having a ferromagnetic core consists of two coils having 500 turns (primary) and 50 turns (secondary) respectively.\n(a) What is the voltage across the secondary coil, if the rms voltage across the primary coil is 240 V?\n(b) What will be the individual currents in the two coils (primary and secondary), if the secondary has a resistive load of 20 ohms?",
       "modelAnswer": "Official CBSE Marking Scheme model answer.",
       "stepMarking": [
         {
           "stepNumber": 1,
           "marks": 2.5,
-          "criterion": "Formula identification & diagram / circuit"
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
         },
         {
           "stepNumber": 2,
           "marks": 2.5,
-          "criterion": "Substitution, algebraic simplification & SI units"
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
         }
       ],
       "keyTerms": [
@@ -325,6 +624,2658 @@
         "Direction vector",
         "Conservation law",
         "Boundary conditions"
+      ],
+      "question_text": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt.\nThe graph below represents the variation of inductive reactance (XL) of the inductor with the frequency of an alternating source.\n\n(a) What is the self-inductance of the inductor?\n(b) If the ac source is replaced by a battery such that V = 100 V, then what is the inductive reactance of the inductor? Give reason.\n(c) When the frequency is 50 Hz, what is the average power dissipated by the inductor over a complete cycle in the circuit? Justify your answer.\n(d) This inductor is connected in series with a resistance of 15 Ω and a capacitor of 5 μF. The frequency of the alternating source is varied such that the power dissipated in the circuit becomes maximum. Calculate the frequency and the phase difference between alternating voltage and current when the power dissipated is the maximum.\nOR An ideal transformer having a ferromagnetic core consists of two coils having 500 turns (primary) and 50 turns (secondary) respectively.\n(a) What is the voltage across the secondary coil, if the rms voltage across the primary coil is 240 V?\n(b) What will be the individual currents in the two coils (primary and secondary), if the secondary has a resistive load of 20 ohms?",
+      "subject_id": "physics",
+      "chapter_name": "Electromagnetism & Modern Physics",
+      "model_answer": "Official CBSE Marking Scheme model answer.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Formula identification & diagram / circuit",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Substitution, algebraic simplification & SI units",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "SI units",
+        "Direction vector",
+        "Conservation law",
+        "Boundary conditions"
+      ]
+    },
+    {
+      "id": "physics_pq1_q17",
+      "subjectId": "physics",
+      "chapterName": "Semiconductor Electronics",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "The graph shows the variation in hole concentration with doping concentration in an extrinsic semiconductor doped with pentavalent impurities.\n\nWhy does the hole concentration reduce when pentavalent doping is increased?",
+      "modelAnswer": "When an intrinsic semiconductor is doped with pentavalent impurities, the number of electrons increases much more than the thermally produced electrons. (0.5 marks)\n\nThis causes the thermally generated holes to recombine with the electrons generated, thereby decreasing the number of holes. (1 mark) 2\n\n2\n\nAs the doping concentration increases, more electrons are produced, causing more electron-hole recombination and hence hole concentration decreases (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Criterion 2 (1 mark)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        }
+      ],
+      "keyTerms": [
+        "graph",
+        "variation",
+        "hole",
+        "concentration"
+      ],
+      "question_text": "The graph shows the variation in hole concentration with doping concentration in an extrinsic semiconductor doped with pentavalent impurities.\n\nWhy does the hole concentration reduce when pentavalent doping is increased?",
+      "subject_id": "physics",
+      "chapter_name": "Semiconductor Electronics",
+      "model_answer": "When an intrinsic semiconductor is doped with pentavalent impurities, the number of electrons increases much more than the thermally produced electrons. (0.5 marks)\n\nThis causes the thermally generated holes to recombine with the electrons generated, thereby decreasing the number of holes. (1 mark) 2\n\n2\n\nAs the doping concentration increases, more electrons are produced, causing more electron-hole recombination and hence hole concentration decreases (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Criterion 2 (1 mark)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        }
+      ],
+      "key_terms": [
+        "graph",
+        "variation",
+        "hole",
+        "concentration"
+      ]
+    },
+    {
+      "id": "physics_pq1_q18",
+      "subjectId": "physics",
+      "chapterName": "Electric Charges And Fields",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "λα and λp are the wavelengths associated with a moving alpha particle and a proton respectively.\n\nObtain the relation between velocities of the two particles for which,\n\n(a) λα > λp\n(b) λα = λp 2",
+      "modelAnswer": "(a) λα > λp\n\nFor the above condition of vp > 4vα, λα will be greater than λp.\n\n(0.5 marks for writing the expression for λ, 0.5 marks for writing the relationship between the masses of the two particles, and 0.5 marks for final velocity relation.)\n\n(b) λα = λp\n\nFor the above condition of vp = 4vα, λα will be equal to λp.\n(0.5 marks for final velocity relation.)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "wavelengths",
+        "associated",
+        "with",
+        "moving"
+      ],
+      "question_text": "λα and λp are the wavelengths associated with a moving alpha particle and a proton respectively.\n\nObtain the relation between velocities of the two particles for which,\n\n(a) λα > λp\n(b) λα = λp 2",
+      "subject_id": "physics",
+      "chapter_name": "Electric Charges And Fields",
+      "model_answer": "(a) λα > λp\n\nFor the above condition of vp > 4vα, λα will be greater than λp.\n\n(0.5 marks for writing the expression for λ, 0.5 marks for writing the relationship between the masses of the two particles, and 0.5 marks for final velocity relation.)\n\n(b) λα = λp\n\nFor the above condition of vp = 4vα, λα will be equal to λp.\n(0.5 marks for final velocity relation.)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "wavelengths",
+        "associated",
+        "with",
+        "moving"
+      ]
+    },
+    {
+      "id": "physics_pq1_q19",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Compare the focal lengths of the two lenses shown below if the radius of curvature of the curved surface is the same in both lenses.",
+      "modelAnswer": "Lens maker's formula (0.5 marks)\n\nFor the plano-concave lens, (0.5 marks)\n\nFor the plano-convex lens, 2\n\n3\n\n(0.5 marks)\n\nf1:f2 = -1:1 (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "keyTerms": [
+        "Compare",
+        "focal",
+        "lengths",
+        "lenses"
+      ],
+      "question_text": "Compare the focal lengths of the two lenses shown below if the radius of curvature of the curved surface is the same in both lenses.",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "Lens maker's formula (0.5 marks)\n\nFor the plano-concave lens, (0.5 marks)\n\nFor the plano-convex lens, 2\n\n3\n\n(0.5 marks)\n\nf1:f2 = -1:1 (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "key_terms": [
+        "Compare",
+        "focal",
+        "lengths",
+        "lenses"
+      ]
+    },
+    {
+      "id": "physics_pq1_q20",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "(a) Two copper wires, P and Q of the same area of cross-section are joined in parallel. The combination of wires is connected across a battery of potential difference V. If the length of the wires, P and Q are in the ratio 1:2, find the ratio of drift velocities of electrons in wires P and Q.",
+      "modelAnswer": "(a) Since the wires are connected in parallel, the potential difference 'V' across both wires will be the same.\nThe wires have the same resistivity ρ Let the length of wires P and Q be L1 and L2 respectively.\nLet the drift velocities electrons in wires P and Q be vd1 and vd2 respectively.\nI = neAvd (0.5 marks) vd - drift velocity L1/L2 = 1/2 V = RI = (ρL/A) I For wire P:\nV = (ρL1/A) neAvd1 ....(i) (0.5 marks) For wire Q:\nV = (ρL2/A) neAvd2 ....(ii) (0.5 marks)\n\nEquating (i) and (ii) L1vd1 = L2vd2 vd1/vd2 = L2/L1 vd1/vd2 =2/1 Hence, the ratio of drift velocities of electrons in wires P and Q is 2:1.(0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "keyTerms": [
+        "copper",
+        "wires",
+        "same",
+        "area"
+      ],
+      "question_text": "(a) Two copper wires, P and Q of the same area of cross-section are joined in parallel. The combination of wires is connected across a battery of potential difference V. If the length of the wires, P and Q are in the ratio 1:2, find the ratio of drift velocities of electrons in wires P and Q.",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "(a) Since the wires are connected in parallel, the potential difference 'V' across both wires will be the same.\nThe wires have the same resistivity ρ Let the length of wires P and Q be L1 and L2 respectively.\nLet the drift velocities electrons in wires P and Q be vd1 and vd2 respectively.\nI = neAvd (0.5 marks) vd - drift velocity L1/L2 = 1/2 V = RI = (ρL/A) I For wire P:\nV = (ρL1/A) neAvd1 ....(i) (0.5 marks) For wire Q:\nV = (ρL2/A) neAvd2 ....(ii) (0.5 marks)\n\nEquating (i) and (ii) L1vd1 = L2vd2 vd1/vd2 = L2/L1 vd1/vd2 =2/1 Hence, the ratio of drift velocities of electrons in wires P and Q is 2:1.(0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "key_terms": [
+        "copper",
+        "wires",
+        "same",
+        "area"
+      ]
+    },
+    {
+      "id": "physics_pq1_q21",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "The image below shows a setup of a device that is used to increase the diameter of a light beam from a laser.\n\nShow how a combination of a convex and a concave lens can also be arranged to increase the diameter of a light beam. Your answer should include how the two lenses should be arranged and the distance between the two lenses. (Note that the rays in both the incident and emergent beam are parallel.)\n\nOR\n\nA glass beaker of height 10 cm, completely filled with water (refractive index = 4/3), has a curved bottom which is silvered as shown below.\n2\n\n9\n\nA plastic coin remains submerged in water at a depth of 5 cm from the top of the beaker. An observer sees the coin in the water and its image in the mirror.\nIf the image formed by the curved mirror is seen by the observer at a distance of 15 cm from the surface of the water, what is the focal length of the curved surface? (Assume the silvered curved surface acts as a spherical mirror.)",
+      "modelAnswer": "Concave lens should be placed before the convex lens. (1 mark) The distance between the lenses should be f2-f1, where f2 is the focal length of the convex lens and f1 is the focal length of the concave lens. (1 mark)\n\n(OR) 2\n\n4\n\n(1 mark for drawing the concave lens before the convex lens. 1 mark for marking the focal lengths correctly.)\nOR Apparent depth of image = 15 cm Real depth = n × apparent depth = 4/3 × 15 = 20 cm (1 mark) For the concave mirror, u = -5 cm, v = 20 - 10 cm\n\n(1 mark)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Criterion 1 (1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Criterion 2 (1 mark)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 1.0,
+          "criterion": "Criterion 4 (1 mark)",
+          "step_number": 4
+        }
+      ],
+      "keyTerms": [
+        "image",
+        "setup",
+        "device",
+        "that"
+      ],
+      "question_text": "The image below shows a setup of a device that is used to increase the diameter of a light beam from a laser.\n\nShow how a combination of a convex and a concave lens can also be arranged to increase the diameter of a light beam. Your answer should include how the two lenses should be arranged and the distance between the two lenses. (Note that the rays in both the incident and emergent beam are parallel.)\n\nOR\n\nA glass beaker of height 10 cm, completely filled with water (refractive index = 4/3), has a curved bottom which is silvered as shown below.\n2\n\n9\n\nA plastic coin remains submerged in water at a depth of 5 cm from the top of the beaker. An observer sees the coin in the water and its image in the mirror.\nIf the image formed by the curved mirror is seen by the observer at a distance of 15 cm from the surface of the water, what is the focal length of the curved surface? (Assume the silvered curved surface acts as a spherical mirror.)",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "Concave lens should be placed before the convex lens. (1 mark) The distance between the lenses should be f2-f1, where f2 is the focal length of the convex lens and f1 is the focal length of the concave lens. (1 mark)\n\n(OR) 2\n\n4\n\n(1 mark for drawing the concave lens before the convex lens. 1 mark for marking the focal lengths correctly.)\nOR Apparent depth of image = 15 cm Real depth = n × apparent depth = 4/3 × 15 = 20 cm (1 mark) For the concave mirror, u = -5 cm, v = 20 - 10 cm\n\n(1 mark)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Criterion 1 (1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Criterion 2 (1 mark)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 1.0,
+          "criterion": "Criterion 4 (1 mark)",
+          "step_number": 4
+        }
+      ],
+      "key_terms": [
+        "image",
+        "setup",
+        "device",
+        "that"
+      ]
+    },
+    {
+      "id": "physics_pq1_q22",
+      "subjectId": "physics",
+      "chapterName": "Alternating Current",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Identify if the two nuclear reactions mentioned below are endothermic or exothermic. Show your calculations.\n\nUse the information below to answer the question:",
+      "modelAnswer": "For the first reaction mass of reactants = 1.00728 + 7.0160 = 8.12328 amu mass of products = 2 × 4.0026 = 8.0052 mass of reactants > mass of products (1 mark)\n\nHence, the reaction is exothermic. (0.5 marks)\n\nFor the second reaction mass of reactants = 7.0160 + 4.0026= 11.0186 amu mass of products = 1.0087 + 10.1294 = 11.1381 mass of reactants < mass of products (1 mark)\n\nHence, the reaction is endothermic. (0.5 marks) 3",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Criterion 1 (1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "keyTerms": [
+        "Identify",
+        "nuclear",
+        "reactions",
+        "mentioned"
+      ],
+      "question_text": "Identify if the two nuclear reactions mentioned below are endothermic or exothermic. Show your calculations.\n\nUse the information below to answer the question:",
+      "subject_id": "physics",
+      "chapter_name": "Alternating Current",
+      "model_answer": "For the first reaction mass of reactants = 1.00728 + 7.0160 = 8.12328 amu mass of products = 2 × 4.0026 = 8.0052 mass of reactants > mass of products (1 mark)\n\nHence, the reaction is exothermic. (0.5 marks)\n\nFor the second reaction mass of reactants = 7.0160 + 4.0026= 11.0186 amu mass of products = 1.0087 + 10.1294 = 11.1381 mass of reactants < mass of products (1 mark)\n\nHence, the reaction is endothermic. (0.5 marks) 3",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Criterion 1 (1 mark)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        }
+      ],
+      "key_terms": [
+        "Identify",
+        "nuclear",
+        "reactions",
+        "mentioned"
+      ]
+    },
+    {
+      "id": "physics_pq1_q23",
+      "subjectId": "physics",
+      "chapterName": "Electrostatic Potential And Capacitance",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "X and Y are two equipotential surfaces separated by a distance of 2 m in a uniform electric field of 10 V/m. Surface X has a potential of 10 V\n(a) Calculate the potential of surface Y.\n(b) What is the work done in moving a +2 C charge from surface Y to surface X along path 1? How will this work change when the charge is moved along Path 2? Give a reason for your answer.\n3",
+      "modelAnswer": "(a) Given E = 10 V/m Vx = 10 V Δ r = 2 m = .\n= 10 x 2 = 20 V (0.5 marks)\n\nSince, the potential decreases in the direction of the electric field, the potential at surface Y will be more than the potential at surface X.\nV = 20 + 10 = 30V (0.5 marks)\n\n(b) Given: q = 2 C Work done in moving charge from Y to X along Path 1= (Vx - Vy )q W = (10 - 30) × 2 W = -20 × 2 = - 40 J (1 mark)\n\nWork done in moving charge along Path 2 will be the same as work done along Path 1. (0.5 marks) This is because the work done between two surfaces is independent of the path since the force acting on the charge is conservative in nature. (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "keyTerms": [
+        "equipotential",
+        "surfaces",
+        "separated",
+        "distance"
+      ],
+      "question_text": "X and Y are two equipotential surfaces separated by a distance of 2 m in a uniform electric field of 10 V/m. Surface X has a potential of 10 V\n(a) Calculate the potential of surface Y.\n(b) What is the work done in moving a +2 C charge from surface Y to surface X along path 1? How will this work change when the charge is moved along Path 2? Give a reason for your answer.\n3",
+      "subject_id": "physics",
+      "chapter_name": "Electrostatic Potential And Capacitance",
+      "model_answer": "(a) Given E = 10 V/m Vx = 10 V Δ r = 2 m = .\n= 10 x 2 = 20 V (0.5 marks)\n\nSince, the potential decreases in the direction of the electric field, the potential at surface Y will be more than the potential at surface X.\nV = 20 + 10 = 30V (0.5 marks)\n\n(b) Given: q = 2 C Work done in moving charge from Y to X along Path 1= (Vx - Vy )q W = (10 - 30) × 2 W = -20 × 2 = - 40 J (1 mark)\n\nWork done in moving charge along Path 2 will be the same as work done along Path 1. (0.5 marks) This is because the work done between two surfaces is independent of the path since the force acting on the charge is conservative in nature. (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "key_terms": [
+        "equipotential",
+        "surfaces",
+        "separated",
+        "distance"
+      ]
+    },
+    {
+      "id": "physics_pq1_q24",
+      "subjectId": "physics",
+      "chapterName": "Dual Nature Of Radiation And Matter",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "(a) Compare the de Broglie wavelength associated with the electron in the third orbit to the circumference of the orbit.\n\n(b) In which of the following will the electrons have the same de Broglie wavelength?\n\n(i) Third orbit of He atom\n(ii) Fourth orbit of He atom\n(iii) Third orbit of Li atom\n(iv) Sixth orbit of Be atom\n\nShow your calculations.",
+      "modelAnswer": "(a) λ = 2πr/n (0.5 marks)\n\nIf n = 3, λ = circumference /3 (0.5 marks)\n\n(b) λ = 2πr/n Since r ∝ n2/Z λ ∝ n/Z (0.5 marks)\n\n(i) For the third orbit of He atom, n/Z = 3/2\n\n(ii) For the fourth orbit of He atom, n/Z = 4/2 =2\n\n(iii) For the third orbit of Li atom n/Z = 3/3 = 1\n\n(iv) For the sixth orbit of Be atom n/Z = 6/4 = 3/2\n\n(1 mark for correct calculation of all n/Z)\n\nTherefore, an electron in the third orbit of He atom will have the same de Broglie wavelength as the electron in the sixth orbit of Be atom. (0.5 marks ) (Full marks will be awarded if calculations are done based on velocity of electrons.) 3",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        }
+      ],
+      "keyTerms": [
+        "Compare",
+        "Broglie",
+        "wavelength",
+        "associated"
+      ],
+      "question_text": "(a) Compare the de Broglie wavelength associated with the electron in the third orbit to the circumference of the orbit.\n\n(b) In which of the following will the electrons have the same de Broglie wavelength?\n\n(i) Third orbit of He atom\n(ii) Fourth orbit of He atom\n(iii) Third orbit of Li atom\n(iv) Sixth orbit of Be atom\n\nShow your calculations.",
+      "subject_id": "physics",
+      "chapter_name": "Dual Nature Of Radiation And Matter",
+      "model_answer": "(a) λ = 2πr/n (0.5 marks)\n\nIf n = 3, λ = circumference /3 (0.5 marks)\n\n(b) λ = 2πr/n Since r ∝ n2/Z λ ∝ n/Z (0.5 marks)\n\n(i) For the third orbit of He atom, n/Z = 3/2\n\n(ii) For the fourth orbit of He atom, n/Z = 4/2 =2\n\n(iii) For the third orbit of Li atom n/Z = 3/3 = 1\n\n(iv) For the sixth orbit of Be atom n/Z = 6/4 = 3/2\n\n(1 mark for correct calculation of all n/Z)\n\nTherefore, an electron in the third orbit of He atom will have the same de Broglie wavelength as the electron in the sixth orbit of Be atom. (0.5 marks ) (Full marks will be awarded if calculations are done based on velocity of electrons.) 3",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        }
+      ],
+      "key_terms": [
+        "Compare",
+        "Broglie",
+        "wavelength",
+        "associated"
+      ]
+    },
+    {
+      "id": "physics_pq1_q25",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and 2 Ω resistors in the circuit shown below.",
+      "modelAnswer": "Give 0.5 marks for the correct representation of current in the circuits.\n\nBy using Kirchhoff's second law for closed-loop PQS we get\n- 4I1+ 2I2 + 10 = 0 4I1 - 2I2 = 10 2I1 - I2= 5....(i) (0.5 marks)\n\nBy using Kirchhoff's second law for closed-loop QRS we get\n- (I1 + I2)1 + 6 - 2I2 =0 I1 + 3I2 = 6.....(ii) (0.5 marks) solving (i) and (ii), we get 7I1 = 21 ∴I1= 21/7 = 3 A (0.5 marks) I2= 1 A (0.5 marks) I1 + I2 = 3 + 1 = 4 A (0.5 marks) Therefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and across 1 Ω resistor is 4 A.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "keyTerms": [
+        "Using",
+        "Kirchhoff",
+        "laws",
+        "calculate"
+      ],
+      "question_text": "Using Kirchhoff's laws, calculate the current flowing through 4 Ω, 1 Ω, and 2 Ω resistors in the circuit shown below.",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "Give 0.5 marks for the correct representation of current in the circuits.\n\nBy using Kirchhoff's second law for closed-loop PQS we get\n- 4I1+ 2I2 + 10 = 0 4I1 - 2I2 = 10 2I1 - I2= 5....(i) (0.5 marks)\n\nBy using Kirchhoff's second law for closed-loop QRS we get\n- (I1 + I2)1 + 6 - 2I2 =0 I1 + 3I2 = 6.....(ii) (0.5 marks) solving (i) and (ii), we get 7I1 = 21 ∴I1= 21/7 = 3 A (0.5 marks) I2= 1 A (0.5 marks) I1 + I2 = 3 + 1 = 4 A (0.5 marks) Therefore, the current across 4 Ω resistor is 3 A, across 2 Ω resistor is 1 A, and across 1 Ω resistor is 4 A.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "key_terms": [
+        "Using",
+        "Kirchhoff",
+        "laws",
+        "calculate"
+      ]
+    },
+    {
+      "id": "physics_pq1_q26",
+      "subjectId": "physics",
+      "chapterName": "Moving Charges And Magnetism",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Two charges A and B, each having a velocity of v, traverse circular paths in a uniform magnetic field as shown below.\n\n3\n\n11\n\n(a) Compare the charge-to-mass ratio of the two particles A and B. Show the necessary mathematical calculations.\n(b) Which of the two particles is likely to be a proton if the other is an alpha particle? Give reason.",
+      "modelAnswer": "(a) For a charged particle executing a circular path, θ = 90° ∴ F = qvB (0.5 marks)\n\nSince the charged particle executes a circular path mv2 /r = qvB q/m = v/rB (0.5 marks) Since, v and B are constant for both the particles, q/m ∝ 1/r q/m: charge-to-mass ratio As rB > rA, particle A has a greater charge-to-mass ratio than B. (1 mark)\n\n(b) A proton has a greater charge-to-mass ratio than an alpha particle.\n(0.5 marks) Hence, particle A is likely to be a proton. (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "keyTerms": [
+        "charges",
+        "each",
+        "having",
+        "velocity"
+      ],
+      "question_text": "Two charges A and B, each having a velocity of v, traverse circular paths in a uniform magnetic field as shown below.\n\n3\n\n11\n\n(a) Compare the charge-to-mass ratio of the two particles A and B. Show the necessary mathematical calculations.\n(b) Which of the two particles is likely to be a proton if the other is an alpha particle? Give reason.",
+      "subject_id": "physics",
+      "chapter_name": "Moving Charges And Magnetism",
+      "model_answer": "(a) For a charged particle executing a circular path, θ = 90° ∴ F = qvB (0.5 marks)\n\nSince the charged particle executes a circular path mv2 /r = qvB q/m = v/rB (0.5 marks) Since, v and B are constant for both the particles, q/m ∝ 1/r q/m: charge-to-mass ratio As rB > rA, particle A has a greater charge-to-mass ratio than B. (1 mark)\n\n(b) A proton has a greater charge-to-mass ratio than an alpha particle.\n(0.5 marks) Hence, particle A is likely to be a proton. (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 1.0,
+          "criterion": "Criterion 3 (1 mark)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        }
+      ],
+      "key_terms": [
+        "charges",
+        "each",
+        "having",
+        "velocity"
+      ]
+    },
+    {
+      "id": "physics_pq1_q27",
+      "subjectId": "physics",
+      "chapterName": "Electric Charges And Fields",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "(a) A radio wave and an infrasonic wave have the same wavelength when travelling through air. Are their frequencies the same or different? Give a reason for your answer.\n\n(b) An electromagnetic wave traveling east has a magnetic field that oscillates vertically and has a frequency of 60 kHz and an rms strength of 8 × 10−9T.\nDetermine the frequency and the rms strength of the electric field. What is the direction of the electric field?",
+      "modelAnswer": "(a) Their frequencies will be different.\n\nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since they have different speeds in air, their frequencies are different.\n\n(or) f = v/λ ; since they have different speeds in air, they will have different frequencies.\n\n3\n\n7\n\n(1 mark for the correct answer. No marks will be awarded if reason is not written.)\n\n(b) Frequency of electric field = frequency of magnetic field = 60 kHz (0.5 marks)\n\nErms = c Brms Erms = 3 x 108 x 8 x 10-9 = 2.4 V/m (1 mark for the correct answer with the unit. Accept any correct unit.)\n\nDirection of electric field - along the horizontal north-south line. (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "radio",
+        "wave",
+        "infrasonic",
+        "have"
+      ],
+      "question_text": "(a) A radio wave and an infrasonic wave have the same wavelength when travelling through air. Are their frequencies the same or different? Give a reason for your answer.\n\n(b) An electromagnetic wave traveling east has a magnetic field that oscillates vertically and has a frequency of 60 kHz and an rms strength of 8 × 10−9T.\nDetermine the frequency and the rms strength of the electric field. What is the direction of the electric field?",
+      "subject_id": "physics",
+      "chapter_name": "Electric Charges And Fields",
+      "model_answer": "(a) Their frequencies will be different.\n\nA radio wave is an EM wave and an infrasonic wave is a sound wave. Since they have different speeds in air, their frequencies are different.\n\n(or) f = v/λ ; since they have different speeds in air, they will have different frequencies.\n\n3\n\n7\n\n(1 mark for the correct answer. No marks will be awarded if reason is not written.)\n\n(b) Frequency of electric field = frequency of magnetic field = 60 kHz (0.5 marks)\n\nErms = c Brms Erms = 3 x 108 x 8 x 10-9 = 2.4 V/m (1 mark for the correct answer with the unit. Accept any correct unit.)\n\nDirection of electric field - along the horizontal north-south line. (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "radio",
+        "wave",
+        "infrasonic",
+        "have"
+      ]
+    },
+    {
+      "id": "physics_pq1_q28",
+      "subjectId": "physics",
+      "chapterName": "Moving Charges And Magnetism",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 T. The ring is rotated about its diameter at a frequency of 60 Hz.\n(a) If the ring has 50 turns, then what is the maximum induced emf in the ring?\n(b) State one condition under which the induced emf in the circular ring will be zero?\n\nOR\n\nGiven below are a few characteristics of solenoids p and q.\nsolenoid p solenoid q length of the solenoid l (m) l (m) number of turns (N) 200 50 cross-sectional area of the wire A (m2) A (m2) relative permeability of the core material 1 500 self-inductance 2 (mH) ?\n\nWhat is the self-inductance of the solenoid q?",
+      "modelAnswer": "(a) Maximum induced emf (εmax) = N × B × A × ω (0.5 marks) where, N = 50, B = 0.4 T, ω = 2πf = 2×π×60, r = d/2 = 0.2/2 = 0.1 m\n\nTherefore, A= πr2 = π × (0.1)2 (0.5 marks)\n\nSubstituting we get, εmax = 50 × 0.4 × (3.14 × 0.1 × 0.1) × (2 × 3.14 × 60) = 236.63 V (0.5 marks each for the substitution and final answer.)\n\n(b) if the ring is rotated about its axis\nor the ring is translated in the magnetic field (1 mark for any one correct answer) [Accept any other valid correct answer.]\n\nOR\n\n(1 mark for correct formula. 0.5 marks for substitution. 0.5 mark for the calculation. 1 mark for the correct answer)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "circular",
+        "ring",
+        "diameter",
+        "placed"
+      ],
+      "question_text": "A circular ring of diameter 0.2 m is placed in a uniform magnetic field of 0.4 T. The ring is rotated about its diameter at a frequency of 60 Hz.\n(a) If the ring has 50 turns, then what is the maximum induced emf in the ring?\n(b) State one condition under which the induced emf in the circular ring will be zero?\n\nOR\n\nGiven below are a few characteristics of solenoids p and q.\nsolenoid p solenoid q length of the solenoid l (m) l (m) number of turns (N) 200 50 cross-sectional area of the wire A (m2) A (m2) relative permeability of the core material 1 500 self-inductance 2 (mH) ?\n\nWhat is the self-inductance of the solenoid q?",
+      "subject_id": "physics",
+      "chapter_name": "Moving Charges And Magnetism",
+      "model_answer": "(a) Maximum induced emf (εmax) = N × B × A × ω (0.5 marks) where, N = 50, B = 0.4 T, ω = 2πf = 2×π×60, r = d/2 = 0.2/2 = 0.1 m\n\nTherefore, A= πr2 = π × (0.1)2 (0.5 marks)\n\nSubstituting we get, εmax = 50 × 0.4 × (3.14 × 0.1 × 0.1) × (2 × 3.14 × 60) = 236.63 V (0.5 marks each for the substitution and final answer.)\n\n(b) if the ring is rotated about its axis\nor the ring is translated in the magnetic field (1 mark for any one correct answer) [Accept any other valid correct answer.]\n\nOR\n\n(1 mark for correct formula. 0.5 marks for substitution. 0.5 mark for the calculation. 1 mark for the correct answer)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "circular",
+        "ring",
+        "diameter",
+        "placed"
+      ]
+    },
+    {
+      "id": "physics_pq1_q29",
+      "subjectId": "physics",
+      "chapterName": "Alternating Current",
+      "type": "case",
+      "marks": 4,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Read the following paragraph and answer the questions that follow. 4\n\n12\n\nFor most mobile devices, the voltage to recharge the battery is typically 5 volts of direct current. In India, the current supplied to our homes is alternating current at 220V and at a frequency of 50 Hz. Fatima designed a simplified version of a mobile phone charger. She made a circuit using a centre tap transformer and two similar silicon diodes D1 and D2 as shown below. Study the diagram below and answer the questions that follow.\n\n(a) Can Fatima also charge the battery of a phone by connecting the battery directly to the ac power supply? Give reason.\n(b) The graph of the potential barrier (V) vs width of the depletion region (x), when D1 is unbiased at room temperature, is shown below.\n\nPlot a comparative graph of the potential barrier (V) vs width of the depletion region (x) of D1 at room temperature when the voltage at A is negative with respect to voltage at centre tap. Give reason.\nOR If the battery of the phone is directly connected to the output terminals of the secondary coil of the transformer, will it get charged? Justify your answer.\n(c) What will be the output frequency across the phone's battery when the orientation of D2 is reversed in fig. 1 and the centre-tapped three-output transformer is replaced by a two-output step-down transformer? Justify your answer.",
+      "modelAnswer": "(a) No, Fatima cannot charge the battery of a phone by connecting it directly to ac power supply. (0.5 marks) The mobile devices require a 5V DC to get charged. Connecting the battery 4\n\n8\n\ndirectly to 220V ac power supply will cause an excess flow of current produces a large amount of heat which can destroy the phone.\n(0.5 marks)\n\n(b) D1 is reverse biased, hence the width of its depletion region increases, and the potential barrier also increases. (0.5 marks) (0.5 marks)\nOR The secondary coil of the transformer provides alternating current. Hence if the battery of the phone is directly connected to the output terminals of the transformer, for one-half cycle the battery will get charged and for the next half, it will get discharged. (0.5 marks) Hence, the charging of the battery will not take place. (0.5 marks)\n(c) Both D1 and D2 will be forward-biased for one-half of the cycle of ac voltage and reverse-biased for the next half cycle.\nHence, the combination of D1 and D2 behaves as a half-wave rectifier. (1 mark) Thus only one-half of the ac voltage gets rectified in a cycle. (0.5 marks) Hence, the frequency of output voltage will be 50 Hz. (0.5 marks)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 1.0,
+          "criterion": "Criterion 7 (1 mark)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "Criterion 9 (0.5 marks)",
+          "step_number": 9
+        }
+      ],
+      "keyTerms": [
+        "Read",
+        "following",
+        "paragraph",
+        "answer"
+      ],
+      "question_text": "Read the following paragraph and answer the questions that follow. 4\n\n12\n\nFor most mobile devices, the voltage to recharge the battery is typically 5 volts of direct current. In India, the current supplied to our homes is alternating current at 220V and at a frequency of 50 Hz. Fatima designed a simplified version of a mobile phone charger. She made a circuit using a centre tap transformer and two similar silicon diodes D1 and D2 as shown below. Study the diagram below and answer the questions that follow.\n\n(a) Can Fatima also charge the battery of a phone by connecting the battery directly to the ac power supply? Give reason.\n(b) The graph of the potential barrier (V) vs width of the depletion region (x), when D1 is unbiased at room temperature, is shown below.\n\nPlot a comparative graph of the potential barrier (V) vs width of the depletion region (x) of D1 at room temperature when the voltage at A is negative with respect to voltage at centre tap. Give reason.\nOR If the battery of the phone is directly connected to the output terminals of the secondary coil of the transformer, will it get charged? Justify your answer.\n(c) What will be the output frequency across the phone's battery when the orientation of D2 is reversed in fig. 1 and the centre-tapped three-output transformer is replaced by a two-output step-down transformer? Justify your answer.",
+      "subject_id": "physics",
+      "chapter_name": "Alternating Current",
+      "model_answer": "(a) No, Fatima cannot charge the battery of a phone by connecting it directly to ac power supply. (0.5 marks) The mobile devices require a 5V DC to get charged. Connecting the battery 4\n\n8\n\ndirectly to 220V ac power supply will cause an excess flow of current produces a large amount of heat which can destroy the phone.\n(0.5 marks)\n\n(b) D1 is reverse biased, hence the width of its depletion region increases, and the potential barrier also increases. (0.5 marks) (0.5 marks)\nOR The secondary coil of the transformer provides alternating current. Hence if the battery of the phone is directly connected to the output terminals of the transformer, for one-half cycle the battery will get charged and for the next half, it will get discharged. (0.5 marks) Hence, the charging of the battery will not take place. (0.5 marks)\n(c) Both D1 and D2 will be forward-biased for one-half of the cycle of ac voltage and reverse-biased for the next half cycle.\nHence, the combination of D1 and D2 behaves as a half-wave rectifier. (1 mark) Thus only one-half of the ac voltage gets rectified in a cycle. (0.5 marks) Hence, the frequency of output voltage will be 50 Hz. (0.5 marks)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 1.0,
+          "criterion": "Criterion 7 (1 mark)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "Criterion 9 (0.5 marks)",
+          "step_number": 9
+        }
+      ],
+      "key_terms": [
+        "Read",
+        "following",
+        "paragraph",
+        "answer"
+      ]
+    },
+    {
+      "id": "physics_pq1_q30",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "case",
+      "marks": 4,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "Read the following paragraph and answer the questions that follow.\nWhen light rays fall on glass, about 4% of the light gets reflected. To eliminate this reflection, the glass display cases in museums usually have an anti-reflective coating.\nThis works on the principle of interference. When light falls on the coated glass, the light gets reflected from the top and bottom surfaces of the coating and these two reflected light rays can interfere. To reduce reflection, the thickness and refractive index of the coating are adjusted such that the light rays undergo destructive interference.\n4\n\n13\n\nReflected light undergoes a 180° phase shift when it falls on a denser medium from a rarer medium and no phase shift when it falls on a rarer medium from a denser medium. (Note: The thickness of coating is much less than the glass.) To answer the questions below, consider a monochromatic light of wavelength λ incident on the coating of thickness t at a small angle of incidence and n1<n2<n3. Also Consider PQ ≈ t.\n(i) Which of the following occurs, if there is no coating on the glass?\nA. The object behind the case looks distorted.\nB. The colours of the object behind the glass case appear dull.\nC. A reflection of the objects in front of the glass case is seen on the case.\nD. Multiple reflections of the object behind the glass case are seen on the case\n(ii) What is the path difference between rays 1 and 2? (Consider PQ ≈ t.) A. t B. 2t C. λ D. 2 λ\n(iii) For what minimum thickness of the coating, do the two rays 1 and 2 undergo destructive interference? (Remember the wavelength of the light ray changes as it moves from one media to another.) A. n2 λ/2 B. n2 λ/4 C. λ/(2n2) D. λ/(4n2)\n\nOR\n\nFor what minimum thickness of the coating, do the two rays 1 and 2 undergo constructive interference? (Remember the wavelength of the light ray changes as it moves from one media to another.) A. n2 λ B. n2 λ/2 C. λ/(n2) D. λ/(2n2)\n(iv) If the material of the coating is changed such that n2>n3, what will be the additional path difference compared to the path difference identified in question (b)?\nA. t B. π C. λ/2 D. (There will be NO additional path difference.)",
+      "modelAnswer": "(i) C. A reflection of the objects in front of the glass case is seen on the case.\n(ii) B. 2t\n(iii) D. λ/4n2\nOR D. λ/2n2\n(iv) λ/2",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Read",
+        "following",
+        "paragraph",
+        "answer"
+      ],
+      "question_text": "Read the following paragraph and answer the questions that follow.\nWhen light rays fall on glass, about 4% of the light gets reflected. To eliminate this reflection, the glass display cases in museums usually have an anti-reflective coating.\nThis works on the principle of interference. When light falls on the coated glass, the light gets reflected from the top and bottom surfaces of the coating and these two reflected light rays can interfere. To reduce reflection, the thickness and refractive index of the coating are adjusted such that the light rays undergo destructive interference.\n4\n\n13\n\nReflected light undergoes a 180° phase shift when it falls on a denser medium from a rarer medium and no phase shift when it falls on a rarer medium from a denser medium. (Note: The thickness of coating is much less than the glass.) To answer the questions below, consider a monochromatic light of wavelength λ incident on the coating of thickness t at a small angle of incidence and n1<n2<n3. Also Consider PQ ≈ t.\n(i) Which of the following occurs, if there is no coating on the glass?\nA. The object behind the case looks distorted.\nB. The colours of the object behind the glass case appear dull.\nC. A reflection of the objects in front of the glass case is seen on the case.\nD. Multiple reflections of the object behind the glass case are seen on the case\n(ii) What is the path difference between rays 1 and 2? (Consider PQ ≈ t.) A. t B. 2t C. λ D. 2 λ\n(iii) For what minimum thickness of the coating, do the two rays 1 and 2 undergo destructive interference? (Remember the wavelength of the light ray changes as it moves from one media to another.) A. n2 λ/2 B. n2 λ/4 C. λ/(2n2) D. λ/(4n2)\n\nOR\n\nFor what minimum thickness of the coating, do the two rays 1 and 2 undergo constructive interference? (Remember the wavelength of the light ray changes as it moves from one media to another.) A. n2 λ B. n2 λ/2 C. λ/(n2) D. λ/(2n2)\n(iv) If the material of the coating is changed such that n2>n3, what will be the additional path difference compared to the path difference identified in question (b)?\nA. t B. π C. λ/2 D. (There will be NO additional path difference.)",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "(i) C. A reflection of the objects in front of the glass case is seen on the case.\n(ii) B. 2t\n(iii) D. λ/4n2\nOR D. λ/2n2\n(iv) λ/2",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Read",
+        "following",
+        "paragraph",
+        "answer"
+      ]
+    },
+    {
+      "id": "physics_pq1_q31",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "(a) A ray of light is incident at angle θ on a right-angled prism at point X. At point Y, it emerges along the prism surface. Calculate the refractive index of the prism in terms of the incident angle.\n\n(b) Show that for an equilateral prism kept in air, minimum deviation occurs when the angle of incidence i = sin-1(n/2), where n is the refractive index of the material of the prism.\n\nOR\n\n(a) A Young's double slit setup is illuminated with monochromatic light. If the intensity of light passing through one of the slits is reduced, explain the changes that can be seen in the appearance of the bright and dark fringes?\n\n(b) (i) A single slit diffraction setup is illuminated with green light of wavelength 500 nm. If the width of the slit is 1 mm and the screen is 2 m away from the slits, calculate the width of the central maximum.\n(ii) What will happen to the width of the central maximum, if the green light is replaced with the red light? Give a reason for your answer.\n5\n\n15\n\n(c) A student wishes to study the diffraction of sound using the single slit setup. He replaces the light source with a sound source. What other change should he do to study the diffraction pattern?",
+      "modelAnswer": "(a)\n\nAt the 1st surface, using Snell's law sin θ = n sin r1 5\n\n9\n\nsin r1 = sin θ/n (0.5 marks)\n\nr2= A - r1 = 90 - r1 (0.5 marks)\n\nAt the second interface, sin r2 = sin 90/n sin r2 = 1/n (0.5 marks)\n\nsin (90 - r1) = 1/n cos r1 = 1/n (0.5 marks)\n\nSquaring both sides cos2r1 = 1/n2 1 - sin2r1 = 1/n2 1 - (sin2θ/n2) = 1/n2 Solving, n = √(1+sin2θ) (1 mark)\n\n(b) For an equilateral prism A = 60° (0.5 marks) Using Snell's law at the first surface, sin i = n sin r (0.5 marks)\n\nAt minimum deviation r = A/2 = 60/2 = 30° (0.5 marks)\n\nsin i = n sin(30) sin i = n(1/2) i = sin-1(n/2) (0.5 marks)\nOR (a) The bright fringes will appear less bright because the intensity of light from one of the slits is reduced. (1 mark)\n\nThe dark fringes will appear less dark/brighter because the intensity of light from the two slits is not the same and the intensities do not completely cancel each other out. (1 mark)\n\n(b) (i) λ = 500 nm = 500 x 10-9 m; D = 2 m; d= 1 mm = 1 x 10-3 m\n\nWidth of central maximum = 2λD/d (0.5 marks) =2 x 500 x 10-9 x 2/(1 x 10-3) = 2 mm (0.5 marks)\n\n(ii) Since the wavelength of red light is more the green light and the width of the central maximum is directly proportional to wavelength, the width of the central maximum will increase when red light is used. (1 mark for full answer.)\n\n(c) (i) Increase slit width, so that the slit width is comparable to the wavelength of sound. (0.5 marks)\n(ii) Replace the screen with a sound detector. (0.5 marks) 5",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 1.0,
+          "criterion": "Criterion 5 (1 mark)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "Criterion 7 (0.5 marks)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "Criterion 9 (0.5 marks)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 1.0,
+          "criterion": "Criterion 10 (1 mark)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 1.0,
+          "criterion": "Criterion 11 (1 mark)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 0.5,
+          "criterion": "Criterion 12 (0.5 marks)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 0.5,
+          "criterion": "Criterion 14 (0.5 marks)",
+          "step_number": 14
+        },
+        {
+          "stepNumber": 15,
+          "marks": 0.5,
+          "criterion": "Criterion 15 (0.5 marks)",
+          "step_number": 15
+        }
+      ],
+      "keyTerms": [
+        "light",
+        "incident",
+        "angle",
+        "right"
+      ],
+      "question_text": "(a) A ray of light is incident at angle θ on a right-angled prism at point X. At point Y, it emerges along the prism surface. Calculate the refractive index of the prism in terms of the incident angle.\n\n(b) Show that for an equilateral prism kept in air, minimum deviation occurs when the angle of incidence i = sin-1(n/2), where n is the refractive index of the material of the prism.\n\nOR\n\n(a) A Young's double slit setup is illuminated with monochromatic light. If the intensity of light passing through one of the slits is reduced, explain the changes that can be seen in the appearance of the bright and dark fringes?\n\n(b) (i) A single slit diffraction setup is illuminated with green light of wavelength 500 nm. If the width of the slit is 1 mm and the screen is 2 m away from the slits, calculate the width of the central maximum.\n(ii) What will happen to the width of the central maximum, if the green light is replaced with the red light? Give a reason for your answer.\n5\n\n15\n\n(c) A student wishes to study the diffraction of sound using the single slit setup. He replaces the light source with a sound source. What other change should he do to study the diffraction pattern?",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "(a)\n\nAt the 1st surface, using Snell's law sin θ = n sin r1 5\n\n9\n\nsin r1 = sin θ/n (0.5 marks)\n\nr2= A - r1 = 90 - r1 (0.5 marks)\n\nAt the second interface, sin r2 = sin 90/n sin r2 = 1/n (0.5 marks)\n\nsin (90 - r1) = 1/n cos r1 = 1/n (0.5 marks)\n\nSquaring both sides cos2r1 = 1/n2 1 - sin2r1 = 1/n2 1 - (sin2θ/n2) = 1/n2 Solving, n = √(1+sin2θ) (1 mark)\n\n(b) For an equilateral prism A = 60° (0.5 marks) Using Snell's law at the first surface, sin i = n sin r (0.5 marks)\n\nAt minimum deviation r = A/2 = 60/2 = 30° (0.5 marks)\n\nsin i = n sin(30) sin i = n(1/2) i = sin-1(n/2) (0.5 marks)\nOR (a) The bright fringes will appear less bright because the intensity of light from one of the slits is reduced. (1 mark)\n\nThe dark fringes will appear less dark/brighter because the intensity of light from the two slits is not the same and the intensities do not completely cancel each other out. (1 mark)\n\n(b) (i) λ = 500 nm = 500 x 10-9 m; D = 2 m; d= 1 mm = 1 x 10-3 m\n\nWidth of central maximum = 2λD/d (0.5 marks) =2 x 500 x 10-9 x 2/(1 x 10-3) = 2 mm (0.5 marks)\n\n(ii) Since the wavelength of red light is more the green light and the width of the central maximum is directly proportional to wavelength, the width of the central maximum will increase when red light is used. (1 mark for full answer.)\n\n(c) (i) Increase slit width, so that the slit width is comparable to the wavelength of sound. (0.5 marks)\n(ii) Replace the screen with a sound detector. (0.5 marks) 5",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 1.0,
+          "criterion": "Criterion 5 (1 mark)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "Criterion 7 (0.5 marks)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 0.5,
+          "criterion": "Criterion 9 (0.5 marks)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 1.0,
+          "criterion": "Criterion 10 (1 mark)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 1.0,
+          "criterion": "Criterion 11 (1 mark)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 0.5,
+          "criterion": "Criterion 12 (0.5 marks)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 0.5,
+          "criterion": "Criterion 14 (0.5 marks)",
+          "step_number": 14
+        },
+        {
+          "stepNumber": 15,
+          "marks": 0.5,
+          "criterion": "Criterion 15 (0.5 marks)",
+          "step_number": 15
+        }
+      ],
+      "key_terms": [
+        "light",
+        "incident",
+        "angle",
+        "right"
+      ]
+    },
+    {
+      "id": "physics_pq1_q32",
+      "subjectId": "physics",
+      "chapterName": "Electrostatic Potential And Capacitance",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "(a) A camera usually operates at 1.5 V and this potential difference is not sufficient to emit light energy using flash. For this purpose, the flash circuit of the camera has a capacitor that is charged to 300 V-330 V using various electrical components. If the voltage generated across the plates of the capacitor is 300 V and the capacitance of the parallel plate capacitor used is 100 µF, then find the energy released when the trigger button on the camera is pressed.\n(a) How much charge does the 100 µF capacitor charged to 300 V hold?\n(b) If the distance between the parallel plate capacitor of capacitance 100 µF is increased two times, then calculate the capacitance of the capacitor.\n\n(c) The graph below shows the variation of charge 'q' with potential difference 'V' for a parallel plate capacitor 'C' for scenarios P and Q.\nScenario P - the space between the capacitor 'C' is filled with air.\nScenario Q - the space between the capacitor 'C' is filled with a substance of dielectric constant K.\nWhich of the two lines A or B corresponds to scenario Q? Give a reason for your answer.\n\nOR\n(a) Find the effective capacitance between points P and Q, if each capacitor has a capacitance of 6µF.\n5\n\n16\n\n(b) Find the ratio of charges on capacitors C1 and C4, if the potential difference between points P and Q is 10 V.",
+      "modelAnswer": "(a) V = 300 V C = 100 µF Energy = 1/2 CV2 (0.5 marks) = 1/2 × 100 × 10-6 (300)2 = 4.5 J (0.5 marks)\n\n(b) q = CV (0.5 marks) q = 100 × 10-6 × 300 = 0.03 C (0.5 marks)\n(c) Capacitance of a parallel plate capacitor C = (∈0 A)/d (0.5 marks) C = 100 µF d' = 2d C' = (∈0 A)/d' C' = (∈0 A)/2d = 100/2 = 50 µF\n\nHence, if the distance between the plates of the capacitor is increased two times the capacitance of the capacitor decreases by 1/2 ie becomes 50 µF. (0.5 marks)\n(c) The slope of the q vs V graph gives the capacitance of a parallel plate capacitor.\nWhen the space between the plates of a capacitor is filled with a substance of dielectric constant K, its capacitance increases K times. (0.5 marks) Greater the slope of the q vs V graph, the higher the capacitance. (0.5 marks) As line A has a greater slope it represents greater capacitance and corresponds to scenario (1 mark)\n\n5\nOR (a) The arrangement of capacitors is equivalent to:\n\nC1 and C3 are in parallel.\nCp = 6 + 6 = 12 µF Cp and C2 are in series (0.5 marks) 1/Cs = 1/12 + 1/6 = 1/12 + 2/12 = 3/12 Cs = 4 µF (0.5 marks) Cs and C4 are in parallel 5\n\n11\n\nCnet = 4 + 6 = 10 µF (1 mark)\n(b) We know that C = Q/V Charge on C4 Q4 = 10 x 6 = 60 µC (0.5 marks) Net capacitance of C1 and C3 = 6 + 6 = 12 µF Net capacitance of C1, C3 ,and C2 is :\n1/C = 1/12 + 1/6 = 3/12 = 1/4 C = 4 µF Net charge across C1, and C3 ,and C2 Q = C V = 4 x 10 = 40 µC (0.5 marks) Since the charge in the series combination is the same, Net charge across C1 and C3 = 40 µC (0.5 marks)\n\nPotential across C1 and C3 = Q/C = 40/12 = 10/3 V Charge across C1 Q1 = C1 × V = 6 x 10/3 = 20 µC (0.5 marks) Ratio of charges across C1 and C4 Q1/ Q4 = 20/60 = 1:3 (1 mark)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "Criterion 7 (0.5 marks)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 1.0,
+          "criterion": "Criterion 9 (1 mark)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 0.5,
+          "criterion": "Criterion 10 (0.5 marks)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 0.5,
+          "criterion": "Criterion 11 (0.5 marks)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 1.0,
+          "criterion": "Criterion 12 (1 mark)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 0.5,
+          "criterion": "Criterion 14 (0.5 marks)",
+          "step_number": 14
+        },
+        {
+          "stepNumber": 15,
+          "marks": 0.5,
+          "criterion": "Criterion 15 (0.5 marks)",
+          "step_number": 15
+        },
+        {
+          "stepNumber": 16,
+          "marks": 0.5,
+          "criterion": "Criterion 16 (0.5 marks)",
+          "step_number": 16
+        },
+        {
+          "stepNumber": 17,
+          "marks": 1.0,
+          "criterion": "Criterion 17 (1 mark)",
+          "step_number": 17
+        }
+      ],
+      "keyTerms": [
+        "camera",
+        "usually",
+        "operates",
+        "this"
+      ],
+      "question_text": "(a) A camera usually operates at 1.5 V and this potential difference is not sufficient to emit light energy using flash. For this purpose, the flash circuit of the camera has a capacitor that is charged to 300 V-330 V using various electrical components. If the voltage generated across the plates of the capacitor is 300 V and the capacitance of the parallel plate capacitor used is 100 µF, then find the energy released when the trigger button on the camera is pressed.\n(a) How much charge does the 100 µF capacitor charged to 300 V hold?\n(b) If the distance between the parallel plate capacitor of capacitance 100 µF is increased two times, then calculate the capacitance of the capacitor.\n\n(c) The graph below shows the variation of charge 'q' with potential difference 'V' for a parallel plate capacitor 'C' for scenarios P and Q.\nScenario P - the space between the capacitor 'C' is filled with air.\nScenario Q - the space between the capacitor 'C' is filled with a substance of dielectric constant K.\nWhich of the two lines A or B corresponds to scenario Q? Give a reason for your answer.\n\nOR\n(a) Find the effective capacitance between points P and Q, if each capacitor has a capacitance of 6µF.\n5\n\n16\n\n(b) Find the ratio of charges on capacitors C1 and C4, if the potential difference between points P and Q is 10 V.",
+      "subject_id": "physics",
+      "chapter_name": "Electrostatic Potential And Capacitance",
+      "model_answer": "(a) V = 300 V C = 100 µF Energy = 1/2 CV2 (0.5 marks) = 1/2 × 100 × 10-6 (300)2 = 4.5 J (0.5 marks)\n\n(b) q = CV (0.5 marks) q = 100 × 10-6 × 300 = 0.03 C (0.5 marks)\n(c) Capacitance of a parallel plate capacitor C = (∈0 A)/d (0.5 marks) C = 100 µF d' = 2d C' = (∈0 A)/d' C' = (∈0 A)/2d = 100/2 = 50 µF\n\nHence, if the distance between the plates of the capacitor is increased two times the capacitance of the capacitor decreases by 1/2 ie becomes 50 µF. (0.5 marks)\n(c) The slope of the q vs V graph gives the capacitance of a parallel plate capacitor.\nWhen the space between the plates of a capacitor is filled with a substance of dielectric constant K, its capacitance increases K times. (0.5 marks) Greater the slope of the q vs V graph, the higher the capacitance. (0.5 marks) As line A has a greater slope it represents greater capacitance and corresponds to scenario (1 mark)\n\n5\nOR (a) The arrangement of capacitors is equivalent to:\n\nC1 and C3 are in parallel.\nCp = 6 + 6 = 12 µF Cp and C2 are in series (0.5 marks) 1/Cs = 1/12 + 1/6 = 1/12 + 2/12 = 3/12 Cs = 4 µF (0.5 marks) Cs and C4 are in parallel 5\n\n11\n\nCnet = 4 + 6 = 10 µF (1 mark)\n(b) We know that C = Q/V Charge on C4 Q4 = 10 x 6 = 60 µC (0.5 marks) Net capacitance of C1 and C3 = 6 + 6 = 12 µF Net capacitance of C1, C3 ,and C2 is :\n1/C = 1/12 + 1/6 = 3/12 = 1/4 C = 4 µF Net charge across C1, and C3 ,and C2 Q = C V = 4 x 10 = 40 µC (0.5 marks) Since the charge in the series combination is the same, Net charge across C1 and C3 = 40 µC (0.5 marks)\n\nPotential across C1 and C3 = Q/C = 40/12 = 10/3 V Charge across C1 Q1 = C1 × V = 6 x 10/3 = 20 µC (0.5 marks) Ratio of charges across C1 and C4 Q1/ Q4 = 20/60 = 1:3 (1 mark)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 0.5,
+          "criterion": "Criterion 7 (0.5 marks)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 0.5,
+          "criterion": "Criterion 8 (0.5 marks)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 1.0,
+          "criterion": "Criterion 9 (1 mark)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 0.5,
+          "criterion": "Criterion 10 (0.5 marks)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 0.5,
+          "criterion": "Criterion 11 (0.5 marks)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 1.0,
+          "criterion": "Criterion 12 (1 mark)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 0.5,
+          "criterion": "Criterion 14 (0.5 marks)",
+          "step_number": 14
+        },
+        {
+          "stepNumber": 15,
+          "marks": 0.5,
+          "criterion": "Criterion 15 (0.5 marks)",
+          "step_number": 15
+        },
+        {
+          "stepNumber": 16,
+          "marks": 0.5,
+          "criterion": "Criterion 16 (0.5 marks)",
+          "step_number": 16
+        },
+        {
+          "stepNumber": 17,
+          "marks": 1.0,
+          "criterion": "Criterion 17 (1 mark)",
+          "step_number": 17
+        }
+      ],
+      "key_terms": [
+        "camera",
+        "usually",
+        "operates",
+        "this"
+      ]
+    },
+    {
+      "id": "physics_pq1_q33",
+      "subjectId": "physics",
+      "chapterName": "Alternating Current",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ1)",
+      "questionText": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt.\nThe graph below represents the variation of inductive reactance (XL) of the inductor with the frequency of an alternating source.\n\n(a) What is the self-inductance of the inductor?\n(b) If the ac source is replaced by a battery such that V = 100 V, then what is the inductive reactance of the inductor? Give reason.\n(c) When the frequency is 50 Hz, what is the average power dissipated by the inductor over a complete cycle in the circuit? Justify your answer.\n(d) This inductor is connected in series with a resistance of 15 Ω and a capacitor of 5 μF. The frequency of the alternating source is varied such that the power dissipated in the circuit becomes maximum. Calculate the frequency and the phase difference between alternating voltage and current when the power dissipated is the maximum.\nOR An ideal transformer having a ferromagnetic core consists of two coils having 500 turns (primary) and 50 turns (secondary) respectively.\n(a) What is the voltage across the secondary coil, if the rms voltage across the primary coil is 240 V?\n(b) What will be the individual currents in the two coils (primary and secondary), if the secondary has a resistive load of 20 ohms?\n5",
+      "modelAnswer": "(a) XL = 2πf L (0.5 marks) L = XL /2πf L = 20/(2 × 3.14 × 100) = 0.032 H (0.5 marks)\n(b) A battery is a source of direct current and thus f = 0 Hz. (0.5 marks) As XL = 2πfL, the inductive reactance of the inductor becomes zero. (0.5 marks)\n\n(c) Pavg = VrmsIrms cosφ where φ is the phase difference between current and voltage in the circuit.\nPhase difference is 90° for pure inductive circuit. (0.5 marks) ∴Pavg= 0 (0.5 marks)\n\n(d) Power dissipated in an LCR circuit is maximum when XL= XC f = 1/2π√(LC) f = 0.398 × 103 Hz f = 398 Hz (1 mark) Under this condition of resonance, the circuit behaves as a pure resistive circuit.\nHence phase difference between current and voltage is 0°. (1 mark) 5\nOR (a) The voltage across the secondary coil is given by:\nNp/Ns = Vp/Vs (1 mark) where Np = 500, Ns = 50 and Vp = 240 V Therefore, Vs = Vp x (Ns/Np) 5\n\n12\n\n= 240 x (50/500) = 24 V (1 mark)\n(b) Current in the secondary coil is given by:\nIs = Vs/Rs (0.5 marks) where Vs = 24 V and Rs = 20 ohms Therefore, Is = 24/20 = 1.2 A (1 mark)\n\nCurrent in the primary coil is given by:\nIp/Is = Ns/Np (0.5 marks) where Is = 1.2 A, Ns = 500 and Np = 50 Therefore, Ip = (Ns/Np) x (Is) = (50/500) x (1.2) = 0.12 A (1 mark)",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 1.0,
+          "criterion": "Criterion 7 (1 mark)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 1.0,
+          "criterion": "Criterion 8 (1 mark)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 1.0,
+          "criterion": "Criterion 9 (1 mark)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 1.0,
+          "criterion": "Criterion 10 (1 mark)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 0.5,
+          "criterion": "Criterion 11 (0.5 marks)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 1.0,
+          "criterion": "Criterion 12 (1 mark)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 1.0,
+          "criterion": "Criterion 14 (1 mark)",
+          "step_number": 14
+        }
+      ],
+      "keyTerms": [
+        "inductor",
+        "inductance",
+        "connected",
+        "source"
+      ],
+      "question_text": "An inductor of inductance 'L' is connected to an AC source, V = 100 sin ωt.\nThe graph below represents the variation of inductive reactance (XL) of the inductor with the frequency of an alternating source.\n\n(a) What is the self-inductance of the inductor?\n(b) If the ac source is replaced by a battery such that V = 100 V, then what is the inductive reactance of the inductor? Give reason.\n(c) When the frequency is 50 Hz, what is the average power dissipated by the inductor over a complete cycle in the circuit? Justify your answer.\n(d) This inductor is connected in series with a resistance of 15 Ω and a capacitor of 5 μF. The frequency of the alternating source is varied such that the power dissipated in the circuit becomes maximum. Calculate the frequency and the phase difference between alternating voltage and current when the power dissipated is the maximum.\nOR An ideal transformer having a ferromagnetic core consists of two coils having 500 turns (primary) and 50 turns (secondary) respectively.\n(a) What is the voltage across the secondary coil, if the rms voltage across the primary coil is 240 V?\n(b) What will be the individual currents in the two coils (primary and secondary), if the secondary has a resistive load of 20 ohms?\n5",
+      "subject_id": "physics",
+      "chapter_name": "Alternating Current",
+      "model_answer": "(a) XL = 2πf L (0.5 marks) L = XL /2πf L = 20/(2 × 3.14 × 100) = 0.032 H (0.5 marks)\n(b) A battery is a source of direct current and thus f = 0 Hz. (0.5 marks) As XL = 2πfL, the inductive reactance of the inductor becomes zero. (0.5 marks)\n\n(c) Pavg = VrmsIrms cosφ where φ is the phase difference between current and voltage in the circuit.\nPhase difference is 90° for pure inductive circuit. (0.5 marks) ∴Pavg= 0 (0.5 marks)\n\n(d) Power dissipated in an LCR circuit is maximum when XL= XC f = 1/2π√(LC) f = 0.398 × 103 Hz f = 398 Hz (1 mark) Under this condition of resonance, the circuit behaves as a pure resistive circuit.\nHence phase difference between current and voltage is 0°. (1 mark) 5\nOR (a) The voltage across the secondary coil is given by:\nNp/Ns = Vp/Vs (1 mark) where Np = 500, Ns = 50 and Vp = 240 V Therefore, Vs = Vp x (Ns/Np) 5\n\n12\n\n= 240 x (50/500) = 24 V (1 mark)\n(b) Current in the secondary coil is given by:\nIs = Vs/Rs (0.5 marks) where Vs = 24 V and Rs = 20 ohms Therefore, Is = 24/20 = 1.2 A (1 mark)\n\nCurrent in the primary coil is given by:\nIp/Is = Ns/Np (0.5 marks) where Is = 1.2 A, Ns = 500 and Np = 50 Therefore, Ip = (Ns/Np) x (Is) = (50/500) x (1.2) = 0.12 A (1 mark)",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 0.5,
+          "criterion": "Criterion 1 (0.5 marks)",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 0.5,
+          "criterion": "Criterion 2 (0.5 marks)",
+          "step_number": 2
+        },
+        {
+          "stepNumber": 3,
+          "marks": 0.5,
+          "criterion": "Criterion 3 (0.5 marks)",
+          "step_number": 3
+        },
+        {
+          "stepNumber": 4,
+          "marks": 0.5,
+          "criterion": "Criterion 4 (0.5 marks)",
+          "step_number": 4
+        },
+        {
+          "stepNumber": 5,
+          "marks": 0.5,
+          "criterion": "Criterion 5 (0.5 marks)",
+          "step_number": 5
+        },
+        {
+          "stepNumber": 6,
+          "marks": 0.5,
+          "criterion": "Criterion 6 (0.5 marks)",
+          "step_number": 6
+        },
+        {
+          "stepNumber": 7,
+          "marks": 1.0,
+          "criterion": "Criterion 7 (1 mark)",
+          "step_number": 7
+        },
+        {
+          "stepNumber": 8,
+          "marks": 1.0,
+          "criterion": "Criterion 8 (1 mark)",
+          "step_number": 8
+        },
+        {
+          "stepNumber": 9,
+          "marks": 1.0,
+          "criterion": "Criterion 9 (1 mark)",
+          "step_number": 9
+        },
+        {
+          "stepNumber": 10,
+          "marks": 1.0,
+          "criterion": "Criterion 10 (1 mark)",
+          "step_number": 10
+        },
+        {
+          "stepNumber": 11,
+          "marks": 0.5,
+          "criterion": "Criterion 11 (0.5 marks)",
+          "step_number": 11
+        },
+        {
+          "stepNumber": 12,
+          "marks": 1.0,
+          "criterion": "Criterion 12 (1 mark)",
+          "step_number": 12
+        },
+        {
+          "stepNumber": 13,
+          "marks": 0.5,
+          "criterion": "Criterion 13 (0.5 marks)",
+          "step_number": 13
+        },
+        {
+          "stepNumber": 14,
+          "marks": 1.0,
+          "criterion": "Criterion 14 (1 mark)",
+          "step_number": 14
+        }
+      ],
+      "key_terms": [
+        "inductor",
+        "inductance",
+        "connected",
+        "source"
+      ]
+    },
+    {
+      "id": "physics_pq2_q17",
+      "subjectId": "physics",
+      "chapterName": "Dual Nature Of Radiation And Matter",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "The following table gives the value of work function for a few photosensitive metals\n\nIf each of these me tals is expo sed to ra diation of wavelength 4 00nm, name the element/elements not emitting photo electrons and why?\n\nOR\n\nTwo particles A and B of de Broglie wavelengths λ 1 and λ 2 combine to form a particle C. The process conserves momentum. Find the de Brogl ie wavelength of the particle C. (The motion is one dimensional).",
+      "modelAnswer": "E= h c / λ = 1245 / λ(nm) in eV= 1245/ 400 =3.1eV 1 Mo will not emit as work function is more than energy incident 1\n\nOR pc = |pA| + |pB| = h/ λA + h/ λB = h/ λC 1 λC = λA λB / λA +λB 1",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "following",
+        "table",
+        "gives",
+        "work"
+      ],
+      "question_text": "The following table gives the value of work function for a few photosensitive metals\n\nIf each of these me tals is expo sed to ra diation of wavelength 4 00nm, name the element/elements not emitting photo electrons and why?\n\nOR\n\nTwo particles A and B of de Broglie wavelengths λ 1 and λ 2 combine to form a particle C. The process conserves momentum. Find the de Brogl ie wavelength of the particle C. (The motion is one dimensional).",
+      "subject_id": "physics",
+      "chapter_name": "Dual Nature Of Radiation And Matter",
+      "model_answer": "E= h c / λ = 1245 / λ(nm) in eV= 1245/ 400 =3.1eV 1 Mo will not emit as work function is more than energy incident 1\n\nOR pc = |pA| + |pB| = h/ λA + h/ λB = h/ λC 1 λC = λA λB / λA +λB 1",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "following",
+        "table",
+        "gives",
+        "work"
+      ]
+    },
+    {
+      "id": "physics_pq2_q18",
+      "subjectId": "physics",
+      "chapterName": "Alternating Current",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "In a Young's double -slit experiment, the slits are separated by 0.28 mm and the screen is placed\n1.4 m away. The distance between the central bright fringe and the fourth bright fringe is measured to be 1.2 cm. Determine the wavelength of light used in the experiment.\n.",
+      "modelAnswer": "The position of the nth bright fringe nDx d = 1\n\n23(1.2 10 ) (0.28 10 ) 4 1.4 xd nD −−  = =  = 6000 Å 1",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Young",
+        "double",
+        "slit",
+        "experiment"
+      ],
+      "question_text": "In a Young's double -slit experiment, the slits are separated by 0.28 mm and the screen is placed\n1.4 m away. The distance between the central bright fringe and the fourth bright fringe is measured to be 1.2 cm. Determine the wavelength of light used in the experiment.\n.",
+      "subject_id": "physics",
+      "chapter_name": "Alternating Current",
+      "model_answer": "The position of the nth bright fringe nDx d = 1\n\n23(1.2 10 ) (0.28 10 ) 4 1.4 xd nD −−  = =  = 6000 Å 1",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Young",
+        "double",
+        "slit",
+        "experiment"
+      ]
+    },
+    {
+      "id": "physics_pq2_q19",
+      "subjectId": "physics",
+      "chapterName": "Electric Charges And Fields",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Suppose that the electric field part of an electromagnetic wave in vacuum is E= [3.1 N/C] cos [(1.8 rad/m)y + 5.4 × 108 rad/s)t]\n\n(a) What is the direction of propagation of electromagnetic wave?\n(b) What is the wavelength of electromagnetic wave?\n\nS.No Metal Work function(eV)\n1. Na 1.92\n2. K 2.15\n3. Mo 4.17 Page 4 of 7",
+      "modelAnswer": "(a) The direction of motion of the em wave is along negative Y-axis. 1 M\n(b) Given, E = [3.1 N/C] cos [(1.8 rad/m)y + 5.4 × 108 rad/s)t\n\nComparing with E = E0 cos [ky + t] K = 1.8 rad/m,  = 5.4 × 108 rad/s and E0 = 3.1 N/C 1M  = 2π/ k = 3.5m",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Suppose",
+        "that",
+        "electric",
+        "field"
+      ],
+      "question_text": "Suppose that the electric field part of an electromagnetic wave in vacuum is E= [3.1 N/C] cos [(1.8 rad/m)y + 5.4 × 108 rad/s)t]\n\n(a) What is the direction of propagation of electromagnetic wave?\n(b) What is the wavelength of electromagnetic wave?\n\nS.No Metal Work function(eV)\n1. Na 1.92\n2. K 2.15\n3. Mo 4.17 Page 4 of 7",
+      "subject_id": "physics",
+      "chapter_name": "Electric Charges And Fields",
+      "model_answer": "(a) The direction of motion of the em wave is along negative Y-axis. 1 M\n(b) Given, E = [3.1 N/C] cos [(1.8 rad/m)y + 5.4 × 108 rad/s)t\n\nComparing with E = E0 cos [ky + t] K = 1.8 rad/m,  = 5.4 × 108 rad/s and E0 = 3.1 N/C 1M  = 2π/ k = 3.5m",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Suppose",
+        "that",
+        "electric",
+        "field"
+      ]
+    },
+    {
+      "id": "physics_pq2_q20",
+      "subjectId": "physics",
+      "chapterName": "Electrostatic Potential And Capacitance",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Find the electrical potential energy of the two identical nuclei formed just after the fission of a 100X250 nucleus.(R0=1.28 X 10-15)",
+      "modelAnswer": "The electrical potential energy of the two identical nuclei\n\nU= K (50e) (50e) / 2R = 1 = (9 x109 x50 x1.6 x 10-16 x50 x 1.6 x10-16 ) / { 2x1.28 x10-15 x (125)1/3} = 4.5 x 10 – 11 J 1",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Find",
+        "electrical",
+        "potential",
+        "energy"
+      ],
+      "question_text": "Find the electrical potential energy of the two identical nuclei formed just after the fission of a 100X250 nucleus.(R0=1.28 X 10-15)",
+      "subject_id": "physics",
+      "chapter_name": "Electrostatic Potential And Capacitance",
+      "model_answer": "The electrical potential energy of the two identical nuclei\n\nU= K (50e) (50e) / 2R = 1 = (9 x109 x50 x1.6 x 10-16 x50 x 1.6 x10-16 ) / { 2x1.28 x10-15 x (125)1/3} = 4.5 x 10 – 11 J 1",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Find",
+        "electrical",
+        "potential",
+        "energy"
+      ]
+    },
+    {
+      "id": "physics_pq2_q21",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "vsa",
+      "marks": 2,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Two cells of same emf E but internal resistance r1 and r2 are connected in series to an external resistor R (Fig). What should be the value of R so that the potential difference across the terminals of the first cell becomes zero?\nE, r1 E r2\n\n[SECTION C]",
+      "modelAnswer": "I = V1 = E – Ir1 = E – = 0 1 E = , 1 = R =r1 - r2 1",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "cells",
+        "same",
+        "internal",
+        "resistance"
+      ],
+      "question_text": "Two cells of same emf E but internal resistance r1 and r2 are connected in series to an external resistor R (Fig). What should be the value of R so that the potential difference across the terminals of the first cell becomes zero?\nE, r1 E r2\n\n[SECTION C]",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "I = V1 = E – Ir1 = E – = 0 1 E = , 1 = R =r1 - r2 1",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "cells",
+        "same",
+        "internal",
+        "resistance"
+      ]
+    },
+    {
+      "id": "physics_pq2_q22",
+      "subjectId": "physics",
+      "chapterName": "Semiconductor Electronics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) A potential barrier of 0.6 V exists across a semiconductor diode with the depletion region 5 × 10–7 m wide, then what is the intensity of the electric field in this region?\n(a) Draw the output signal a cross R when a square input signal as shown in the figure is applied across the input terminals of the circuit . Assume that the diode is ideal.\n(b) Name the device which acts using unidirectional properties as applicable in previous part.",
+      "modelAnswer": "(a) The electric field intensity is E = V/d, = 7\n0.50 V\n5.0 10 m− =  1.0 × 106 Vm–1. 1\n(b) 1 ( c ) Rectifier 1",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "potential",
+        "barrier",
+        "exists",
+        "across"
+      ],
+      "question_text": "(a) A potential barrier of 0.6 V exists across a semiconductor diode with the depletion region 5 × 10–7 m wide, then what is the intensity of the electric field in this region?\n(a) Draw the output signal a cross R when a square input signal as shown in the figure is applied across the input terminals of the circuit . Assume that the diode is ideal.\n(b) Name the device which acts using unidirectional properties as applicable in previous part.",
+      "subject_id": "physics",
+      "chapter_name": "Semiconductor Electronics",
+      "model_answer": "(a) The electric field intensity is E = V/d, = 7\n0.50 V\n5.0 10 m− =  1.0 × 106 Vm–1. 1\n(b) 1 ( c ) Rectifier 1",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "potential",
+        "barrier",
+        "exists",
+        "across"
+      ]
+    },
+    {
+      "id": "physics_pq2_q23",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Two cells of voltage 10V and 2V and internal resistances 10Ω and 5Ω respectively, are connected as shown in figure. Find the potential difference across R=2Ώ",
+      "modelAnswer": "Applying Kirchhoff's junction rule:\nI1 = I + I2 Kirchhoff's loop rule gives:\n10 = 2I + 10I1 =2I +(10 I +I2 ) 1M 5 = I2 + 6I-------(1) 2 = 5 I2 – 2I ..... (ii) 1M I=5/8A, V= 1.25 Volt 1M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "cells",
+        "voltage",
+        "internal",
+        "resistances"
+      ],
+      "question_text": "Two cells of voltage 10V and 2V and internal resistances 10Ω and 5Ω respectively, are connected as shown in figure. Find the potential difference across R=2Ώ",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "Applying Kirchhoff's junction rule:\nI1 = I + I2 Kirchhoff's loop rule gives:\n10 = 2I + 10I1 =2I +(10 I +I2 ) 1M 5 = I2 + 6I-------(1) 2 = 5 I2 – 2I ..... (ii) 1M I=5/8A, V= 1.25 Volt 1M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "cells",
+        "voltage",
+        "internal",
+        "resistances"
+      ]
+    },
+    {
+      "id": "physics_pq2_q24",
+      "subjectId": "physics",
+      "chapterName": "Wave Optics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) In a single-slit diffraction experiment, the width of the slit is made double the origina l width.\nHow does this affect the size and intensity of the central diffraction band?\n(b) How is the width of the central maximum changed when red light is replaced by blue light?",
+      "modelAnswer": "(a) The width of central maximum=2λD/d When the slit width d is doubled, the width of the central maximum is halved. Its area becomes one fourth and hence the intensity becomes four times the initial intensity. 2M\n(b) When red light is replaced by blue light the linear width of the central maximum decreases because the wavelength of blue light is lesser than that of red light. 1M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "single",
+        "slit",
+        "diffraction",
+        "experiment"
+      ],
+      "question_text": "(a) In a single-slit diffraction experiment, the width of the slit is made double the origina l width.\nHow does this affect the size and intensity of the central diffraction band?\n(b) How is the width of the central maximum changed when red light is replaced by blue light?",
+      "subject_id": "physics",
+      "chapter_name": "Wave Optics",
+      "model_answer": "(a) The width of central maximum=2λD/d When the slit width d is doubled, the width of the central maximum is halved. Its area becomes one fourth and hence the intensity becomes four times the initial intensity. 2M\n(b) When red light is replaced by blue light the linear width of the central maximum decreases because the wavelength of blue light is lesser than that of red light. 1M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "single",
+        "slit",
+        "diffraction",
+        "experiment"
+      ]
+    },
+    {
+      "id": "physics_pq2_q25",
+      "subjectId": "physics",
+      "chapterName": "Semiconductor Electronics",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Draw the energy band diagram when intrinsic semiconductor (Ge32) is doped with impurity atoms of Antimony (Sb51). Name the extrinsic semiconductor so obtained and majority charge carriers in it. Also what will be the ratio n e: nh for the semiconductor so obtained where ne is the number density of electrons and nh is the number density of holes?\nR=2Ώ Page 5 of 7\n\nOR Draw the energy band diagram when intrinsic semiconductor (Si 14) is doped with impurity atoms of Boron (B5).\nName the extrinsic semiconductor so obtained and majority charge carriers in it. Also what will be the ratio ne:nh for the semiconductor so obtained where ne is the number density of electrons and nh is the number density of holes?",
+      "modelAnswer": "3 N type and majority charge carriers are electrons.\nThe number density of electrons to the number density of holes is much greater than 1 for N type semiconductor.\nOR\n\np- type and majority charge carriers are Holes.\nThe number density of electrons to the number density of holes is much smaller than 1 for N type semiconductor.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Draw",
+        "energy",
+        "band",
+        "diagram"
+      ],
+      "question_text": "Draw the energy band diagram when intrinsic semiconductor (Ge32) is doped with impurity atoms of Antimony (Sb51). Name the extrinsic semiconductor so obtained and majority charge carriers in it. Also what will be the ratio n e: nh for the semiconductor so obtained where ne is the number density of electrons and nh is the number density of holes?\nR=2Ώ Page 5 of 7\n\nOR Draw the energy band diagram when intrinsic semiconductor (Si 14) is doped with impurity atoms of Boron (B5).\nName the extrinsic semiconductor so obtained and majority charge carriers in it. Also what will be the ratio ne:nh for the semiconductor so obtained where ne is the number density of electrons and nh is the number density of holes?",
+      "subject_id": "physics",
+      "chapter_name": "Semiconductor Electronics",
+      "model_answer": "3 N type and majority charge carriers are electrons.\nThe number density of electrons to the number density of holes is much greater than 1 for N type semiconductor.\nOR\n\np- type and majority charge carriers are Holes.\nThe number density of electrons to the number density of holes is much smaller than 1 for N type semiconductor.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Draw",
+        "energy",
+        "band",
+        "diagram"
+      ]
+    },
+    {
+      "id": "physics_pq2_q26",
+      "subjectId": "physics",
+      "chapterName": "Magnetism And Matter",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) Out of two magnetic materials A has relative magnetic permeability slightly greater than unity while B has less than unity. Identify the nature of materials A and B. Will their susceptibilities be positive or negative?\n(b)A ball of superconductin g material is dipped in liquid nitrogen and placed near a bar magnet.\nIn which direction will it move and why?",
+      "modelAnswer": "(a) A is Paramagnetic & B is Diamagnetic 1M\n(b)The magnetic susceptibility of A is positive and that of B is negative. 1M\n(c) The ball will move away from the magnet due to diamagnetic behavior. On being brought near a bar magnet, it will be feebly magnetized opposite to the direction of the magnetizing field and thus it will be repelled. 1M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "magnetic",
+        "materials",
+        "relative",
+        "permeability"
+      ],
+      "question_text": "(a) Out of two magnetic materials A has relative magnetic permeability slightly greater than unity while B has less than unity. Identify the nature of materials A and B. Will their susceptibilities be positive or negative?\n(b)A ball of superconductin g material is dipped in liquid nitrogen and placed near a bar magnet.\nIn which direction will it move and why?",
+      "subject_id": "physics",
+      "chapter_name": "Magnetism And Matter",
+      "model_answer": "(a) A is Paramagnetic & B is Diamagnetic 1M\n(b)The magnetic susceptibility of A is positive and that of B is negative. 1M\n(c) The ball will move away from the magnet due to diamagnetic behavior. On being brought near a bar magnet, it will be feebly magnetized opposite to the direction of the magnetizing field and thus it will be repelled. 1M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "magnetic",
+        "materials",
+        "relative",
+        "permeability"
+      ]
+    },
+    {
+      "id": "physics_pq2_q27",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "The distance between two point sources of light is 24 cm. Find out where would you place a converging lens of focal length 9 cm so that the images of both the sources are formed at the same point.",
+      "modelAnswer": "1M\n\nFor the first point source O1\n\n1 1 1 v u f−= , 1 1 1 ( ) 9vx−=− ½ M\n\n1 1 1 9vx=− …(i) For the second point source O2 1 1 1 (24 ) ( 9)vx−= −− ½ M\n\n1 1 1 9 (24 )vx −=+ − …(ii)\n\n3 From equation (i) and (ii),\n\n1 1 1 1 9 9 24xx −− = + − , 1 1 2 (24 ) 9xx+=− , x = 18 cm or 6 cm. 1M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "distance",
+        "between",
+        "point",
+        "sources"
+      ],
+      "question_text": "The distance between two point sources of light is 24 cm. Find out where would you place a converging lens of focal length 9 cm so that the images of both the sources are formed at the same point.",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "1M\n\nFor the first point source O1\n\n1 1 1 v u f−= , 1 1 1 ( ) 9vx−=− ½ M\n\n1 1 1 9vx=− …(i) For the second point source O2 1 1 1 (24 ) ( 9)vx−= −− ½ M\n\n1 1 1 9 (24 )vx −=+ − …(ii)\n\n3 From equation (i) and (ii),\n\n1 1 1 1 9 9 24xx −− = + − , 1 1 2 (24 ) 9xx+=− , x = 18 cm or 6 cm. 1M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "distance",
+        "between",
+        "point",
+        "sources"
+      ]
+    },
+    {
+      "id": "physics_pq2_q28",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "sa",
+      "marks": 3,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) A cell of emf E and internal resistance r is connected with an external resistance R. Show the graphical variation of terminal voltage across the cell versus resistance R. Predict from the graph the condition under which terminal potential difference V becomes equal to the emf.\n\n(b) The voltage between the terminals of a battery is 6V. When a wire is connected acr oss its terminals, it falls to 5.6 V. If one more identical wire is connected between the terminals then what will be new potential difference across the terminals of the battery?\n\n[ SECTION D]",
+      "modelAnswer": "(a) 1 M\n\nThe terminal potential difference, V becomes equal to the emf E when R becomes infinitely large. ½ M\n\n(b) EV RVr −= ½ M\n\nLet after connecting another identical wire between terminals, the potential difference be V.\n\n6 5.6 6 V RR6 V 2 −−    =       V = 5.25 V 1M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "cell",
+        "internal",
+        "resistance",
+        "connected"
+      ],
+      "question_text": "(a) A cell of emf E and internal resistance r is connected with an external resistance R. Show the graphical variation of terminal voltage across the cell versus resistance R. Predict from the graph the condition under which terminal potential difference V becomes equal to the emf.\n\n(b) The voltage between the terminals of a battery is 6V. When a wire is connected acr oss its terminals, it falls to 5.6 V. If one more identical wire is connected between the terminals then what will be new potential difference across the terminals of the battery?\n\n[ SECTION D]",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "(a) 1 M\n\nThe terminal potential difference, V becomes equal to the emf E when R becomes infinitely large. ½ M\n\n(b) EV RVr −= ½ M\n\nLet after connecting another identical wire between terminals, the potential difference be V.\n\n6 5.6 6 V RR6 V 2 −−    =       V = 5.25 V 1M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 1.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 1.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "cell",
+        "internal",
+        "resistance",
+        "connected"
+      ]
+    },
+    {
+      "id": "physics_pq2_q29",
+      "subjectId": "physics",
+      "chapterName": "Current Electricity",
+      "type": "case",
+      "marks": 4,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "A galvanometer is used in an electric circuit to detect current and in some experiments to locate the null point. The galvanometer cannot be used as such to measure the value of current . A galvanometer is a very sensitive device. It gives full scale deflection even for a very small current of the order of few microamperes. On the passage of a large current the galvanometer may get damaged either due to the breaking of the pointer or the coil may burn due the production of the excessive heat. A galvanometer can be converted an ammeter by the use of a shunt resistance.\n\n1. How is a moving coil galvanometer converted into an ammeter of desired range?\n(a) Connecting a shunt resistance in series (b) Connecting a shunt resistance in parallel\n(c) Connecting large resistance in series (d) Connecting a large resistance in parallel\n2. A moving coil galvanometer of resistance G gives a full -scale deflection for a current Ig. It is converted into an ammeter of range 0-I ampere. What should be the value of shunt resistance to convert it into an ammeter of desired range?\nPage 6 of 7\n\n(a)\n(b)\n(c)\n(d)\n\n3. Which one will have the greatest resistance, a micro-ammeter, a milli-ammeter, or an ammeter?\n(a) Microammeter (b) Milliammeter\n(c) Ammeter (d) All will have the same resistance\n4. The sensitivity of a galvanometer is 60 div/ampere. When a shunt resistance is connected its current sensitivity decreases to 10 div/ampere. What will be the shunt resistance if the resistance of the galvanometer is 20ohm?\n(a) 4 ohm (b) 5 ohm (c) 4.5 ohm (d) 5.5 ohm\n\nOR\n\nAn ammeter reads up to 1 ampere. Its internal resistance is 0.81 ohm. To increase the range to 10A, the value of the required shunt is\n(a) 0.9 ohm (b) 0.09 ohm (c) 0.03 ohm (d) 0.3 ohm",
+      "modelAnswer": "1(b) 2(a) 3 (c) 4(a) OR (b) 4",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "galvanometer",
+        "used",
+        "electric",
+        "circuit"
+      ],
+      "question_text": "A galvanometer is used in an electric circuit to detect current and in some experiments to locate the null point. The galvanometer cannot be used as such to measure the value of current . A galvanometer is a very sensitive device. It gives full scale deflection even for a very small current of the order of few microamperes. On the passage of a large current the galvanometer may get damaged either due to the breaking of the pointer or the coil may burn due the production of the excessive heat. A galvanometer can be converted an ammeter by the use of a shunt resistance.\n\n1. How is a moving coil galvanometer converted into an ammeter of desired range?\n(a) Connecting a shunt resistance in series (b) Connecting a shunt resistance in parallel\n(c) Connecting large resistance in series (d) Connecting a large resistance in parallel\n2. A moving coil galvanometer of resistance G gives a full -scale deflection for a current Ig. It is converted into an ammeter of range 0-I ampere. What should be the value of shunt resistance to convert it into an ammeter of desired range?\nPage 6 of 7\n\n(a)\n(b)\n(c)\n(d)\n\n3. Which one will have the greatest resistance, a micro-ammeter, a milli-ammeter, or an ammeter?\n(a) Microammeter (b) Milliammeter\n(c) Ammeter (d) All will have the same resistance\n4. The sensitivity of a galvanometer is 60 div/ampere. When a shunt resistance is connected its current sensitivity decreases to 10 div/ampere. What will be the shunt resistance if the resistance of the galvanometer is 20ohm?\n(a) 4 ohm (b) 5 ohm (c) 4.5 ohm (d) 5.5 ohm\n\nOR\n\nAn ammeter reads up to 1 ampere. Its internal resistance is 0.81 ohm. To increase the range to 10A, the value of the required shunt is\n(a) 0.9 ohm (b) 0.09 ohm (c) 0.03 ohm (d) 0.3 ohm",
+      "subject_id": "physics",
+      "chapter_name": "Current Electricity",
+      "model_answer": "1(b) 2(a) 3 (c) 4(a) OR (b) 4",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "galvanometer",
+        "used",
+        "electric",
+        "circuit"
+      ]
+    },
+    {
+      "id": "physics_pq2_q30",
+      "subjectId": "physics",
+      "chapterName": "Dual Nature Of Radiation And Matter",
+      "type": "case",
+      "marks": 4,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "French physicist Louis Victor de Broglie in 1924 put forward the bold hypothesis that moving particles of matter should display wave -like properties under suitable conditions. He reasoned that nature was symmetrical and that the two basic physical enti ties – matter and energy, must have symmetrical character. If radiation shows dual aspects, so should matter. de Broglie proposed that the wave length λ associated with a particle of momentum p is given as λ=h/p=h/mv. From this equation λ is smaller for a heavier particle (large m) or more energetic particle (large v). de Broglie wavelength of an electron accelerated by a potential difference 'V' can be calculated by λ =12.27√V Å.\n\n1. Which of the following is not an electromagnetic wave?\n(a) Matter wave (b) X Rays (c) Radio wave (d) Ultraviolet\n\n2. The temperature a t which average de -Broglie wavelength of helium atom becomes\n0.5 nm is\n(a) 6.6 K (b) 7.1 K (c) 279.6 K (d) 280.1 K\n\n3. An electron, proton and alpha particle, all are accelerated with same potential difference V volt.\nThe particle with minimum de Broglie wavelength will be\n(a) electron (b) proton (c) alpha particle ( d) deutron\n\nOR\n\nA photon of wavelength  (less than threshold wavelength 0) is incident on a metal surface of work function W0. The de-Broglie wavelength of the ejected electron of mass m is\n(a) 02W hchm  −  (b) 02W h hcm −\n(c) 02W h hcm − (d)\n\nPage 7 of 7\n\n4. Determine the velocity of a de -Broglie wave of wavelength  = h/mv where m is the mass of the particle and v is the velocity of particle.\n(a) (v+c) (b) (c-v) (c)\n(d) where c is the speed of light in vacuum\n\n[SECTION E]",
+      "modelAnswer": "1(a) 2(a) 3 (c) OR (c) 4(d) 4",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "French",
+        "physicist",
+        "Louis",
+        "Victor"
+      ],
+      "question_text": "French physicist Louis Victor de Broglie in 1924 put forward the bold hypothesis that moving particles of matter should display wave -like properties under suitable conditions. He reasoned that nature was symmetrical and that the two basic physical enti ties – matter and energy, must have symmetrical character. If radiation shows dual aspects, so should matter. de Broglie proposed that the wave length λ associated with a particle of momentum p is given as λ=h/p=h/mv. From this equation λ is smaller for a heavier particle (large m) or more energetic particle (large v). de Broglie wavelength of an electron accelerated by a potential difference 'V' can be calculated by λ =12.27√V Å.\n\n1. Which of the following is not an electromagnetic wave?\n(a) Matter wave (b) X Rays (c) Radio wave (d) Ultraviolet\n\n2. The temperature a t which average de -Broglie wavelength of helium atom becomes\n0.5 nm is\n(a) 6.6 K (b) 7.1 K (c) 279.6 K (d) 280.1 K\n\n3. An electron, proton and alpha particle, all are accelerated with same potential difference V volt.\nThe particle with minimum de Broglie wavelength will be\n(a) electron (b) proton (c) alpha particle ( d) deutron\n\nOR\n\nA photon of wavelength  (less than threshold wavelength 0) is incident on a metal surface of work function W0. The de-Broglie wavelength of the ejected electron of mass m is\n(a) 02W hchm  −  (b) 02W h hcm −\n(c) 02W h hcm − (d)\n\nPage 7 of 7\n\n4. Determine the velocity of a de -Broglie wave of wavelength  = h/mv where m is the mass of the particle and v is the velocity of particle.\n(a) (v+c) (b) (c-v) (c)\n(d) where c is the speed of light in vacuum\n\n[SECTION E]",
+      "subject_id": "physics",
+      "chapter_name": "Dual Nature Of Radiation And Matter",
+      "model_answer": "1(a) 2(a) 3 (c) OR (c) 4(d) 4",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.0,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.0,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "French",
+        "physicist",
+        "Louis",
+        "Victor"
+      ]
+    },
+    {
+      "id": "physics_pq2_q31",
+      "subjectId": "physics",
+      "chapterName": "Electrostatic Potential And Capacitance",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) State Gauss's theorem in electrostatics.\n(b) Using Gauss theorem find out an expression for electric field intensity due to uniformly charged infinite plane sheet.\n(c) A body is placed in the form of a right circular cone of dielectric material with base radius R and height h is placed with its base on a horizontal table. A horizontal uniform electric field of magnitude E penetrates the cone. What is the electric flux that enters the body?\nOR\n(a) Sketch the equipotential surfaces due to the charge distribution (i) q1 + q2 = 0 (ii) two identical positive charges.\n\n. (b) Write 3 important characteristics of an equipotential surface.\n(c) The electric potential (in volt) in a region varies with x according to the relation V(x) = 5 + 4x2, where x is in m.\n(i) Is the electric field in the given region uniform?\n(ii) Find the magnitude and direction of the force experienced by a charge of 1C placed at x = –1 m.",
+      "modelAnswer": "(a) The total electric flux coming out of a closed surface is 1/ times the net charge enclosed by it. ½ M\n(b) Electric field due to an infinite plane sheet of charge. Let us consider an infinite thin plane sheet of positive charge having a uniform surface charge density .\nLet P be the point where electric field E is to be found. Let us imagine a cylindrical gaussian surface of length 2r and containing P as shown.\nThe net flux through the cylindrical gaussian surface φ = RCF LCF CS cos 0 cos 0 cos 90EdA EdA EdA+ +    1M = E.A + EA + 0,  = 2 EA ½M\n\n5 The total charge enclosed by the gaussian cylinder = A Using Gauss's theorem, 2 EA = 0 A  , E= 02   1 M\n\n½ M\n\n(b) The flux through an area is EA cos . Here the flux through the cone is the same as that through the triangular section of the cone in a vertical plane passing through the vertex. The area of this triangular section is = 1 2 [2R × h] and is perpendicular to the direction of electric field. ½ M The electric flux is E × 1 2 (2R × h) cos 0° i.e., ERh 1.M\n\nOR\n(a) Equipotential Surfaces 2Marks\n(b) Three Characteristics 1.5Marks\n(c) Numerical 1.5Marks\n\n(a) EQUIPOTENTIAL SURFACES 1+1\n\n(b) 1: Two equipotential surfaces never intersect each other.\n2: The electric field intensity is always at right angles to an equipotential surface.\n3: The work done in moving a test charge from one point to another point on an equipotential surface is always zero. 3x ½ M\n(c) (i) E = 2[5 4 ]dv d xdx dx −− = + E = –8x. this shows that E  x, obviously electric field cannot be uniform. 1M .\n(ii) At x = –1m, E = +8 Vm–1  Force on charge of 1C placed at x =–1 m is 1 × 8 = 8 N ½ M",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "State",
+        "Gauss",
+        "theorem",
+        "electrostatics"
+      ],
+      "question_text": "(a) State Gauss's theorem in electrostatics.\n(b) Using Gauss theorem find out an expression for electric field intensity due to uniformly charged infinite plane sheet.\n(c) A body is placed in the form of a right circular cone of dielectric material with base radius R and height h is placed with its base on a horizontal table. A horizontal uniform electric field of magnitude E penetrates the cone. What is the electric flux that enters the body?\nOR\n(a) Sketch the equipotential surfaces due to the charge distribution (i) q1 + q2 = 0 (ii) two identical positive charges.\n\n. (b) Write 3 important characteristics of an equipotential surface.\n(c) The electric potential (in volt) in a region varies with x according to the relation V(x) = 5 + 4x2, where x is in m.\n(i) Is the electric field in the given region uniform?\n(ii) Find the magnitude and direction of the force experienced by a charge of 1C placed at x = –1 m.",
+      "subject_id": "physics",
+      "chapter_name": "Electrostatic Potential And Capacitance",
+      "model_answer": "(a) The total electric flux coming out of a closed surface is 1/ times the net charge enclosed by it. ½ M\n(b) Electric field due to an infinite plane sheet of charge. Let us consider an infinite thin plane sheet of positive charge having a uniform surface charge density .\nLet P be the point where electric field E is to be found. Let us imagine a cylindrical gaussian surface of length 2r and containing P as shown.\nThe net flux through the cylindrical gaussian surface φ = RCF LCF CS cos 0 cos 0 cos 90EdA EdA EdA+ +    1M = E.A + EA + 0,  = 2 EA ½M\n\n5 The total charge enclosed by the gaussian cylinder = A Using Gauss's theorem, 2 EA = 0 A  , E= 02   1 M\n\n½ M\n\n(b) The flux through an area is EA cos . Here the flux through the cone is the same as that through the triangular section of the cone in a vertical plane passing through the vertex. The area of this triangular section is = 1 2 [2R × h] and is perpendicular to the direction of electric field. ½ M The electric flux is E × 1 2 (2R × h) cos 0° i.e., ERh 1.M\n\nOR\n(a) Equipotential Surfaces 2Marks\n(b) Three Characteristics 1.5Marks\n(c) Numerical 1.5Marks\n\n(a) EQUIPOTENTIAL SURFACES 1+1\n\n(b) 1: Two equipotential surfaces never intersect each other.\n2: The electric field intensity is always at right angles to an equipotential surface.\n3: The work done in moving a test charge from one point to another point on an equipotential surface is always zero. 3x ½ M\n(c) (i) E = 2[5 4 ]dv d xdx dx −− = + E = –8x. this shows that E  x, obviously electric field cannot be uniform. 1M .\n(ii) At x = –1m, E = +8 Vm–1  Force on charge of 1C placed at x =–1 m is 1 × 8 = 8 N ½ M",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "State",
+        "Gauss",
+        "theorem",
+        "electrostatics"
+      ]
+    },
+    {
+      "id": "physics_pq2_q32",
+      "subjectId": "physics",
+      "chapterName": "Ray Optics And Optical Instruments",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "Draw a ray diagram showing the image formation by an astronomical telescope in normal adjustment. Obtain expression for total magnification when the image is formed at infinity.\nA small telescope has an objective lens of focal length 144cm and an eyepiece of focal length 6cm. What is the magnifying power of the telescope and what is the separation between the objective and the eyepiece in normal adjustment?\nOR Draw a ray diagram showing the image formation by a compound microscope when the final image is form ed at the least distance of disti nct vision. Write an expression for the total magnification when the final image is formed at the near point. A compound microscope has an objective of focal length 1.25 cm and eyepiece of focal length 5 cm. A small object is kept at 2.5 cm from the objective. If the final image formed is at infinity, find the distance between the objective and the eyepiece.",
+      "modelAnswer": "Labelled Ray Diagram: 1.5 M Magnification: 1.5M Numerical: 2 M\n\nMagnifying Power:\nM =\n\n= tan tan = …(1) From EAB tan  = AB EA   …(2)  OAB tan  = AB OA   …(3) From equations (1), (2) and (3),\n\nOAM EA =   M = 0 E f u + − … (4) Case: When the final image is formed at infinity.\n\n1 1 1 v u f−= for eyepiece …(5) Required value of v = –, object distance = –uE, focal length = +fE ---(6) From (5) & (6), uE = fE\n\n5\n\n0 E fM f −= M=-144/ 6 =-24 & L = 144 + 6 =150cm.\n\nOR\n\nRay Diagram : 1.5 M Expression : 1M Numerical : 2.5M COMPOUND MICROSCOPE\n\nThe magnifying power of compound microscope for final image formed at near point is M = 0 0E Dv uf − + Given, focal length of objective fO = 1.25 cm Focal length of eyepiece fE = 5 cm For objective\n\n0 1 1 1 ( 2.5) 1.25v −=− v0 = 2.5 cm For eyepiece\n\n= 5 cm. So, if the final image is formed at infinity, then the distance between the objective and the eyepiece is ( v0 + ) i.e.\n7.5 cm.",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "Draw",
+        "diagram",
+        "showing",
+        "image"
+      ],
+      "question_text": "Draw a ray diagram showing the image formation by an astronomical telescope in normal adjustment. Obtain expression for total magnification when the image is formed at infinity.\nA small telescope has an objective lens of focal length 144cm and an eyepiece of focal length 6cm. What is the magnifying power of the telescope and what is the separation between the objective and the eyepiece in normal adjustment?\nOR Draw a ray diagram showing the image formation by a compound microscope when the final image is form ed at the least distance of disti nct vision. Write an expression for the total magnification when the final image is formed at the near point. A compound microscope has an objective of focal length 1.25 cm and eyepiece of focal length 5 cm. A small object is kept at 2.5 cm from the objective. If the final image formed is at infinity, find the distance between the objective and the eyepiece.",
+      "subject_id": "physics",
+      "chapter_name": "Ray Optics And Optical Instruments",
+      "model_answer": "Labelled Ray Diagram: 1.5 M Magnification: 1.5M Numerical: 2 M\n\nMagnifying Power:\nM =\n\n= tan tan = …(1) From EAB tan  = AB EA   …(2)  OAB tan  = AB OA   …(3) From equations (1), (2) and (3),\n\nOAM EA =   M = 0 E f u + − … (4) Case: When the final image is formed at infinity.\n\n1 1 1 v u f−= for eyepiece …(5) Required value of v = –, object distance = –uE, focal length = +fE ---(6) From (5) & (6), uE = fE\n\n5\n\n0 E fM f −= M=-144/ 6 =-24 & L = 144 + 6 =150cm.\n\nOR\n\nRay Diagram : 1.5 M Expression : 1M Numerical : 2.5M COMPOUND MICROSCOPE\n\nThe magnifying power of compound microscope for final image formed at near point is M = 0 0E Dv uf − + Given, focal length of objective fO = 1.25 cm Focal length of eyepiece fE = 5 cm For objective\n\n0 1 1 1 ( 2.5) 1.25v −=− v0 = 2.5 cm For eyepiece\n\n= 5 cm. So, if the final image is formed at infinity, then the distance between the objective and the eyepiece is ( v0 + ) i.e.\n7.5 cm.",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "Draw",
+        "diagram",
+        "showing",
+        "image"
+      ]
+    },
+    {
+      "id": "physics_pq2_q33",
+      "subjectId": "physics",
+      "chapterName": "Alternating Current",
+      "type": "la",
+      "marks": 5,
+      "source": "CBSE Official Practice Questions (PQ2)",
+      "questionText": "(a) A voltage e = e0 sin t applied to a series LCR circuit drives a current i = i0 sin (t + ) in the circuit. Deduce the expression for the average power dissipated in the circuit.\n(b) For circuits used for transporting electric power, a low power factor implies large power loss in transmission. Explain.\n(c) In a series LR circuit, X L = R and the power factor of the circuit is P 1. When a capacitor of capacitance C such that XL = XC is put in series, the power factor becomes P2. Find P1/P2 .\nOR\n(a) A series LCR circuit is connected to an ac source having voltage e = e0 sin t. Derive the expression for the instanta neous current and its phase relationship to the applied voltage.\nObtain the condition for resonance to occur.\n(b) In a series LCR circuit, impedance is the same at two frequencies f1 and f2. Show, that the resonant frequency is 12ff .",
+      "modelAnswer": "(a) Expression for Average Power 3M\n(b) Reason 1M\n(c) Numerical 1M\n\n(a) Average power in an a.c. circuit Let the instantaneous values of alternating emf and current applied to an ac circuit be given by e = e0 sin t and i = i0 sin (t + ) where  is the phase difference between A small work done by the ac source in the circuit in the dt is given by dW = e i d t = e0 i0 sin t sin (t + ) dt The total work done by AC source in one complete cycle is\n\n0 T dW ei dt= = 00 0 sin sin ( ) T e i t t dt   + =  00 0 sin sin cos cos sin T e i t t t dt   +   = 2 0 0 0 000 cos sin sin sin cos TT e i t dt e i t t dt  +    = 0 0 0 0 00 cos (1 cos 2 ) sin sin 222 TTe i e i t dt t dt −  +  \n\nW = 00 cos2 ei T  The average power dissipated per cycle is Pav = 00 cos 22 eiW T =  Pav = ERMS · IRMS cos   True power = Apparent power × Power factor\n(b) To transport a given power, low power factor means large current through the transmission line, resulting in large power loss.\n( c) Case-1 :Given, XL = R Power factor, P1 = 22 L R1 2RX = + Case-2: Given,XL = XC Z = 22 LCR (X X )+− = R Power factor = R R ZR= = 1  1 2 P 1 P 2 =\n\nOR\n\n(a) Phasor Diagram : 1/2 M Expression for Current : 1M Phase angle : 1M Condition for Resonance : 1M\n(b) Proof : 1.5M\n\nAn ac circuit containing an inductor, a capacitor and a resistor in series.\n\nLet an alternating emf e = e0 sin t be applied to LCR series combination.\nLet i be the current in the circuit at any instant of time and V R, VL and VC be the voltages across R, L and C respectively at that instant. Then VR = iR, VL = i XL and VC = i XC Now VR is in phase with i, VL leads i be 90° while V C lags behind i by 90°. In the phasor diagram, the vector OA is representing V R which is in phase with i, the vector OB represent V L (which leads i by 90°) and the vector O G is representing V C (which lags behind i by 90°). If V L > V C then their resultant will be (V L – VC) which is represented by the vector OD. The vector OF is representing the resultant of VR and (VL – VC). Thus,\n\n22 R L CV [V V ]e= + −\n\n22 LCR (X X )ei= + −\n\n22 LCR (X X ) ei= +− Here, 22 LCR (X X )+− is the effective resistance or impedance of the circuit.\nTherefore, Z = 22 LCR (X X )+− As XL = L and XC = 1/ωC  Z = 2 2 1RL C +  −  The phasor diagram shows that in LCR series circuit, the applied emf e leads the current i by a phase angle , given by tan  = L C L C R V V X X L 1 C V R R −−  − == The following 3 cases arise:\n(i) If XL > XC, then  is positive. In this case the emf e leads the current i\n(ii) If XL < XC, then  is negative. In this case the emf e lags behind the current\n(iii) If XL = XC, then  = 0. In this case the emf e and the current i are in phase and Z = R = minimum. This is the case of series resonance.\nHence at resonance XL = XC L = 1/C  1 LC=\n\n12L 2Cf f=   Resonant linear frequency.\n(b) Given:\n12ZZff = As R is same in both cases\n\n12XXff =\n\n12L C C L(X X ) (X X )ff− = −\n\n1 2 2 1L L C C(X ) (X ) (X ) (X )f f f f+ = +\n\n12 12 1 1 12 L( ) 2Cff ff  + = +  \n\n12 12 12 ()12 L( ) 2C ffff ff + + = \n\n2 12 14 LC ff=\n\n12 12 LC ff = Resonant frequency = 12 1 2 LC ff= ",
+      "stepMarking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "keyTerms": [
+        "voltage",
+        "applied",
+        "series",
+        "circuit"
+      ],
+      "question_text": "(a) A voltage e = e0 sin t applied to a series LCR circuit drives a current i = i0 sin (t + ) in the circuit. Deduce the expression for the average power dissipated in the circuit.\n(b) For circuits used for transporting electric power, a low power factor implies large power loss in transmission. Explain.\n(c) In a series LR circuit, X L = R and the power factor of the circuit is P 1. When a capacitor of capacitance C such that XL = XC is put in series, the power factor becomes P2. Find P1/P2 .\nOR\n(a) A series LCR circuit is connected to an ac source having voltage e = e0 sin t. Derive the expression for the instanta neous current and its phase relationship to the applied voltage.\nObtain the condition for resonance to occur.\n(b) In a series LCR circuit, impedance is the same at two frequencies f1 and f2. Show, that the resonant frequency is 12ff .",
+      "subject_id": "physics",
+      "chapter_name": "Alternating Current",
+      "model_answer": "(a) Expression for Average Power 3M\n(b) Reason 1M\n(c) Numerical 1M\n\n(a) Average power in an a.c. circuit Let the instantaneous values of alternating emf and current applied to an ac circuit be given by e = e0 sin t and i = i0 sin (t + ) where  is the phase difference between A small work done by the ac source in the circuit in the dt is given by dW = e i d t = e0 i0 sin t sin (t + ) dt The total work done by AC source in one complete cycle is\n\n0 T dW ei dt= = 00 0 sin sin ( ) T e i t t dt   + =  00 0 sin sin cos cos sin T e i t t t dt   +   = 2 0 0 0 000 cos sin sin sin cos TT e i t dt e i t t dt  +    = 0 0 0 0 00 cos (1 cos 2 ) sin sin 222 TTe i e i t dt t dt −  +  \n\nW = 00 cos2 ei T  The average power dissipated per cycle is Pav = 00 cos 22 eiW T =  Pav = ERMS · IRMS cos   True power = Apparent power × Power factor\n(b) To transport a given power, low power factor means large current through the transmission line, resulting in large power loss.\n( c) Case-1 :Given, XL = R Power factor, P1 = 22 L R1 2RX = + Case-2: Given,XL = XC Z = 22 LCR (X X )+− = R Power factor = R R ZR= = 1  1 2 P 1 P 2 =\n\nOR\n\n(a) Phasor Diagram : 1/2 M Expression for Current : 1M Phase angle : 1M Condition for Resonance : 1M\n(b) Proof : 1.5M\n\nAn ac circuit containing an inductor, a capacitor and a resistor in series.\n\nLet an alternating emf e = e0 sin t be applied to LCR series combination.\nLet i be the current in the circuit at any instant of time and V R, VL and VC be the voltages across R, L and C respectively at that instant. Then VR = iR, VL = i XL and VC = i XC Now VR is in phase with i, VL leads i be 90° while V C lags behind i by 90°. In the phasor diagram, the vector OA is representing V R which is in phase with i, the vector OB represent V L (which leads i by 90°) and the vector O G is representing V C (which lags behind i by 90°). If V L > V C then their resultant will be (V L – VC) which is represented by the vector OD. The vector OF is representing the resultant of VR and (VL – VC). Thus,\n\n22 R L CV [V V ]e= + −\n\n22 LCR (X X )ei= + −\n\n22 LCR (X X ) ei= +− Here, 22 LCR (X X )+− is the effective resistance or impedance of the circuit.\nTherefore, Z = 22 LCR (X X )+− As XL = L and XC = 1/ωC  Z = 2 2 1RL C +  −  The phasor diagram shows that in LCR series circuit, the applied emf e leads the current i by a phase angle , given by tan  = L C L C R V V X X L 1 C V R R −−  − == The following 3 cases arise:\n(i) If XL > XC, then  is positive. In this case the emf e leads the current i\n(ii) If XL < XC, then  is negative. In this case the emf e lags behind the current\n(iii) If XL = XC, then  = 0. In this case the emf e and the current i are in phase and Z = R = minimum. This is the case of series resonance.\nHence at resonance XL = XC L = 1/C  1 LC=\n\n12L 2Cf f=   Resonant linear frequency.\n(b) Given:\n12ZZff = As R is same in both cases\n\n12XXff =\n\n12L C C L(X X ) (X X )ff− = −\n\n1 2 2 1L L C C(X ) (X ) (X ) (X )f f f f+ = +\n\n12 12 1 1 12 L( ) 2Cff ff  + = +  \n\n12 12 12 ()12 L( ) 2C ffff ff + + = \n\n2 12 14 LC ff=\n\n12 12 LC ff = Resonant frequency = 12 1 2 LC ff= ",
+      "step_marking": [
+        {
+          "stepNumber": 1,
+          "marks": 2.5,
+          "criterion": "Core formula / concept formulation",
+          "step_number": 1
+        },
+        {
+          "stepNumber": 2,
+          "marks": 2.5,
+          "criterion": "Accurate derivation / calculation with proper unit",
+          "step_number": 2
+        }
+      ],
+      "key_terms": [
+        "voltage",
+        "applied",
+        "series",
+        "circuit"
       ]
     }
   ]

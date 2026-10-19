@@ -4,6 +4,10 @@
     <cache-path
         name="cached_pdfs_cache"
         path="cached_pdfs/" />
+    <cache-path
+        name="cached_updates"
+        path="updates/" />
+
     <files-path
         name="cached_pdfs"
         path="cached_pdfs/" />

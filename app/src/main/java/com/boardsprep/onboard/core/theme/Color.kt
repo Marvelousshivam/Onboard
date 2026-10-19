@@ -110,6 +110,7 @@ val AccentAmberOnBg = Color(0xFF7C4A00)       // WCAG AA compliant dark amber te
 val SuccessGreen = Color(0xFF48BB78)
 val SuccessGreenLight = Color(0xFFDCFCE7)
 val SuccessGreenDark = Color(0xFF34D399)
+val SuccessGreenOnBg = Color(0xFF065F46)
 
 val ErrorRed = Color(0xFFF56565)
 val PrimaryBlue = Color(0xFFA78BFA)

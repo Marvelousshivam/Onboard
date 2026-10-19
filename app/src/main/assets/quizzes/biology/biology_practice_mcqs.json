@@ -1,0 +1,38 @@
+{
+  "id": "biology_12_ecosystem_practice",
+  "subject": "Biology",
+  "book": "CBSE Official Practice Questions",
+  "chapter": "Ecosystem",
+  "title": "Ecosystem - CBSE Official Practice DPP",
+  "total_questions": 2,
+  "questions": [
+    {
+      "id": "biology_pq1_q12",
+      "q_no": 1,
+      "question": "Rupal says that in marine food chains where the pyramid of biomass is \ninverted, the 10% rule of energy transfer is not applicable. \nIs she CORRECT and why? \n(a) No, because every level still gets 10% of the energy from the lower level. \n(b) Yes, because there are more consumers and so more energy is \ntransferred. \n(c) No, because the pyramid of biomass can never be inverted for any food \nchain. \n(d) Yes, because there is lower biomass of producers in these food chains so \nless energy is transferred. \n1 \nQuestion No. 13 to 16 consist of two statements – Assertion (",
+      "options": [
+        "and Reason (R). Answer these \nquestions selecting the appropriate option given below: \na) Both A and R are true and R is the correct explanation of A. \nb) Both A and R are true and R is not the correct explanation of A. \nc) A is true but R is false. \nd) A is false but R is true.",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "12 (a) No, because every level still gets 10% of the energy from the lower \nlevel. \n1"
+    },
+    {
+      "id": "biology_pq2_q12",
+      "q_no": 2,
+      "question": "Which of the following is possible in an aquatic ecosystem? \n \n Pyramid of \nnumbers \nPyramid of \nbiomass \nPyramid of \nenergy \na) Inverted Upright Inverted \nb) Upright Upright Upright \nc) Inverted Inverted Inverted \nd) Upright Inverted Upright \n \n1 \nQuestion No. 13 to 16 consist of two statements – Assertion (",
+      "options": [
+        "and Reason (R). \nAnswer these questions  selecting the appropriate option given below: \na) Both A and R are true and R is the correct explanation of A. \nb) Both A and R are true and R is not the correct explanation of A. \nc) A is true but R is false. \nd) A is False but R is true.",
+        "Option B",
+        "Option C",
+        "Option D"
+      ],
+      "correct_option_index": 0,
+      "correct_answer_letter": "A",
+      "explanation": "Official CBSE answer key."
+    }
+  ]
+}

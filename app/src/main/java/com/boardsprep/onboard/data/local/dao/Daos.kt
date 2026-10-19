@@ -252,3 +252,21 @@ interface QuestionEvaluationDao {
     @Query("DELETE FROM question_evaluations WHERE questionId = :questionId")
     suspend fun deleteEvaluation(questionId: String)
 }
+
+@Dao
+interface ExamAttemptDao {
+    @Query("SELECT * FROM exam_attempts ORDER BY completedAt DESC")
+    fun getAllAttempts(): Flow<List<com.boardsprep.onboard.data.local.entities.ExamAttemptEntity>>
+
+    @Query("SELECT * FROM exam_attempts WHERE subjectId = :subjectId ORDER BY completedAt DESC")
+    fun getAttemptsForSubject(subjectId: String): Flow<List<com.boardsprep.onboard.data.local.entities.ExamAttemptEntity>>
+
+    @Query("SELECT * FROM exam_attempts WHERE paperTitle = :paperTitle ORDER BY completedAt DESC LIMIT 1")
+    suspend fun getLatestAttemptForPaper(paperTitle: String): com.boardsprep.onboard.data.local.entities.ExamAttemptEntity?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAttempt(entity: com.boardsprep.onboard.data.local.entities.ExamAttemptEntity): Long
+
+    @Query("UPDATE exam_attempts SET selfScore = :score WHERE id = :id")
+    suspend fun updateSelfScore(id: Long, score: Int)
+}

@@ -17,9 +17,11 @@ import com.boardsprep.onboard.data.local.dao.VideoProgressDao
 import com.boardsprep.onboard.data.local.dao.ErrorVaultDao
 import com.boardsprep.onboard.data.local.dao.SpacedReviewDao
 import com.boardsprep.onboard.data.local.dao.FocusSessionDao
+import com.boardsprep.onboard.data.local.dao.ExamAttemptDao
 import com.boardsprep.onboard.data.local.dao.QuestionEvaluationDao
 import com.boardsprep.onboard.data.local.entities.ChapterMasteryEntity
 import com.boardsprep.onboard.data.local.entities.DownloadedFileEntity
+import com.boardsprep.onboard.data.local.entities.ExamAttemptEntity
 import com.boardsprep.onboard.data.local.entities.MasteredItemEntity
 import com.boardsprep.onboard.data.local.entities.PdfAnnotationEntity
 import com.boardsprep.onboard.data.local.entities.PdfBookmarkEntity
@@ -46,9 +48,11 @@ import com.boardsprep.onboard.data.local.entities.FocusSessionEntity
         PdfBookmarkEntity::class,
         PdfAnnotationEntity::class,
         // Subjective Question Bank evaluations
-        QuestionEvaluationEntity::class
+        QuestionEvaluationEntity::class,
+        // CBSE 3-Hour Exam Simulation attempts
+        ExamAttemptEntity::class
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class OnboardDatabase : RoomDatabase() {
@@ -62,6 +66,7 @@ abstract class OnboardDatabase : RoomDatabase() {
     abstract fun spacedReviewDao(): SpacedReviewDao
     abstract fun focusSessionDao(): FocusSessionDao
     abstract fun questionEvaluationDao(): QuestionEvaluationDao
+    abstract fun examAttemptDao(): ExamAttemptDao
 
     // OnBOARD Reader DAOs
     abstract fun pdfReadingStateDao(): PdfReadingStateDao
@@ -205,6 +210,30 @@ abstract class OnboardDatabase : RoomDatabase() {
             db.execSQL("CREATE INDEX IF NOT EXISTS index_question_evaluations_status ON question_evaluations(status)")
         }
 
+        private fun createExamAttemptTable(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS exam_attempts (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                    paperTitle TEXT NOT NULL,
+                    subjectId TEXT NOT NULL,
+                    durationSeconds INTEGER NOT NULL,
+                    timeSpentSeconds INTEGER NOT NULL,
+                    readingTimeSeconds INTEGER NOT NULL,
+                    appSwitchCount INTEGER NOT NULL,
+                    completedSectionsJson TEXT NOT NULL,
+                    selfScore INTEGER NOT NULL,
+                    maxMarks INTEGER NOT NULL,
+                    scratchpadNotes TEXT NOT NULL,
+                    completedAt INTEGER NOT NULL
+                )
+                """.trimIndent()
+            )
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_exam_attempts_subjectId ON exam_attempts(subjectId)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_exam_attempts_paperTitle ON exam_attempts(paperTitle)")
+            db.execSQL("CREATE INDEX IF NOT EXISTS index_exam_attempts_completedAt ON exam_attempts(completedAt)")
+        }
+
         /**
          * Version 1 -> 2 migration: adds the three OnBOARD Reader tables.
          */
@@ -251,6 +280,24 @@ abstract class OnboardDatabase : RoomDatabase() {
             }
         }
 
+        /**
+         * Version 4 -> 5 migration: adds exam_attempts table for CBSE 3-Hour Simulation studio.
+         */
+        val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createExamAttemptTable(db)
+            }
+        }
+
+        val MIGRATION_1_5 = object : Migration(1, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createReaderTables(db)
+                createStudySprintTables(db)
+                createQuestionEvaluationTable(db)
+                createExamAttemptTable(db)
+            }
+        }
+
         fun getInstance(context: Context): OnboardDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -258,7 +305,7 @@ abstract class OnboardDatabase : RoomDatabase() {
                     OnboardDatabase::class.java,
                     "onboard_app.db"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3, MIGRATION_3_4, MIGRATION_1_4)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_1_3, MIGRATION_3_4, MIGRATION_1_4, MIGRATION_4_5, MIGRATION_1_5)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance

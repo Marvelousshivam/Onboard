@@ -3,9 +3,9 @@ package com.boardsprep.onboard.ui.screens
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -56,6 +56,17 @@ typealias OnOpenPdfWithPair = (
     pairedRole: PdfPairedRole
 ) -> Unit
 
+data class UnifiedPaperSet(
+    val setId: String,
+    val subject: String,
+    val subjectId: String,
+    val category: String,
+    val displayTitle: String,
+    val subtitle: String,
+    val sqpPaper: SamplePaper?,
+    val msPaper: SamplePaper?
+)
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SamplePapersScreen(
@@ -78,21 +89,105 @@ fun SamplePapersScreen(
     }
 
     var selectedSubjectId by remember(normalizedInitialId) { mutableStateOf(normalizedInitialId) }
-    var selectedTypeFilter by remember { mutableStateOf("all") } // "all", "sqp", "ms"
+    var selectedTypeFilter by remember { mutableStateOf("all") } // "all", "official", "practice"
     var searchQuery by remember { mutableStateOf("") }
     var isPatternExpanded by remember { mutableStateOf(false) }
 
     val allPapers = remember { repository.getSamplePapers() }
+    val allExamAttempts by repository.getAllExamAttempts().collectAsState(initial = emptyList())
 
-    val filteredPapers = remember(allPapers, selectedSubjectId, selectedTypeFilter, searchQuery) {
-        allPapers.filter { paper ->
-            val matchesSubject = selectedSubjectId.isBlank() || paper.subjectId.equals(selectedSubjectId, ignoreCase = true)
-            val matchesType = selectedTypeFilter == "all" || paper.type.equals(selectedTypeFilter, ignoreCase = true)
-            val matchesQuery = searchQuery.isBlank() ||
-                    paper.title.contains(searchQuery, ignoreCase = true) ||
-                    paper.subject.contains(searchQuery, ignoreCase = true)
-            matchesSubject && matchesType && matchesQuery
+    // Unified paper sets: Groups papers strictly by setId / pairFilename so SQPs and Practice Sets are never jumbled!
+    val unifiedPaperSets = remember(allPapers, selectedSubjectId, selectedTypeFilter, searchQuery) {
+        val groups = allPapers.groupBy { paper ->
+            if (paper.setId.isNotBlank()) paper.setId
+            else {
+                val fn = paper.filename.lowercase()
+                val sub = paper.subjectId
+                when {
+                    fn.contains("pq2") -> "${sub}_pq2"
+                    fn.contains("pq") -> "${sub}_pq1"
+                    else -> "${sub}_sqp"
+                }
+            }
         }
+
+        groups.mapNotNull { (setIdKey, papers) ->
+            val sqp = papers.firstOrNull { it.type.equals("sqp", ignoreCase = true) }
+            val ms = papers.firstOrNull { it.type.equals("ms", ignoreCase = true) }
+                ?: allPapers.firstOrNull { it.filename.equals(sqp?.pairFilename, ignoreCase = true) }
+            val primaryPaper = sqp ?: ms ?: return@mapNotNull null
+
+            val subjId = primaryPaper.subjectId
+            val matchesSubject = selectedSubjectId.isBlank() || subjId.equals(selectedSubjectId, ignoreCase = true)
+            if (!matchesSubject) return@mapNotNull null
+
+            val category = primaryPaper.paperCategory.ifBlank {
+                val fn = primaryPaper.filename.lowercase()
+                when {
+                    fn.contains("pq2") -> "Practice Paper Set 2"
+                    fn.contains("pq") -> "Practice Paper Set 1"
+                    else -> "Official SQP 2027"
+                }
+            }
+
+            val matchesCategory = when (selectedTypeFilter) {
+                "official" -> category.contains("Official", ignoreCase = true) || !primaryPaper.filename.contains("PQ", ignoreCase = true)
+                "practice" -> category.contains("Practice", ignoreCase = true) || primaryPaper.filename.contains("PQ", ignoreCase = true)
+                else -> true
+            }
+            if (!matchesCategory) return@mapNotNull null
+
+            val displaySubject = when (primaryPaper.subject.trim().lowercase()) {
+                "englishcore", "english" -> "English Core"
+                "physicaleducation", "pe" -> "Physical Education"
+                "maths" -> "Mathematics"
+                else -> primaryPaper.subject
+            }
+
+            val cleanSetTitle = when {
+                category.contains("Set 2", ignoreCase = true) || primaryPaper.filename.contains("PQ2", ignoreCase = true) ->
+                    "$displaySubject Additional Practice Paper (Set 2)"
+                category.contains("Set 1", ignoreCase = true) || primaryPaper.filename.contains("PQ", ignoreCase = true) ->
+                    "$displaySubject Additional Practice Paper (Set 1)"
+                else ->
+                    "$displaySubject Official Sample Question Paper 2026-27"
+            }
+
+            val subtitle = when {
+                category.contains("Set 2", ignoreCase = true) || primaryPaper.filename.contains("PQ2", ignoreCase = true) ->
+                    "CBSE Additional Practice Set 2 • With Full Solutions"
+                category.contains("Set 1", ignoreCase = true) || primaryPaper.filename.contains("PQ", ignoreCase = true) ->
+                    "CBSE Additional Practice Set 1 • With Full Solutions"
+                else ->
+                    "Official Board 3-Hour SQP • Full Step-Wise Marking Scheme"
+            }
+
+            val matchesQuery = searchQuery.isBlank() ||
+                    cleanSetTitle.contains(searchQuery, ignoreCase = true) ||
+                    displaySubject.contains(searchQuery, ignoreCase = true) ||
+                    category.contains(searchQuery, ignoreCase = true)
+
+            if (!matchesQuery) return@mapNotNull null
+
+            UnifiedPaperSet(
+                setId = setIdKey,
+                subject = displaySubject,
+                subjectId = subjId,
+                category = category,
+                displayTitle = cleanSetTitle,
+                subtitle = subtitle,
+                sqpPaper = sqp,
+                msPaper = ms
+            )
+        }.sortedWith(
+            compareBy<UnifiedPaperSet> {
+                when {
+                    it.category.contains("Official", ignoreCase = true) || (!it.displayTitle.contains("Practice", ignoreCase = true)) -> 0
+                    it.category.contains("Set 1", ignoreCase = true) || it.displayTitle.contains("Set 1", ignoreCase = true) -> 1
+                    else -> 2
+                }
+            }.thenBy { it.subject }
+        )
     }
 
     val subjects = listOf(
@@ -165,15 +260,48 @@ fun SamplePapersScreen(
                 )
             )
 
-            // Paper Type Segmented Tabs (All, SQP, MS) - Compact to eliminate clipping
+            // Paper Type Segmented Tabs (All Papers, Official SQP, Practice Sets)
+            val allMatchingSubject = remember(allPapers, selectedSubjectId) {
+                val groups = allPapers.groupBy { paper ->
+                    if (paper.setId.isNotBlank()) paper.setId
+                    else {
+                        val fn = paper.filename.lowercase()
+                        val sub = paper.subjectId
+                        when {
+                            fn.contains("pq2") -> "${sub}_pq2"
+                            fn.contains("pq") -> "${sub}_pq1"
+                            else -> "${sub}_sqp"
+                        }
+                    }
+                }
+                groups.filter { (_, papers) ->
+                    val primary = papers.firstOrNull() ?: return@filter false
+                    selectedSubjectId.isBlank() || primary.subjectId.equals(selectedSubjectId, ignoreCase = true)
+                }
+            }
+
+            val officialSetsCount = remember(allMatchingSubject) {
+                allMatchingSubject.count { (_, papers) ->
+                    val primary = papers.firstOrNull() ?: return@count false
+                    primary.paperCategory.contains("Official", ignoreCase = true) || !primary.filename.contains("PQ", ignoreCase = true)
+                }
+            }
+
+            val practiceSetsCount = remember(allMatchingSubject) {
+                allMatchingSubject.count { (_, papers) ->
+                    val primary = papers.firstOrNull() ?: return@count false
+                    primary.paperCategory.contains("Practice", ignoreCase = true) || primary.filename.contains("PQ", ignoreCase = true)
+                }
+            }
+
             val typeTabs = listOf(
-                ExpressiveTabItem("All", badge = "${allPapers.size}"),
-                ExpressiveTabItem("SQPs", icon = Icons.Default.Description),
-                ExpressiveTabItem("Marking", icon = Icons.Default.CheckCircle)
+                ExpressiveTabItem("All Papers", badge = "${officialSetsCount + practiceSetsCount}"),
+                ExpressiveTabItem("Official SQP", badge = "$officialSetsCount"),
+                ExpressiveTabItem("Practice Sets", badge = "$practiceSetsCount")
             )
             val selectedTypeIndex = when (selectedTypeFilter) {
-                "sqp" -> 1
-                "ms" -> 2
+                "official" -> 1
+                "practice" -> 2
                 else -> 0
             }
 
@@ -182,8 +310,8 @@ fun SamplePapersScreen(
                 selectedTabIndex = selectedTypeIndex,
                 onTabSelected = {
                     selectedTypeFilter = when (it) {
-                        1 -> "sqp"
-                        2 -> "ms"
+                        1 -> "official"
+                        2 -> "practice"
                         else -> "all"
                     }
                 },
@@ -191,29 +319,49 @@ fun SamplePapersScreen(
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp)
             )
 
-            // Subject Filter Segmented Row
-            val subjectItems = remember(subjects) {
-                subjects.map { (id, label) ->
-                    LiquidGlassSegmentItem(id, label)
+            // Subject Filter Chips (Edge-to-Edge with ContentPadding = 16.dp, Zero Edge Clipping!)
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(subjects) { (id, label) ->
+                    val isSelected = selectedSubjectId == id
+                    val chipColor = when (id) {
+                        "physics" -> PhysicsLavender
+                        "chemistry" -> ChemistryMint
+                        "maths" -> MathsPeach
+                        "biology" -> BiologySky
+                        "english" -> EnglishRose
+                        "physical_education" -> AccentAmber
+                        else -> MaterialTheme.colorScheme.primary
+                    }
+                    FilterChip(
+                        selected = isSelected,
+                        onClick = { selectedSubjectId = id },
+                        label = {
+                            Text(
+                                text = label,
+                                fontSize = 12.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                            )
+                        },
+                        shape = RoundedCornerShape(100.dp),
+                        colors = FilterChipDefaults.filterChipColors(
+                            selectedContainerColor = chipColor.copy(alpha = 0.2f),
+                            selectedLabelColor = chipColor,
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f),
+                            labelColor = MaterialTheme.colorScheme.onSurfaceVariant
+                        ),
+                        border = FilterChipDefaults.filterChipBorder(
+                            enabled = true,
+                            selected = isSelected,
+                            borderColor = if (isSelected) chipColor else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.4f),
+                            borderWidth = if (isSelected) 1.5.dp else 1.dp
+                        )
+                    )
                 }
             }
-            val activeSubjectColor = when (selectedSubjectId) {
-                "physics" -> PhysicsLavender
-                "chemistry" -> ChemistryMint
-                "maths" -> MathsPeach
-                "biology" -> BiologySky
-                "english" -> EnglishRose
-                "physical_education" -> AccentAmber
-                else -> MaterialTheme.colorScheme.primary
-            }
-            LiquidGlassSegmentedRow(
-                items = subjectItems,
-                selectedKey = selectedSubjectId,
-                onSelect = { selectedSubjectId = it },
-                accentColor = activeSubjectColor,
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 4.dp),
-                modifier = Modifier.fillMaxWidth()
-            )
 
             Spacer(modifier = Modifier.height(4.dp))
 
@@ -344,12 +492,12 @@ fun SamplePapersScreen(
                     }
                 }
 
-                if (filteredPapers.isEmpty()) {
+                if (unifiedPaperSets.isEmpty()) {
                     item {
                         ExpressiveEmptyState(
                             icon = Icons.Default.Description,
                             title = "No Papers Found",
-                            description = "No sample papers match your current filters. Try selecting 'All Papers' or clearing the search keyword.",
+                            description = "No sample papers match your current filters. Try selecting 'All Subjects' or clearing the search keyword.",
                             tintColor = MaterialTheme.colorScheme.primary,
                             actionText = "Reset Filters",
                             onActionClick = {
@@ -360,13 +508,63 @@ fun SamplePapersScreen(
                         )
                     }
                 } else {
-                    items(filteredPapers) { paper ->
-                        SamplePaperCard(
-                            paper = paper,
-                            allPapers = allPapers,
+                    items(unifiedPaperSets, key = { it.setId }) { paperSet ->
+                        UnifiedSamplePaperCard(
+                            paperSet = paperSet,
+                            allExamAttempts = allExamAttempts,
+                            selectedSubjectId = selectedSubjectId,
+                            selectedTypeFilter = selectedTypeFilter,
                             onOpenPdf = onOpenPdf,
                             onStartExamSimulation = onStartExamSimulation
                         )
+                    }
+
+                    // Question Bank navigation shortcut banner
+                    item {
+                        Card(
+                            onClick = { onQuestionBankClick(selectedSubjectId) },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 4.dp),
+                            shape = RoundedCornerShape(18.dp),
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+                            )
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(16.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Surface(
+                                    shape = CircleShape,
+                                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(42.dp)
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = Icons.Default.Quiz,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.size(22.dp)
+                                        )
+                                    }
+                                }
+                                Spacer(modifier = Modifier.width(14.dp))
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = "Need Chapter-Wise Subjective Practice?",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        fontWeight = FontWeight.Bold,
+                                        color = MaterialTheme.colorScheme.onSurface
+                                    )
+                                    Text(
+                                        text = "Practice questions with step-by-step marking rubrics in CBSE Question Bank →",
+                                        style = MaterialTheme.typography.bodySmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -375,16 +573,17 @@ fun SamplePapersScreen(
 }
 
 @Composable
-private fun SamplePaperCard(
-    paper: SamplePaper,
-    allPapers: List<SamplePaper>,
+private fun UnifiedSamplePaperCard(
+    paperSet: UnifiedPaperSet,
+    allExamAttempts: List<com.boardsprep.onboard.data.local.entities.ExamAttemptEntity>,
+    selectedSubjectId: String,
+    selectedTypeFilter: String,
     onOpenPdf: OnOpenPdfWithPair,
     onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit
 ) {
     val context = LocalContext.current
-    val isSqp = paper.type.equals("sqp", ignoreCase = true)
 
-    val subjectAccent = when (paper.subjectId) {
+    val subjectAccent = when (paperSet.subjectId) {
         "physics" -> PhysicsLavender
         "chemistry" -> ChemistryMint
         "maths" -> MathsPeach
@@ -394,63 +593,32 @@ private fun SamplePaperCard(
         else -> MaterialTheme.colorScheme.primary
     }
 
-    val subjectContainer = when (paper.subjectId) {
-        "physics" -> PhysicsLavenderContainer
-        "chemistry" -> ChemistryMintContainer
-        "maths" -> MathsPeachContainer
-        "biology" -> BiologySkyContainer
-        "english" -> EnglishRoseContainer
-        "physical_education" -> MaterialTheme.colorScheme.surfaceVariant
-        else -> MaterialTheme.colorScheme.primaryContainer
-    }
-
-    // Find paired paper (e.g. if this is SQP, find MS, and vice versa)
-    val pairedType = if (isSqp) "ms" else "sqp"
-    val pairedPaper = remember(paper.subjectId, pairedType) {
-        allPapers.find { it.subjectId == paper.subjectId && it.type.equals(pairedType, ignoreCase = true) }
-    }
-
-    val displaySubject = remember(paper.subject) {
-        when (paper.subject.trim().lowercase()) {
-            "englishcore", "english" -> "English Core"
-            "physicaleducation", "pe" -> "Physical Education"
-            "maths" -> "Mathematics"
-            else -> paper.subject
+    val latestAttempt = remember(allExamAttempts, paperSet.displayTitle, paperSet.sqpPaper?.title) {
+        allExamAttempts.firstOrNull {
+            it.paperTitle.equals(paperSet.displayTitle, ignoreCase = true) ||
+            (paperSet.sqpPaper != null && it.paperTitle.equals(paperSet.sqpPaper.title, ignoreCase = true))
         }
-    }
-
-    val displayTitle = remember(paper.title) {
-        paper.title
-            .replace("EnglishCore", "English Core")
-            .replace("PhysicalEducation", "Physical Education")
-    }
-
-    val localCached = remember(paper.filename) {
-        LocalDocumentScanner.findSamplePaper(context, paper.filename)
-    }
-
-    /**
-     * Compute the paired document (url, title, role) for the *current* paper.
-     * Used when the user opens this paper directly — the in-reader switcher
-     * can then jump to the sibling SQP/MS in one tap.
-     */
-    fun pairedInfo(): Triple<String, String, PdfPairedRole> {
-        val p = pairedPaper ?: return Triple("", "", PdfPairedRole.GENERAL)
-        val pairedLocal = LocalDocumentScanner.findSamplePaper(context, p.filename)
-        val pUrl = pairedLocal?.absolutePath ?: p.url
-        val pTitle = p.title
-            .replace("EnglishCore", "English Core")
-            .replace("PhysicalEducation", "Physical Education")
-        val role = if (isSqp) PdfPairedRole.MARKING_SCHEME else PdfPairedRole.QUESTION_PAPER
-        return Triple(pUrl, pTitle, role)
     }
 
     val isGlass = LocalGlassEnabled.current && isGlassSupported()
     Surface(
         onClick = {
-            val openUrl = localCached?.absolutePath ?: paper.url
-            val (pairUrl, pairTitle, pairRole) = pairedInfo()
-            onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
+            // Default card tap opens SQP with MS paired
+            val sqp = paperSet.sqpPaper ?: paperSet.msPaper
+            if (sqp != null) {
+                val ms = paperSet.msPaper
+                val sqpLocal = LocalDocumentScanner.findSamplePaper(context, sqp.filename)
+                val sqpUrl = sqpLocal?.absolutePath ?: sqp.url
+                val msLocal = ms?.let { LocalDocumentScanner.findSamplePaper(context, it.filename) }
+                val msUrl = msLocal?.absolutePath ?: (ms?.url ?: "")
+                onOpenPdf(
+                    sqpUrl,
+                    "${paperSet.displayTitle} — SQP",
+                    msUrl,
+                    "${paperSet.displayTitle} — Marking Scheme",
+                    PdfPairedRole.QUESTION_PAPER
+                )
+            }
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -463,51 +631,105 @@ private fun SamplePaperCard(
         border = null
     ) {
         Column(modifier = Modifier.padding(18.dp)) {
-            // Top Row: Subject pill + Paper Type badge
+            // Top Row: Subject pill (hidden when subject filter is active) + Status/Score badge
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Surface(
-                    shape = ExpressivePillSmall,
-                    color = subjectAccent.copy(alpha = 0.2f)
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                // Only show subject pill if subject is not already filtered!
+                if (selectedSubjectId.isBlank()) {
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = subjectAccent.copy(alpha = 0.2f)
                     ) {
-                        Box(
-                            modifier = Modifier
-                                .size(8.dp)
-                                .clip(CircleShape)
-                                .background(subjectAccent)
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = displaySubject,
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 11.sp,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            maxLines = 1,
-                            softWrap = false
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(8.dp)
+                                    .clip(CircleShape)
+                                    .background(subjectAccent)
+                            )
+                            Spacer(modifier = Modifier.width(6.dp))
+                            Text(
+                                text = paperSet.subject,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 11.sp,
+                                color = MaterialTheme.colorScheme.onSurface,
+                                maxLines = 1,
+                                softWrap = false
+                            )
+                        }
                     }
+                } else {
+                    Spacer(modifier = Modifier.width(1.dp))
                 }
 
-                val badgeBg = if (isSqp) MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f) else SuccessGreenLight
-                val badgeText = if (isSqp) MaterialTheme.colorScheme.onPrimaryContainer else Color(0xFF166534)
-                Surface(
-                    shape = ExpressivePillSmall,
-                    color = badgeBg
-                ) {
-                    Text(
-                        text = if (isSqp) "Sample Question Paper (SQP)" else "Marking Scheme (MS)",
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight.ExtraBold,
-                        color = badgeText,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                    )
+                // Compact Score / Board Status Badge
+                if (latestAttempt != null) {
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = if (latestAttempt.selfScore >= 0) AccentAmberLight else MaterialTheme.colorScheme.surfaceVariant
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.WorkspacePremium,
+                                contentDescription = null,
+                                tint = AccentAmberOnBg,
+                                modifier = Modifier.size(13.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = if (latestAttempt.selfScore >= 0)
+                                    "Score: ${latestAttempt.selfScore}/${latestAttempt.maxMarks} • ${(latestAttempt.timeSpentSeconds / 60)}m"
+                                else
+                                    "Attempted • ${(latestAttempt.timeSpentSeconds / 60)}m",
+                                fontSize = 10.5.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = AccentAmberOnBg
+                            )
+                        }
+                    }
+                } else {
+                    Surface(
+                        shape = ExpressivePillSmall,
+                        color = when {
+                            paperSet.category.contains("Official", ignoreCase = true) || (!paperSet.displayTitle.contains("Practice", ignoreCase = true)) ->
+                                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.7f)
+                            paperSet.category.contains("Set 2", ignoreCase = true) || paperSet.displayTitle.contains("Set 2", ignoreCase = true) ->
+                                AccentAmberLight
+                            else ->
+                                SuccessGreenLight
+                        }
+                    ) {
+                        Text(
+                            text = when {
+                                paperSet.category.contains("Official", ignoreCase = true) || (!paperSet.displayTitle.contains("Practice", ignoreCase = true)) ->
+                                    "Official SQP • 2026-27"
+                                paperSet.category.contains("Set 2", ignoreCase = true) || paperSet.displayTitle.contains("Set 2", ignoreCase = true) ->
+                                    "Practice Paper • Set 2"
+                                else ->
+                                    "Practice Paper • Set 1"
+                            },
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = when {
+                                paperSet.category.contains("Official", ignoreCase = true) || (!paperSet.displayTitle.contains("Practice", ignoreCase = true)) ->
+                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                paperSet.category.contains("Set 2", ignoreCase = true) || paperSet.displayTitle.contains("Set 2", ignoreCase = true) ->
+                                    AccentAmberOnBg
+                                else ->
+                                    SuccessGreenOnBg
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
                 }
             }
 
@@ -515,7 +737,7 @@ private fun SamplePaperCard(
 
             // Title
             Text(
-                text = displayTitle,
+                text = paperSet.displayTitle,
                 fontWeight = FontWeight.Bold,
                 fontSize = 15.sp,
                 lineHeight = 21.sp,
@@ -524,124 +746,118 @@ private fun SamplePaperCard(
 
             Spacer(modifier = Modifier.height(6.dp))
 
-            // Details info
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
-            ) {
-                Text(
-                    text = if (isSqp) "Official 3-Hour Board Paper • 70/80 Marks" else "Step-Wise Marking Breakdown & Model Solutions",
-                    fontSize = 12.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                if (localCached != null) {
-                    Surface(
-                        shape = ExpressivePillSmall,
-                        color = SuccessGreen.copy(alpha = 0.15f)
-                    ) {
-                        Text(
-                            text = "Downloaded",
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = SuccessGreen,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
-                    }
-                }
-            }
+            // Details subtitle
+            Text(
+                text = paperSet.subtitle,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            // SQP 3-Hour Exam Simulation Quick Action
-            if (isSqp) {
-                Button(
-                    onClick = {
-                        val openUrl = localCached?.absolutePath ?: paper.url
-                        val pairedMsUrl = pairedPaper?.let { p ->
-                            val local = LocalDocumentScanner.findSamplePaper(context, p.filename)
-                            local?.absolutePath ?: p.url
-                        } ?: ""
-                        onStartExamSimulation(displayTitle, displaySubject, openUrl, pairedMsUrl)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = ExpressiveCardMedium,
-                    colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Bolt,
-                        contentDescription = null,
-                        modifier = Modifier.size(18.dp),
-                        tint = AccentAmberOnBg
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = "Start 3-Hour Exam Simulation",
-                        fontSize = 13.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = AccentAmberOnBg
-                    )
-                }
-
-                Spacer(modifier = Modifier.height(8.dp))
+            // Primary Hero Action: Start 3-Hour Exam Simulation
+            Button(
+                onClick = {
+                    val sqp = paperSet.sqpPaper ?: paperSet.msPaper!!
+                    val ms = paperSet.msPaper
+                    val sqpLocal = LocalDocumentScanner.findSamplePaper(context, sqp.filename)
+                    val sqpUrl = sqpLocal?.absolutePath ?: sqp.url
+                    val msUrl = ms?.let { m ->
+                        val mLocal = LocalDocumentScanner.findSamplePaper(context, m.filename)
+                        mLocal?.absolutePath ?: m.url
+                    } ?: ""
+                    onStartExamSimulation(paperSet.displayTitle, paperSet.subject, sqpUrl, msUrl)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                shape = ExpressiveCardMedium,
+                colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
+            ) {
+                Icon(
+                    imageVector = if (latestAttempt != null) Icons.Default.Replay else Icons.Default.Bolt,
+                    contentDescription = null,
+                    modifier = Modifier.size(18.dp),
+                    tint = AccentAmberOnBg
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(
+                    text = if (latestAttempt != null) "Retake 3-Hour Exam Simulation" else "Start 3-Hour Exam Simulation",
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = AccentAmberOnBg
+                )
             }
 
-            // Secondary Action Buttons Row
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Secondary Actions Row (50% / 50%): Read Paper (PDF) & Marking Scheme (MS)
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 OutlinedButton(
                     onClick = {
-                        val openUrl = localCached?.absolutePath ?: paper.url
-                        val (pairUrl, pairTitle, pairRole) = pairedInfo()
-                        onOpenPdf(openUrl, displayTitle, pairUrl, pairTitle, pairRole)
+                        val sqp = paperSet.sqpPaper ?: return@OutlinedButton
+                        val ms = paperSet.msPaper
+                        val sqpLocal = LocalDocumentScanner.findSamplePaper(context, sqp.filename)
+                        val sqpUrl = sqpLocal?.absolutePath ?: sqp.url
+                        val msLocal = ms?.let { LocalDocumentScanner.findSamplePaper(context, it.filename) }
+                        val msUrl = msLocal?.absolutePath ?: (ms?.url ?: "")
+                        onOpenPdf(
+                            sqpUrl,
+                            "${paperSet.displayTitle} — SQP",
+                            msUrl,
+                            "${paperSet.displayTitle} — Marking Scheme",
+                            PdfPairedRole.QUESTION_PAPER
+                        )
                     },
                     modifier = Modifier.weight(1f),
                     shape = ExpressiveCardMedium
                 ) {
                     Icon(
-                        imageVector = if (isSqp) Icons.Default.MenuBook else Icons.Default.CheckCircle,
+                        imageVector = Icons.Default.MenuBook,
                         contentDescription = null,
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = if (isSqp) "Open in Reader" else "View Marking",
+                        text = "Read Paper",
                         fontSize = 12.sp,
                         fontWeight = FontWeight.SemiBold,
-                        maxLines = 1,
-                        softWrap = false
+                        maxLines = 1
                     )
                 }
 
-                if (pairedPaper != null) {
-                    OutlinedButton(
-                        onClick = {
-                            val pairedLocal = LocalDocumentScanner.findSamplePaper(context, pairedPaper.filename)
-                            val openUrl = pairedLocal?.absolutePath ?: pairedPaper.url
-                            val pairedTitleText = pairedPaper.title
-                                .replace("EnglishCore", "English Core")
-                                .replace("PhysicalEducation", "Physical Education")
-                            val originalRole = if (isSqp) PdfPairedRole.QUESTION_PAPER else PdfPairedRole.MARKING_SCHEME
-                            val originalUrl = localCached?.absolutePath ?: paper.url
-                            onOpenPdf(openUrl, pairedTitleText, originalUrl, displayTitle, originalRole)
-                        },
-                        modifier = Modifier.weight(1f),
-                        shape = ExpressiveCardMedium
-                    ) {
-                        Icon(
-                            imageVector = if (isSqp) Icons.Default.CheckCircle else Icons.Default.Description,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp)
+                OutlinedButton(
+                    onClick = {
+                        val ms = paperSet.msPaper ?: return@OutlinedButton
+                        val sqp = paperSet.sqpPaper
+                        val msLocal = LocalDocumentScanner.findSamplePaper(context, ms.filename)
+                        val msUrl = msLocal?.absolutePath ?: ms.url
+                        val sqpLocal = sqp?.let { LocalDocumentScanner.findSamplePaper(context, it.filename) }
+                        val sqpUrl = sqpLocal?.absolutePath ?: (sqp?.url ?: "")
+                        onOpenPdf(
+                            msUrl,
+                            "${paperSet.displayTitle} — Marking Scheme",
+                            sqpUrl,
+                            "${paperSet.displayTitle} — SQP",
+                            PdfPairedRole.MARKING_SCHEME
                         )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = if (isSqp) "Marking Scheme" else "Question Paper",
-                            fontSize = 12.sp,
-                            maxLines = 1,
-                            softWrap = false
-                        )
-                    }
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = ExpressiveCardMedium
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.CheckCircle,
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = "Marking Scheme",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        maxLines = 1
+                    )
                 }
             }
         }

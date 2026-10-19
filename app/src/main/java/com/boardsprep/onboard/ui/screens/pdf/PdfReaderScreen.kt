@@ -179,9 +179,10 @@ fun PdfReaderScreen(
             AnimatedVisibility(visible = chromeVisible && !isFullscreen, enter = fadeIn(), exit = fadeOut()) {
                 TopAppBar(
                     title = {
+                        val (cleanTitle, subtitlePrefix) = remember(title) { formatPdfTopBarTitle(title) }
                         Column {
                             Text(
-                                text = title,
+                                text = cleanTitle,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis,
                                 fontSize = 16.sp,
@@ -189,8 +190,10 @@ fun PdfReaderScreen(
                             )
                             if (ui.totalPages > 0) {
                                 Text(
-                                    text = "CBSE Class 12 • Page ${ui.currentPage + 1} of ${ui.totalPages}",
+                                    text = "$subtitlePrefix • Page ${ui.currentPage + 1} of ${ui.totalPages}",
                                     fontSize = 11.sp,
+                                    maxLines = 1,
+                                    overflow = TextOverflow.Ellipsis,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -270,12 +273,7 @@ fun PdfReaderScreen(
                             )
                         }
 
-                        // 5. Appearance
-                        IconButton(onClick = { showAppearance = true }) {
-                            Icon(Icons.Default.Tune, "Appearance")
-                        }
-
-                        // 6. More (Overflow menu for secondary study tools)
+                        // 5. More (Overflow menu for secondary study tools)
                         IconButton(onClick = { showOverflow = true }) {
                             Icon(Icons.Default.MoreVert, "More options")
                         }
@@ -517,3 +515,50 @@ fun PdfReaderScreen(
         )
     }
 }
+
+/**
+ * Clean up redundant title prefixes and produce a clean (title, subtitlePrefix) pair.
+ * For example:
+ * - "CBSE Class 12 2026-27 English Core Additional Practice Question Paper (Set 1) — SQP"
+ *   -> ("Additional Practice Question Paper (Set 1) — SQP", "English Core • Code 301")
+ * - "CBSE Class 12 Chemistry Sample Question Paper — SQP"
+ *   -> ("Sample Question Paper — SQP", "Chemistry • Code 043")
+ */
+internal fun formatPdfTopBarTitle(rawTitle: String): Pair<String, String> {
+    val lower = rawTitle.lowercase()
+    val subjectInfo = when {
+        lower.contains("english core") || lower.contains("englishcore") || lower.contains("english") -> "English Core • Code 301"
+        lower.contains("chemistry") -> "Chemistry • Code 043"
+        lower.contains("physics") -> "Physics • Code 042"
+        lower.contains("mathematics") || lower.contains("maths") -> "Mathematics • Code 041"
+        lower.contains("biology") -> "Biology • Code 044"
+        lower.contains("physical education") || lower.contains("physicaleducation") || lower.contains(" pe ") || lower.endsWith(" pe") -> "Physical Education • Code 048"
+        else -> null
+    }
+
+    var cleanTitle = rawTitle
+        .replace(Regex("(?i)CBSE\\s+Class\\s+12\\s+(?:20\\d\\d-\\d\\d\\s+)?"), "")
+        .replace(Regex("(?i)CBSE\\s+20\\d\\d-\\d\\d\\s+"), "")
+        .replace(Regex("(?i)Class\\s+12\\s+"), "")
+        .trim()
+
+    if (subjectInfo != null) {
+        cleanTitle = cleanTitle
+            .replace(Regex("(?i)English\\s*Core\\s*[-—:]?\\s*"), "")
+            .replace(Regex("(?i)Chemistry\\s*[-—:]?\\s*"), "")
+            .replace(Regex("(?i)Physics\\s*[-—:]?\\s*"), "")
+            .replace(Regex("(?i)Mathematics\\s*[-—:]?\\s*"), "")
+            .replace(Regex("(?i)Biology\\s*[-—:]?\\s*"), "")
+            .replace(Regex("(?i)Physical\\s*Education\\s*[-—:]?\\s*"), "")
+            .trim(' ', '-', '—', ':')
+            .trim()
+    }
+
+    if (cleanTitle.isBlank()) {
+        cleanTitle = rawTitle
+    }
+
+    val subtitlePrefix = subjectInfo ?: "CBSE Class 12"
+    return Pair(cleanTitle, subtitlePrefix)
+}
+

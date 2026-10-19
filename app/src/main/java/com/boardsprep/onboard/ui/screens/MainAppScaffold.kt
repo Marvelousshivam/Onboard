@@ -78,6 +78,7 @@ fun MainAppScaffold(
     onOpenPdfWithPair: (url: String, title: String, pairedUrl: String, pairedTitle: String, pairedRole: PdfPairedRole) -> Unit,
     onOpenPdfSimple: (url: String, title: String) -> Unit,
     onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit,
+    onCheckForUpdates: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(initialTab.coerceIn(0, 3)) }
@@ -122,6 +123,7 @@ fun MainAppScaffold(
                 1 -> {
                     QuestionBankScreen(
                         initialSubjectId = activeQbSubject,
+                        showBackButton = false,
                         onBackClick = { selectedTabIndex = 0 },
                         onOpenPdf = onOpenPdfSimple
                     )
@@ -147,7 +149,8 @@ fun MainAppScaffold(
                         onDailyBlitzClick = onDailyBlitzClick,
                         onToolsClick = onToolsClick,
                         onAccountClick = onAccountClick,
-                        onReplayTourClick = onReplayTourClick
+                        onReplayTourClick = onReplayTourClick,
+                        onCheckForUpdates = onCheckForUpdates
                     )
                 }
             }

@@ -27,7 +27,10 @@ import com.boardsprep.onboard.core.playback.DownloadState
 import com.boardsprep.onboard.core.playback.LectureDownloader
 import com.boardsprep.onboard.core.pdf.PdfPairedRole
 import com.boardsprep.onboard.core.theme.OnboardTheme
+import com.boardsprep.onboard.core.update.AppUpdateChecker
+import com.boardsprep.onboard.core.update.UpdateState
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.UpdateAvailableDialog
 import com.boardsprep.onboard.ui.navigation.Screen
 import com.boardsprep.onboard.ui.screens.*
 import com.boardsprep.onboard.ui.screens.pdf.PdfViewerScreen
@@ -77,6 +80,37 @@ class MainActivity : ComponentActivity() {
                         val navController = rememberNavController()
                         val coroutineScope = rememberCoroutineScope()
                         var subjects by remember { mutableStateOf(repository.getSubjects()) }
+                        val updateChecker = remember { AppUpdateChecker(applicationContext) }
+                        val updateState by updateChecker.updateState.collectAsState()
+
+                        // Silent check for GitHub release updates on startup (12h rate-limited)
+                        LaunchedEffect(Unit) {
+                            updateChecker.checkForUpdates(isManual = false)
+                        }
+
+                        // User feedback for manual update checks
+                        LaunchedEffect(updateState) {
+                            when (val state = updateState) {
+                                is UpdateState.Checking -> {
+                                    if (state.isManual) {
+                                        Toast.makeText(this@MainActivity, "Checking GitHub for updates...", Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+                                is UpdateState.UpToDate -> {
+                                    if (state.isManual) {
+                                        Toast.makeText(this@MainActivity, "OnBOARD is up to date (v${state.currentVersion})", Toast.LENGTH_SHORT).show()
+                                        updateChecker.dismiss()
+                                    }
+                                }
+                                is UpdateState.Error -> {
+                                    if (state.isManual) {
+                                        Toast.makeText(this@MainActivity, state.message, Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                                else -> Unit
+                            }
+                        }
+
 
                 // Request Notification Permission on Android 13+ (API 33+) for persistent download notifications
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -171,6 +205,9 @@ class MainActivity : ComponentActivity() {
                                         msUrl = msUrl
                                     )
                                 )
+                            },
+                            onCheckForUpdates = {
+                                updateChecker.checkForUpdates(isManual = true)
                             }
                         )
                     }
@@ -483,7 +520,17 @@ class MainActivity : ComponentActivity() {
                     // CBSE Class 12 Master Tools Screen
                     composable(Screen.Tools.route) {
                         ToolsScreen(
-                            onBackClick = { navController.popBackStack() }
+                            onBackClick = { navController.popBackStack() },
+                            onStartExamSimulation = { paperTitle, subject, paperUrl, msUrl ->
+                                navController.navigate(
+                                    Screen.ExamSimulation.createRoute(
+                                        paperTitle = paperTitle,
+                                        subject = subject,
+                                        paperUrl = paperUrl,
+                                        msUrl = msUrl
+                                    )
+                                )
+                            }
                         )
                     }
 
@@ -547,11 +594,22 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
-                    }
                 }
+
+                // GitHub Release In-App Update Dialog
+                UpdateAvailableDialog(
+                    updateState = updateState,
+                    onStartDownload = { release -> updateChecker.startDownload(release) },
+                    onCancelDownload = { updateChecker.cancelDownload() },
+                    onInstallUpdate = { apkFile -> updateChecker.installUpdate(apkFile) },
+                    onDismiss = { updateChecker.dismiss() }
+                )
             }
         }
     }
 }
 }
+}
+
+
 

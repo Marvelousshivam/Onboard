@@ -196,3 +196,27 @@ data class QuestionEvaluationEntity(
     val updatedAt: Long = System.currentTimeMillis()
 )
 
+/**
+ * CBSE 3-Hour Exam Simulation attempt record.
+ * Tracks official simulation runs, elapsed time, focus integrity, completed sections,
+ * and user's post-exam step-wise marking score.
+ */
+@Entity(
+    tableName = "exam_attempts",
+    indices = [Index("subjectId"), Index("paperTitle"), Index("completedAt")]
+)
+data class ExamAttemptEntity(
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val paperTitle: String,
+    val subjectId: String,
+    val durationSeconds: Int = 10800,
+    val timeSpentSeconds: Long,
+    val readingTimeSeconds: Long = 900,
+    val appSwitchCount: Int = 0,
+    val completedSectionsJson: String = "[]",
+    val selfScore: Int = -1,
+    val maxMarks: Int = 70,
+    val scratchpadNotes: String = "",
+    val completedAt: Long = System.currentTimeMillis()
+)
+
