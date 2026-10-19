@@ -51,8 +51,8 @@ internal class InverseLayerScope : GraphicsLayerScope {
     override var shape: Shape = RectangleShape
     override var clip: Boolean = false
     override var renderEffect: RenderEffect? = null
-    var blendMode: BlendMode = BlendMode.SrcOver
-    var colorFilter: ColorFilter? = null
+    override var blendMode: BlendMode = BlendMode.SrcOver
+    override var colorFilter: ColorFilter? = null
     override var compositingStrategy: CompositingStrategy = CompositingStrategy.Auto
 
     private var matrix: Matrix? = null

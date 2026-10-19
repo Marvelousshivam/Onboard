@@ -92,3 +92,10 @@
 # --- General Android & Kotlin ---
 -keepattributes SourceFile,LineNumberTable
 -dontwarn kotlin.reflect.**
+
+# --- android-youtube-player (Pierfrancesco Soffritti) ---
+-keep class com.pierfrancescosoffritti.androidyoutubeplayer.** { *; }
+-keepnames class com.pierfrancescosoffritti.youtubeplayer.* { *; }
+-keepclassmembers class com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayerBridge {
+    *;
+}
