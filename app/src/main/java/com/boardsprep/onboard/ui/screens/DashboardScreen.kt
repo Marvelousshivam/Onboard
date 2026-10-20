@@ -256,22 +256,29 @@ fun DashboardScreen(
                 // ── Tier 1: Asymmetric Bento Hero Countdown & Contextual Study Widget ────────────────
                 item {
                     val heroShape = RoundedCornerShape(28.dp)
+                    val heroColor = if (isDark) Color(0xFF1E1D2A) else Color(0xFFEDE7F6)
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
                             .then(
                                 if (isGlass) Modifier.lightweightLiquidGlass(
                                     shape = heroShape,
-                                    fallbackColor = if (isDark) Color(0xFF1D1C28) else MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)
+                                    fallbackColor = if (isDark) Color(0xFF1D1C28) else heroColor
                                 ) else Modifier
                             ),
                         shape = heroShape,
                         colors = CardDefaults.cardColors(
-                            containerColor = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF1E1D2A) else Color(0xFFF3EDFC))
+                            containerColor = if (isGlass) Color.Transparent else heroColor
                         ),
-                        elevation = CardDefaults.cardElevation(defaultElevation = if (isGlass) 0.dp else 2.dp)
+                        border = null,
+                        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
                     ) {
-                        Column(modifier = Modifier.padding(20.dp)) {
+                        Column(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.Transparent)
+                                .padding(20.dp)
+                        ) {
                             // Top Row: Micro-Eyebrow + Oversized Display Countdown
                             Row(
                                 modifier = Modifier.fillMaxWidth(),
@@ -314,7 +321,7 @@ fun DashboardScreen(
                                     )
                                 }
 
-                                // Right Column: Oversized Expressive Typography Countdown
+                                // Right Column: Oversized Expressive Typography Countdown (Clean Right Aligned & Tightly Stacked)
                                 Column(
                                     horizontalAlignment = Alignment.End,
                                     verticalArrangement = Arrangement.Center
@@ -322,9 +329,10 @@ fun DashboardScreen(
                                     Text(
                                         text = "$daysRemaining",
                                         style = MaterialTheme.typography.displayMedium.copy(
-                                            fontSize = 44.sp,
+                                            fontSize = 56.sp,
                                             fontWeight = FontWeight.Black,
-                                            lineHeight = 44.sp
+                                            letterSpacing = (-1.5).sp,
+                                            lineHeight = 48.sp
                                         ),
                                         color = if (isDark) Color.White else MaterialTheme.colorScheme.primary
                                     )
@@ -332,8 +340,8 @@ fun DashboardScreen(
                                         text = "DAYS LEFT",
                                         style = MaterialTheme.typography.labelSmall.copy(
                                             fontWeight = FontWeight.Black,
-                                            letterSpacing = 1.4.sp,
-                                            fontSize = 9.5.sp
+                                            letterSpacing = 1.5.sp,
+                                            fontSize = 10.sp
                                         ),
                                         color = if (isDark) PhysicsLavender else MaterialTheme.colorScheme.primary
                                     )
@@ -342,7 +350,7 @@ fun DashboardScreen(
 
                             Spacer(modifier = Modifier.height(18.dp))
 
-                            // Contextual Resume Study Action Card with Circular Progress Ring
+                            // Contextual Resume Study Action Card: Elevated Tactile Player Widget (Pure White, Zero Shadow)
                             Surface(
                                 onClick = {
                                     if (resumeSubject != null) {
@@ -352,7 +360,10 @@ fun DashboardScreen(
                                     }
                                 },
                                 shape = RoundedCornerShape(20.dp),
-                                color = if (isGlass) Color.White.copy(alpha = 0.08f) else (if (isDark) Color(0xFF28253A) else Color.White),
+                                color = if (isGlass) Color.White.copy(alpha = 0.08f) else (if (isDark) Color(0xFF232135) else Color(0xFFFFFBFF)),
+                                shadowElevation = 0.dp,
+                                tonalElevation = 0.dp,
+                                border = null,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .springBounceClick {
@@ -483,7 +494,7 @@ fun DashboardScreen(
                                         fontSize = 13.5.sp
                                     )
                                     Text(
-                                        text = "⚡ 5-MIN DRILL",
+                                        text = "5-MIN DRILL",
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.ExtraBold,
                                         fontSize = 9.5.sp,
@@ -542,7 +553,7 @@ fun DashboardScreen(
                                         fontSize = 13.5.sp
                                     )
                                     Text(
-                                        text = if (unresolvedErrorCount > 0) "🚨 $unresolvedErrorCount to Review" else "✓ Zero Flaws",
+                                        text = if (unresolvedErrorCount > 0) "$unresolvedErrorCount to Review" else "Zero Flaws",
                                         style = MaterialTheme.typography.labelSmall,
                                         fontWeight = FontWeight.ExtraBold,
                                         fontSize = 9.5.sp,
@@ -801,7 +812,7 @@ fun M3ExpressiveSubjectGridTile(
                 .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            // Top Row: Organic Icon (Uniform 1:1 Aspect Ratio) + Theory Marks Weightage
+            // Top Row: 44dp Squircle Icon + Optional Mastery Status Pill
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
@@ -810,8 +821,9 @@ fun M3ExpressiveSubjectGridTile(
                 Surface(
                     shape = iconShape,
                     color = cardBg,
+                    border = androidx.compose.foundation.BorderStroke(1.dp, accentColor.copy(alpha = 0.18f)),
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(44.dp)
                         .aspectRatio(1f)
                 ) {
                     Box(
@@ -829,83 +841,104 @@ fun M3ExpressiveSubjectGridTile(
                             },
                             contentDescription = null,
                             tint = accentColor,
-                            modifier = Modifier.size(22.dp)
+                            modifier = Modifier.size(24.dp)
                         )
                     }
                 }
 
-                Text(
-                    text = "${subject.totalTheoryMarks}M Theory",
-                    style = MaterialTheme.typography.labelSmall,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.85f),
-                    fontSize = 11.sp
-                )
+                if (masteredChaptersCount > 0) {
+                    Surface(
+                        shape = RoundedCornerShape(100.dp),
+                        color = accentColor.copy(alpha = 0.15f)
+                    ) {
+                        Text(
+                            text = "$masteryPercent% Mastered",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = accentColor,
+                            fontSize = 10.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+                } else if (inProgressChaptersCount > 0) {
+                    Surface(
+                        shape = RoundedCornerShape(100.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant
+                    ) {
+                        Text(
+                            text = "$inProgressChaptersCount In Progress",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Medium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            fontSize = 10.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        )
+                    }
+                }
             }
 
-            // Subject Title
-            Text(
-                text = subject.name,
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 15.sp
-                ),
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 1
-            )
-
-            // Dynamic Progress Track & Chapter Mastery (Replaces static 4 Pillars pill)
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                verticalArrangement = Arrangement.spacedBy(5.dp)
-            ) {
+            // Subject Title & Consolidated Subtitle ("19 Chapters • 80M" + "0%")
+            Column(verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                Text(
+                    text = subject.name,
+                    style = MaterialTheme.typography.titleMedium.copy(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 15.sp
+                    ),
+                    color = MaterialTheme.colorScheme.onSurface,
+                    maxLines = 1
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "${subject.chapters.size} Chapters",
-                        style = MaterialTheme.typography.labelSmall,
-                        fontSize = 10.5.sp,
+                        text = "${subject.chapters.size} Chapters • ${subject.totalTheoryMarks}M",
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Medium
+                        ),
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                     Text(
-                        text = when {
-                            masteredChaptersCount > 0 -> "$masteryPercent% Mastered"
-                            inProgressChaptersCount > 0 -> "$inProgressChaptersCount In Progress"
-                            else -> "Core Track"
-                        },
-                        style = MaterialTheme.typography.labelSmall,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 10.5.sp,
-                        color = when {
-                            masteredChaptersCount > 0 -> accentColor
-                            inProgressChaptersCount > 0 -> accentColor
-                            else -> MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
-                        }
+                        text = "$masteryPercent%",
+                        style = MaterialTheme.typography.labelSmall.copy(
+                            fontSize = 11.sp,
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f)
                     )
                 }
+            }
 
-                // Sleek thin color-coded progress bar (Zero fake sliver when unstarted or 0 fully mastered)
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(3.5.dp)
-                        .clip(RoundedCornerShape(2.dp))
-                        .background(accentColor.copy(alpha = 0.15f))
-                ) {
-                    val progressFraction = if (totalChapters > 0 && masteredChaptersCount > 0) {
-                        (masteredChaptersCount.toFloat() / totalChapters).coerceIn(0.06f, 1f)
-                    } else 0f
-                    if (progressFraction > 0f) {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(fraction = progressFraction)
-                                .fillMaxHeight()
-                                .background(accentColor)
-                        )
-                    }
+            // 6.dp Rounded M3 Linear Progress Indicator with Visible Track Gap & Initial 0% Dot
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 4.dp)
+                    .height(6.dp)
+                    .clip(RoundedCornerShape(3.dp))
+                    .background(MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
+            ) {
+                val progressFraction = if (totalChapters > 0 && masteredChaptersCount > 0) {
+                    (masteredChaptersCount.toFloat() / totalChapters).coerceIn(0.06f, 1f)
+                } else 0f
+                if (progressFraction > 0f) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth(fraction = progressFraction)
+                            .fillMaxHeight()
+                            .clip(RoundedCornerShape(3.dp))
+                            .background(accentColor)
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .size(6.dp)
+                            .clip(CircleShape)
+                            .background(accentColor.copy(alpha = 0.35f))
+                    )
                 }
             }
         }

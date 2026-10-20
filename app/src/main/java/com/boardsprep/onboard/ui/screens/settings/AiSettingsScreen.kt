@@ -141,14 +141,14 @@ fun AiSettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = M3EBentoTileShape,
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f)),
-                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.3f))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.70f)),
+                border = null
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Surface(
                             shape = CircleShape,
-                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
+                            color = MaterialTheme.colorScheme.primary.copy(alpha = 0.15f),
                             modifier = Modifier.size(32.dp)
                         ) {
                             Box(contentAlignment = Alignment.Center) {
@@ -160,7 +160,7 @@ fun AiSettingsScreen(
                             text = "AI Key Configuration",
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            color = MaterialTheme.colorScheme.onSecondaryContainer
                         )
                     }
                     Spacer(modifier = Modifier.height(6.dp))
@@ -168,21 +168,25 @@ fun AiSettingsScreen(
                         text = bannerDesc,
                         fontSize = 12.sp,
                         lineHeight = 17.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.85f)
                     )
-                    Spacer(modifier = Modifier.height(10.dp))
-                    FilledTonalButton(
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Button(
                         onClick = {
                             val url = bannerUrl.ifBlank { selectedProvider.helpUrl }
                             if (url.isNotBlank()) {
                                 context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                             }
                         },
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(100.dp),
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     ) {
-                        Icon(Icons.AutoMirrored.Filled.OpenInNew, null, modifier = Modifier.size(14.dp))
+                        Icon(Icons.AutoMirrored.Filled.OpenInNew, null, modifier = Modifier.size(14.dp), tint = MaterialTheme.colorScheme.onPrimary)
                         Spacer(modifier = Modifier.width(6.dp))
-                        Text(bannerButtonLabel, fontSize = 11.5.sp)
+                        Text(bannerButtonLabel, fontSize = 12.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onPrimary)
                     }
                 }
             }
@@ -198,9 +202,13 @@ fun AiSettingsScreen(
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 shape = M3EBentoTileShape,
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)),
+                border = null
             ) {
-                Column(modifier = Modifier.padding(8.dp)) {
+                Column(
+                    modifier = Modifier.padding(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
                     // Provider Row
                     SettingsTileItem(
                         icon = Icons.Default.Hub,
@@ -208,8 +216,6 @@ fun AiSettingsScreen(
                         subtitle = selectedProvider.displayName,
                         onClick = { showProviderDialog = true }
                     )
-
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
 
                     // Model Row
                     SettingsTileItem(
@@ -219,13 +225,12 @@ fun AiSettingsScreen(
                         onClick = { showModelDialog = true }
                     )
 
-                    HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
-
-                    // API Key Row
+                    // API Key Row with Monospaced Key
                     SettingsTileItem(
                         icon = Icons.Default.VpnKey,
                         title = "API Key",
                         subtitle = if (currentApiKey.isNotBlank()) "••••••••••••${currentApiKey.takeLast(4)}" else "Not Configured (Tap to enter)",
+                        isMonospaceSubtitle = currentApiKey.isNotBlank(),
                         trailing = {
                             if (currentApiKey.isNotBlank()) {
                                 Icon(Icons.Default.CheckCircle, null, tint = SuccessGreen, modifier = Modifier.size(18.dp))
@@ -235,7 +240,6 @@ fun AiSettingsScreen(
                     )
 
                     if (selectedProvider == AiProvider.CUSTOM) {
-                        HorizontalDivider(modifier = Modifier.padding(horizontal = 8.dp), color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
                         SettingsTileItem(
                             icon = Icons.Default.Link,
                             title = "Custom Base URL",
@@ -305,13 +309,39 @@ fun AiSettingsScreen(
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
+                    val latencyBadge = remember(testResultText, testResultIsSuccess) {
+                        if (testResultIsSuccess && testResultText != null) {
+                            Regex("""\((\d+\s*ms)\)""").find(testResultText!!)?.groupValues?.get(1)
+                        } else null
+                    }
+
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text("Test API Connectivity", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
+                        Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text("Test API Connectivity", fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
+                                if (latencyBadge != null) {
+                                    Surface(
+                                        shape = RoundedCornerShape(100.dp),
+                                        color = SuccessGreen.copy(alpha = 0.15f)
+                                    ) {
+                                        Text(
+                                            text = latencyBadge,
+                                            fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
+                                            fontSize = 10.5.sp,
+                                            fontWeight = FontWeight.Bold,
+                                            color = SuccessGreen,
+                                            modifier = Modifier.padding(horizontal = 7.dp, vertical = 2.dp)
+                                        )
+                                    }
+                                }
+                            }
                             Text("Verifies API key validity and measures latency.", fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                         Button(
@@ -335,7 +365,11 @@ fun AiSettingsScreen(
                                 }
                             },
                             enabled = !isTestingConnection,
-                            shape = RoundedCornerShape(10.dp)
+                            shape = RoundedCornerShape(100.dp),
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = MaterialTheme.colorScheme.primary,
+                                contentColor = MaterialTheme.colorScheme.onPrimary
+                            )
                         ) {
                             if (isTestingConnection) {
                                 CircularProgressIndicator(modifier = Modifier.size(16.dp), color = MaterialTheme.colorScheme.onPrimary, strokeWidth = 2.dp)
@@ -632,6 +666,7 @@ private fun SettingsTileItem(
     icon: ImageVector,
     title: String,
     subtitle: String,
+    isMonospaceSubtitle: Boolean = false,
     trailing: @Composable (() -> Unit)? = null,
     onClick: () -> Unit
 ) {
@@ -658,7 +693,14 @@ private fun SettingsTileItem(
         Spacer(modifier = Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(title, fontWeight = FontWeight.Bold, fontSize = 13.5.sp)
-            Text(subtitle, fontSize = 11.5.sp, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
+            Text(
+                text = subtitle,
+                fontSize = 11.5.sp,
+                fontFamily = if (isMonospaceSubtitle) androidx.compose.ui.text.font.FontFamily.Monospace else androidx.compose.ui.text.font.FontFamily.Default,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
+            )
         }
         if (trailing != null) {
             trailing()

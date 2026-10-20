@@ -770,20 +770,23 @@ private fun UnifiedSamplePaperCard(
                 },
                 modifier = Modifier.fillMaxWidth(),
                 shape = ExpressiveCardMedium,
-                colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary
+                )
             ) {
                 Icon(
                     imageVector = if (latestAttempt != null) Icons.Default.Replay else Icons.Default.Bolt,
                     contentDescription = null,
                     modifier = Modifier.size(18.dp),
-                    tint = AccentAmberOnBg
+                    tint = MaterialTheme.colorScheme.onPrimary
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
                     text = if (latestAttempt != null) "Retake 3-Hour Exam Simulation" else "Start 3-Hour Exam Simulation",
                     fontSize = 13.sp,
                     fontWeight = FontWeight.Bold,
-                    color = AccentAmberOnBg
+                    color = MaterialTheme.colorScheme.onPrimary
                 )
             }
 

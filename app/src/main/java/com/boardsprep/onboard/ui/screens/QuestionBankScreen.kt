@@ -408,9 +408,11 @@ fun QuestionBankScreen(
                             fontWeight = FontWeight.Bold
                         )
                         Text(
-                            text = "Official Subjective Practice Studio • 2026-27",
+                            text = "Official Subjective Studio • 2027",
                             style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
                         )
                     }
                 },
@@ -510,32 +512,43 @@ fun QuestionBankScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Row 1: Subject Selection Tabs
+            // Row 1: M3 Primary Scrollable Tab Row for Subjects
             val selectedTabIndex = subjects.indexOfFirst { it.first == selectedSubjectId }.coerceAtLeast(0)
-            ExpressiveSegmentedTabs(
-                tabs = subjects.map { (id, name) ->
-                    ExpressiveTabItem(title = name)
-                },
+            ScrollableTabRow(
                 selectedTabIndex = selectedTabIndex,
-                onTabSelected = { idx ->
-                    selectedSubjectId = subjects[idx].first
-                },
-                accentColor = MaterialTheme.colorScheme.primary,
-                contentPadding = PaddingValues(horizontal = 16.dp, vertical = 2.dp)
-            )
+                edgePadding = 16.dp,
+                containerColor = MaterialTheme.colorScheme.background,
+                contentColor = MaterialTheme.colorScheme.primary,
+                divider = {
+                    HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.2f))
+                }
+            ) {
+                subjects.forEachIndexed { idx, (id, name) ->
+                    val isSelected = selectedTabIndex == idx
+                    Tab(
+                        selected = isSelected,
+                        onClick = { selectedSubjectId = id },
+                        text = {
+                            Text(
+                                text = name,
+                                fontSize = 13.sp,
+                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
+                                color = if (isSelected) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+                    )
+                }
+            }
 
-            // Row 2: Sleek 42dp Single-Line Search Bar
+            // Row 2: Sleek 42dp Single-Line Search Bar (Zero 1.dp wireframe border)
             Surface(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 4.dp)
+                    .padding(horizontal = 16.dp, vertical = 6.dp)
                     .height(42.dp),
                 shape = RoundedCornerShape(21.dp),
                 color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
-                border = androidx.compose.foundation.BorderStroke(
-                    1.dp,
-                    MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.35f)
-                )
+                border = null
             ) {
                 Row(
                     modifier = Modifier
@@ -590,7 +603,7 @@ fun QuestionBankScreen(
                 }
             }
 
-            // Row 3: Consolidated Single Filter Row ([All Chapters ▾] | 2M | 3M | 4M | 5M | [Status: All ▾])
+            // Row 3: Consolidated Filter Row with 0.dp border FilterChips
             LazyRow(
                 modifier = Modifier.fillMaxWidth(),
                 contentPadding = PaddingValues(horizontal = 16.dp, vertical = 2.dp),
@@ -604,6 +617,7 @@ fun QuestionBankScreen(
                         FilterChip(
                             selected = isChapterActive,
                             onClick = { isChapterMenuExpanded = true },
+                            border = null,
                             label = {
                                 Text(
                                     text = if (isChapterActive) selectedChapterFilter else "All Chapters ▾",
@@ -625,6 +639,7 @@ fun QuestionBankScreen(
                                 }
                             } else null,
                             colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
                                 selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                                 selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -653,7 +668,7 @@ fun QuestionBankScreen(
                     }
                 }
 
-                // Marks Chips: All, 2M, 3M, 4M, 5M
+                // Marks Chips: All, 2M, 3M, 4M, 5M (0.dp unselected border)
                 val marksOptions = listOf(
                     "all" to "All Marks",
                     "vsa" to "2M (VSA)",
@@ -665,6 +680,7 @@ fun QuestionBankScreen(
                     FilterChip(
                         selected = selectedTypeFilter == key,
                         onClick = { selectedTypeFilter = key },
+                        border = null,
                         label = {
                             Text(
                                 text = label,
@@ -673,13 +689,14 @@ fun QuestionBankScreen(
                             )
                         },
                         colors = FilterChipDefaults.filterChipColors(
+                            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
                             selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                             selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
                         )
                     )
                 }
 
-                // Status Filter Dropdown Chip
+                // Status Filter Dropdown Chip (0.dp unselected border)
                 item {
                     Box {
                         val isStatusActive = selectedStatusFilter != "all"
@@ -693,6 +710,7 @@ fun QuestionBankScreen(
                         FilterChip(
                             selected = isStatusActive,
                             onClick = { isStatusMenuExpanded = true },
+                            border = null,
                             label = {
                                 Text(
                                     text = if (isStatusActive) statusLabel else "Status: All ▾",
@@ -712,6 +730,7 @@ fun QuestionBankScreen(
                                 }
                             } else null,
                             colors = FilterChipDefaults.filterChipColors(
+                                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
                                 selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
                                 selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -986,70 +1005,45 @@ private fun QuestionBankCard(
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Header: Tags and Marks Badge
+            // Header: Unified Single Badge Pill ("VSA • 2 Marks") + Clean Chapter Name
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    modifier = Modifier.weight(1f, fill = false)
-                ) {
-                    // Type Tag
-                    val typeLabel = when (question.type.lowercase()) {
-                        "vsa" -> "VSA"
-                        "sa" -> "Short Answer"
-                        "case" -> "Case Study"
-                        "la" -> "Long Answer"
-                        else -> question.type.uppercase()
-                    }
-                    Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.8f)
-                    ) {
-                        Text(
-                            text = typeLabel,
-                            fontSize = 10.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = MaterialTheme.colorScheme.onPrimaryContainer,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
-                        )
-                    }
-
-                    // Chapter Tag
-                    if (question.chapterName.isNotBlank()) {
-                        Surface(
-                            shape = RoundedCornerShape(6.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        ) {
-                            Text(
-                                text = question.chapterName,
-                                fontSize = 10.sp,
-                                fontWeight = FontWeight.Medium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                    }
+                val typeLabel = when (question.type.lowercase()) {
+                    "vsa" -> "VSA"
+                    "sa" -> "SA"
+                    "case" -> "Case"
+                    "la" -> "LA"
+                    else -> question.type.uppercase()
                 }
 
-                Spacer(modifier = Modifier.width(8.dp))
-
-                // Marks Badge
+                // Single Unified Badge Pill
                 Surface(
                     shape = RoundedCornerShape(100.dp),
                     color = MaterialTheme.colorScheme.secondaryContainer
                 ) {
                     Text(
-                        text = "${question.marks} Marks",
+                        text = "$typeLabel • ${question.marks} ${if (question.marks == 1) "Mark" else "Marks"}",
                         fontSize = 11.sp,
-                        fontWeight = FontWeight.ExtraBold,
+                        fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                        modifier = Modifier.padding(horizontal = 9.dp, vertical = 3.dp)
+                    )
+                }
+
+                // Plain Chapter Name without box
+                if (question.chapterName.isNotBlank()) {
+                    Text(
+                        text = question.chapterName,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Medium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(start = 8.dp)
                     )
                 }
             }
@@ -1124,76 +1118,24 @@ private fun QuestionBankCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Action Buttons: Model Answer & Step Rubric Toggle + ✨ Ask AI / Hint Button
+            Spacer(modifier = Modifier.height(10.dp))
+
             val isGlass = LocalGlassEnabled.current && isGlassSupported()
             val buttonShape = RoundedCornerShape(12.dp)
 
+            // Compact Tonal Ask AI / Hint Button (Single Material Symbol AutoAwesome, Zero yellow emoji)
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalArrangement = Arrangement.End,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Model Answer & Rubric Toggle Button (takes remaining space)
-                Surface(
-                    onClick = { isRubricExpanded = !isRubricExpanded },
-                    shape = buttonShape,
-                    color = when {
-                        isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                        isGlass -> Color.Transparent
-                        isRubricExpanded -> MaterialTheme.colorScheme.surface
-                        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                    },
-                    border = androidx.compose.foundation.BorderStroke(
-                        1.dp,
-                        when {
-                            isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                            isGlass -> Color.White.copy(alpha = 0.15f)
-                            isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-                            else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
-                        }
-                    ),
-                    modifier = Modifier.weight(1f)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = if (isRubricExpanded) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(15.dp)
-                            )
-                            Spacer(modifier = Modifier.width(6.dp))
-                            Text(
-                                text = if (isRubricExpanded) "Hide Model Answer" else "Model Answer & Rubric",
-                                fontSize = 11.5.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
-                            )
-                        }
-                        Icon(
-                            imageVector = if (isRubricExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(16.dp)
-                        )
-                    }
-                }
-
-                // Compact Tonal ✨ Ask AI / Hint Button
                 Surface(
                     onClick = { onAskAiClick(question) },
-                    shape = buttonShape,
-                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.65f),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f))
+                    shape = RoundedCornerShape(100.dp),
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.65f)
                 ) {
                     Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
@@ -1202,9 +1144,9 @@ private fun QuestionBankCard(
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(15.dp)
                         )
-                        Spacer(modifier = Modifier.width(5.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "✨ Ask AI / Hint",
+                            text = "Ask AI / Hint",
                             fontSize = 11.5.sp,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.onPrimaryContainer
@@ -1213,7 +1155,51 @@ private fun QuestionBankCard(
                 }
             }
 
-            // Expanded Content
+            Spacer(modifier = Modifier.height(8.dp))
+
+            // Clean Full-Width Expandable Accordion: Model Answer & Step Rubric
+            Surface(
+                onClick = { isRubricExpanded = !isRubricExpanded },
+                shape = buttonShape,
+                color = when {
+                    isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                    isGlass -> Color.Transparent
+                    isRubricExpanded -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f)
+                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.28f)
+                },
+                border = if (isGlass) androidx.compose.foundation.BorderStroke(0.5.dp, Color.White.copy(alpha = 0.15f)) else null,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Row(
+                    modifier = Modifier.padding(horizontal = 14.dp, vertical = 11.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = if (isRubricExpanded) Icons.Default.VisibilityOff else Icons.Default.Visibility,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = if (isRubricExpanded) "Hide Model Answer & Rubric" else "Model Answer & Rubric",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    Icon(
+                        imageVector = if (isRubricExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.size(18.dp)
+                    )
+                }
+            }
+
+            // Expanded Content (Accordion Body)
             AnimatedVisibility(
                 visible = isRubricExpanded,
                 enter = fadeIn() + expandVertically(),
@@ -1379,137 +1365,53 @@ private fun QuestionAssessmentDock(
     val isGlass = LocalGlassEnabled.current && isGlassSupported()
     val isDark = isSystemInDarkTheme()
     val haptic = LocalHapticFeedback.current
-    val density = LocalDensity.current
 
     val tiers = remember {
         listOf(
             Triple("full", "✓ Full Marks", Color(0xFF00C853)),
             Triple("half", "½ Partial", Color(0xFFFF9100)),
-            Triple("retry", "⟳ Retry", Color(0xFFFF1744))
+            Triple("retry", "↻ Retry", Color(0xFFFF1744))
         )
     }
 
-    val selectedIndex = tiers.indexOfFirst { it.first == currentStatus }
-    val activeColor = if (selectedIndex >= 0) tiers[selectedIndex].third else Color.Transparent
+    val containerShape = RoundedCornerShape(14.dp)
+    val segmentShape = RoundedCornerShape(10.dp)
 
-    val pillColor by animateColorAsState(
-        targetValue = activeColor,
-        animationSpec = tween(220),
-        label = "dockPillColor"
-    )
-
-    var rowWidthPx by remember { mutableFloatStateOf(0f) }
-    val gapPx = with(density) { 8.dp.toPx() }
-    val n = tiers.size
-
-    val buttonWidthPx = if (rowWidthPx > 0f) {
-        (rowWidthPx - gapPx * (n - 1)) / n
-    } else 0f
-    val stepPx = if (rowWidthPx > 0f) {
-        (rowWidthPx + gapPx) / n
-    } else 0f
-
-    val targetOffsetPx = if (selectedIndex >= 0 && stepPx > 0f) {
-        selectedIndex * stepPx
-    } else 0f
-
-    val animOffset = remember { Animatable(0f) }
-    var isInitialized by remember { mutableStateOf(false) }
-
-    LaunchedEffect(selectedIndex, targetOffsetPx) {
-        if (selectedIndex >= 0) {
-            if (!isInitialized) {
-                animOffset.snapTo(targetOffsetPx)
-                isInitialized = true
-            } else {
-                animOffset.animateTo(targetOffsetPx, GlassSpring)
-            }
-        }
-    }
-
-    val currentOffset = animOffset.value
-    val lag = if (buttonWidthPx > 0f && selectedIndex >= 0) {
-        (abs(targetOffsetPx - currentOffset) / buttonWidthPx).coerceIn(0f, 1f)
-    } else 0f
-
-    val shape = RoundedCornerShape(12.dp)
-
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .onGloballyPositioned { coordinates ->
-                rowWidthPx = coordinates.size.width.toFloat()
-            }
+    Surface(
+        shape = containerShape,
+        color = if (isGlass) (if (isDark) Color(0xFF141520) else Color(0xFFF3EDFC)).copy(alpha = 0.55f)
+                else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.40f),
+        border = if (isGlass) androidx.compose.foundation.BorderStroke(0.5.dp, Color.White.copy(alpha = 0.12f)) else null,
+        modifier = modifier.fillMaxWidth()
     ) {
-        // Gliding Liquid Pill Indicator (Rendered when a tier is selected)
-        if (selectedIndex >= 0 && buttonWidthPx > 0f) {
-            Box(
-                modifier = Modifier
-                    .offset { IntOffset(currentOffset.roundToInt(), 0) }
-                    .width(with(density) { buttonWidthPx.toDp() })
-                    .height(42.dp)
-                    .graphicsLayer {
-                        scaleX = 1f + lag * GLASS_STRETCH
-                        scaleY = 1f - lag * GLASS_STRETCH * GLASS_SQUASH
-                    }
-                    .clip(shape)
-                    .background(
-                        if (isGlass) pillColor.copy(alpha = 0.28f)
-                        else pillColor.copy(alpha = 0.22f)
-                    )
-                    .border(
-                        width = 1.2.dp,
-                        color = pillColor,
-                        shape = shape
-                    )
-            )
-        }
-
-        // 3 Tiers Row
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(4.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            tiers.forEachIndexed { index, (key, label, color) ->
-                val isSelected = selectedIndex == index
+            tiers.forEach { (key, label, color) ->
+                val isSelected = currentStatus == key
 
-                val contentColor by animateColorAsState(
-                    targetValue = when {
-                        isSelected -> color
-                        isGlass -> glassContentColor().copy(alpha = 0.85f)
-                        else -> MaterialTheme.colorScheme.onSurfaceVariant
-                    },
-                    label = "evalContentColor"
+                val segmentBg by animateColorAsState(
+                    targetValue = if (isSelected) color.copy(alpha = if (isDark) 0.24f else 0.16f) else Color.Transparent,
+                    animationSpec = tween(200),
+                    label = "segmentBg"
                 )
-
-                val interactionSource = remember { MutableInteractionSource() }
+                val textColor by animateColorAsState(
+                    targetValue = if (isSelected) color else MaterialTheme.colorScheme.onSurfaceVariant,
+                    animationSpec = tween(200),
+                    label = "segmentTextColor"
+                )
 
                 Box(
                     modifier = Modifier
                         .weight(1f)
-                        .height(42.dp)
-                        .clip(shape)
-                        .background(
-                            // When selected, the gliding selection pill underneath provides the fill!
-                            if (isSelected) Color.Transparent
-                            else if (isGlass) (if (isDark) Color(0xFF12141C) else Color(0xFFFAF8FE)).copy(alpha = 0.50f)
-                            else MaterialTheme.colorScheme.surface,
-                            shape
-                        )
-                        .border(
-                            // When selected, the gliding selection pill underneath provides the single crisp border!
-                            width = if (isSelected) 0.dp else if (isGlass) 0.5.dp else 1.dp,
-                            color = if (isSelected) Color.Transparent else if (isGlass) Color.White.copy(alpha = 0.15f) else MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.40f),
-                            shape = shape
-                        )
-                        .clickable(
-                            interactionSource = interactionSource,
-                            indication = ripple(
-                                bounded = true,
-                                color = if (isGlass) Color.White.copy(alpha = 0.55f) else color
-                            )
-                        ) {
+                        .height(38.dp)
+                        .clip(segmentShape)
+                        .background(segmentBg)
+                        .clickable {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             onSaveEvaluation(key)
                         },
@@ -1519,7 +1421,7 @@ private fun QuestionAssessmentDock(
                         text = label,
                         fontSize = 11.5.sp,
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                        color = contentColor
+                        color = textColor
                     )
                 }
             }

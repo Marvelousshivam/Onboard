@@ -247,16 +247,16 @@ fun MainAppScaffold(
                     color = if (isGlassEnabled) (if (isDark) Color(0xFF10121A) else Color(0xFFFAF8FE)).copy(alpha = (0.80f * glassStyle.tintAlpha).coerceIn(0.20f, 0.95f))
                     else if (isDark) Color(0xFF161722).copy(alpha = 0.94f) else Color.White.copy(alpha = 0.95f),
                     border = if (isGlassEnabled) androidx.compose.foundation.BorderStroke(1.2.dp, rimBrush)
-                    else null, // Zero 1px wireframe border in non-glass mode!
-                    tonalElevation = if (isGlassEnabled) 0.dp else 6.dp,
-                    shadowElevation = if (isGlassEnabled) 6.dp else 10.dp
+                    else androidx.compose.foundation.BorderStroke(1.dp, if (isDark) Color(0xFF28253A) else Color(0xFFE6E0EC)),
+                    tonalElevation = 0.dp,
+                    shadowElevation = if (isGlassEnabled) 3.dp else 3.dp
                 ) {
                     Box(
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 5.dp)
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 6.dp)
                     ) {
                         // Continuous Travelling Selection Pill with USMUSIC V2 Momentum Deformation
                         if (tabWidthPx > 0f) {
-                            val pillShape = RoundedCornerShape(20.dp)
+                            val pillShape = RoundedCornerShape(18.dp)
                             Box(
                                 modifier = Modifier
                                     .width(with(density) { tabWidthPx.toDp() })

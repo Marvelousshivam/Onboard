@@ -81,10 +81,14 @@ Before initiating non-trivial refactors, new screens, or architectural changes:
 Every Jetpack Compose screen and component in OnBOARD must be strictly vetted against [`Design.md`](file:///d:/BoardsPrep/Design.md):
 
 ### Anti-Slop Audit Checklist
-- [ ] **No Double Glyphs**: Flat Material 3 vector icons only. Never place a 3D emoji next to a vector icon or combine duplicate emojis.
+- [ ] **Purge All Emojis from UI Components**: Flat Material 3 vector icons only (`Icons.Default.AutoAwesome`, `Icons.Default.Bolt`, `Icons.Default.AutoFixHigh`, `Icons.Default.CheckCircle`). Never place emojis (`⚡`, `🚨`, `✨`, `🔥`) inside headers, drill tags, buttons, badges, or dialog CTAs.
+- [ ] **Tonal Palette Discipline**: Use `primary` (deep violet/indigo) with `onPrimary` for main actions. Banish clashing bright yellow/amber buttons on lavender screens. Unify card backgrounds to `surfaceContainerLow` (no washed-out pastel fills).
+- [ ] **Zero-Border Surfaces**: Drop 90% of `BorderStroke(1.dp, ...)`; rely on tonal contrast between canvas and `surfaceContainerLow`.
+- [ ] **Monospace Tokens**: Latency (`676 ms`), marks (`70M`), and API keys (`••••••••••vGwz`) must use `FontFamily.Monospace`.
 - [ ] **No Viewport Strangulation**: The content area (questions, formulas, exam papers) must receive >= 70% of screen height. All promotional cards, stats, and banners must live inside scrollable lists or collapse gracefully.
 - [ ] **Sleek Single-Line Search**: Max 44dp height, single-line input (`maxLines = 1`), auto-hiding top banners when the IME keyboard appears.
 - [ ] **Text Ascender / Descender Safety**: Always assign `maxLines = 1` and `TextOverflow.Ellipsis` to header subtitles and stat pills so letters with descenders (`g`, `y`, `p`, `j`) never get cut off by bottom borders.
+- [ ] **Grammar Integrity**: Ensure singular/plural rules are respected (e.g. `1 question to fix` vs `N questions to fix`).
 - [ ] **OCR Sanitization**: Never display raw `\n` mid-sentence line breaks or broken OCR words (`M . Hamel` -> `M. Hamel`, `fir st` -> `first`).
 - [ ] **Spring Physics Only**: Use physics-based springs (`dampingRatio = 0.85f`, `stiffness = Spring.StiffnessMediumLow`) for sheets, dialogs, and progress bars. Ban linear tweens.
 - [ ] **Zero Recomposition Traps**: Use `Modifier.graphicsLayer { ... }` or lambda modifiers for dynamic offsets, alphas, and scales. Never read raw scroll offsets in composable composition scopes.

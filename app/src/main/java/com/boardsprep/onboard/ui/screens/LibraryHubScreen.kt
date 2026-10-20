@@ -227,7 +227,7 @@ fun LibraryHubScreen(
                         // Error Vault Card
                         LibraryFeatureCard(
                             title = "Mistake Vault",
-                            subtitle = if (unresolvedErrorCount > 0) "$unresolvedErrorCount questions to fix" else "Zero pending errors",
+                            subtitle = if (unresolvedErrorCount == 1) "1 question to fix" else if (unresolvedErrorCount > 1) "$unresolvedErrorCount questions to fix" else "Zero pending errors",
                             badge = if (unresolvedErrorCount > 0) "$unresolvedErrorCount PENDING" else "",
                             badgeColor = MaterialTheme.colorScheme.error,
                             icon = Icons.Default.AutoFixHigh,
@@ -653,7 +653,7 @@ private fun HandbookChipTile(
 ) {
     val isGlass = LocalGlassEnabled.current && isGlassSupported()
     val shape = RoundedCornerShape(16.dp)
-    val cardBg = if (isGlass) tint.copy(alpha = 0.15f) else (if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
+    val cardBg = if (isGlass) Color.Transparent else (if (isDark) Color(0xFF161722) else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f))
     Surface(
         onClick = onClick,
         shape = shape,
@@ -673,16 +673,16 @@ private fun HandbookChipTile(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Surface(
-                shape = CircleShape,
-                color = tint.copy(alpha = 0.2f),
-                modifier = Modifier.size(30.dp)
+                shape = RoundedCornerShape(10.dp),
+                color = tint.copy(alpha = if (isDark) 0.22f else 0.14f),
+                modifier = Modifier.size(32.dp)
             ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(
                         imageVector = icon,
                         contentDescription = null,
                         tint = tint,
-                        modifier = Modifier.size(16.dp)
+                        modifier = Modifier.size(18.dp)
                     )
                 }
             }

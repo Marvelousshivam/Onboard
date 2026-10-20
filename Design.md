@@ -22,10 +22,11 @@ OnBOARD is built for CBSE Class 12 board aspirants in their final sprint. Studen
 AI models have distinct reflexive defaults ("tells") when designing UI. Any AI assistant or developer working on OnBOARD **must strictly avoid** these patterns:
 
 ### 🚫 Tell 1: Double Glyphing & Emoji Stacking
-- **The Violation**: Mixing 3D system emojis (`🔒`, `🚀`, `🔥`, `🗝️`) right next to flat Material vector icons, or stacking duplicate emojis (e.g., `🚀 🚀 Update!`, `🗝️ 🔒 Official Scheme`).
-- **The Rule**: **Never mix emojis with Material vector icons.**
-  - Use single, purposeful Material 3 vector icons (`Icons.Outlined.*` or `Icons.Filled.*`).
-  - Emojis may only be used sparingly in celebratory cards (e.g., streak milestones), never inside navigation pills, dialog CTAs, or toolbars.
+- **The Violation**: Mixing 3D system emojis (`🔒`, `🚀`, `🔥`, `🗝️`, `⚡`, `🚨`, `✨`) right next to flat Material vector icons, or stacking duplicate emojis (e.g., `✨ ✨ Ask AI / Hint`, `⚡ 5-MIN DRILL`, `🚨 1 to Review`).
+- **The Rule**: **Purge all emojis from UI components completely.**
+  - Rely exclusively on single, purposeful Material 3 vector symbols (`Icons.Default.AutoAwesome`, `Icons.Default.Bolt`, `Icons.Default.AutoFixHigh`, `Icons.Default.CheckCircle`).
+  - No emojis in buttons, badges, navigation pills, headers, or drill tags.
+  - Emojis are reserved strictly for celebratory confetti screens or streak milestones, never in UI chrome.
 
 ### 🚫 Tell 2: Hollow & Invented Copy
 - **The Violation**: Generic marketing slogans ("*Empower your academic journey with AI-driven revolutionary mastery!*").
@@ -193,7 +194,36 @@ When explaining DPP or Quiz questions, the AI output must NEVER be an unstructur
 
 ---
 
-## 8. Anti-AI-Slop Review Checklist
+## 8. Material 3 Expressive Tonal Discipline & Screen Upgrades
+
+### 1. Tonal Palette & Color Discipline
+- **Zero-Border Discipline**: Eliminate 90% of `BorderStroke(1.dp, ...)` on standard cards and surfaces. Let contrast between deep background and `surfaceContainerLow` define boundaries. Reserve subtle 0.5dp borders exclusively for liquid glass mode.
+- **Harmonized Action Buttons**: Banish clashing yellow/amber primary buttons against lavender themes. All primary hero buttons (e.g. "Start 3-Hour Exam Simulation") must use theme `primary` (deep violet/indigo) with `onPrimary` text, or `primaryContainer`/`onPrimaryContainer`.
+- **Unified Academic Cards**: Eliminate washed-out pastel backgrounds (`#E8F5E9`, etc.). Subject cards across Home and Library unify to `surfaceContainerLow`. Unique subject hues are restricted to the 40–44dp icon squircle.
+- **Single-Pill Question Badges**: In CBSE Question Bank cards, replace fragmented multi-colored badges with a single unified `secondaryContainer` pill (`VSA • 2 Marks`), leaving the chapter title as clean `labelMedium` (`onSurfaceVariant`) text without an enclosing box.
+
+### 2. Screen-by-Screen Expressive Polish
+- **Home / Dashboard**:
+  - *Countdown Hero*: Subtle vertical gradient from `primaryContainer` to `surfaceContainerLow`. Display countdown styled in massive tight-tracked Google Sans Display (`FontWeight.Black`, `56.sp`). "Continue Today's Study" rendered as an elevated tactile surface pill.
+  - *Academic Subjects*: De-clutter metadata. Remove repeated "Core Track". Show clean subtitle: `"19 Chapters • 80M"`. Replace thin hair-line progress with a 6dp rounded M3 linear progress indicator with visible track gap.
+- **CBSE Question Bank & Sample Papers**:
+  - *Integrated Subject Tabs*: Top subject selector transformed into clean M3 `PrimaryScrollableTabRow` or edge-to-edge underlined tabs integrated into the TopAppBar.
+  - *Clean Secondary Filters*: Secondary chips (All Marks, 2M, 3M, etc.) use `FilterChip` with 0dp border when unselected and `surfaceContainerHigh` fill.
+  - *Single Clean AutoAwesome*: Ask AI button uses single Material vector `Icons.Default.AutoAwesome` (no emoji sparkle).
+  - *Full-Width Rubric Accordion*: "Model Answer & Rubric" rendered as a clean full-width expandable accordion positioned directly above the self-grading bar.
+  - *Tonal Self-Grading Dock*: Group "✓ Full Marks", "½ Partial", and "↻ Retry" with distinct responsive tonal fills when selected.
+  - *Text Wrapping*: Header subtitle strictly `"Official Subjective Studio • 2027"` with `maxLines = 1` and `TextOverflow.Ellipsis`.
+- **Library Hub Screen**:
+  - *Grammar Fix*: Singular/plural agreement: `if (mistakeCount == 1) "1 question to fix" else "$mistakeCount questions to fix"`.
+  - *Handbooks*: Unified `surfaceContainerLow` container fill.
+- **AI Engine & Settings**:
+  - *Banner*: Remove 1dp purple border, fill with `secondaryContainer`, style button as clean filled `primary` pill.
+  - *Segmentation*: Remove Android 9 list dividers inside "Provider & Model Configuration" in favor of clean card segmentation or 12dp spacing.
+  - *Monospace Tokens*: Latency (`676 ms`), marks (`70M`), and API keys (`••••••••••vGwz`) rendered in `FontFamily.Monospace`.
+
+---
+
+## 9. Anti-AI-Slop Review Checklist
 Before any PR or feature branch is considered complete, run this mental audit:
 - [ ] Are all icons pure Material 3 vectors with zero emoji mixing?
 - [ ] Does the screen viewport dedicate >= 70% space to actual questions/content?
@@ -206,4 +236,6 @@ Before any PR or feature branch is considered complete, run this mental audit:
 - [ ] Is every claim and label grounded in official CBSE syllabus reality?
 - [ ] Does the AI bottom sheet use 0.dp elevation and KaTeX math formatting?
 - [ ] Does the AI respect the Dual Mode rule (disabled during timed exams, active in review)?
+- [ ] Are monospace fonts used for latencies, API keys, and token benchmarks?
+- [ ] Are cards zero-border M3 Expressive surfaces without washed-out pastel fills?
 

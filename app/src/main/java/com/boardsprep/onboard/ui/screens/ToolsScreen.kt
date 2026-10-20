@@ -599,20 +599,23 @@ private fun ExamSimulationLauncherTool(
                         onClick = { onStartExamSimulation(paper.title, paper.subject, openUrl, msUrl) },
                         modifier = Modifier.fillMaxWidth(),
                         shape = ExpressivePillSmall,
-                        colors = ButtonDefaults.buttonColors(containerColor = AccentAmber)
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
+                        )
                     ) {
                         Icon(
                             imageVector = if (latestAttempt != null) Icons.Default.Replay else Icons.Default.Bolt,
                             contentDescription = null,
                             modifier = Modifier.size(16.dp),
-                            tint = AccentAmberOnBg
+                            tint = MaterialTheme.colorScheme.onPrimary
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
                             text = if (latestAttempt != null) "Retake 3-Hour Simulation" else "Start 3-Hour Simulation",
                             fontSize = 12.sp,
                             fontWeight = FontWeight.Bold,
-                            color = AccentAmberOnBg
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }
