@@ -152,7 +152,48 @@ All animations in OnBOARD must feel tactile, physical, and weighted—never line
 
 ---
 
-## 7. Anti-AI-Slop Review Checklist
+## 7. AI Socratic Assistant & Behavioral Nudge System (`/genjutsu` + `/agency-behavioral-nudge-engine`)
+
+The AI features in OnBOARD serve as an elite, non-judgmental CBSE Class 12 Socratic Master Teacher. The UI must eliminate cognitive friction, prevent the "illusion of competence," and guide students toward deep conceptual mastery.
+
+### 1. Liquid Glass AI Bottom Sheet (`LiquidGlassAiSheet`)
+- **Visual Surface**: Uses `lightweightLiquidGlass` with specular rim highlights and dynamic backdrop blur over the active study screen.
+- **Flat Elevation**: Must use `elevation = 0.dp` to prevent ugly dark drop-shadow blobbing against translucent layers.
+- **Streaming Typewriter Effect**:
+  - Live character/token streaming via OkHttp SSE Flow.
+  - Streaming cursor: 2dp x 16dp pill with breathing alpha pulse (`animateFloat` 0.2f to 1.0f, infinite repeat).
+- **Mathematical & Chemical Formula Rendering**:
+  - Formulas MUST be rendered with KaTeX/LaTeX formatting ($...$ inline, $$...$$ block equations).
+  - Clean font rendering matching `MathFormulaView`.
+- **Grounding Citation Pills**:
+  - When live Internet Search is active, citations appear as interactive squircle chips (`[🌐 CBSE Circular 2026-27]`, `[📖 NCERT Section 4.5]`).
+- **Interactive Follow-Up Input Bar**:
+  - Sleek 44dp height single-line input anchored to the bottom.
+  - Quick action chips row above input: `[⚡ Simpler Analogy]`, `[🔁 Give Me 1 Twin Question]`, `[📊 CBSE Marking Rubric]`.
+  - Haptic response on submit (`HapticFeedbackType.TextHandleMove`).
+
+### 2. The 3-Part Diagnostic Card Architecture
+When explaining DPP or Quiz questions, the AI output must NEVER be an unstructured wall of text. It must be formatted into three distinct, scannable cognitive cards:
+1. **Core Concept & Proof** (Green accent tint, `M3EBentoTileShape`): Step-by-step mathematical proof or physical mechanism demonstrating why the correct option is true.
+2. **Why Your Pick Was Wrong** (Amber/Rose accent tint): Identifies the exact cognitive trap, arithmetic slip, or misread premise that led to the student's chosen option.
+3. **CBSE Board Exam Tip** (Indigo accent tint): High-yield examiner note on how this concept is tested in 2M/3M/5M board questions and how partial step-marks are awarded.
+
+### 3. Pedagogical & Behavioral Rules (`/agency-psychologist`)
+- **The Anti-Offloading Rule**: AI must never spoon-feed direct answers in active practice mode. Hints must guide retrieval:
+  - *Tier 1 Hint*: Core physical/mathematical principle (e.g. *"Apply Lenz's law to determine induced EMF direction"*).
+  - *Tier 2 Hint*: Formula setup & given variables.
+  - *Tier 3 Solution*: Full step-wise marking breakdown (only after attempt).
+- **Dual Mode Architecture**:
+  - **Practice Mode**: On-demand Socratic hints available before answering; instant 3-part diagnostic available upon selecting an option.
+  - **Timed Quiz Mode**: AI strictly disabled while the timer is running to maintain real exam simulation pressure. Unlocked fully on the Post-Quiz Review Screen.
+- **Error Vault Integration**:
+  - Missed questions auto-ingested into Error Vault.
+  - AI tags the error type: `[Conceptual Gap]`, `[Formula Slip]`, `[Calculation / Unit Error]`, or `[Question Misinterpretation]`.
+  - Generates 1 "Twin Question" to verify mastery before resolving the error.
+
+---
+
+## 8. Anti-AI-Slop Review Checklist
 Before any PR or feature branch is considered complete, run this mental audit:
 - [ ] Are all icons pure Material 3 vectors with zero emoji mixing?
 - [ ] Does the screen viewport dedicate >= 70% space to actual questions/content?
@@ -163,3 +204,6 @@ Before any PR or feature branch is considered complete, run this mental audit:
 - [ ] Is there 110dp bottom scroll clearance above the floating dock?
 - [ ] Do animations use spring physics instead of linear tweens?
 - [ ] Is every claim and label grounded in official CBSE syllabus reality?
+- [ ] Does the AI bottom sheet use 0.dp elevation and KaTeX math formatting?
+- [ ] Does the AI respect the Dual Mode rule (disabled during timed exams, active in review)?
+

@@ -69,5 +69,6 @@ sealed class Screen(val route: String) {
         fun createRoute(tab: Int = 0) = "main_app?tab=$tab"
     }
     object LibraryHub : Screen("library_hub")
+    object AiSettings : Screen("ai_settings")
 }
 

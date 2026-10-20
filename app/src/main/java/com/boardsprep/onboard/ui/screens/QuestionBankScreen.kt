@@ -17,7 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -33,6 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.ai.*
 import com.boardsprep.onboard.core.sync.FirebaseSyncManager
 import com.boardsprep.onboard.core.theme.*
 import com.boardsprep.onboard.data.local.entities.QuestionEvaluationEntity
@@ -42,6 +43,9 @@ import com.boardsprep.onboard.data.models.SubjectQuestionBank
 import com.boardsprep.onboard.data.repository.BoardsRepository
 import com.boardsprep.onboard.ui.components.ExpressiveEmptyState
 import com.boardsprep.onboard.ui.components.ExpressiveSegmentedTabs
+import com.boardsprep.onboard.ui.components.ai.LiquidGlassAiSheet
+import com.boardsprep.onboard.ui.components.ai.AiQuickActionChipItem
+import kotlinx.coroutines.Job
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import com.boardsprep.onboard.core.glass.LocalGlassEnabled
@@ -120,12 +124,27 @@ fun QuestionBankScreen(
     showBackButton: Boolean = true,
     onBackClick: () -> Unit = {},
     onOpenPdf: ((url: String, title: String) -> Unit)? = null,
+    onOpenAiSettings: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val repository = remember { BoardsRepository(context) }
     val syncManager = remember { FirebaseSyncManager.getInstance(context) }
     val coroutineScope = rememberCoroutineScope()
+    val prefsManager = remember { AiPreferencesManager.getInstance(context) }
+    val responseCache = remember { AiResponseCache.getInstance(context) }
+    val aiEngine = remember { AiProviderEngine() }
+
+    // Socratic AI Companion Sheet State for CBSE Question Bank
+    var showAiSheet by remember { mutableStateOf(false) }
+    var aiCurrentQuestion by remember { mutableStateOf<QuestionBankItem?>(null) }
+    var aiStreamingText by remember { mutableStateOf("") }
+    var isAiGenerating by remember { mutableStateOf(false) }
+    var isAiResponseCached by remember { mutableStateOf(false) }
+    var aiErrorMessage by remember { mutableStateOf<String?>(null) }
+    var aiCitations by remember { mutableStateOf<List<AiCitation>>(emptyList()) }
+    var isWebSearchActive by remember { mutableStateOf(prefsManager.isWebSearchEnabled()) }
+    var aiJob by remember { mutableStateOf<Job?>(null) }
 
     val subjects = remember {
         listOf(
@@ -234,6 +253,141 @@ fun QuestionBankScreen(
     val evaluatedCount = evaluationsList.size
     val fullCount = evaluationsList.count { it.status == "full" }
     val retryCount = evaluationsList.count { it.status == "retry" }
+
+    fun startQbAiStreaming(
+        question: QuestionBankItem,
+        actionType: String = "qb_hint",
+        customInput: String? = null,
+        forceRefresh: Boolean = false
+    ) {
+        aiJob?.cancel()
+        aiErrorMessage = null
+        showAiSheet = true
+        aiCurrentQuestion = question
+
+        val provider = prefsManager.getSelectedProvider()
+        val apiKey = prefsManager.getApiKey(provider)
+        val model = prefsManager.getSelectedModel(provider)
+        val baseUrl = prefsManager.getBaseUrl(provider)
+
+        val stepSummary = if (question.stepMarking.isNotEmpty()) {
+            question.stepMarking.joinToString("\n") { "- Step ${it.stepNumber}: ${it.marks}m (${it.criterion})" }
+        } else {
+            "Standard CBSE step-wise rubric applies: Formula (½m), Substitution with SI units (1m), Final Statement (½m/1m)."
+        }
+        val qbContext = QuestionBankAiContext(
+            questionId = question.id,
+            subject = subjects.find { it.first == selectedSubjectId }?.second ?: "Physics",
+            chapterName = question.chapterName.ifBlank { "Class 12" },
+            questionType = question.type,
+            marks = question.marks,
+            questionText = sanitizeQuestionText(question.questionText),
+            modelAnswer = sanitizeQuestionText(question.modelAnswer),
+            stepMarkingSummary = stepSummary,
+            keyTerms = question.keyTerms
+        )
+
+        val cacheKey = AiResponseCache.generateKey(question.id, actionType, provider.id, model)
+
+        if (!forceRefresh && customInput == null) {
+            val cached = responseCache.get(cacheKey)
+            if (cached != null) {
+                aiStreamingText = cached.content
+                aiCitations = cached.citations
+                isAiGenerating = false
+                isAiResponseCached = true
+                return
+            }
+        }
+
+        isAiResponseCached = false
+        if (customInput == null) {
+            aiStreamingText = ""
+        } else {
+            aiStreamingText += "\n\n**Draft / Query:** $customInput\n\n"
+        }
+        aiCitations = emptyList()
+        isAiGenerating = true
+
+        if (apiKey.isBlank() && provider != AiProvider.CUSTOM) {
+            isAiGenerating = false
+            aiErrorMessage = "API Key is missing for ${provider.displayName}. Tap below to configure your key in AI Settings."
+            return
+        }
+
+        val systemPrompt = CbsePromptBuilder.buildSystemPrompt(
+            subject = qbContext.subject,
+            chapter = qbContext.chapterName,
+            webSearchEnabled = isWebSearchActive
+        )
+
+        val (userPrompt, tokenCap) = when (actionType) {
+            "qb_hint" -> CbsePromptBuilder.buildQbHintPrompt(qbContext) to 150
+            "qb_keywords" -> CbsePromptBuilder.buildQbKeyTermsPrompt(qbContext) to 160
+            "qb_grade" -> CbsePromptBuilder.buildQbGradeDraftPrompt(qbContext, customInput ?: "Please outline the grading points.") to 280
+            else -> (customInput ?: CbsePromptBuilder.buildQbHintPrompt(qbContext)) to 280
+        }
+
+        val messages = listOf(
+            AiMessage("system", systemPrompt),
+            AiMessage("user", userPrompt)
+        )
+
+        aiJob = coroutineScope.launch {
+            try {
+                aiEngine.streamChat(
+                    messages = messages,
+                    provider = provider,
+                    baseUrl = baseUrl,
+                    apiKey = apiKey,
+                    model = model,
+                    enableWebSearch = isWebSearchActive,
+                    maxTokens = tokenCap
+                ).collect { chunk ->
+                    if (chunk.errorMessage != null) {
+                        aiErrorMessage = chunk.errorMessage
+                        isAiGenerating = false
+                    } else {
+                        if (chunk.deltaText.isNotEmpty()) {
+                            aiStreamingText += chunk.deltaText
+                        }
+                        if (chunk.citations.isNotEmpty()) {
+                            aiCitations = chunk.citations
+                        }
+                        if (chunk.isComplete) {
+                            isAiGenerating = false
+                            if (customInput == null) {
+                                responseCache.put(cacheKey, aiStreamingText, aiCitations)
+                            }
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                aiErrorMessage = e.localizedMessage ?: "Failed to generate AI response"
+                isAiGenerating = false
+            }
+        }
+    }
+
+    val qbQuickActions = remember {
+        listOf(
+            AiQuickActionChipItem(
+                label = "💡 1-Line Hint",
+                icon = Icons.Default.Lightbulb,
+                prompt = "qb_hint"
+            ),
+            AiQuickActionChipItem(
+                label = "🎯 Key Keywords",
+                icon = Icons.Default.FactCheck,
+                prompt = "qb_keywords"
+            ),
+            AiQuickActionChipItem(
+                label = "📝 Grade My Draft",
+                icon = Icons.AutoMirrored.Filled.Grading,
+                prompt = "qb_grade"
+            )
+        )
+    }
 
     // Scroll behavior for TopAppBar to maximize viewport on scroll
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -665,12 +819,59 @@ fun QuestionBankScreen(
                                     )
                                     syncManager.syncQuestionEvaluation(entity)
                                 }
+                            },
+                            onAskAiClick = { q ->
+                                startQbAiStreaming(q, actionType = "qb_hint")
                             }
                         )
                     }
                 }
             }
         }
+    }
+
+    if (showAiSheet) {
+        val qMarks = aiCurrentQuestion?.marks ?: 2
+        LiquidGlassAiSheet(
+            title = "Socratic Companion (${qMarks}M Subjective)",
+            activeProvider = prefsManager.getSelectedProvider(),
+            activeModel = prefsManager.getSelectedModel(prefsManager.getSelectedProvider()),
+            streamingContent = aiStreamingText,
+            isGenerating = isAiGenerating,
+            isWebSearchActive = isWebSearchActive,
+            citations = aiCitations,
+            isCached = isAiResponseCached,
+            errorMessage = aiErrorMessage,
+            customActions = qbQuickActions,
+            onToggleWebSearch = { newState ->
+                isWebSearchActive = newState
+                prefsManager.setWebSearchEnabled(newState)
+                aiCurrentQuestion?.let { q ->
+                    startQbAiStreaming(q, actionType = "qb_hint", forceRefresh = true)
+                }
+            },
+            onQuickAction = { actionKey ->
+                val q = aiCurrentQuestion ?: return@LiquidGlassAiSheet
+                if (actionKey == "qb_grade") {
+                    aiStreamingText += "\n\n📝 **Grade My Draft:** Type or paste your rough answer in the box below and tap Send. The AI Head Examiner will grade it strictly against the ${q.marks}-mark CBSE rubric."
+                } else {
+                    startQbAiStreaming(q, actionType = actionKey)
+                }
+            },
+            onSendFollowUp = { draftOrQuery ->
+                val q = aiCurrentQuestion ?: return@LiquidGlassAiSheet
+                startQbAiStreaming(q, actionType = "qb_grade", customInput = draftOrQuery)
+            },
+            onOpenSettings = {
+                showAiSheet = false
+                onOpenAiSettings()
+            },
+            onDismissRequest = {
+                showAiSheet = false
+                aiJob?.cancel()
+                isAiGenerating = false
+            }
+        )
     }
 }
 
@@ -759,7 +960,8 @@ private fun SubjectMasteryCard(
 private fun QuestionBankCard(
     question: QuestionBankItem,
     evaluation: QuestionEvaluationEntity?,
-    onSaveEvaluation: (String) -> Unit
+    onSaveEvaluation: (String) -> Unit,
+    onAskAiClick: (QuestionBankItem) -> Unit
 ) {
     var isRubricExpanded by remember { mutableStateOf(false) }
 
@@ -922,76 +1124,117 @@ private fun QuestionBankCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Expandable CBSE Model Answer & Step Rubric
+            // Action Buttons: Model Answer & Step Rubric Toggle + ✨ Ask AI / Hint Button
             val isGlass = LocalGlassEnabled.current && isGlassSupported()
-            val rubricShape = RoundedCornerShape(12.dp)
-            Surface(
-                onClick = { isRubricExpanded = !isRubricExpanded },
-                shape = rubricShape,
-                color = when {
-                    isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
-                    isGlass -> Color.Transparent
-                    isRubricExpanded -> MaterialTheme.colorScheme.surface
-                    else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
-                },
-                border = androidx.compose.foundation.BorderStroke(
-                    1.dp,
-                    when {
-                        isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                        isGlass -> Color.White.copy(alpha = 0.15f)
-                        isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
-                        else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
-                    }
-                ),
-                interactionSource = remember { MutableInteractionSource() },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .then(
-                        if (isGlass) Modifier.lightweightLiquidGlass(shape = rubricShape)
-                        else Modifier
-                    )
+            val buttonShape = RoundedCornerShape(12.dp)
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(modifier = Modifier.padding(12.dp)) {
+                // Model Answer & Rubric Toggle Button (takes remaining space)
+                Surface(
+                    onClick = { isRubricExpanded = !isRubricExpanded },
+                    shape = buttonShape,
+                    color = when {
+                        isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)
+                        isGlass -> Color.Transparent
+                        isRubricExpanded -> MaterialTheme.colorScheme.surface
+                        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+                    },
+                    border = androidx.compose.foundation.BorderStroke(
+                        1.dp,
+                        when {
+                            isGlass && isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
+                            isGlass -> Color.White.copy(alpha = 0.15f)
+                            isRubricExpanded -> MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
+                            else -> MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f)
+                        }
+                    ),
+                    modifier = Modifier.weight(1f)
+                ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 imageVector = if (isRubricExpanded) Icons.Default.VisibilityOff else Icons.Default.Visibility,
                                 contentDescription = null,
                                 tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(16.dp)
+                                modifier = Modifier.size(15.dp)
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = if (isRubricExpanded) "Hide Model Answer & Rubric" else "Show CBSE Model Answer & Step Rubric",
-                                fontSize = 12.sp,
+                                text = if (isRubricExpanded) "Hide Model Answer" else "Model Answer & Rubric",
+                                fontSize = 11.5.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = MaterialTheme.colorScheme.primary
+                                color = MaterialTheme.colorScheme.primary,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
-
                         Icon(
                             imageVector = if (isRubricExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
                             contentDescription = null,
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.size(18.dp)
+                            modifier = Modifier.size(16.dp)
                         )
                     }
+                }
 
-                    // Expanded Content
-                    AnimatedVisibility(
-                        visible = isRubricExpanded,
-                        enter = fadeIn() + expandVertically(),
-                        exit = fadeOut() + shrinkVertically()
+                // Compact Tonal ✨ Ask AI / Hint Button
+                Surface(
+                    onClick = { onAskAiClick(question) },
+                    shape = buttonShape,
+                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.65f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.35f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 10.dp)
-                        ) {
+                        Icon(
+                            imageVector = Icons.Default.AutoAwesome,
+                            contentDescription = "Ask AI",
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(15.dp)
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Text(
+                            text = "✨ Ask AI / Hint",
+                            fontSize = 11.5.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                        )
+                    }
+                }
+            }
+
+            // Expanded Content
+            AnimatedVisibility(
+                visible = isRubricExpanded,
+                enter = fadeIn() + expandVertically(),
+                exit = fadeOut() + shrinkVertically()
+            ) {
+                Surface(
+                    shape = buttonShape,
+                    color = when {
+                        isGlass -> MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+                        else -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.35f)
+                    },
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.25f)),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(12.dp)
+                    ) {
                             // Model Answer
                             if (question.modelAnswer.isNotBlank()) {
                                 Surface(
@@ -1114,7 +1357,6 @@ private fun QuestionBankCard(
                         }
                     }
                 }
-            }
 
             Spacer(modifier = Modifier.height(12.dp))
 

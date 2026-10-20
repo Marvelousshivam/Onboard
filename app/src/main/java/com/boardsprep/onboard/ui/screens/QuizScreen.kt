@@ -22,7 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
+import com.boardsprep.onboard.core.ai.*
 import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import com.boardsprep.onboard.core.theme.AccentAmber
 import com.boardsprep.onboard.core.theme.ErrorRed
@@ -30,6 +32,8 @@ import com.boardsprep.onboard.core.theme.PrimaryBlue
 import com.boardsprep.onboard.core.theme.SuccessGreen
 import com.boardsprep.onboard.data.models.Quiz
 import com.boardsprep.onboard.data.repository.BoardsRepository
+import com.boardsprep.onboard.ui.components.ai.LiquidGlassAiSheet
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -39,9 +43,15 @@ fun QuizScreen(
     quizFile: String,
     title: String,
     repository: BoardsRepository,
-    onBackClick: () -> Unit
+    onBackClick: () -> Unit,
+    onOpenAiSettings: () -> Unit = {}
 ) {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
+    val prefsManager = remember { AiPreferencesManager.getInstance(context) }
+    val responseCache = remember { AiResponseCache.getInstance(context) }
+    val aiEngine = remember { AiProviderEngine() }
+
     var quiz by remember { mutableStateOf<Quiz?>(null) }
     var currentIndex by remember { mutableStateOf(0) }
     val userAnswers = remember { mutableStateMapOf<Int, Int>() } // questionIndex -> selectedOptionIndex
@@ -50,6 +60,195 @@ fun QuizScreen(
     var isReviewMode by remember { mutableStateOf(false) }
     var reviewFilter by remember { mutableStateOf("ALL") } // ALL, INCORRECT, CORRECT, UNATTEMPTED
     var elapsedSeconds by remember { mutableStateOf(0L) }
+
+    // AI Socratic & Diagnostic State
+    var showAiSheet by remember { mutableStateOf(false) }
+    var aiSheetTitle by remember { mutableStateOf("Socratic Study Companion") }
+    var aiStreamingText by remember { mutableStateOf("") }
+    var isAiGenerating by remember { mutableStateOf(false) }
+    var isAiResponseCached by remember { mutableStateOf(false) }
+    var aiErrorMessage by remember { mutableStateOf<String?>(null) }
+    var aiCitations by remember { mutableStateOf<List<AiCitation>>(emptyList()) }
+    var aiCurrentContext by remember { mutableStateOf<DppQuestionContext?>(null) }
+    var isWebSearchActive by remember { mutableStateOf(prefsManager.isWebSearchEnabled()) }
+    var aiJob by remember { mutableStateOf<Job?>(null) }
+    val conversationHistory = remember { mutableStateListOf<AiMessage>() }
+
+    fun startAiStreaming(dppCtx: DppQuestionContext, isHintOnly: Boolean, customQuery: String? = null, forceRefresh: Boolean = false) {
+        aiJob?.cancel()
+        aiErrorMessage = null
+        showAiSheet = true
+        aiCurrentContext = dppCtx
+
+        val provider = prefsManager.getSelectedProvider()
+        val apiKey = prefsManager.getApiKey(provider)
+        val model = prefsManager.getSelectedModel(provider)
+        val baseUrl = prefsManager.getBaseUrl(provider)
+
+        aiSheetTitle = if (isHintOnly) "Socratic Study Companion" else "DPP Diagnostic Breakdown"
+
+        // Local Response Caching check: re-opening previously answered hints/solutions costs 0 tokens!
+        val actionType = when {
+            customQuery != null -> "custom_${customQuery.hashCode()}"
+            isHintOnly -> "hint"
+            else -> "diagnostic"
+        }
+        val cacheKey = AiResponseCache.generateKey(dppCtx.questionText, actionType, provider.id, model)
+
+        if (!forceRefresh) {
+            val cached = responseCache.get(cacheKey)
+            if (cached != null) {
+                aiStreamingText = cached.content
+                aiCitations = cached.citations
+                isAiGenerating = false
+                isAiResponseCached = true
+                return
+            }
+        }
+
+        isAiResponseCached = false
+        aiStreamingText = ""
+        aiCitations = emptyList()
+        isAiGenerating = true
+
+        if (apiKey.isBlank() && provider != AiProvider.CUSTOM) {
+            isAiGenerating = false
+            aiErrorMessage = "API Key is missing for ${provider.displayName}. Tap below to configure your key in AI Settings."
+            return
+        }
+
+        val systemPrompt = CbsePromptBuilder.buildSystemPrompt(
+            subject = dppCtx.subject,
+            chapter = dppCtx.chapter,
+            webSearchEnabled = isWebSearchActive
+        )
+
+        val userPrompt = if (customQuery != null) {
+            customQuery
+        } else if (isHintOnly) {
+            CbsePromptBuilder.buildSocraticHintPrompt(dppCtx)
+        } else {
+            CbsePromptBuilder.buildDppDiagnosticPrompt(dppCtx)
+        }
+
+        // Hard Token Cap: 150 for Hint (covers reasoning + concise hint), 280 for Diagnostic
+        val tokenCap = if (isHintOnly) 150 else 280
+
+        conversationHistory.clear()
+        conversationHistory.add(AiMessage("system", systemPrompt))
+        conversationHistory.add(AiMessage("user", userPrompt))
+
+        aiJob = coroutineScope.launch {
+            try {
+                aiEngine.streamChat(
+                    messages = conversationHistory.toList(),
+                    provider = provider,
+                    baseUrl = baseUrl,
+                    apiKey = apiKey,
+                    model = model,
+                    enableWebSearch = isWebSearchActive,
+                    maxTokens = tokenCap
+                ).collect { chunk ->
+                    if (chunk.errorMessage != null) {
+                        aiErrorMessage = chunk.errorMessage
+                        isAiGenerating = false
+                    } else {
+                        if (chunk.deltaText.isNotEmpty()) {
+                            aiStreamingText += chunk.deltaText
+                        }
+                        if (chunk.citations.isNotEmpty()) {
+                            aiCitations = chunk.citations
+                        }
+                        if (chunk.isComplete) {
+                            isAiGenerating = false
+                            conversationHistory.add(AiMessage("assistant", aiStreamingText))
+                            // Cache completed response locally
+                            responseCache.put(cacheKey, aiStreamingText, aiCitations)
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                aiErrorMessage = e.localizedMessage ?: "Failed to generate AI response"
+                isAiGenerating = false
+            }
+        }
+    }
+
+    fun sendFollowUp(query: String) {
+        val currentCtx = aiCurrentContext ?: return
+        val provider = prefsManager.getSelectedProvider()
+        val apiKey = prefsManager.getApiKey(provider)
+        val model = prefsManager.getSelectedModel(provider)
+        val baseUrl = prefsManager.getBaseUrl(provider)
+
+        // Token Optimization: Strip entire multi-turn history bloat!
+        // Resend only System Prompt + Compact Question Context + Specific Follow-Up Prompt.
+        val systemPrompt = CbsePromptBuilder.buildSystemPrompt(
+            subject = currentCtx.subject,
+            chapter = currentCtx.chapter,
+            webSearchEnabled = isWebSearchActive
+        )
+        val contextPrompt = "Context Question: \"${currentCtx.questionText}\"\nOption (${currentCtx.correctOptionLetter}) is correct."
+        val strippedMessages = listOf(
+            AiMessage("system", systemPrompt),
+            AiMessage("user", "$contextPrompt\n\nTask: $query")
+        )
+
+        aiStreamingText += "\n\n**Action:** $query\n\n"
+        isAiGenerating = true
+        isAiResponseCached = false
+
+        val tokenCap = if (query.contains("analogy", ignoreCase = true) || query.contains("twin", ignoreCase = true)) 140 else 280
+
+        aiJob?.cancel()
+        aiJob = coroutineScope.launch {
+            try {
+                aiEngine.streamChat(
+                    messages = strippedMessages,
+                    provider = provider,
+                    baseUrl = baseUrl,
+                    apiKey = apiKey,
+                    model = model,
+                    enableWebSearch = isWebSearchActive,
+                    maxTokens = tokenCap
+                ).collect { chunk ->
+                    if (chunk.errorMessage != null) {
+                        aiErrorMessage = chunk.errorMessage
+                        isAiGenerating = false
+                    } else {
+                        if (chunk.deltaText.isNotEmpty()) {
+                            aiStreamingText += chunk.deltaText
+                        }
+                        if (chunk.citations.isNotEmpty()) {
+                            aiCitations = chunk.citations
+                        }
+                        if (chunk.isComplete) {
+                            isAiGenerating = false
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                aiErrorMessage = e.localizedMessage ?: "Failed to stream follow-up"
+                isAiGenerating = false
+            }
+        }
+    }
+
+    fun requestAiExplanation(qIndex: Int, isHintOnly: Boolean, customQuery: String? = null) {
+        val activeQuiz = quiz ?: return
+        val q = activeQuiz.questions.getOrNull(qIndex) ?: return
+        val dppCtx = DppQuestionContext(
+            subject = title.substringBefore("—").trim().ifBlank { "CBSE Class 12" },
+            chapter = title.substringAfter("—").trim().ifBlank { "Current Chapter" },
+            questionText = q.question,
+            options = q.options,
+            correctOptionIndex = q.correctOptionIndex,
+            selectedOptionIndex = userAnswers[qIndex],
+            officialExplanation = q.explanation,
+            isPracticeMode = isPracticeMode
+        )
+        startAiStreaming(dppCtx, isHintOnly, customQuery)
+    }
 
     LaunchedEffect(quizFile) {
         quiz = repository.getQuizForFile(quizFile)
@@ -158,6 +357,13 @@ fun QuizScreen(
                     )
                 },
                 actions = {
+                    IconButton(onClick = onOpenAiSettings) {
+                        Icon(
+                            imageVector = Icons.Default.AutoAwesome,
+                            contentDescription = "AI Settings",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
                     if (!isQuizCompleted) {
                         // Switch between Practice and Exam Mode
                         FilterChip(
@@ -568,6 +774,29 @@ fun QuizScreen(
                                         }
                                     }
                                 }
+
+                                Spacer(modifier = Modifier.height(10.dp))
+                                OutlinedButton(
+                                    onClick = {
+                                        requestAiExplanation(origIdx, isHintOnly = false)
+                                    },
+                                    shape = RoundedCornerShape(10.dp),
+                                    modifier = Modifier.fillMaxWidth(),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.AutoAwesome,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(16.dp),
+                                        tint = MaterialTheme.colorScheme.primary
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text(
+                                        text = if (!isUserCorrect && selectedOpt != null) "Diagnose Why My Pick Was Wrong (AI)" else "Deep Concept Breakdown (AI)",
+                                        fontSize = 12.sp,
+                                        fontWeight = FontWeight.SemiBold
+                                    )
+                                }
                             }
                         }
                     }
@@ -756,6 +985,29 @@ fun QuizScreen(
                             }
                         }
 
+                        // Socratic Hint trigger (Practice Mode, before answering)
+                        if (isPracticeMode && !hasAnsweredCurrent) {
+                            item {
+                                OutlinedButton(
+                                    onClick = {
+                                        requestAiExplanation(currentIndex, isHintOnly = true)
+                                    },
+                                    shape = RoundedCornerShape(12.dp),
+                                    modifier = Modifier.fillMaxWidth().padding(top = 4.dp),
+                                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f))
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Lightbulb,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(18.dp),
+                                        tint = AccentAmber
+                                    )
+                                    Spacer(modifier = Modifier.width(8.dp))
+                                    Text("Need a Socratic Hint? Ask AI", fontWeight = FontWeight.SemiBold, fontSize = 13.sp)
+                                }
+                            }
+                        }
+
                         // Instant Explanation Card (Practice Mode)
                         if (isPracticeMode && hasAnsweredCurrent) {
                             item {
@@ -790,6 +1042,28 @@ fun QuizScreen(
                                                 color = MaterialTheme.colorScheme.onSurface
                                             )
                                         }
+
+                                        Spacer(modifier = Modifier.height(12.dp))
+                                        FilledTonalButton(
+                                            onClick = {
+                                                requestAiExplanation(currentIndex, isHintOnly = false)
+                                            },
+                                            shape = RoundedCornerShape(10.dp),
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Icon(
+                                                imageVector = Icons.Default.AutoAwesome,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(16.dp),
+                                                tint = MaterialTheme.colorScheme.primary
+                                            )
+                                            Spacer(modifier = Modifier.width(8.dp))
+                                            Text(
+                                                text = if (selectedOption != q.correctOptionIndex) "Diagnose Why My Pick Was Wrong (AI)" else "Deep Concept Proof & Marking Scheme (AI)",
+                                                fontSize = 12.sp,
+                                                fontWeight = FontWeight.Bold
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -798,6 +1072,42 @@ fun QuizScreen(
                 }
             }
         }
+    }
+
+    if (showAiSheet) {
+        LiquidGlassAiSheet(
+            title = if (aiCurrentContext?.isPracticeMode == true) "Socratic Study Companion" else "DPP Diagnostic Breakdown",
+            activeProvider = prefsManager.getSelectedProvider(),
+            activeModel = prefsManager.getSelectedModel(prefsManager.getSelectedProvider()),
+            streamingContent = aiStreamingText,
+            isGenerating = isAiGenerating,
+            isWebSearchActive = isWebSearchActive,
+            citations = aiCitations,
+            isCached = isAiResponseCached,
+            errorMessage = aiErrorMessage,
+            onToggleWebSearch = { newState ->
+                isWebSearchActive = newState
+                prefsManager.setWebSearchEnabled(newState)
+                aiCurrentContext?.let { ctx ->
+                    startAiStreaming(ctx, isHintOnly = false, forceRefresh = true)
+                }
+            },
+            onQuickAction = { promptText ->
+                sendFollowUp(promptText)
+            },
+            onSendFollowUp = { query ->
+                sendFollowUp(query)
+            },
+            onOpenSettings = {
+                showAiSheet = false
+                onOpenAiSettings()
+            },
+            onDismissRequest = {
+                showAiSheet = false
+                aiJob?.cancel()
+                isAiGenerating = false
+            }
+        )
     }
 }
 

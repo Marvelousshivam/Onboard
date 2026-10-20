@@ -34,6 +34,7 @@ import com.boardsprep.onboard.ui.components.UpdateAvailableDialog
 import com.boardsprep.onboard.ui.navigation.Screen
 import com.boardsprep.onboard.ui.screens.*
 import com.boardsprep.onboard.ui.screens.pdf.PdfViewerScreen
+import com.boardsprep.onboard.ui.screens.settings.AiSettingsScreen
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import java.net.URLDecoder
@@ -206,6 +207,9 @@ class MainActivity : ComponentActivity() {
                                     )
                                 )
                             },
+                            onOpenAiSettings = {
+                                navController.navigate(Screen.AiSettings.route)
+                            },
                             onCheckForUpdates = {
                                 updateChecker.checkForUpdates(isManual = true)
                             }
@@ -377,6 +381,7 @@ class MainActivity : ComponentActivity() {
                             pairedSource = decodedPairedUrl.ifBlank { null },
                             pairedTitle = decodedPairedTitle.ifBlank { null },
                             pairedRole = pairedRole,
+                            onOpenAiSettings = { navController.navigate(Screen.AiSettings.route) },
                             onNavigateToPairedOverride = { src, ttl ->
                                 // When the user taps the QP<->MS switcher, navigate to the paired
                                 // document. We pass the *original* document back as the new pair so
@@ -416,7 +421,8 @@ class MainActivity : ComponentActivity() {
                             quizFile = quizFile,
                             title = decodedTitle,
                             repository = repository,
-                            onBackClick = { navController.popBackStack() }
+                            onBackClick = { navController.popBackStack() },
+                            onOpenAiSettings = { navController.navigate(Screen.AiSettings.route) }
                         )
                     }
 
@@ -591,7 +597,17 @@ class MainActivity : ComponentActivity() {
                             onBackClick = { navController.popBackStack() },
                             onOpenPdf = { url, title ->
                                 navController.navigate(Screen.PdfViewer.createRoute(url = url, title = title))
+                            },
+                            onOpenAiSettings = {
+                                navController.navigate(Screen.AiSettings.route)
                             }
+                        )
+                    }
+
+                    // Multi-Provider AI Engine & BYOK Settings Screen
+                    composable(Screen.AiSettings.route) {
+                        AiSettingsScreen(
+                            onBackClick = { navController.popBackStack() }
                         )
                     }
                 }

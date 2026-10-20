@@ -28,6 +28,7 @@ import androidx.compose.material.icons.Icons
 import com.boardsprep.onboard.core.glass.components.LiquidGlassBackButton
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.OpenInNew
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Bookmark
 import androidx.compose.material.icons.filled.BugReport
 import androidx.compose.material.icons.filled.Edit
@@ -39,6 +40,12 @@ import androidx.compose.material.icons.outlined.BookmarkBorder
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import com.boardsprep.onboard.core.ai.*
+import com.boardsprep.onboard.ui.components.ai.LiquidGlassAiSheet
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -97,6 +104,7 @@ fun PdfViewerScreen(
     pairedSource: String? = null,
     pairedTitle: String? = null,
     pairedRole: PdfPairedRole = PdfPairedRole.GENERAL,
+    onOpenAiSettings: () -> Unit = {},
     onNavigateToPairedOverride: ((String, String) -> Unit)? = null
 ) {
     val paired = remember(pairedSource, pairedTitle) {
@@ -113,6 +121,7 @@ fun PdfViewerScreen(
         title = title,
         paired = paired,
         onBackClick = onBackClick,
+        onOpenAiSettings = onOpenAiSettings,
         onNavigateToPaired = onNavigateToPairedOverride ?: { _, _ -> onBackClick() }
     )
 }
@@ -124,11 +133,138 @@ fun PdfReaderScreen(
     title: String,
     paired: PdfPairedDocument?,
     onBackClick: () -> Unit,
+    onOpenAiSettings: () -> Unit = {},
     onNavigateToPaired: (String, String) -> Unit
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+    val prefsManager = remember { AiPreferencesManager.getInstance(context) }
+    val aiEngine = remember { AiProviderEngine() }
     val state = rememberPdfReaderState(source = source, title = title, paired = paired)
     val ui by state.uiState.collectAsState()
+
+    var showAiSheet by remember { mutableStateOf(false) }
+    var aiStreamingText by remember { mutableStateOf("") }
+    var isAiGenerating by remember { mutableStateOf(false) }
+    var aiErrorMessage by remember { mutableStateOf<String?>(null) }
+    var aiCitations by remember { mutableStateOf<List<AiCitation>>(emptyList()) }
+    var isWebSearchActive by remember { mutableStateOf(prefsManager.isWebSearchEnabled()) }
+    var aiCurrentContext by remember { mutableStateOf<DppQuestionContext?>(null) }
+    val conversationHistory = remember { mutableStateListOf<AiMessage>() }
+    var aiJob by remember { mutableStateOf<Job?>(null) }
+
+    fun startAiStreaming(dppCtx: DppQuestionContext, isHintOnly: Boolean, customPrompt: String? = null) {
+        val provider = prefsManager.getSelectedProvider()
+        val apiKey = prefsManager.getApiKey(provider)
+        val model = prefsManager.getSelectedModel(provider)
+        val baseUrl = prefsManager.getBaseUrl(provider)
+
+        aiCurrentContext = dppCtx
+        aiStreamingText = ""
+        aiErrorMessage = null
+        aiCitations = emptyList()
+        conversationHistory.clear()
+        showAiSheet = true
+        isAiGenerating = true
+
+        val messages = if (customPrompt != null) {
+            val systemPrompt = CbsePromptBuilder.buildSystemPrompt(dppCtx.subject, dppCtx.chapter, isWebSearchActive)
+            listOf(
+                AiMessage("system", systemPrompt),
+                AiMessage("user", customPrompt)
+            )
+        } else {
+            val systemPrompt = CbsePromptBuilder.buildSystemPrompt(dppCtx.subject, dppCtx.chapter, isWebSearchActive)
+            val userPrompt = if (isHintOnly) {
+                CbsePromptBuilder.buildSocraticHintPrompt(dppCtx)
+            } else {
+                CbsePromptBuilder.buildDppDiagnosticPrompt(dppCtx)
+            }
+            listOf(
+                AiMessage("system", systemPrompt),
+                AiMessage("user", userPrompt)
+            )
+        }
+
+        conversationHistory.addAll(messages)
+
+        aiJob?.cancel()
+        aiJob = coroutineScope.launch {
+            try {
+                aiEngine.streamChat(
+                    messages = messages,
+                    provider = provider,
+                    baseUrl = baseUrl,
+                    apiKey = apiKey,
+                    model = model,
+                    enableWebSearch = isWebSearchActive
+                ).collect { chunk ->
+                    if (chunk.errorMessage != null) {
+                        aiErrorMessage = chunk.errorMessage
+                        isAiGenerating = false
+                    } else {
+                        if (chunk.deltaText.isNotEmpty()) {
+                            aiStreamingText += chunk.deltaText
+                        }
+                        if (chunk.citations.isNotEmpty()) {
+                            aiCitations = chunk.citations
+                        }
+                        if (chunk.isComplete) {
+                            isAiGenerating = false
+                            conversationHistory.add(AiMessage("assistant", aiStreamingText))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                aiErrorMessage = e.localizedMessage ?: "Failed to generate AI explanation"
+                isAiGenerating = false
+            }
+        }
+    }
+
+    fun sendFollowUp(query: String) {
+        val provider = prefsManager.getSelectedProvider()
+        val apiKey = prefsManager.getApiKey(provider)
+        val model = prefsManager.getSelectedModel(provider)
+        val baseUrl = prefsManager.getBaseUrl(provider)
+
+        conversationHistory.add(AiMessage("user", query))
+        aiStreamingText += "\n\n**Student Query:** $query\n\n"
+        isAiGenerating = true
+
+        aiJob?.cancel()
+        aiJob = coroutineScope.launch {
+            try {
+                aiEngine.streamChat(
+                    messages = conversationHistory.toList(),
+                    provider = provider,
+                    baseUrl = baseUrl,
+                    apiKey = apiKey,
+                    model = model,
+                    enableWebSearch = isWebSearchActive
+                ).collect { chunk ->
+                    if (chunk.errorMessage != null) {
+                        aiErrorMessage = chunk.errorMessage
+                        isAiGenerating = false
+                    } else {
+                        if (chunk.deltaText.isNotEmpty()) {
+                            aiStreamingText += chunk.deltaText
+                        }
+                        if (chunk.citations.isNotEmpty()) {
+                            aiCitations = chunk.citations
+                        }
+                        if (chunk.isComplete) {
+                            isAiGenerating = false
+                            conversationHistory.add(AiMessage("assistant", aiStreamingText))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                aiErrorMessage = e.localizedMessage ?: "Failed to stream follow-up"
+                isAiGenerating = false
+            }
+        }
+    }
 
     var chromeVisible by remember { mutableStateOf(true) }
     var showAppearance by remember { mutableStateOf(false) }
@@ -156,8 +292,13 @@ fun PdfReaderScreen(
 
     // Back button: exit annotation studio / exit fullscreen / close sheets before leaving the document.
     val isAnnotating = ui.sketchMode || ui.highlightMode || ui.eraserMode
-    BackHandler(enabled = isFullscreen || isAnnotating || showAppearance || showBookmarks || showAnnotations || showOutline || showJump || showErrorLog || showNoteSheet || showOverflow || showSearch) {
+    BackHandler(enabled = isFullscreen || isAnnotating || showAppearance || showBookmarks || showAnnotations || showOutline || showJump || showErrorLog || showNoteSheet || showOverflow || showSearch || showAiSheet) {
         when {
+            showAiSheet -> {
+                showAiSheet = false
+                aiJob?.cancel()
+                isAiGenerating = false
+            }
             isAnnotating -> state.exitAnnotationStudio()
             isFullscreen -> state.toggleFullscreen()
             showAppearance -> showAppearance = false
@@ -273,12 +414,62 @@ fun PdfReaderScreen(
                             )
                         }
 
+                        // 4.5. AI Study Companion & Concept Explainer
+                        IconButton(onClick = {
+                            val activeTopic = formatPdfTopBarTitle(title).first
+                            val prompt = "I am studying CBSE Class 12 topic: '$activeTopic' (from document '$title', Page ${ui.currentPage + 1} of ${ui.totalPages.coerceAtLeast(1)}). Please explain the core concepts on this topic with rigorous derivations, formulas in LaTeX math, key definitions expected by CBSE examiners, and common pitfall traps to avoid in board exams."
+                            val dppCtx = DppQuestionContext(
+                                subject = formatPdfTopBarTitle(title).second,
+                                chapter = activeTopic,
+                                questionText = "Reading '$title' — Page ${ui.currentPage + 1}",
+                                options = emptyList(),
+                                correctOptionIndex = 0,
+                                selectedOptionIndex = null,
+                                officialExplanation = "",
+                                isPracticeMode = true
+                            )
+                            startAiStreaming(dppCtx, isHintOnly = false, customPrompt = prompt)
+                        }) {
+                            Icon(
+                                imageVector = Icons.Default.AutoAwesome,
+                                contentDescription = "Ask AI to Explain",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        }
+
                         // 5. More (Overflow menu for secondary study tools)
                         IconButton(onClick = { showOverflow = true }) {
                             Icon(Icons.Default.MoreVert, "More options")
                         }
 
                         DropdownMenu(expanded = showOverflow, onDismissRequest = { showOverflow = false }) {
+                            DropdownMenuItem(
+                                text = { Text("Ask AI: Explain Current Page") },
+                                onClick = {
+                                    showOverflow = false
+                                    val activeTopic = formatPdfTopBarTitle(title).first
+                                    val prompt = "I am studying CBSE Class 12 topic: '$activeTopic' (from document '$title', Page ${ui.currentPage + 1} of ${ui.totalPages.coerceAtLeast(1)}). Please explain the core concepts on this topic with rigorous derivations, formulas in LaTeX math, key definitions expected by CBSE examiners, and common pitfall traps to avoid in board exams."
+                                    val dppCtx = DppQuestionContext(
+                                        subject = formatPdfTopBarTitle(title).second,
+                                        chapter = activeTopic,
+                                        questionText = "Reading '$title' — Page ${ui.currentPage + 1}",
+                                        options = emptyList(),
+                                        correctOptionIndex = 0,
+                                        selectedOptionIndex = null,
+                                        officialExplanation = "",
+                                        isPracticeMode = true
+                                    )
+                                    startAiStreaming(dppCtx, isHintOnly = false, customPrompt = prompt)
+                                }
+                            )
+                            DropdownMenuItem(
+                                text = { Text("AI Engine & Key Settings") },
+                                onClick = {
+                                    showOverflow = false
+                                    onOpenAiSettings()
+                                }
+                            )
+                            androidx.compose.material3.HorizontalDivider()
                             DropdownMenuItem(
                                 text = { Text(if (ui.highlightMode) "✓ Highlight mode" else "Highlight mode") },
                                 onClick = { showOverflow = false; state.toggleHighlightMode() }
@@ -512,6 +703,41 @@ fun PdfReaderScreen(
         PdfErrorLogSheet(
             onClear = { PdfErrorLog.clear() },
             onDismiss = { showErrorLog = false }
+        )
+    }
+    if (showAiSheet) {
+        LiquidGlassAiSheet(
+            title = "AI Study Companion",
+            subtitle = "${prefsManager.getSelectedProvider().displayName} • ${prefsManager.getSelectedModel(prefsManager.getSelectedProvider())}",
+            activeProvider = prefsManager.getSelectedProvider(),
+            activeModel = prefsManager.getSelectedModel(prefsManager.getSelectedProvider()),
+            streamingContent = aiStreamingText,
+            isGenerating = isAiGenerating,
+            isWebSearchActive = isWebSearchActive,
+            citations = aiCitations,
+            errorMessage = aiErrorMessage,
+            onToggleWebSearch = { newState ->
+                isWebSearchActive = newState
+                prefsManager.setWebSearchEnabled(newState)
+                aiCurrentContext?.let { ctx ->
+                    startAiStreaming(ctx, isHintOnly = false)
+                }
+            },
+            onQuickAction = { promptText ->
+                sendFollowUp(promptText)
+            },
+            onSendFollowUp = { query ->
+                sendFollowUp(query)
+            },
+            onOpenSettings = {
+                showAiSheet = false
+                onOpenAiSettings()
+            },
+            onDismissRequest = {
+                showAiSheet = false
+                aiJob?.cancel()
+                isAiGenerating = false
+            }
         )
     }
 }

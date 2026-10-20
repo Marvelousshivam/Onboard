@@ -78,6 +78,7 @@ fun MainAppScaffold(
     onOpenPdfWithPair: (url: String, title: String, pairedUrl: String, pairedTitle: String, pairedRole: PdfPairedRole) -> Unit,
     onOpenPdfSimple: (url: String, title: String) -> Unit,
     onStartExamSimulation: (paperTitle: String, subject: String, paperUrl: String, msUrl: String) -> Unit,
+    onOpenAiSettings: () -> Unit = {},
     onCheckForUpdates: (() -> Unit)? = null,
     modifier: Modifier = Modifier
 ) {
@@ -125,7 +126,8 @@ fun MainAppScaffold(
                         initialSubjectId = activeQbSubject,
                         showBackButton = false,
                         onBackClick = { selectedTabIndex = 0 },
-                        onOpenPdf = onOpenPdfSimple
+                        onOpenPdf = onOpenPdfSimple,
+                        onOpenAiSettings = onOpenAiSettings
                     )
                 }
                 2 -> {
@@ -150,6 +152,7 @@ fun MainAppScaffold(
                         onToolsClick = onToolsClick,
                         onAccountClick = onAccountClick,
                         onReplayTourClick = onReplayTourClick,
+                        onOpenAiSettings = onOpenAiSettings,
                         onCheckForUpdates = onCheckForUpdates
                     )
                 }

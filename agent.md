@@ -113,14 +113,44 @@ OnBOARD operates across two tightly coupled repositories:
 
 ---
 
-## 6. Official Release Protocol (Execution Gate)
+## 6. Multi-Provider AI Architecture & Verification Protocol (`com.boardsprep.onboard.core.ai`)
+
+All AI integrations in OnBOARD must follow this unified, provider-agnostic architecture:
+
+### 1. Standardized OpenAI-Compatible Contract
+All providers communicate over an OkHttp SSE (`text/event-stream`) streaming client to `POST /chat/completions`:
+- **Google AI Studio (Gemini)**: `https://generativelanguage.googleapis.com/v1beta/openai/chat/completions` (with native Google Search Grounding).
+- **OpenRouter**: `https://openrouter.ai/api/v1/chat/completions` (with web plugins and multi-model routing).
+- **Groq**: `https://api.groq.com/openai/v1/chat/completions` (ultra-fast inference for instantaneous conversational hints).
+- **Perplexity AI**: `https://api.perplexity.ai/chat/completions` (`sonar` models with native web citation links).
+- **Custom / BYOK**: Custom base URL, API key, and model ID for power users.
+
+### 2. DPP & Quiz Context Injection Standard
+When triggering AI explanations for DPP or Quiz questions, the `DppQuestionContext` MUST inject:
+- Subject & Chapter metadata (`name`, `weightage_marks`).
+- Full question stem text (sanitized of OCR breaks).
+- All options (A, B, C, D).
+- The student's chosen option (if answered).
+- The official correct option and textbook explanation.
+- Target format: The **3-Part Diagnostic** (Core Concept & Proof with KaTeX LaTeX, Why Your Pick Was Wrong, CBSE Board Exam Tip).
+
+### 3. Strict Development & Debugging Rules: "Never Rush Code"
+- **Build & Debug First**: Always compile with `./gradlew assembleDebug` or `./gradlew compileDebugKotlin`.
+- **Test Before Presenting**: Test API connections, token streaming, cancellation, and error handling.
+- **Never Push or Release Prematurely**:
+  - Do NOT run `assembleRelease` or `git push` without the user's explicit consent.
+  - Deliver changes iteratively, test on device, capture live verification screenshots, and ask for user approval.
+
+---
+
+## 7. Official Release Protocol (Execution Gate)
 
 When the user explicitly issues the instruction to build a release and push updates (e.g. *"Build release and push updates"*):
 
 1. **Verify Versioning**:
    - Check `app/build.gradle.kts`: Verify `versionCode` and `versionName` reflect the intended release (e.g. `1.2.0`, `1.2.1`).
 2. **Run Unit Tests**:
-   - Execute `./gradlew testDebugUnitTest` to guarantee Room entities and JSON deserializers pass without regressions.
+   - Execute `./gradlew testDebugUnitTest` to guarantee Room entities, AI parsers, and JSON deserializers pass without regressions.
 3. **Assemble Signed Release Build**:
    - Execute `./gradlew assembleRelease`.
    - Verify output APK exists at `app/build/outputs/apk/release/app-release.apk` and has valid size (~22 MB).
@@ -133,3 +163,4 @@ When the user explicitly issues the instruction to build a release and push upda
    - Verify release URL is live.
 6. **Final Device Verification**:
    - If switching from debug build on device, run `adb uninstall com.boardsprep.onboard`, install `app-release.apk`, launch, and take a final confirmation screenshot.
+
